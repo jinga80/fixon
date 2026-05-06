@@ -73,6 +73,12 @@ WHITENOISE_ROOT = BASE_DIR / "public"
 WHITENOISE_INDEX_FILE = True
 WHITENOISE_AUTOREFRESH = DEBUG
 WHITENOISE_USE_FINDERS = DEBUG
+WHITENOISE_MIMETYPES = {
+    ".webmanifest": "application/manifest+json",
+    ".stl": "model/stl",
+    ".stp": "model/step",
+    ".step": "model/step",
+}
 
 # 압축 + immutable cache
 STORAGES = {
