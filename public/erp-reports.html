@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn ERP — 리포트</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+html,body{display:flex;height:100vh;overflow:hidden;background:var(--bg-section);}
+.sidebar{width:280px;background:#fff;border-right:1px solid var(--border);padding:24px 16px;overflow-y:auto;}
+.sidebar h2{font-size:18px;margin-bottom:16px;letter-spacing:-0.02em;}
+.sidebar a{display:block;color:var(--accent);font-size:14px;font-weight:600;margin-bottom:18px;}
+.r-item{padding:12px 14px;border-radius:10px;cursor:pointer;margin-bottom:6px;font-size:14.5px;display:flex;gap:12px;align-items:center;color:var(--dim);transition:all 0.12s;font-weight:500;}
+.r-item:hover{background:var(--bg-section);color:var(--text);}
+.r-item.active{background:var(--accent);color:#fff;font-weight:700;}
+.r-item .icon{font-size:18px;}
+.main{flex:1;overflow-y:auto;padding:32px 40px;}
+.main h1{font-size:28px;margin-bottom:24px;letter-spacing:-0.025em;font-weight:800;}
+.filters{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;box-shadow:var(--shadow-sm);}
+.filters label{font-size:13px;color:var(--dim);font-weight:600;}
+.filters select,.filters input{padding:10px 14px;font-size:14.5px;}
+.actions{display:flex;gap:10px;margin-bottom:20px;}
+#out{background:#fff;border:1px solid var(--border);border-radius:14px;padding:32px 40px;box-shadow:var(--shadow-sm);}
+.report h2{font-size:24px;margin-bottom:8px;letter-spacing:-0.02em;font-weight:800;}
+.report .sub{color:var(--muted);font-size:14.5px;margin-bottom:22px;}
+.report table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14.5px;}
+.report th{text-align:left;padding:14px 16px;background:var(--bg-section);font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;border-bottom:1px solid var(--border);}
+.report td{padding:14px 16px;border-bottom:1px solid var(--border-subtle);color:var(--text);}
+.report .total td{background:var(--accent-soft);font-weight:700;color:var(--accent-deep);}
+.report .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.report .kpi{background:var(--bg-section);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.report .kpi .l{font-size:12.5px;color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:0.06em;}
+.report .kpi .v{font-family:var(--fd);font-size:24px;font-weight:800;margin-top:6px;letter-spacing:-0.025em;color:var(--text);}
+.bar{height:10px;background:var(--bg-section);border-radius:5px;overflow:hidden;display:inline-block;width:140px;vertical-align:middle;border:1px solid var(--border);}
+.bar-fill{height:100%;background:var(--accent);}
+@media print{
+  html,body{background:#fff;color:#000;display:block;height:auto;overflow:visible;}
+  .sidebar,.filters,.actions,.main h1{display:none !important;}
+  .main{padding:0;}
+  #out{background:#fff;border:none;padding:20px;box-shadow:none;}
+  .report th,.report td{color:#000;border-color:#ccc;}
+  .report .kpi{background:#f5f5f5;border-color:#ddd;}
+  .report .kpi .v{color:#000;}
+  .report .total td{background:#fff8f3;color:#000;}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <a href="erp.html">← ERP로 돌아가기</a>
+  <h2>📊 리포트</h2>
+  <div class="r-item active" data-r="revenue" onclick="pick('revenue',this)"><span class="icon">💰</span><span>월간 매출</span></div>
+  <div class="r-item" data-r="order" onclick="pick('order',this)"><span class="icon">📋</span><span>주문 상세</span></div>
+  <div class="r-item" data-r="qc" onclick="pick('qc',this)"><span class="icon">✔️</span><span>품질 관리</span></div>
+  <div class="r-item" data-r="inventory" onclick="pick('inventory',this)"><span class="icon">📦</span><span>재고 현황</span></div>
+  <div class="r-item" data-r="partner" onclick="pick('partner',this)"><span class="icon">🏢</span><span>거래처 활동</span></div>
+  <div class="r-item" data-r="settlement" onclick="pick('settlement',this)"><span class="icon">💵</span><span>정산 명세서</span></div>
+</aside>
+
+<main class="main">
+  <h1>📊 리포트 생성</h1>
+  <div class="filters" id="filters"></div>
+  <div class="actions">
+    <button class="btn primary" onclick="gen()">📊 리포트 생성</button>
+    <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
+    <button class="btn" onclick="copy()">📋 클립보드 복사</button>
+    <button class="btn" onclick="dl()">💾 HTML 다운로드</button>
+  </div>
+  <div id="out"><div class="empty">왼쪽에서 리포트 종류를 선택하고 "리포트 생성"을 클릭하세요</div></div>
+</main>
+
+<script>
+const KEY='fixon-erp-state-v6';
+let state=null,current='revenue';
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
+function fmtKRW(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
+function fmtN(n){return Number(n).toLocaleString('ko-KR');}
+function fmtDate(iso){if(!iso)return'-';const d=new Date(iso);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령',applied:'적용',settled:'정산'};
+
+const FILTERS={
+  revenue:`<label>월</label><select id="f-month"><option value="all">전체</option>${[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>`<option value="${m}">${m}월</option>`).join('')}</select><label>그룹</label><select id="f-group"><option value="clinic">치과별</option><option value="lab">기공소별</option><option value="total">전체 합계</option></select>`,
+  order:`<label>주문번호</label><select id="f-order"></select>`,
+  qc:`<label>기간</label><select id="f-range"><option value="week">이번 주</option><option value="month" selected>이번 달</option><option value="all">전체</option></select>`,
+  inventory:`<label>표시</label><select id="f-show"><option value="all">전체</option><option value="low">재주문 필요만</option></select>`,
+  partner:`<label>유형</label><select id="f-type"><option value="clinic">치과</option><option value="lab">기공소</option><option value="graphy">그래피</option></select>`,
+  settlement:`<label>시작일</label><input id="f-start" type="date"><label>종료일</label><input id="f-end" type="date">`
+};
+
+function pick(r,el){current=r;document.querySelectorAll('.r-item').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('filters').innerHTML=FILTERS[r]||'';if(r==='order'&&state){const sel=document.getElementById('f-order');sel.innerHTML=state.orders.map(o=>`<option value="${o.id}">${o.id} (${o.clinicId})</option>`).join('');}gen();}
+
+function gen(){
+  if(!load()){document.getElementById('out').innerHTML='<div class="empty">⚠️ ERP 데이터 없음. <a href="erp.html" style="color:var(--accent);">ERP를 먼저 열어주세요</a></div>';return;}
+  const fns={revenue:rRevenue,order:rOrder,qc:rQC,inventory:rInv,partner:rPartner,settlement:rSettlement};
+  document.getElementById('out').innerHTML=fns[current]();
+}
+
+function rRevenue(){
+  const month=document.getElementById('f-month')?.value||'all';
+  const group=document.getElementById('f-group')?.value||'clinic';
+  let orders=state.orders.filter(o=>['applied','settled'].includes(o.status));
+  if(month!=='all')orders=orders.filter(o=>new Date(o.createdAt).getMonth()+1===+month);
+  const total=orders.reduce((s,o)=>s+(o.pricing.clinic_pays||o.pricing.base||0),0);
+  const totalFee=orders.reduce((s,o)=>s+(o.pricing.fixon_fee||0),0);
+  const settled=orders.filter(o=>o.status==='settled');
+  let groupRows='';
+  const groupBy=group==='clinic'?'clinicId':group==='lab'?'assignedLab':null;
+  if(groupBy){
+    const map={};orders.forEach(o=>{const k=o[groupBy];if(!map[k])map[k]={count:0,total:0,fee:0};map[k].count++;map[k].total+=o.pricing.clinic_pays||o.pricing.base;map[k].fee+=o.pricing.fixon_fee;});
+    const lookup=group==='clinic'?(state.clinics||[]):(state.labs||[]);
+    groupRows=Object.entries(map).map(([k,v])=>{const name=lookup.find(x=>x.id===k)?.name||k;return `<tr><td>${name}</td><td style="text-align:right;font-family:var(--fm);">${v.count}</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(v.total)}</td><td style="text-align:right;font-family:var(--fm);color:var(--accent);">${fmtKRW(v.fee)}</td></tr>`;}).join('');
+  }
+  return `<div class="report">
+    <h2>💰 월간 매출 리포트</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')} · 기간: ${month==='all'?'전체':month+'월'} · 그룹: ${group}</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="l">전체 주문</div><div class="v">${orders.length}</div></div>
+      <div class="kpi"><div class="l">정산 완료</div><div class="v" style="color:var(--green);">${settled.length}</div></div>
+      <div class="kpi"><div class="l">총 매출</div><div class="v" style="color:var(--accent);font-size:16px;">${fmtKRW(total)}</div></div>
+      <div class="kpi"><div class="l">FixOn 수수료</div><div class="v" style="color:var(--green);font-size:16px;">${fmtKRW(totalFee)}</div></div>
+    </div>
+    ${groupBy?`<table><thead><tr><th>${group==='clinic'?'치과':'기공소'}</th><th style="text-align:right;">주문수</th><th style="text-align:right;">청구액</th><th style="text-align:right;">수수료</th></tr></thead><tbody>${groupRows}</tbody></table>`:''}
+  </div>`;
+}
+
+function rOrder(){
+  const id=document.getElementById('f-order')?.value;
+  const o=state.orders.find(x=>x.id===id);
+  if(!o)return '<div class="empty">주문을 선택하세요</div>';
+  const c=state.clinics.find(x=>x.id===o.clinicId);
+  const p=state.patients.find(x=>x.id===o.patientId);
+  return `<div class="report">
+    <h2>📋 주문 명세서 — ${o.id}</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')}</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="l">치과</div><div class="v" style="font-size:14px;">${c?.name||'-'}</div></div>
+      <div class="kpi"><div class="l">환자</div><div class="v" style="font-size:14px;">${p?.name||'-'} (${p?.age||'-'}/${p?.sex||'-'})</div></div>
+      <div class="kpi"><div class="l">상태</div><div class="v" style="font-size:14px;color:var(--accent);">${STATUS_LABEL[o.status]}</div></div>
+      <div class="kpi"><div class="l">금액</div><div class="v" style="font-size:14px;">${fmtKRW(o.pricing.base)}</div></div>
+    </div>
+    <h3 style="font-family:var(--fd);font-size:14px;margin-top:20px;">분배 명세</h3>
+    <table><tbody>
+      <tr><td>치과 청구액</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(o.pricing.base)}</td></tr>
+      <tr><td>↳ 기공소 분배</td><td style="text-align:right;font-family:var(--fm);color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td></tr>
+      <tr><td>↳ 그래피 분배</td><td style="text-align:right;font-family:var(--fm);color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td></tr>
+      <tr class="total"><td>↳ FixOn 수수료</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(o.pricing.fixon_fee)}</td></tr>
+    </tbody></table>
+    <h3 style="font-family:var(--fd);font-size:14px;margin-top:20px;">진행 타임라인</h3>
+    <table><thead><tr><th>일시</th><th>상태</th><th>담당</th><th>비고</th></tr></thead><tbody>
+      ${o.timeline.map(t=>`<tr><td style="font-family:var(--fm);">${fmtDate(t.at)} ${new Date(t.at).toLocaleTimeString('ko-KR').slice(0,5)}</td><td>${STATUS_LABEL[t.status]||t.status}</td><td>${t.by}</td><td>${t.note||'-'}</td></tr>`).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+function rQC(){
+  const range=document.getElementById('f-range')?.value||'month';
+  const now=new Date();const start=new Date(now);
+  if(range==='week')start.setDate(start.getDate()-7);
+  else if(range==='month')start.setMonth(start.getMonth()-1);
+  else start.setFullYear(2020);
+  const STATUS_FLOW=Object.keys(STATUS_LABEL);
+  const orders=state.orders.filter(o=>new Date(o.createdAt)>=start);
+  const reachedQc=orders.filter(o=>STATUS_FLOW.indexOf(o.status)>=STATUS_FLOW.indexOf('qc'));
+  const passed=reachedQc.filter(o=>o.qcResult==='pass').length;
+  const failed=reachedQc.filter(o=>o.qcResult==='fail').length;
+  const passRate=reachedQc.length?Math.round(passed/reachedQc.length*100):0;
+  return `<div class="report">
+    <h2>✔️ 품질 관리 리포트</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')} · 기간: ${range==='week'?'1주':range==='month'?'1개월':'전체'}</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="l">QC 검사</div><div class="v">${reachedQc.length}</div></div>
+      <div class="kpi"><div class="l">통과</div><div class="v" style="color:var(--green);">${passed}</div></div>
+      <div class="kpi"><div class="l">실패</div><div class="v" style="color:var(--red);">${failed}</div></div>
+      <div class="kpi"><div class="l">통과율</div><div class="v" style="color:var(--green);">${passRate}%</div></div>
+    </div>
+    <h3 style="font-family:var(--fd);font-size:14px;margin-top:18px;">기공소별 통과율</h3>
+    <table><thead><tr><th>기공소</th><th>처리</th><th>통과율</th></tr></thead><tbody>
+      ${(state.labs||[]).map(l=>{const lo=reachedQc.filter(o=>o.assignedLab===l.id);const lp=lo.filter(o=>o.qcResult==='pass').length;const lr=lo.length?Math.round(lp/lo.length*100):0;return `<tr><td>${l.name}</td><td style="font-family:var(--fm);">${lo.length}</td><td><span class="bar"><span class="bar-fill" style="width:${lr}%;"></span></span> <span style="font-family:var(--fm);">${lr}%</span></td></tr>`;}).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+function rInv(){
+  const show=document.getElementById('f-show')?.value||'all';
+  const inv=state.inventory||{};
+  let rows=Object.entries(inv);
+  if(show==='low')rows=rows.filter(([k,v])=>v.stock<v.threshold);
+  return `<div class="report">
+    <h2>📦 재고 현황 리포트</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')}</div>
+    <table><thead><tr><th>품목</th><th>현재 재고</th><th>최소 재고</th><th>상태</th></tr></thead><tbody>
+      ${rows.map(([k,v])=>{const ratio=v.stock/v.threshold;const st=ratio<1?'⚠️ 재주문 필요':ratio<2?'⚡ 곧 재주문':'✓ 정상';const c=ratio<1?'var(--red)':ratio<2?'var(--yellow)':'var(--green)';return `<tr><td><strong>${k}</strong></td><td style="font-family:var(--fm);">${fmtN(v.stock)} ${v.unit}</td><td style="font-family:var(--fm);color:var(--dim);">${v.threshold} ${v.unit}</td><td style="color:${c};">${st}</td></tr>`;}).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+function rPartner(){
+  const type=document.getElementById('f-type')?.value||'clinic';
+  const list=type==='clinic'?(state.clinics||[]):type==='lab'?(state.labs||[]):(state.graphyAccounts||[]);
+  return `<div class="report">
+    <h2>🏢 거래처 활동 리포트</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')} · 유형: ${type}</div>
+    <table><thead><tr><th>거래처</th><th>주문수</th><th>총 금액</th><th>최근 활동</th></tr></thead><tbody>
+      ${list.map(p=>{const orders=state.orders.filter(o=>{if(type==='clinic')return o.clinicId===p.id;if(type==='lab')return o.assignedLab===p.id;if(type==='graphy')return o.assignedGraphy===p.id;});const total=orders.reduce((s,o)=>s+o.pricing.base,0);const last=orders.length?fmtDate(orders[0].createdAt):'-';return `<tr><td><strong>${p.name||p.id}</strong></td><td style="font-family:var(--fm);">${orders.length}</td><td style="font-family:var(--fm);">${fmtKRW(total)}</td><td style="font-family:var(--fm);color:var(--dim);">${last}</td></tr>`;}).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+function rSettlement(){
+  const start=document.getElementById('f-start')?.value;
+  const end=document.getElementById('f-end')?.value;
+  let orders=state.orders.filter(o=>o.status==='settled');
+  if(start)orders=orders.filter(o=>fmtDate(o.createdAt)>=start);
+  if(end)orders=orders.filter(o=>fmtDate(o.createdAt)<=end);
+  const totals=orders.reduce((s,o)=>{s.total+=o.pricing.base;s.lab+=o.pricing.lab_share;s.graphy+=o.pricing.graphy_share;s.fee+=o.pricing.fixon_fee;return s;},{total:0,lab:0,graphy:0,fee:0});
+  return `<div class="report">
+    <h2>💵 정산 명세서</h2>
+    <div class="sub">생성: ${new Date().toLocaleString('ko-KR')} · 기간: ${start||'전체'} ~ ${end||'전체'}</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="l">정산 건수</div><div class="v">${orders.length}</div></div>
+      <div class="kpi"><div class="l">총 청구액</div><div class="v" style="font-size:14px;">${fmtKRW(totals.total)}</div></div>
+      <div class="kpi"><div class="l">총 분배</div><div class="v" style="font-size:14px;color:var(--purple);">${fmtKRW(totals.lab+totals.graphy)}</div></div>
+      <div class="kpi"><div class="l">FixOn 수익</div><div class="v" style="font-size:14px;color:var(--green);">${fmtKRW(totals.fee)}</div></div>
+    </div>
+    <table><thead><tr><th>주문번호</th><th>치과</th><th>청구</th><th>기공소</th><th>그래피</th><th>FixOn</th></tr></thead><tbody>
+      ${orders.map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);return `<tr><td style="font-family:var(--fm);">${o.id}</td><td>${c?.name||o.clinicId}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(o.pricing.base)}</td><td style="font-family:var(--fm);text-align:right;color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--accent);">${fmtKRW(o.pricing.fixon_fee)}</td></tr>`;}).join('')}
+      <tr class="total"><td colspan="2">합계</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.total)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.lab)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.graphy)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.fee)}</td></tr>
+    </tbody></table>
+  </div>`;
+}
+
+function copy(){const t=document.getElementById('out').innerText;navigator.clipboard.writeText(t).then(()=>alert('✅ 복사됨'));}
+function dl(){const html=`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>FixOn 리포트</title><style>body{font-family:'Noto Sans KR',sans-serif;padding:30px;}table{width:100%;border-collapse:collapse;}th,td{padding:8px;border:1px solid #ccc;}th{background:#f5f5f5;text-align:left;}</style></head><body>${document.getElementById('out').innerHTML}</body></html>`;const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`fixon-report-${current}-${new Date().toISOString().slice(0,10)}.html`;a.click();URL.revokeObjectURL(url);}
+
+document.getElementById('filters').innerHTML=FILTERS.revenue;
+gen();
+</script>
+</body>
+</html>

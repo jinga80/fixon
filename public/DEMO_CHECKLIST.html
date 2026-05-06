@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn — 시연 전 자동 점검</title>
+<!-- STL inline data — required for designer; load early so __SAMPLE_STL is available -->
+<script src="samples/stl-data.js" onerror="window.__stlLoadFailed=true"></script>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:920px;margin:0 auto;padding:36px 28px;}
+header{margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--border);}
+header h1{font-size:32px;font-weight:800;letter-spacing:-0.025em;}
+header p{color:var(--muted);font-size:15px;margin-top:8px;}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+.summary{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-sm);}
+.summary .score{font-family:var(--fd);font-size:52px;font-weight:800;letter-spacing:-0.03em;font-feature-settings:"tnum";}
+.summary .pass{color:var(--green);}.summary .warn{color:var(--yellow);}.summary .fail{color:var(--red);}
+.summary .meta{font-size:13px;color:var(--muted);font-family:var(--fm);text-align:right;}
+.controls{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.check-list{display:flex;flex-direction:column;gap:10px;}
+.check{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 22px;box-shadow:var(--shadow-sm);}
+.check-row{display:flex;justify-content:space-between;align-items:center;}
+.check-row .label{flex:1;display:flex;gap:12px;align-items:center;}
+.check-row .label .icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;font-weight:700;}
+.check-row .label .icon.pass{background:var(--green-dim);color:var(--green);}
+.check-row .label .icon.fail{background:var(--red-dim);color:var(--red);}
+.check-row .label .icon.warn{background:var(--yellow-dim);color:var(--yellow);}
+.check-row .label .icon.pending{background:var(--bg-section);color:var(--muted);}
+.check-row .label .name{font-weight:600;font-size:15px;color:var(--text);}
+.check-row .value{font-family:var(--fm);font-size:13px;color:var(--muted);font-weight:500;}
+.check-row .value.pass{color:var(--green);}
+.check-row .value.fail{color:var(--red);}
+.check-row .value.warn{color:var(--yellow);}
+.check .detail{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-subtle);font-size:13px;color:var(--muted);}
+.check .fix{margin-top:8px;font-size:13px;color:var(--accent);font-weight:600;}
+.cat-h{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;font-weight:700;}
+.cat-h:first-child{margin-top:0;}
+.action-bar{position:sticky;bottom:24px;background:#fff;border:2px solid var(--accent);border-radius:16px;padding:18px 24px;margin-top:28px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 12px 32px var(--accent-glow);}
+.action-bar a{padding:12px 24px;background:var(--accent);color:#fff;border-radius:10px;font-size:15px;font-weight:700;}
+.action-bar a:hover{background:var(--accent-deep);}
+.progress{height:5px;background:var(--bg-section);border-radius:3px;overflow:hidden;margin-bottom:14px;display:none;}
+.progress.active{display:block;}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width 0.2s;border-radius:3px;}
+.env-note{padding:14px 20px;background:var(--blue-dim);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;font-size:14px;color:var(--text);margin-bottom:18px;line-height:1.65;}
+.fix-btn{margin-top:8px;padding:7px 14px;background:var(--accent-soft);color:var(--accent-deep);border:1px solid #ffd9bf;border-radius:8px;cursor:pointer;font-family:var(--fb);font-size:13px;font-weight:700;transition:all 0.15s;}
+.fix-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a href="erp.html" class="back">← ERP</a>
+  <h1>🚦 시연 전 자동 점검</h1>
+  <p>그래피 미팅 30분 전 실행 — 시스템이 시연 가능 상태인지 자동 검증합니다.</p>
+</header>
+
+<div class="summary">
+  <div>
+    <div class="score" id="score">—</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px;" id="score-label">점검 실행 대기</div>
+  </div>
+  <div class="meta" id="meta"></div>
+</div>
+
+<div class="env-note" id="env-note"></div>
+
+<div class="controls">
+  <button class="btn primary" onclick="runChecks()">🚀 자동 점검 실행</button>
+  <button class="btn" onclick="resetAndOpenERP()">🔄 시연용 데이터 초기화 + ERP 열기</button>
+  <button class="btn" onclick="prewarm()">🔥 캐시 prewarm</button>
+</div>
+
+<div class="progress" id="progress"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div id="results"></div>
+
+<div class="action-bar" id="action-bar" style="display:none;">
+  <div>
+    <strong>모든 점검 통과 ✅</strong> — 시연 시작 가능합니다
+  </div>
+  <a href="erp.html">시연 시작 →</a>
+</div>
+
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6';
+const SUB_PAGES=['erp.html','erp-analytics.html','erp-messages.html','erp-reports.html','erp-quality.html','erp-mobile.html','erp-help.html','erp-inventory.html','erp-calendar.html','erp-portal.html','erp-search.html','erp-workflow.html'];
+const REQUIRED_STATUSES=['received','design_queued','designing','design_done','print_queued','printing','assembling','qc','shipping','delivered','applied','settled'];
+
+let results=[];
+
+// File existence check via iframe — works on file:// (fetch HEAD doesn't)
+function checkFileExists(url){
+  return new Promise(resolve=>{
+    const iframe=document.createElement('iframe');
+    iframe.style.cssText='position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px;';
+    let done=false;
+    const finish=ok=>{if(done)return;done=true;try{iframe.remove();}catch(e){}resolve(ok);};
+    iframe.onload=()=>finish(true);
+    iframe.onerror=()=>finish(false);
+    setTimeout(()=>finish(false),3000);
+    iframe.src=url;
+    document.body.appendChild(iframe);
+  });
+}
+
+async function runChecks(){
+  results=[];
+  const c=(category,name,passed,detail,fix,fixAction)=>{results.push({category,name,passed,detail,fix,fixAction});};
+  const isFileProtocol=location.protocol==='file:';
+  document.getElementById('env-note').innerHTML=isFileProtocol
+    ? `📂 <strong>file:// 환경 감지</strong> — iframe 방식으로 파일 존재를 검사합니다. 점검에 5~10초 걸립니다.`
+    : `🌐 <strong>HTTP 환경 감지</strong> — fetch 방식으로 빠른 검사 진행`;
+
+  // Show progress bar
+  const totalSteps=SUB_PAGES.length+10;
+  let step=0;
+  const progress=document.getElementById('progress');
+  const fill=document.getElementById('progress-fill');
+  progress.classList.add('active');
+  const tick=()=>{step++;fill.style.width=`${Math.round(step/totalSteps*100)}%`;};
+
+  // === 1. localStorage data ===
+  let state=null;
+  try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}
+  c('데이터','localStorage 데이터 로드', !!state, state?`v6 정상 (주문 ${state.orders?.length||0}건)`:'없음 — 데이터 초기화 + ERP 열기 필요','"🔄 시연용 데이터 초기화 + ERP 열기" 버튼 클릭','reset');
+  tick();
+  if(state){
+    const have=new Set((state.orders||[]).map(o=>o.status));
+    const missing=REQUIRED_STATUSES.filter(s=>!have.has(s));
+    c('데이터','12개 상태 골고루 분포', missing.length===0, missing.length?`누락: ${missing.join(', ')}`:'모든 상태 OK','데이터 초기화로 시드 새로 생성','reset');
+    const rescan=(state.orders||[]).filter(o=>o.status==='rescan_requested');
+    c('데이터','rescan_requested 시연용 주문', rescan.length>0, rescan.length?`${rescan.length}건 (${rescan[0]?.id})`:'없음 — 재스캔 시나리오 불가','데이터 초기화','reset');
+    const withUDI=(state.orders||[]).filter(o=>o.udi).length;
+    c('데이터','UDI 추적 데이터 (의료기기법)', withUDI===state.orders?.length && withUDI>0, `${withUDI}/${state.orders?.length||0} 주문에 UDI`,'데이터 초기화','reset');
+    c('데이터','환자 데이터', (state.patients||[]).length>=5, `${state.patients?.length||0}명 등록`,'데이터 초기화','reset');
+    c('데이터','거래처 데이터', state.clinics?.length>=3 && state.labs?.length>=2, `치과 ${state.clinics?.length||0} · 기공소 ${state.labs?.length||0} · 그래피 ${state.graphyAccounts?.length||0}`,'데이터 초기화','reset');
+    const size=JSON.stringify(state).length;
+    c('성능','localStorage 사이즈', size<2_500_000, `${(size/1024).toFixed(0)} KB`, size>=2_500_000?'알림 정리 또는 디자인 STL 첨부 정리 권장':null);
+  }
+  for(let i=0;i<6;i++)tick();
+
+  // === 2. Sub-page accessibility (iframe-based, file:// compatible) ===
+  for(const page of SUB_PAGES){
+    if(isFileProtocol){
+      const ok=await checkFileExists(page);
+      c('파일',page, ok, ok?'존재 확인 ✓':'파일 없음 또는 로드 실패','파일 재배포 필요');
+    } else {
+      try{
+        const res=await fetch(page,{method:'HEAD'});
+        c('파일',page, res.ok, `HTTP ${res.status}`,'파일 누락');
+      }catch(e){
+        c('파일',page, false, e.message,'재배포 또는 네트워크 확인');
+      }
+    }
+    tick();
+  }
+
+  // === 3. STL 인라인 데이터 ===
+  c('자산','STL 인라인 데이터 (디자이너용)', !!window.__SAMPLE_STL && Object.keys(window.__SAMPLE_STL).length>0, window.__SAMPLE_STL?`${Object.keys(window.__SAMPLE_STL).length}개 STL 캐시됨 (${(JSON.stringify(window.__SAMPLE_STL).length/1024/1024).toFixed(1)}MB)`:'미로드 — samples/stl-data.js 부재 가능','samples/stl-data.js 파일 확인');
+  tick();
+
+  // === 4. 브라우저 호환성 ===
+  c('브라우저','importmap 지원 (Three.js 3D 디자이너)', !!HTMLScriptElement.supports?.('importmap')||/Chrome\/[1-9]\d{2,}/.test(navigator.userAgent)||/Edg\//.test(navigator.userAgent), navigator.userAgent.match(/(Chrome|Safari|Firefox|Edg)\/[\d.]+/)?.[0]||'unknown','Chrome 또는 Edge 사용 권장 (Safari 16.3 이하 미지원)');
+  c('브라우저','clipboard API', !!navigator.clipboard, navigator.clipboard?'사용 가능':'미지원 (HTTPS 또는 localhost 필요)','HTTP 환경에서 시연 권장');
+  c('브라우저','WebGL', !!document.createElement('canvas').getContext('webgl2')||!!document.createElement('canvas').getContext('webgl'), '확인됨','3D 디자이너에 필요');
+  for(let i=0;i<3;i++)tick();
+
+  // === 5. 환경 ===
+  c('환경','화면 해상도 (1280px 이상)', screen.width>=1280||window.innerWidth>=1280, `${screen.width}×${screen.height}`,'1920×1080 권장');
+  c('환경','네트워크', navigator.onLine, navigator.onLine?'온라인 (Google Fonts/CDN 접근 OK)':'오프라인 — 폰트 미로드','인터넷 연결 확인');
+  c('환경','시스템 시간', true, new Date().toLocaleString('ko-KR'),null);
+  for(let i=0;i<3;i++)tick();
+
+  setTimeout(()=>{progress.classList.remove('active');fill.style.width='0%';},500);
+  render();
+}
+
+function render(){
+  const passed=results.filter(r=>r.passed).length;
+  const total=results.length;
+  const rate=total?Math.round(passed/total*100):0;
+  const cls=rate===100?'pass':rate>=80?'warn':'fail';
+  document.getElementById('score').textContent=`${rate}%`;
+  document.getElementById('score').className=`score ${cls}`;
+  document.getElementById('score-label').textContent=`${passed}/${total} 통과`;
+  document.getElementById('meta').innerHTML=`마지막 점검: ${new Date().toLocaleString('ko-KR')}<br>실패 ${total-passed}건`;
+  // group by category
+  const cats={};
+  results.forEach(r=>{(cats[r.category]=cats[r.category]||[]).push(r);});
+  let html='';
+  for(const [cat,items] of Object.entries(cats)){
+    html+=`<div class="cat-h">${cat}</div>`;
+    items.forEach(r=>{
+      const icon=r.passed?'pass':'fail';
+      const ico=r.passed?'✓':'✗';
+      const fixBtn=!r.passed&&r.fixAction==='reset'?`<button class="fix-btn" onclick="resetAndOpenERP()">🔄 자동 수정 시도</button>`:'';
+      html+=`<div class="check"><div class="check-row"><div class="label"><span class="icon ${icon}">${ico}</span><span class="name">${r.name}</span></div><span class="value ${icon}">${r.detail||''}</span></div>${!r.passed&&r.fix?`<div class="fix">→ ${r.fix}</div>`:''}${fixBtn}</div>`;
+    });
+  }
+  document.getElementById('results').innerHTML=html;
+  document.getElementById('action-bar').style.display=rate===100?'flex':'none';
+}
+
+function resetAndOpenERP(){
+  if(!confirm('ERP 데이터를 초기화하고 erp.html을 새 탭에서 엽니다.\n\n진행 흐름:\n1) localStorage 초기화\n2) erp.html 자동 오픈 → 시드 데이터 자동 생성\n3) 이 페이지에서 자동 재점검\n\n계속할까요?'))return;
+  localStorage.removeItem(KEY);
+  ['fixon-messages-v1','fixon-qc-data-v1','fixon-inventory-v1','fixon-workflow-v1'].forEach(k=>localStorage.removeItem(k));
+  const w=window.open('erp.html','_blank');
+  if(!w){alert('⚠️ 팝업이 차단되었습니다. erp.html을 직접 새 탭에서 연 뒤 이 페이지로 돌아오세요.');return;}
+  // multi-tab storage event listener — when erp.html writes seed, re-run checks
+  let reChecked=false;
+  const onStorage=(e)=>{
+    if(e.key===KEY && e.newValue && !reChecked){
+      reChecked=true;
+      window.removeEventListener('storage',onStorage);
+      setTimeout(()=>runChecks(),300);
+    }
+  };
+  window.addEventListener('storage',onStorage);
+  // fallback re-check after 3s
+  setTimeout(()=>{if(!reChecked){reChecked=true;window.removeEventListener('storage',onStorage);runChecks();}},3500);
+}
+
+async function prewarm(){
+  const btn=event.target;btn.disabled=true;btn.textContent='🔥 prewarm 중...';
+  const isFileProtocol=location.protocol==='file:';
+  for(const page of SUB_PAGES){
+    if(isFileProtocol){
+      await checkFileExists(page); // iframe load = browser-cached
+    } else {
+      try{await fetch(page);}catch(e){}
+    }
+  }
+  btn.disabled=false;btn.textContent='✅ prewarm 완료';
+  setTimeout(()=>{btn.textContent='🔥 캐시 prewarm';},2000);
+}
+</script>
+</body>
+</html>

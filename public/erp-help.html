@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn ERP — 도움말 / 가이드</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+html,body{display:flex;min-height:100vh;background:var(--bg-section);}
+.sidebar{width:280px;background:#fff;border-right:1px solid var(--border);padding:24px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sidebar a.back{color:var(--accent);font-size:14px;font-weight:600;display:block;margin-bottom:18px;}
+.sidebar h2{font-size:18px;margin-bottom:16px;letter-spacing:-0.02em;}
+.sidebar .search-box{margin-bottom:14px;}
+.sidebar input{width:100%;padding:11px 14px;font-size:14.5px;}
+.cat{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin:20px 0 8px;}
+.nav-item{display:block;padding:10px 14px;color:var(--dim);text-decoration:none;border-radius:8px;font-size:15px;cursor:pointer;font-weight:500;transition:all 0.12s;}
+.nav-item:hover{background:var(--bg-section);color:var(--text);}
+.nav-item.active{background:var(--accent-soft);color:var(--accent-deep);font-weight:700;}
+.main{flex:1;padding:40px 56px;max-width:920px;}
+.main header{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.main h1{font-size:34px;font-weight:800;margin-bottom:8px;letter-spacing:-0.025em;}
+.crumb{font-size:13px;color:var(--muted);font-family:var(--fm);}
+article{display:none;font-size:16.5px;line-height:1.75;color:var(--dim);}
+article.active{display:block;}
+article h2{font-size:24px;margin:32px 0 14px;color:var(--text);letter-spacing:-0.02em;}
+article h3{font-size:19px;margin:24px 0 12px;color:var(--accent);font-weight:700;}
+article p{margin-bottom:14px;}
+article ul,article ol{padding-left:28px;margin-bottom:16px;}
+article li{margin-bottom:8px;}
+article kbd{background:#fff;border:1px solid var(--border);border-bottom-width:2px;padding:3px 10px;border-radius:6px;font-family:var(--fm);font-size:13px;color:var(--accent);font-weight:600;}
+article .info{background:var(--accent-soft);border-left:3px solid var(--accent);padding:18px 22px;margin:18px 0;border-radius:0 10px 10px 0;font-size:15px;color:var(--text);line-height:1.7;}
+article table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+article th{text-align:left;padding:14px 16px;background:var(--bg-section);font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
+article td{padding:14px 16px;border-bottom:1px solid var(--border-subtle);color:var(--text);}
+article tr:last-child td{border-bottom:none;}
+.faq-q{font-weight:700;color:var(--accent);margin-top:18px;font-size:17px;}
+.tut-step{display:none;}
+.tut-step.active{display:block;}
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,0.5);backdrop-filter:blur(4px);display:none;z-index:100;align-items:center;justify-content:center;padding:24px;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px;max-width:560px;width:100%;box-shadow:var(--shadow-lg);}
+.modal h3{margin:0 0 16px;color:var(--accent);font-size:22px;letter-spacing:-0.02em;}
+.modal .nav-row{display:flex;justify-content:space-between;margin-top:22px;}
+.modal .progress{height:5px;background:var(--bg-section);border-radius:3px;overflow:hidden;margin-bottom:18px;}
+.modal .progress-fill{height:100%;background:var(--accent);transition:width 0.3s;border-radius:3px;}
+.fb{margin-top:32px;padding:24px;background:#fff;border:1px solid var(--border);border-radius:14px;text-align:center;}
+.fb button{padding:10px 20px;background:transparent;border:1px solid var(--border);color:var(--text);border-radius:8px;margin:0 6px;cursor:pointer;font-family:var(--fb);font-size:14.5px;font-weight:600;transition:all 0.15s;}
+.fb button:hover{border-color:var(--accent);color:var(--accent);}
+@media print{html,body{background:#fff;color:#000;}.sidebar{display:none;}.main{padding:20px;max-width:none;}article{display:block !important;page-break-after:always;}}
+@media (max-width:780px){html,body{display:block;}.sidebar{position:relative;height:auto;width:100%;}.main{padding:24px;}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <a href="erp.html" class="back">← ERP로 돌아가기</a>
+  <h2>📖 도움말</h2>
+  <div class="search-box"><input type="text" id="search" placeholder="🔍 검색..." oninput="searchDocs(this.value)"></div>
+  <button class="btn" style="width:100%;margin-bottom:10px;font-size:11px;padding:7px;" onclick="openTutorial()">🚀 인터랙티브 튜토리얼</button>
+
+  <div class="cat">시작</div>
+  <a class="nav-item active" data-id="start" onclick="showArticle('start',this)">시작하기</a>
+  <a class="nav-item" data-id="overview" onclick="showArticle('overview',this)">시스템 구조</a>
+
+  <div class="cat">역할별 가이드</div>
+  <a class="nav-item" data-id="clinic" onclick="showArticle('clinic',this)">치과 (Clinic)</a>
+  <a class="nav-item" data-id="lab" onclick="showArticle('lab',this)">기공소 (Lab)</a>
+  <a class="nav-item" data-id="graphy" onclick="showArticle('graphy',this)">그래피 (Graphy)</a>
+  <a class="nav-item" data-id="fixon" onclick="showArticle('fixon',this)">FixOn 관리자</a>
+
+  <div class="cat">기능</div>
+  <a class="nav-item" data-id="designer" onclick="showArticle('designer',this)">3D 디자이너</a>
+  <a class="nav-item" data-id="shortcuts" onclick="showArticle('shortcuts',this)">단축키</a>
+  <a class="nav-item" data-id="glossary" onclick="showArticle('glossary',this)">용어 사전</a>
+
+  <div class="cat">기타</div>
+  <a class="nav-item" data-id="faq" onclick="showArticle('faq',this)">FAQ</a>
+  <a class="nav-item" data-id="videos" onclick="showArticle('videos',this)">비디오 가이드</a>
+  <a class="nav-item" data-id="support" onclick="showArticle('support',this)">고객 지원</a>
+</aside>
+
+<main class="main">
+<header>
+  <div class="crumb"><span id="crumb">시작 / 시작하기</span></div>
+  <h1 id="page-title">시작하기</h1>
+</header>
+
+<article data-id="start" class="active">
+<p>FixOn ERP는 치과의 디지털 스플린트 디자인 → 기공소 디자인 작업 → 그래피 3D 인쇄/조립 → 환자 적용까지 전체 워크플로우를 관리하는 운영 시스템입니다.</p>
+<div class="info"><strong>💡 5분 안에 시작하기</strong><br>1. ERP 접속 → 우상단 역할 전환 → 본인 역할 선택<br>2. 사이드바에서 메뉴 탐색<br>3. 본 가이드의 역할별 가이드 참고</div>
+<h3>전체 워크플로우</h3>
+<svg viewBox="0 0 700 80" style="width:100%;height:auto;margin:14px 0;">
+  <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff6b2b"/></marker></defs>
+  <g font-family="Noto Sans KR" font-size="12" fill="#e8e6f0">
+    <rect x="10" y="20" width="100" height="40" fill="#60a5fa" rx="6"/><text x="60" y="44" text-anchor="middle" fill="#fff">치과</text>
+    <line x1="115" y1="40" x2="155" y2="40" stroke="#ff6b2b" stroke-width="2" marker-end="url(#arr)"/>
+    <rect x="160" y="20" width="100" height="40" fill="#a78bfa" rx="6"/><text x="210" y="44" text-anchor="middle" fill="#fff">기공소</text>
+    <line x1="265" y1="40" x2="305" y2="40" stroke="#ff6b2b" stroke-width="2" marker-end="url(#arr)"/>
+    <rect x="310" y="20" width="100" height="40" fill="#34d399" rx="6"/><text x="360" y="44" text-anchor="middle" fill="#fff">그래피</text>
+    <line x1="415" y1="40" x2="455" y2="40" stroke="#ff6b2b" stroke-width="2" marker-end="url(#arr)"/>
+    <rect x="460" y="20" width="100" height="40" fill="#60a5fa" rx="6"/><text x="510" y="44" text-anchor="middle" fill="#fff">치과 (적용)</text>
+    <line x1="565" y1="40" x2="605" y2="40" stroke="#ff6b2b" stroke-width="2" marker-end="url(#arr)"/>
+    <rect x="610" y="20" width="80" height="40" fill="#ff6b2b" rx="6"/><text x="650" y="44" text-anchor="middle" fill="#fff">정산</text>
+  </g>
+</svg>
+<h3>주문 12단계</h3>
+<p>접수 → 디자인 대기 → 디자인 중 → 디자인 완료 → 생산 대기 → 인쇄 → 조립 → QC → 배송 → 수령 → 환자 적용 → 정산 완료</p>
+</article>
+
+<article data-id="overview">
+<h2>시스템 구조</h2>
+<p>FixOn ERP는 단일 HTML 파일로 동작하며 4개 stakeholder가 각자의 역할로 관리합니다.</p>
+<table><thead><tr><th>역할</th><th>주요 화면</th><th>핵심 기능</th></tr></thead><tbody>
+<tr><td>🦷 치과</td><td>대시보드 / 신규 주문 / 환자 관리 / 결제</td><td>주문 등록, 환자 데이터 관리, 적용 완료, 결제</td></tr>
+<tr><td>🔧 기공소</td><td>작업 큐 / 완료 목록 / 통계</td><td>스캔 검토, FixOn 디자인 SW 작업, 디자인 완료</td></tr>
+<tr><td>🖨️ 그래피</td><td>생산 큐 / 조립 / QC / 배송 / 재고</td><td>3D 프린팅, 조립, 품질 검수, 배송 등록</td></tr>
+<tr><td>⚙️ FixOn</td><td>전체 대시보드 / 정산 / 거래처 / 품질</td><td>운영 총괄, 매출 분배, 거래처 관리</td></tr>
+</tbody></table>
+</article>
+
+<article data-id="clinic">
+<h2>치과 가이드</h2>
+<h3>1️⃣ 환자 등록</h3>
+<p>"환자 관리" 메뉴에서 신규 환자를 등록합니다. 이름, 나이, 성별, 진료 비고를 입력합니다.</p>
+<h3>2️⃣ 신규 주문</h3>
+<p>"신규 주문" 메뉴에서:</p>
+<ol>
+<li>환자 선택</li>
+<li>스캔 방식 선택 (구강스캐너 / 인상체 데스크탑 스캔)</li>
+<li>스캐너 모델 + 부위 선택</li>
+<li>스캔 파일 업로드 (또는 샘플 사용)</li>
+<li>노즐 레이아웃 프리셋 선택 또는 3D 디자이너에서 직접 배치</li>
+<li>주문 등록 → 자동으로 기공소로 의뢰 발송</li>
+</ol>
+<h3>3️⃣ 주문 추적</h3>
+<p>"주문 목록"에서 진행 상태를 실시간 확인합니다. 알림 🔔으로 주요 단계마다 안내받습니다.</p>
+<h3>4️⃣ 수령 및 적용</h3>
+<p>배송이 도착하면 "수령 확인" → 환자 적용 후 "환자 적용 완료" 클릭 → 자동 정산.</p>
+</article>
+
+<article data-id="lab">
+<h2>기공소 가이드</h2>
+<h3>📥 작업 큐 확인</h3>
+<p>치과로부터 들어온 디자인 의뢰가 칸반 형태로 표시됩니다. 카드를 클릭해 스캔 데이터를 검토합니다.</p>
+<h3>🔍 스캔 검토</h3>
+<p>스캔 품질이 적합한지 확인:</p>
+<ul>
+<li>품질 OK → "디자인 시작" 클릭 → designing 상태</li>
+<li>품질 부족 → "재스캔 요청" 클릭 → 사유 입력 → 치과로 반려</li>
+</ul>
+<h3>✏️ 디자인 작업</h3>
+<p>FixOn 디자인 SW (또는 3D 디자이너)로 스플린트 설계 → "디자인 완료" → 자동으로 그래피 생산 큐로 인계.</p>
+</article>
+
+<article data-id="graphy">
+<h2>그래피 가이드</h2>
+<h3>🖨️ 인쇄</h3>
+<p>"생산 큐"에서 카드 클릭 → "인쇄 시작" → 가용 프린터 자동 배정 → 소재(TC-85) 사용량 자동 차감.</p>
+<h3>🔧 조립</h3>
+<p>인쇄 완료 후 "조립" 페이지로 이동:</p>
+<ul><li>분사 노즐 4개 삽입</li><li>어댑터 결합</li><li>튜브팁 연결</li><li>수밀 테스트</li></ul>
+<h3>✔️ QC</h3>
+<p>6-axis 검사: 치수 정확도, 노즐 분사, 표면 마감, 어댑터 결합, 수밀, 환자 적합성</p>
+<ul><li>통과 → 송장 자동 생성 → 배송</li><li>실패 → 재생산 큐로 회귀</li></ul>
+</article>
+
+<article data-id="fixon">
+<h2>FixOn 관리자 가이드</h2>
+<h3>📊 전체 대시보드</h3>
+<p>모든 주문, 매출, stakeholder별 처리 현황을 한 화면에 모니터링.</p>
+<h3>🏢 거래처 관리</h3>
+<p>치과/기공소/그래피의 신규 등록 및 계약 관리.</p>
+<h3>💰 정산</h3>
+<p>환자 적용 완료된 주문에 대해 매출을 자동 분배: 기공소 / 그래피 / FixOn 수수료.</p>
+<h3>💲 단가 정책</h3>
+<p>주문 1건당 분배율 설정. 합계 검증 자동.</p>
+</article>
+
+<article data-id="designer">
+<h2>3D 디자이너 사용법</h2>
+<p>주문 모달에서 "🎨 3D 디자이너" 버튼으로 진입. 5단계 wizard 흐름:</p>
+<h3>Step 1: Import</h3>
+<p>구강스캐너 / 인상체 / 샘플 중 선택 → STL 업로드 또는 드래그앤드롭</p>
+<h3>Step 2: 치아 인식</h3>
+<p>"치아 자동 인식" 클릭 → 14개 FDI 라벨 자동 부여</p>
+<h3>Step 3: Splint Fit</h3>
+<p>"Template Fit" 클릭 → splint0306 템플릿이 환자 스캔에 affine fit. Scale 슬라이더로 미세 조정.</p>
+<h3>Step 4: 노즐 배치</h3>
+<ul>
+<li><strong>Hover preview</strong>: 마우스 올리면 ghost nozzle이 표면 따라다님</li>
+<li><strong>FDI 차트 클릭</strong>: 우측 14-cell 차트에서 자동 배치</li>
+<li><strong>Mirror 모드</strong>: 한쪽 클릭 → 반대쪽 자동 배치</li>
+<li><strong>Drag</strong>: 노즐 드래그로 표면 따라 이동</li>
+<li><kbd>Ctrl+Z</kbd> / <kbd>Ctrl+Y</kbd> Undo/Redo</li>
+</ul>
+<h3>Step 5: Export</h3>
+<p>STL 다운로드 (생산용) / JSON (설계 데이터) / 주문에 적용</p>
+</article>
+
+<article data-id="shortcuts">
+<h2>키보드 단축키</h2>
+<table><thead><tr><th>키</th><th>동작</th></tr></thead><tbody>
+<tr><td><kbd>Esc</kbd></td><td>모달 닫기</td></tr>
+<tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>실행 취소 (디자이너)</td></tr>
+<tr><td><kbd>Ctrl</kbd> + <kbd>Y</kbd></td><td>다시 실행 (디자이너)</td></tr>
+<tr><td><kbd>Enter</kbd></td><td>다음 필드 (폼)</td></tr>
+<tr><td><kbd>Shift</kbd> + <kbd>Enter</kbd></td><td>줄 바꿈 (메시지)</td></tr>
+</tbody></table>
+</article>
+
+<article data-id="glossary">
+<h2>용어 사전</h2>
+<h3>FDI 치아 번호 체계</h3>
+<p>국제 표준 두 자리 번호: 첫 자리=사분면 (1=상악우측, 2=상악좌측, 3=하악좌측, 4=하악우측), 둘째 자리=중앙에서의 거리 (1=중절치, 2=측절치, 3=견치, 4=제1소구치, 5=제2소구치, 6=제1대구치, 7=제2대구치).</p>
+<h3>치아 분류 (Korean)</h3>
+<table><thead><tr><th>분류</th><th>한국어</th><th>영어</th></tr></thead><tbody>
+<tr><td>Incisor</td><td>절치 (앞니)</td><td>Central/Lateral Incisor</td></tr>
+<tr><td>Canine</td><td>견치 (송곳니)</td><td>Canine</td></tr>
+<tr><td>Premolar</td><td>소구치</td><td>1st/2nd Premolar</td></tr>
+<tr><td>Molar</td><td>대구치 (어금니)</td><td>1st/2nd/3rd Molar</td></tr>
+</tbody></table>
+<h3>주요 용어</h3>
+<ul>
+<li><strong>스플린트 (Splint)</strong>: 교합안정장치, 환자 치아에 끼우는 맞춤 장치</li>
+<li><strong>노즐 (Nozzle)</strong>: 스플린트의 분사 부위, 잇몸 마사지/치주 케어용</li>
+<li><strong>구강스캐너 (Intraoral Scanner)</strong>: 치과에서 직접 환자 구강 스캔</li>
+<li><strong>인상체 / 모형 스캔</strong>: 인상재로 본 뜬 후 데스크탑 스캐너로 스캔</li>
+<li><strong>QC (Quality Control)</strong>: 품질 검수</li>
+<li><strong>TC-85</strong>: 그래피 3D 프린팅용 의료용 레진</li>
+</ul>
+</article>
+
+<article data-id="faq">
+<h2>자주 묻는 질문 (FAQ)</h2>
+<div class="faq-q">Q1. 스캔 파일 형식은 무엇을 지원하나요?</div>
+<p>A. STL (binary/ASCII), PLY, OBJ를 지원합니다. STL이 권장됩니다.</p>
+<div class="faq-q">Q2. 노즐 위치를 잘못 지정한 경우 어떻게 수정하나요?</div>
+<p>A. 주문 모달에서 "노즐 위치 수정" 또는 "3D 디자이너로 직접 배치"를 사용해 변경할 수 있습니다.</p>
+<div class="faq-q">Q3. QC 실패 시 어떻게 처리되나요?</div>
+<p>A. 자동으로 print_queued 상태로 회귀하고, 재작업 큐에 등록됩니다. 사유는 타임라인에 기록됩니다.</p>
+<div class="faq-q">Q4. 주문 상태를 되돌릴 수 있나요?</div>
+<p>A. QC 실패 외에는 일반적으로 되돌리지 않습니다. 잘못된 진행은 FixOn 관리자에게 문의하세요.</p>
+<div class="faq-q">Q5. 결제는 어떻게 처리되나요?</div>
+<p>A. 환자 적용 완료 시점에 정산 대기로 전환되며 FixOn 관리자가 정산을 진행합니다.</p>
+<div class="faq-q">Q6. 모바일에서도 사용 가능한가요?</div>
+<p>A. 네, <a href="erp-mobile.html" style="color:var(--accent);">모바일 ERP</a>를 별도로 제공합니다.</p>
+<div class="faq-q">Q7. 분석 리포트는 어디서 보나요?</div>
+<p>A. <a href="erp-analytics.html" style="color:var(--accent);">분석 대시보드</a> 또는 <a href="erp-reports.html" style="color:var(--accent);">리포트</a> 페이지에서 확인.</p>
+<div class="faq-q">Q8. 데이터는 어디에 저장되나요?</div>
+<p>A. 브라우저의 localStorage에 저장됩니다 (현재 데모 단계). 향후 백엔드 연동 예정.</p>
+<div class="faq-q">Q9. 다른 환자의 정보를 볼 수 있나요?</div>
+<p>A. 본인 거래처(치과/기공소)의 환자만 보입니다. FixOn 관리자는 전체를 볼 수 있습니다.</p>
+<div class="faq-q">Q10. 3D 디자이너에서 splint 모양이 환자마다 다른가요?</div>
+<p>A. 네, 각 환자의 스캔에 맞춰 splint0306 template를 affine fit하여 환자별로 다른 형태가 생성됩니다.</p>
+<div class="faq-q">Q11. 재스캔이 필요한 경우는?</div>
+<p>A. 기공소가 스캔 품질 부족 판단 시 "재스캔 요청"을 보냅니다. 치과 대시보드에 알림이 표시됩니다.</p>
+<div class="faq-q">Q12. 단가 정책은 누가 변경하나요?</div>
+<p>A. FixOn 관리자만 변경 가능합니다. (단가 정책 메뉴)</p>
+<div class="faq-q">Q13. STL 파일이 file://에서 로드 안 됩니다.</div>
+<p>A. 샘플 STL은 인라인되어 있어 file://에서도 동작합니다. 사용자 STL 업로드는 FileReader로 처리됩니다.</p>
+<div class="faq-q">Q14. 어댑터/튜브팁 위치는 어디서 지정하나요?</div>
+<p>A. 그래피 조립 단계에서 처리됩니다. 디자이너에서는 노즐만 배치합니다.</p>
+<div class="faq-q">Q15. QC 인증서 출력은?</div>
+<p>A. <a href="erp-quality.html" style="color:var(--accent);">QC 센터</a>의 인증서 탭에서 통과한 주문에 대해 다운로드 가능.</p>
+<div class="faq-q">Q16. Mirror 모드는 어떻게 동작하나요?</div>
+<p>A. ON 상태에서 #46 클릭 → #36에도 자동 배치 (좌우 대칭). 비대칭 환자는 OFF.</p>
+<div class="faq-q">Q17. 알림은 어디서 보나요?</div>
+<p>A. ERP 우상단 🔔 아이콘 또는 모바일 메시지 탭.</p>
+<div class="faq-q">Q18. 데이터를 초기화하려면?</div>
+<p>A. 사이드바의 "🔄 데이터 초기화" 버튼 또는 모바일 설정 → 초기화.</p>
+<div class="faq-q">Q19. 새로 추가된 페이지는 무엇인가요?</div>
+<p>A. 분석 대시보드, 메시지 hub, 리포트 생성기, QC 센터, 모바일 컴패니언, 도움말 (이 페이지)이 추가되었습니다.</p>
+<div class="faq-q">Q20. 보안 / 개인정보는 어떻게 관리되나요?</div>
+<p>A. 현재 데모 단계로 localStorage만 사용. 운영 단계에서는 의료정보보호법 준수 백엔드와 암호화 적용 예정.</p>
+</article>
+
+<article data-id="videos">
+<h2>비디오 가이드</h2>
+<p style="color:var(--dim);font-size:13px;margin-bottom:14px;">아래 비디오들은 향후 제작 예정입니다.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+${[['치과 신규 주문 5분 안내','3:42'],['기공소 디자인 워크플로우','5:20'],['그래피 인쇄/조립/QC','7:15'],['FixOn 정산 가이드','4:08'],['3D 디자이너 마스터하기','10:30']].map(([t,d])=>`<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;"><div style="aspect-ratio:16/9;background:var(--bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:32px;opacity:0.4;margin-bottom:8px;">▶</div><div style="font-weight:600;font-size:13px;">${t}</div><div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono';margin-top:3px;">${d} · 준비 중</div></div>`).join('')}
+</div>
+</article>
+
+<article data-id="support">
+<h2>고객 지원</h2>
+<div class="info"><strong>📞 연락처</strong><br>이메일: support@fixon.example<br>전화: 02-1234-5678 (평일 09:00-18:00)<br>긴급: 010-XXXX-XXXX</div>
+<h3>🐛 버그 리포트</h3>
+<p style="font-size:13px;color:var(--dim);margin-bottom:10px;">발견하신 버그를 알려주세요.</p>
+<form onsubmit="event.preventDefault();alert('✅ 접수되었습니다 (데모)');this.reset();" style="display:flex;flex-direction:column;gap:10px;">
+<input type="text" placeholder="이메일" required style="padding:10px 12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:7px;">
+<select style="padding:10px 12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:7px;"><option>심각도 선택</option><option>일반</option><option>중요</option><option>긴급</option></select>
+<textarea rows="5" placeholder="버그 내용 (재현 방법, 환경 등)" required style="padding:10px 12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:7px;font-family:'Noto Sans KR';"></textarea>
+<button type="submit" class="btn">제출</button>
+</form>
+</article>
+
+<div class="fb">
+<div style="font-size:12px;color:var(--dim);margin-bottom:8px;">이 페이지가 도움이 되었나요?</div>
+<button onclick="alert('의견 감사합니다 👍')">👍 도움됨</button>
+<button onclick="alert('피드백 감사합니다 👎')">👎 부족함</button>
+</div>
+</main>
+
+<div class="modal-bg" id="tut-modal">
+<div class="modal">
+<div class="progress"><div class="progress-fill" id="tut-progress" style="width:0%;"></div></div>
+<h3 id="tut-title">튜토리얼</h3>
+<div id="tut-body"></div>
+<div class="nav-row">
+<button class="btn-ghost btn" onclick="closeTutorial()">건너뛰기</button>
+<div><button class="btn-ghost btn" onclick="tutPrev()" id="tut-prev">← 이전</button> <button class="btn" onclick="tutNext()" id="tut-next">다음 →</button></div>
+</div>
+</div>
+</div>
+
+<script>
+const TUT=[
+  {t:'1. 환영합니다 👋',b:'FixOn ERP 8단계 튜토리얼을 시작합니다. 5분이면 끝납니다.'},
+  {t:'2. 역할 전환',b:'우상단 드롭다운에서 본인 역할을 선택하세요. 4개 stakeholder 모두 시뮬레이션 가능합니다.'},
+  {t:'3. 사이드바 메뉴',b:'역할마다 다른 메뉴가 표시됩니다. 클릭해서 화면을 전환하세요.'},
+  {t:'4. 신규 주문',b:'치과 역할 → "신규 주문" → 환자 선택 → 스캔 업로드 → 주문 등록.'},
+  {t:'5. 알림 확인',b:'우상단 🔔 아이콘에 새 작업이 표시됩니다.'},
+  {t:'6. 3D 디자이너',b:'주문 모달의 "🎨 3D 디자이너" 버튼으로 노즐 위치 직접 배치 가능.'},
+  {t:'7. 부가 도구',b:'분석 대시보드, 메시지, 리포트, QC 센터, 모바일 뷰 모두 사용 가능.'},
+  {t:'8. 완료 🎉',b:'이제 FixOn ERP를 자유롭게 사용하실 수 있습니다. 추가 도움이 필요하면 도움말 페이지를 참고하세요.'}
+];
+let tutI=0;
+function showArticle(id,el){
+  document.querySelectorAll('article').forEach(a=>a.classList.remove('active'));
+  document.querySelector(`article[data-id="${id}"]`)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el?.classList.add('active');
+  const titles={start:'시작하기',overview:'시스템 구조',clinic:'치과',lab:'기공소',graphy:'그래피',fixon:'FixOn 관리자',designer:'3D 디자이너',shortcuts:'단축키',glossary:'용어 사전',faq:'FAQ',videos:'비디오 가이드',support:'고객 지원'};
+  document.getElementById('page-title').textContent=titles[id];
+  document.getElementById('crumb').textContent=titles[id];
+  location.hash=id;
+}
+function searchDocs(q){
+  q=q.toLowerCase();if(!q){document.querySelectorAll('article p, article li, article td').forEach(el=>{el.innerHTML=el.innerHTML.replace(/<mark>([^<]+)<\/mark>/g,'$1');});return;}
+  document.querySelectorAll('article').forEach(a=>{
+    a.querySelectorAll('p,li,td').forEach(el=>{
+      const text=el.textContent;
+      if(text.toLowerCase().includes(q)){
+        el.innerHTML=text.replace(new RegExp(`(${q.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')})`,'gi'),'<mark>$1</mark>');
+      }
+    });
+  });
+}
+function openTutorial(){
+  // Real interactive tour runs inside erp.html (highlights actual UI elements as user follows along)
+  window.open('erp.html?tour=1','_blank');
+}
+function closeTutorial(){document.getElementById('tut-modal').classList.remove('open');}
+function renderTut(){const t=TUT[tutI];document.getElementById('tut-title').textContent=t.t;document.getElementById('tut-body').innerHTML=`<p>${t.b}</p>`;document.getElementById('tut-progress').style.width=((tutI+1)/TUT.length*100)+'%';document.getElementById('tut-prev').style.visibility=tutI===0?'hidden':'visible';document.getElementById('tut-next').textContent=tutI===TUT.length-1?'완료':'다음 →';}
+function tutPrev(){if(tutI>0){tutI--;renderTut();}}
+function tutNext(){if(tutI<TUT.length-1){tutI++;renderTut();}else closeTutorial();}
+
+// Hash routing
+if(location.hash){const id=location.hash.slice(1);const el=document.querySelector(`.nav-item[data-id="${id}"]`);if(el)showArticle(id,el);}
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>FixOn Community — Join</title>
+<link rel="stylesheet" href="../assets/design-system.css">
+<style>
+body{min-height:100vh;min-height:100dvh;background:var(--bg-section);}
+
+/* Mobile-first fullscreen */
+.funnel{max-width:460px;margin:0 auto;padding:0 24px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;}
+
+/* Steps */
+.step{display:none;flex:1;flex-direction:column;justify-content:center;padding:32px 0;}
+.step.active{display:flex;}
+
+/* Step 1: Hook */
+.hook{text-align:center;}
+.hook-badge{display:inline-block;font-size:13px;font-weight:600;color:var(--accent-deep);background:var(--accent-soft);border-radius:100px;padding:6px 16px;margin-bottom:20px;letter-spacing:0;}
+.hook h1{font-size:38px;font-weight:900;letter-spacing:-0.03em;line-height:1.2;margin-bottom:12px;color:var(--text);}
+.hook h1 span{color:var(--accent);}
+.hook p{font-size:17px;color:var(--muted);line-height:1.6;margin-bottom:32px;}
+.hook-benefits{text-align:left;margin-bottom:32px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow-sm);}
+.hb-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:15px;color:var(--text);}
+.hb-item:last-child{margin-bottom:0;}
+.hb-icon{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.hb-text{line-height:1.5;}
+.hb-text strong{color:var(--accent-deep);font-weight:700;}
+.hook-btn{width:100%;padding:18px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all 0.2s;box-shadow:0 8px 20px var(--accent-glow);}
+.hook-btn:hover{background:var(--accent-deep);}
+.hook-btn:active{transform:scale(0.98);}
+.hook-skip{text-align:center;margin-top:14px;font-size:13.5px;color:var(--muted);}
+
+/* Step 2: Form */
+.form-step h2{font-size:30px;font-weight:800;margin-bottom:6px;letter-spacing:-0.025em;color:var(--text);}
+.form-step .fs-sub{font-size:15.5px;color:var(--muted);margin-bottom:28px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:14px;color:var(--dim);margin-bottom:8px;font-weight:600;}
+.field input{width:100%;padding:14px 18px;font-size:16px;-webkit-appearance:none;}
+.submit-btn{width:100%;padding:18px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--fb);margin-top:10px;transition:all 0.2s;}
+.submit-btn:hover{background:var(--accent-deep);box-shadow:0 8px 20px var(--accent-glow);}
+.submit-btn:active{transform:scale(0.98);}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.form-note{text-align:center;margin-top:14px;font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* Step 3: Welcome */
+.welcome{text-align:center;}
+.welcome-check{width:80px;height:80px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px;animation:popIn 0.4s ease;box-shadow:0 12px 28px rgba(5,150,105,0.3);}
+@keyframes popIn{from{transform:scale(0);opacity:0;}60%{transform:scale(1.2);}to{transform:scale(1);opacity:1;}}
+.welcome h2{font-size:34px;font-weight:900;margin-bottom:8px;letter-spacing:-0.03em;color:var(--text);}
+.welcome .w-name{font-size:20px;color:var(--accent);font-weight:700;margin-bottom:20px;}
+.welcome-badge{display:inline-block;background:var(--accent-soft);border:1px solid #ffd9bf;border-radius:12px;padding:14px 28px;margin-bottom:28px;}
+.welcome-badge .wb-label{font-size:12px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-weight:700;}
+.welcome-badge .wb-title{font-size:18px;font-weight:800;color:var(--accent-deep);margin-top:3px;}
+.welcome-next{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+.welcome-next .wn-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;text-align:left;font-size:14.5px;color:var(--text);box-shadow:var(--shadow-sm);}
+.wn-icon{font-size:20px;flex-shrink:0;}
+.welcome-go{width:100%;padding:18px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--fb);margin-top:24px;transition:all 0.2s;}
+.welcome-go:hover{background:var(--accent-deep);box-shadow:0 8px 20px var(--accent-glow);}
+
+/* Branding footer */
+.brand-footer{padding:20px 0;text-align:center;font-size:12.5px;color:var(--muted);}
+.brand-footer strong{color:var(--accent);font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="funnel">
+
+<!-- ===== STEP 1: Hook ===== -->
+<div class="step active" id="step-hook">
+  <div class="hook">
+    <div class="hook-badge">SIDEX 2026 &middot; Graphy Booth</div>
+    <h1>방금 보신 그 제품,<br><span>함께 만들어가실</span><br>선생님을 찾습니다</h1>
+    <p>FixOn Washer는 아직 초기 단계입니다.<br>선생님의 임상 경험이 제품의 방향을 바꿀 수 있습니다.</p>
+
+    <div class="hook-benefits">
+      <div class="hb-item">
+        <div class="hb-icon">&#128161;</div>
+        <div class="hb-text"><strong>아이디어 제안</strong><br><span style="font-size:12px;color:var(--dim);">제품 개선 아이디어를 제안하고, 투표로 우선순위를 정합니다</span></div>
+      </div>
+      <div class="hb-item">
+        <div class="hb-icon">&#128172;</div>
+        <div class="hb-text"><strong>임상 피드백</strong><br><span style="font-size:12px;color:var(--dim);">사용 경험을 공유하면 다음 버전에 직접 반영됩니다</span></div>
+      </div>
+      <div class="hb-item">
+        <div class="hb-icon">&#127942;</div>
+        <div class="hb-text"><strong>Founding Member</strong><br><span style="font-size:12px;color:var(--dim);">베타 제품 우선 제공 + 정식 출시 시 크레딧 표기</span></div>
+      </div>
+    </div>
+
+    <button class="hook-btn" onclick="goStep(2)">30초면 됩니다 — 참여하기</button>
+    <div class="hook-skip">가입 후 바로 아이디어를 제안할 수 있습니다</div>
+  </div>
+</div>
+
+<!-- ===== STEP 2: Form ===== -->
+<div class="step" id="step-form">
+  <div class="form-step">
+    <h2>Founding Member 가입</h2>
+    <div class="fs-sub">3가지만 알려주세요.</div>
+
+    <div class="field">
+      <label>성함</label>
+      <input id="f-name" type="text" placeholder="홍길동" autocomplete="name" enterkeyhint="next">
+    </div>
+    <div class="field">
+      <label>병원명</label>
+      <input id="f-clinic" type="text" placeholder="OO치과" enterkeyhint="next">
+    </div>
+    <div class="field">
+      <label>이메일</label>
+      <input id="f-email" type="email" placeholder="you@example.com" autocomplete="email" enterkeyhint="done">
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Founding Member로 가입</button>
+    <div class="form-note">입력하신 정보는 FixOn Community 내에서만 사용됩니다.<br>언제든 탈퇴할 수 있습니다.</div>
+  </div>
+</div>
+
+<!-- ===== STEP 3: Welcome ===== -->
+<div class="step" id="step-welcome">
+  <div class="welcome">
+    <div class="welcome-check">&#10003;</div>
+    <h2>환영합니다!</h2>
+    <div class="w-name" id="w-name"></div>
+
+    <div class="welcome-badge">
+      <div class="wb-label">Your Badge</div>
+      <div class="wb-title">&#127942; Founding Member</div>
+    </div>
+
+    <div class="welcome-next">
+      <div class="wn-item"><span class="wn-icon">&#128161;</span><span>다른 치과의사들의 아이디어를 보고 투표하세요</span></div>
+      <div class="wn-item"><span class="wn-icon">&#128221;</span><span>직접 개선 아이디어를 제안해보세요</span></div>
+      <div class="wn-item"><span class="wn-icon">&#128230;</span><span>베타 제품이 준비되면 가장 먼저 연락드립니다</span></div>
+    </div>
+
+    <button class="welcome-go" onclick="goToCommunity()">커뮤니티 둘러보기 &rarr;</button>
+  </div>
+</div>
+
+<div class="brand-footer">
+  <strong>FixOn</strong> Community &middot; Powered by Graphy
+</div>
+
+</div>
+
+<script>
+function goStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const targets = ['step-hook','step-form','step-welcome'];
+  document.getElementById(targets[n-1])?.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const clinic = document.getElementById('f-clinic').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+
+  if (!name) { document.getElementById('f-name').focus(); return; }
+  if (!clinic) { document.getElementById('f-clinic').focus(); return; }
+
+  // Save to localStorage (shared with community index.html)
+  const user = { name, clinic, email };
+  localStorage.setItem('fixon-user', JSON.stringify(user));
+
+  const members = JSON.parse(localStorage.getItem('fixon-members') || '[]');
+  if (!members.find(m => m.name === name && m.clinic === clinic)) {
+    members.push({
+      ...user,
+      date: new Date().toISOString().slice(0, 10),
+      badges: ['founding'],
+      contributions: 0
+    });
+    localStorage.setItem('fixon-members', JSON.stringify(members));
+  }
+
+  document.getElementById('w-name').textContent = name + ' 선생님';
+  goStep(3);
+}
+
+function goToCommunity() {
+  window.location.href = 'index.html';
+}
+
+// Enter key navigation
+document.getElementById('f-name').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('f-clinic').focus(); });
+document.getElementById('f-clinic').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('f-email').focus(); });
+document.getElementById('f-email').addEventListener('keydown', e => { if (e.key === 'Enter') submitForm(); });
+</script>
+
+</body>
+</html>

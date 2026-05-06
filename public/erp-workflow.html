@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn — 워크플로우 자동화</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 32px;}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:24px;}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;}
+.intro{background:var(--blue-dim);border-left:3px solid var(--blue);padding:16px 22px;border-radius:0 12px 12px 0;margin-bottom:22px;font-size:14.5px;color:var(--text);line-height:1.7;}
+.rules{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.rule{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;box-shadow:var(--shadow-sm);}
+.rule-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.rule-h .name{font-size:18px;font-weight:700;letter-spacing:-0.015em;}
+.rule-h .toggle{display:flex;align-items:center;gap:10px;}
+.rule-body{font-size:14.5px;line-height:1.75;color:var(--dim);}
+.rule-body .if{color:var(--blue);font-weight:700;}
+.rule-body .then{color:var(--green);font-weight:700;}
+.rule-body code{background:var(--bg-section);padding:3px 9px;border-radius:5px;font-family:var(--fm);font-size:13px;color:var(--accent-deep);font-weight:600;border:1px solid var(--border);}
+.rule-actions{display:flex;gap:8px;margin-top:14px;}
+.editor{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:22px;box-shadow:var(--shadow-sm);}
+.editor h3{font-size:18px;margin-bottom:18px;font-weight:700;letter-spacing:-0.015em;}
+.editor-row{display:grid;grid-template-columns:100px 1fr 1fr;gap:12px;margin-bottom:12px;align-items:center;}
+.editor-row label{font-size:13px;color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:0.06em;}
+.exec-log{max-height:280px;overflow-y:auto;}
+.exec-row{padding:12px 16px;border-bottom:1px solid var(--border-subtle);font-size:13.5px;display:flex;gap:14px;align-items:center;}
+.exec-row:last-child{border-bottom:none;}
+.exec-row .when{color:var(--muted);font-family:var(--fm);min-width:110px;font-weight:500;}
+.exec-row .rule-name{flex:1;color:var(--text);}
+.exec-row .result{padding:3px 10px;border-radius:100px;font-size:12px;font-weight:600;}
+.exec-row .result.ok{background:var(--green-dim);color:var(--green);}
+.exec-row .result.skip{background:#f1f5f9;color:var(--muted);}
+.toggle-sw{position:relative;width:42px;height:24px;}
+.toggle-sw input{opacity:0;width:0;height:0;}
+.toggle-sw .slider{position:absolute;cursor:pointer;inset:0;background:var(--border-strong);border-radius:12px;transition:0.2s;}
+.toggle-sw .slider::before{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:0.2s;box-shadow:var(--shadow-sm);}
+.toggle-sw input:checked+.slider{background:var(--accent);}
+.toggle-sw input:checked+.slider::before{transform:translateX(18px);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><a href="erp.html" class="back">← ERP</a><h1 style="margin-top:4px;">⚙️ 워크플로우 자동화</h1></div>
+  <button class="btn primary" onclick="runAll()">🚀 모든 규칙 실행</button>
+</header>
+
+<div class="intro">
+  <strong>If This → Then That</strong> 형식으로 자동화 규칙을 설정합니다. 규칙은 조건이 충족될 때마다 자동 실행됩니다.<br>
+  예: "주문이 72시간 이상 디자인 대기 → 기공소에 알림 발송".
+</div>
+
+<div class="rules" id="rules"></div>
+
+<div class="editor">
+<h3>➕ 새 규칙 만들기</h3>
+<div class="editor-row"><label>이름</label><input id="r-name" placeholder="규칙 이름"><span></span></div>
+<div class="editor-row"><label>IF</label><select id="r-trigger"><option value="status_long">주문이 N시간 이상 같은 상태</option><option value="status_change">상태 변경 시</option><option value="qc_fail">QC 실패 시</option><option value="inv_low">재고 임계치 미만</option></select><input id="r-trigger-val" placeholder="조건값 (예: 24)" type="number" value="24"></div>
+<div class="editor-row"><label>THEN</label><select id="r-action"><option value="notify">알림 발송</option><option value="auto_advance">자동 다음 단계</option><option value="email_supplier">공급사 이메일</option><option value="add_priority">우선순위 상향</option></select><input id="r-action-val" placeholder="대상 (역할/이메일)" value="lab"></div>
+<button class="btn primary" onclick="addRule()">규칙 추가</button>
+</div>
+
+<div class="editor">
+<h3>📜 실행 이력</h3>
+<div class="exec-log" id="log"></div>
+</div>
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6',WKEY='fixon-workflow-v1';
+const TRIGGER_LABEL={status_long:'시간 경과',status_change:'상태 변경',qc_fail:'QC 실패',inv_low:'재고 부족'};
+const ACTION_LABEL={notify:'알림 발송',auto_advance:'자동 진행',email_supplier:'이메일',add_priority:'우선순위 상향'};
+let state=null,wf=null;
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}try{wf=JSON.parse(localStorage.getItem(WKEY));}catch(e){}if(!wf){wf=seed();saveW();}}
+function saveW(){localStorage.setItem(WKEY,JSON.stringify(wf));}
+function seed(){return {rules:[
+  {id:'r1',name:'장기 디자인 대기 알림',trigger:'status_long',triggerVal:48,action:'notify',actionVal:'lab',active:true,desc:'주문이 48시간 이상 design_queued 상태일 경우 기공소에 알림 발송'},
+  {id:'r2',name:'QC 실패 즉시 알림',trigger:'qc_fail',triggerVal:0,action:'notify',actionVal:'graphy',active:true,desc:'QC 실패 시 그래피팀에 즉시 알림'},
+  {id:'r3',name:'재고 임계치 자동 발주',trigger:'inv_low',triggerVal:0,action:'email_supplier',actionVal:'auto-order@graphy.example',active:true,desc:'TC-85 재고가 임계치 이하면 공급사로 자동 발주 메일'},
+  {id:'r4',name:'급한 케이스 우선순위 상향',trigger:'status_change',triggerVal:0,action:'add_priority',actionVal:'high',active:false,desc:'(비활성) 임플란트 케이스로 분류된 주문 자동 우선순위 상향'}
+],log:[
+  {at:new Date(Date.now()-3600000).toISOString(),ruleId:'r1',ruleName:'장기 디자인 대기 알림',result:'ok',msg:'ORD-2026-0011 → lab 알림'},
+  {at:new Date(Date.now()-7200000).toISOString(),ruleId:'r2',ruleName:'QC 실패 즉시 알림',result:'skip',msg:'대상 주문 없음'},
+  {at:new Date(Date.now()-14400000).toISOString(),ruleId:'r3',ruleName:'재고 임계치 자동 발주',result:'ok',msg:'TC-85 5000g 발주 메일 발송'}
+]};}
+
+function fmtRel(iso){const d=(Date.now()-new Date(iso))/60000;if(d<60)return Math.floor(d)+'분 전';if(d<1440)return Math.floor(d/60)+'시간 전';return Math.floor(d/1440)+'일 전';}
+
+function render(){
+  load();
+  document.getElementById('rules').innerHTML=wf.rules.map(r=>`
+    <div class="rule">
+      <div class="rule-h"><div class="name">${r.name}</div><div class="toggle"><label class="toggle-sw"><input type="checkbox" ${r.active?'checked':''} onchange="toggleRule('${r.id}',this.checked)"><span class="slider"></span></label></div></div>
+      <div class="rule-body"><span class="if">IF</span> <code>${TRIGGER_LABEL[r.trigger]}</code>${r.triggerVal?` (값: ${r.triggerVal})`:''} → <span class="then">THEN</span> <code>${ACTION_LABEL[r.action]}</code> → <code>${r.actionVal}</code><br><span style="font-size:11px;color:var(--muted);">${r.desc||''}</span></div>
+      <div class="rule-actions"><button class="btn" onclick="runOne('${r.id}')">실행</button><button class="btn danger" onclick="delRule('${r.id}')">삭제</button></div>
+    </div>
+  `).join('');
+  document.getElementById('log').innerHTML=wf.log.slice(0,30).map(l=>`<div class="exec-row"><span class="when">${fmtRel(l.at)}</span><span class="rule-name">${l.ruleName}</span><span class="result ${l.result}">${l.result==='ok'?'실행됨':'스킵'}</span><span style="color:var(--dim);font-size:10px;">${l.msg||''}</span></div>`).join('')||'<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px;">실행 이력 없음</div>';
+}
+
+window.addRule=function(){const name=document.getElementById('r-name').value.trim();if(!name){alert('이름 입력');return;}wf.rules.push({id:'r'+Date.now(),name,trigger:document.getElementById('r-trigger').value,triggerVal:+document.getElementById('r-trigger-val').value,action:document.getElementById('r-action').value,actionVal:document.getElementById('r-action-val').value,active:true,desc:''});saveW();render();document.getElementById('r-name').value='';};
+window.toggleRule=function(id,on){const r=wf.rules.find(x=>x.id===id);if(r){r.active=on;saveW();}};
+window.delRule=function(id){if(!confirm('삭제할까요?'))return;wf.rules=wf.rules.filter(r=>r.id!==id);saveW();render();};
+window.runOne=function(id){const r=wf.rules.find(x=>x.id===id);if(!r||!r.active){alert('비활성 규칙');return;}executeRule(r);saveW();render();};
+window.runAll=function(){let executed=0;wf.rules.filter(r=>r.active).forEach(r=>{executeRule(r);executed++;});saveW();render();alert(`✅ ${executed}개 규칙 실행 완료`);};
+
+function executeRule(r){
+  if(!state||!load())return;
+  let result='skip',msg='조건 불충족';
+  if(r.trigger==='status_long'){
+    const matches=state.orders.filter(o=>{const lastT=o.timeline[o.timeline.length-1];if(!lastT)return false;const hrs=(Date.now()-new Date(lastT.at))/3600000;return hrs>=r.triggerVal;});
+    if(matches.length){result='ok';msg=`${matches.length}건 매칭 → ${r.actionVal} 알림 발송`;}
+  } else if(r.trigger==='inv_low'){
+    const inv=state.inventory||{};const low=Object.entries(inv).filter(([k,v])=>v.stock<v.threshold);
+    if(low.length){result='ok';msg=`${low.length}품목 재주문 메일 → ${r.actionVal}`;}
+  } else if(r.trigger==='qc_fail'){
+    const failed=state.orders.filter(o=>o.qcResult==='fail');
+    if(failed.length){result='ok';msg=`${failed.length}건 알림 → ${r.actionVal}`;}
+  }
+  wf.log.unshift({at:new Date().toISOString(),ruleId:r.id,ruleName:r.name,result,msg});
+  if(wf.log.length>100)wf.log=wf.log.slice(0,100);
+}
+
+render();
+</script>
+</body>
+</html>

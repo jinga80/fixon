@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>3D Model Viewer - 조립 모드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #eee; overflow: hidden; }
+  #toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    background: rgba(20,20,40,0.95); padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+  }
+  #toolbar button {
+    padding: 6px 14px; border: 1px solid #555; border-radius: 6px;
+    background: #2a2a4a; color: #eee; cursor: pointer; font-size: 13px;
+  }
+  #toolbar button:hover { background: #3a3a6a; }
+  #toolbar button.active { background: #4a6aff; border-color: #4a6aff; }
+  #nozzle-btns { display: flex; gap: 5px; }
+  #nozzle-btns button {
+    width: 36px; height: 36px; border-radius: 50%; font-weight: bold;
+    font-size: 15px; border: 3px solid transparent; padding: 0;
+    position: relative;
+  }
+  #nozzle-btns button.sel { border-color: #fff; box-shadow: 0 0 12px rgba(255,255,255,0.6); }
+  #nozzle-btns button .badge {
+    position: absolute; top: -4px; right: -4px; width: 12px; height: 12px;
+    border-radius: 50%; background: #55ff55; display: none; border: 1px solid #333;
+  }
+  #nozzle-btns button.placed .badge { display: block; }
+  #save-btns { display: flex; gap: 5px; }
+  #viewport-container {
+    position: fixed; top: 48px; left: 0; right: 0; bottom: 0;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    gap: 2px; background: #333;
+  }
+  .viewport { position: relative; background: #1a1a2e; overflow: hidden; }
+  .viewport canvas { display: block; width: 100%; height: 100%; }
+  .viewport-label {
+    position: absolute; top: 6px; left: 10px; font-size: 11px;
+    color: #666; pointer-events: none; z-index: 2;
+    background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 4px;
+  }
+  #loading {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 18px; color: #aaa; z-index: 20;
+  }
+  #help-panel {
+    position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.88); padding: 10px 24px; border-radius: 10px;
+    font-size: 13px; z-index: 10; display: none; text-align: center;
+    line-height: 1.8; border: 1px solid #444;
+  }
+  .key { display: inline-block; background: #555; padding: 1px 6px; border-radius: 3px;
+    font-family: monospace; font-size: 11px; border: 1px solid #777; }
+  .zoom-btns {
+    position: absolute; top: 6px; right: 8px; display: flex; gap: 4px; z-index: 3;
+  }
+  .zoom-btns button {
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid #555;
+    background: rgba(30,30,50,0.8); color: #ccc; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; padding: 0;
+    line-height: 1;
+  }
+  .zoom-btns button:hover { background: rgba(60,60,100,0.9); color: #fff; }
+  #cursor-preview {
+    position: fixed; pointer-events: none; z-index: 15;
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid #fff; display: none;
+    transform: translate(-50%, -50%);
+  }
+</style>
+</head>
+<body>
+
+<!-- file:// 환경 감지 — 로컬 STL/STEP fetch 가 CORS로 차단되므로 사용자에게 즉시 안내 -->
+<div id="file-protocol-warning" style="display:none;position:fixed;inset:0;z-index:9999;background:#1a1a2e;color:#eee;font-family:-apple-system,sans-serif;align-items:center;justify-content:center;padding:24px;">
+  <div style="max-width:580px;background:#252540;border:1px solid #4a4a6a;border-radius:14px;padding:32px 36px;line-height:1.7;">
+    <div style="font-size:14px;color:#cc6633;letter-spacing:2px;font-weight:700;margin-bottom:8px;">⚠ FILE:// PROTOCOL</div>
+    <h2 style="font-size:22px;margin-bottom:14px;">로컬 HTTP 서버가 필요합니다</h2>
+    <p style="color:#bbb;font-size:14px;margin-bottom:18px;">
+      이 페이지는 STL(19MB) · STEP · JSON 등 큰 로컬 파일을 fetch 하는데, 브라우저가 <code style="background:#111;padding:2px 6px;border-radius:4px;color:#ff7744;">file://</code> 환경에선 CORS 로 차단합니다. 아래 두 방법 중 하나로 여세요.
+    </p>
+    <div style="background:#111;border:1px solid #333;border-radius:8px;padding:14px 16px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#aae;">
+      <div style="color:#888;margin-bottom:6px;"># 1) 터미널에서:</div>
+      <div>cd /Users/jin/lander && python3 -m http.server 8765</div>
+      <div style="color:#888;margin-top:10px;margin-bottom:6px;"># 2) 브라우저:</div>
+      <div><a href="http://127.0.0.1:8765/fixon-washer/stl_viewer.html" style="color:#ff9966;">http://127.0.0.1:8765/fixon-washer/stl_viewer.html</a></div>
+    </div>
+    <p style="color:#888;font-size:12px;">서버가 이미 켜져 있으면 위 링크를 클릭하세요.</p>
+  </div>
+</div>
+
+<script>
+if (location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('file-protocol-warning').style.display = 'flex';
+  });
+}
+</script>
+
+<div id="toolbar">
+  <button onclick="loadSTL('nozzle0306_bin.stl', this)">nozzle0306</button>
+  <button onclick="loadSTL('splint0306.stl', this)">splint0306</button>
+  <button onclick="loadSTEP('fixon어댑터.stp', this)">fixon어댑터</button>
+  <button class="active" onclick="loadAssembly(this)" style="background:#cc6633;border-color:#cc6633;">조립 모드</button>
+  <span style="color:#555;">|</span>
+  <div id="nozzle-btns" style="display:none;">
+    <button data-idx="0" onclick="selectByIdx(0)" style="background:#ff6644;color:#fff;">1<span class="badge"></span></button>
+    <button data-idx="1" onclick="selectByIdx(1)" style="background:#44cc66;color:#fff;">2<span class="badge"></span></button>
+    <button data-idx="2" onclick="selectByIdx(2)" style="background:#4488ff;color:#fff;">3<span class="badge"></span></button>
+    <button data-idx="3" onclick="selectByIdx(3)" style="background:#ffcc22;color:#333;">4<span class="badge"></span></button>
+    <span style="color:#555;margin:0 2px;">|</span>
+    <button data-idx="4" onclick="selectByIdx(4)" style="background:#44aadd;color:#fff;border-radius:6px;width:auto;padding:0 10px;">어댑터<span class="badge"></span></button>
+    <button onclick="autoPlaceAdapter()" style="background:#2288aa;color:#fff;border-radius:6px;width:auto;padding:0 10px;font-size:12px;">자동배치</button>
+    <button data-idx="5" onclick="selectByIdx(5)" style="background:#ff7744;color:#fff;border-radius:6px;width:auto;padding:0 10px;">튜브팁<span class="badge"></span></button>
+    <span style="color:#555;margin:0 2px;">|</span>
+    <button onclick="undo()" style="border-radius:6px;width:auto;padding:0 10px;font-size:12px;">↩ 되돌리기</button>
+  </div>
+  <div id="save-btns" style="display:none;">
+    <span style="color:#555;">|</span>
+    <button onclick="saveLayout()">저장</button>
+    <button onclick="document.getElementById('load-file').click()">불러오기</button>
+    <input type="file" id="load-file" accept=".json" style="display:none;" onchange="loadLayout(event)">
+    <span style="color:#555;">|</span>
+    <button onclick="playAnimation(false)" style="background:#8833aa;border-color:#8833aa;">조립 애니메이션</button>
+    <button onclick="playAnimation(true)" style="background:#aa3333;border-color:#aa3333;">녹화 (MP4)</button>
+  </div>
+</div>
+<div id="loading">Loading...</div>
+<div id="help-panel"></div>
+<div id="cursor-preview"></div>
+<div id="anim-overlay" style="display:none; position:fixed; inset:0; z-index:50; background:#1a1a2e;">
+  <canvas id="anim-canvas"></canvas>
+  <div id="anim-status" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    background:rgba(0,0,0,0.7);padding:8px 20px;border-radius:8px;font-size:14px;color:#ccc;"></div>
+  <button id="anim-stop" onclick="stopAnimation()" style="position:absolute;top:15px;right:15px;
+    padding:8px 16px;border-radius:6px;border:1px solid #666;background:#333;color:#eee;cursor:pointer;font-size:13px;">
+    닫기 (ESC)</button>
+</div>
+<div id="viewport-container">
+  <div class="viewport" id="vp-3d">
+    <span class="viewport-label">3D — 클릭=노즐배치</span>
+    <div class="zoom-btns"><button onclick="zoomVP(0,1)">+</button><button onclick="zoomVP(0,-1)">−</button></div>
+  </div>
+  <div class="viewport" id="vp-front">
+    <span class="viewport-label">Front (XY)</span>
+    <div class="zoom-btns"><button onclick="zoomVP(1,1)">+</button><button onclick="zoomVP(1,-1)">−</button></div>
+  </div>
+  <div class="viewport" id="vp-top">
+    <span class="viewport-label">Top (XZ)</span>
+    <div class="zoom-btns"><button onclick="zoomVP(2,1)">+</button><button onclick="zoomVP(2,-1)">−</button></div>
+  </div>
+  <div class="viewport" id="vp-right">
+    <span class="viewport-label">Right (YZ)</span>
+    <div class="zoom-btns"><button onclick="zoomVP(3,1)">+</button><button onclick="zoomVP(3,-1)">−</button></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const loadingEl = document.getElementById('loading');
+const helpEl = document.getElementById('help-panel');
+const nozzleBtnsDiv = document.getElementById('nozzle-btns');
+const cursorEl = document.getElementById('cursor-preview');
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a2e);
+const ambient = new THREE.AmbientLight(0xffffff, 0.8); scene.add(ambient);
+[{p:[1,2,3],i:1.5},{p:[-2,-1,-1],i:0.8},{p:[0,-2,2],i:0.5}].forEach(l => {
+  const d = new THREE.DirectionalLight(0xffffff, l.i); d.position.set(...l.p); scene.add(d);
+});
+const grid = new THREE.GridHelper(200, 40, 0x444466, 0x333355); scene.add(grid);
+
+// ===== Viewports =====
+const viewports = [];
+const vpConfigs = [
+  { id:'vp-3d',    type:'perspective' },
+  { id:'vp-front', type:'ortho', dir:[0,0,1],  up:[0,1,0] },
+  { id:'vp-top',   type:'ortho', dir:[0,1,0],  up:[0,0,-1] },
+  { id:'vp-right', type:'ortho', dir:[1,0,0],  up:[0,1,0] },
+];
+for (const cfg of vpConfigs) {
+  const el = document.getElementById(cfg.id);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.8;
+  el.appendChild(renderer.domElement);
+  let camera;
+  if (cfg.type === 'perspective') {
+    camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
+    camera.position.set(60, 40, 60);
+  } else {
+    const s = 50;
+    camera = new THREE.OrthographicCamera(-s, s, s, -s, -500, 500);
+    camera.position.set(cfg.dir[0]*100, cfg.dir[1]*100, cfg.dir[2]*100);
+    camera.up.set(...cfg.up); camera.lookAt(0,0,0);
+  }
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  if (cfg.type === 'ortho') {
+    controls.enableRotate = false;
+    controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
+  }
+  viewports.push({ el, renderer, camera, controls, cfg });
+}
+const mainVP = viewports[0];
+
+// ===== Zoom buttons =====
+window.zoomVP = function(vpIdx, dir) {
+  const vp = viewports[vpIdx];
+  if (!vp) return;
+  const factor = dir > 0 ? 0.8 : 1.25; // zoom in = smaller, zoom out = bigger
+  if (vp.camera.isPerspectiveCamera) {
+    // Move camera closer/further from target
+    const offset = vp.camera.position.clone().sub(vp.controls.target);
+    offset.multiplyScalar(factor);
+    vp.camera.position.copy(vp.controls.target).add(offset);
+  } else {
+    vp.camera.left *= factor; vp.camera.right *= factor;
+    vp.camera.top *= factor; vp.camera.bottom *= factor;
+    vp.camera.updateProjectionMatrix();
+  }
+  vp.controls.update();
+};
+
+// ===== State =====
+let currentObjects = [];
+let assemblyMode = false;
+let nozzleMeshes = [];
+let nozzleOutlines = [];
+let selectedIdx = 0;
+let splintMeshRef = null;
+let adapterMesh = null;
+let adapterStep = 0;       // 0=idle, 1=waiting splint click, 2=waiting adapter click
+let adapterSplintPoint = null;  // {point, normal} on splint
+let tubetipMesh = null;
+
+const raycaster = new THREE.Raycaster();
+const stlLoader = new STLLoader();
+const nozzleColors = [0xff6644, 0x44cc66, 0x4488ff, 0xffcc22];
+const ADAPTER_COLOR = 0x44aadd;
+const TUBETIP_COLOR = 0xff7744;
+
+function clearScene() {
+  for (const obj of currentObjects) {
+    scene.remove(obj);
+    obj.traverse(c => {
+      if (c.geometry) c.geometry.dispose();
+      if (c.material) (Array.isArray(c.material)?c.material:[c.material]).forEach(m=>m.dispose());
+    });
+  }
+  currentObjects=[]; nozzleMeshes=[]; nozzleOutlines=[];
+  selectedIdx=0; splintMeshRef=null; adapterMesh=null; tubetipMesh=null;
+  adapterStep=0; adapterSplintPoint=null; assemblyMode=false;
+  helpEl.style.display='none';
+  nozzleBtnsDiv.style.display='none';
+  document.getElementById('save-btns').style.display='none';
+}
+
+function fitAllCameras(box) {
+  const center = new THREE.Vector3(); box.getCenter(center);
+  const size = new THREE.Vector3(); box.getSize(size);
+  const d = Math.max(size.x, size.y, size.z) * 1.8;
+  viewports[0].camera.position.set(center.x+d*0.7, center.y+d*0.5, center.z+d*0.7);
+  viewports[0].controls.target.copy(center);
+  for (let i=1;i<viewports.length;i++) {
+    const cam=viewports[i].camera; const half=d*0.7;
+    cam.left=-half; cam.right=half; cam.top=half; cam.bottom=-half;
+    cam.updateProjectionMatrix();
+    const dir=vpConfigs[i].dir;
+    cam.position.set(center.x+dir[0]*100,center.y+dir[1]*100,center.z+dir[2]*100);
+    cam.lookAt(center); viewports[i].controls.target.copy(center);
+  }
+  viewports.forEach(vp=>vp.controls.update());
+}
+
+function setActiveButton(btn) {
+  document.querySelectorAll('#toolbar > button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function loadSTLPromise(f) {
+  return new Promise((res, rej) => stlLoader.load(f,
+    g => { g.computeVertexNormals(); res(g); },
+    undefined,
+    err => { console.error('STL 로드 실패:', f, err); rej(err); }
+  ));
+}
+
+// ===== Single model =====
+window.loadSTL = function(filename, btn) {
+  setActiveButton(btn); loadingEl.textContent='Loading...'; loadingEl.style.display='block'; clearScene();
+  stlLoader.load(filename, (geo) => {
+    geo.computeVertexNormals();
+    const isT = filename==='splint0306.stl';
+    const mesh = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+      color:isT?0xffffff:0x5588cc, metalness:isT?0:0.1, roughness:isT?0.05:0.4,
+      transmission:isT?0.92:0, thickness:isT?2:0, ior:isT?1.45:1.5,
+      transparent:isT, opacity:isT?0.6:1, side:THREE.DoubleSide,
+      clearcoat:isT?1:0, clearcoatRoughness:0.05,
+    }));
+    scene.add(mesh); currentObjects.push(mesh);
+    geo.computeBoundingBox(); const c=new THREE.Vector3(); geo.boundingBox.getCenter(c);
+    mesh.position.sub(c); const box=geo.boundingBox.clone(); box.min.sub(c); box.max.sub(c);
+    fitAllCameras(box); loadingEl.style.display='none';
+  });
+};
+
+// ===== Assembly =====
+let splintCenter = new THREE.Vector3();
+
+window.loadAssembly = async function(btn) {
+  setActiveButton(btn); loadingEl.textContent='Loading...'; loadingEl.style.display='block';
+  clearScene(); assemblyMode = true;
+
+  let splintGeo, nozzleGeo;
+  try {
+    [splintGeo, nozzleGeo] = await Promise.all([
+      loadSTLPromise('splint0306.stl'), loadSTLPromise('nozzle0306_bin.stl'),
+    ]);
+  } catch(e) {
+    loadingEl.textContent = 'STL 로드 실패: ' + e.message;
+    console.error(e);
+    return;
+  }
+
+  // Splint - semi-transparent for seeing nozzles through
+  const splintMesh = new THREE.Mesh(splintGeo, new THREE.MeshPhysicalMaterial({
+    color:0xdddddd, metalness:0, roughness:0.15,
+    transparent:true, opacity:0.5, side:THREE.DoubleSide, depthWrite:false,
+  }));
+  splintMesh.renderOrder = 1;
+  scene.add(splintMesh); currentObjects.push(splintMesh);
+  splintMeshRef = splintMesh;
+
+  splintGeo.computeBoundingBox();
+  splintCenter = new THREE.Vector3(); splintGeo.boundingBox.getCenter(splintCenter);
+  splintMesh.position.sub(splintCenter);
+
+  // 4 nozzles - start hidden until placed
+  for (let i = 0; i < 4; i++) {
+    const geo = nozzleGeo.clone();
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: nozzleColors[i], metalness:0.05, roughness:0.2, side:THREE.DoubleSide,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.userData.nozzleIndex = i;
+    mesh.userData.placed = false;
+    mesh.visible = false; // hidden until placed
+    scene.add(mesh); currentObjects.push(mesh); nozzleMeshes.push(mesh);
+
+    const outline = new THREE.LineSegments(
+      new THREE.EdgesGeometry(geo, 30),
+      new THREE.LineBasicMaterial({ color:nozzleColors[i], transparent:true, opacity:0.5 })
+    );
+    mesh.add(outline); nozzleOutlines.push(outline);
+  }
+
+  // Load adapter from STEP
+  loadingEl.textContent = '어댑터 로딩 중...';
+  try {
+    const occt = await initOcct();
+    const resp = await fetch(encodeURI('fixon어댑터.stp'));
+    const buf = await resp.arrayBuffer();
+    const result = occt.ReadStepFile(new Uint8Array(buf), null);
+    adapterMesh = new THREE.Group();
+    for (let i = 0; i < result.meshes.length; i++) {
+      const md = result.meshes[i];
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(md.attributes.position.array), 3));
+      if (md.attributes.normal) geo.setAttribute('normal', new THREE.Float32BufferAttribute(new Float32Array(md.attributes.normal.array), 3));
+      if (md.index) geo.setIndex(new THREE.BufferAttribute(new Uint32Array(md.index.array), 1));
+      let col = ADAPTER_COLOR;
+      if (md.color) col = new THREE.Color(md.color[0], md.color[1], md.color[2]);
+      adapterMesh.add(new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+        color: col, metalness: 0.15, roughness: 0.25, side: THREE.DoubleSide,
+      })));
+    }
+    // Center adapter geometry internally
+    const aBox = new THREE.Box3().setFromObject(adapterMesh);
+    const aC = new THREE.Vector3(); aBox.getCenter(aC);
+    adapterMesh.children.forEach(c => c.position.sub(aC));
+
+    adapterMesh.userData.nozzleIndex = 4;
+    adapterMesh.userData.placed = false;
+    adapterMesh.visible = false;
+    adapterMesh.traverse(c => { c.visible = false; });
+    scene.add(adapterMesh); currentObjects.push(adapterMesh);
+
+    // No outline for adapter (prevents ghost artifacts)
+    nozzleOutlines.push(null); // index 4 placeholder
+    console.log('어댑터 로드 성공, meshes:', adapterMesh.children.length);
+  } catch(e) {
+    console.error('어댑터 로드 실패:', e);
+  }
+
+  // Load tubetip STL
+  try {
+    const tubetipGeo = await loadSTLPromise('tubetip.stl');
+    // Center geometry at origin for placement
+    tubetipGeo.computeBoundingBox();
+    const tC = new THREE.Vector3(); tubetipGeo.boundingBox.getCenter(tC);
+    tubetipGeo.translate(-tC.x, -tC.y, -tC.z);
+    tubetipMesh = new THREE.Mesh(tubetipGeo, new THREE.MeshPhysicalMaterial({
+      color: 0xeeeeee, metalness: 0.05, roughness: 0.2, side: THREE.DoubleSide,
+    }));
+    tubetipMesh.userData.nozzleIndex = 5;
+    tubetipMesh.userData.placed = false;
+    tubetipMesh.visible = false;
+    scene.add(tubetipMesh); currentObjects.push(tubetipMesh);
+    nozzleOutlines.push(null); // index 5 placeholder
+    console.log('튜브팁 로드 성공');
+  } catch(e) {
+    console.error('튜브팁 로드 실패:', e);
+  }
+
+  selectNozzle(0);
+
+  const box = splintGeo.boundingBox.clone();
+  box.min.sub(splintCenter); box.max.sub(splintCenter);
+  fitAllCameras(box);
+
+  loadingEl.style.display = 'none';
+  nozzleBtnsDiv.style.display = 'flex';
+  document.getElementById('save-btns').style.display = 'flex';
+  updateUI();
+
+  // Auto-restore: splint_adapter.json 항상 우선, localStorage는 무시
+  // 사용자가 "저장" 하면 splint_adapter.json도 자동 갱신
+  localStorage.removeItem('nozzle-layout'); // 이전 캐시 제거
+  try {
+    const resp = await fetch('splint_adapter.json?t=' + Date.now()); // 캐시 방지
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.nozzles) { applyLayout(data.nozzles); console.log('splint_adapter.json 로드 완료'); }
+    }
+  } catch(e) {
+    console.log('splint_adapter.json 없음, 빈 상태로 시작');
+  }
+};
+
+// ===== Selection =====
+function getSelectedMesh() {
+  if (selectedIdx < 4) return nozzleMeshes[selectedIdx];
+  if (selectedIdx === 4) return adapterMesh;
+  if (selectedIdx === 5) return tubetipMesh;
+  return null;
+}
+
+function selectNozzle(idx) {
+  if (!assemblyMode || idx < 0 || idx > 5) return;
+  if (idx === 4 && !adapterMesh) return;
+  if (idx === 5 && !tubetipMesh) return;
+  selectedIdx = idx;
+
+  // Reset all nozzles
+  nozzleMeshes.forEach((m, i) => {
+    m.material.emissive.setHex(0x000000);
+    if (nozzleOutlines[i]) {
+      nozzleOutlines[i].material.opacity = 0.3;
+      nozzleOutlines[i].material.color.setHex(nozzleColors[i]);
+    }
+  });
+  // Reset adapter
+  if (adapterMesh) {
+    adapterMesh.traverse(c => { if (c.material && c.material.emissive) c.material.emissive.setHex(0x000000); });
+  }
+  // Reset tubetip
+  if (tubetipMesh && tubetipMesh.material.emissive) {
+    tubetipMesh.material.emissive.setHex(0x000000);
+  }
+
+  // Highlight selected
+  if (idx < 4) {
+    nozzleMeshes[idx].material.emissive.setHex(0x222222);
+    if (nozzleOutlines[idx]) {
+      nozzleOutlines[idx].material.opacity = 1.0;
+      nozzleOutlines[idx].material.color.setHex(0xffffff);
+    }
+  } else if (idx === 4 && adapterMesh) {
+    adapterMesh.traverse(c => { if (c.material && c.material.emissive) c.material.emissive.setHex(0x222222); });
+  } else if (idx === 5 && tubetipMesh) {
+    tubetipMesh.material.emissive.setHex(0x222222);
+  }
+
+  nozzleBtnsDiv.querySelectorAll('button[data-idx]').forEach(b => b.classList.toggle('sel', parseInt(b.dataset.idx)===idx));
+
+  // Reset adapter placement state
+  adapterStep = 0;
+  adapterSplintPoint = null;
+
+  updateUI();
+}
+window.selectByIdx = function(idx) { selectNozzle(idx); };
+
+function updateUI() {
+  if (!assemblyMode) { helpEl.style.display='none'; return; }
+  const mesh = getSelectedMesh();
+  const placed = mesh && mesh.userData.placed;
+  const label = selectedIdx < 4 ? `노즐 #${selectedIdx+1}` : selectedIdx === 4 ? '어댑터 (#5)' : '튜브팁 (#6)';
+  const placeHint = selectedIdx < 4
+    ? '<b>스플린트 표면을 클릭</b>하면 노즐이 붙습니다'
+    : '<b>스플린트 결합 부위를 클릭</b>하면 어댑터가 붙습니다 (다시 클릭하면 재배치)';
+  helpEl.style.display = 'block';
+  helpEl.innerHTML = `
+    <b>${label}</b> ${placed ? '(배치됨)' : '(미배치)'}<br>
+    ${placeHint}<br>
+    이동: <span class="key">←→</span>X <span class="key">↑↓</span>Y <span class="key">PgUp/Dn</span>Z
+    (+<span class="key">Shift</span> 미세)
+    &nbsp;|&nbsp; 회전: <span class="key">R/F</span> <span class="key">T/G</span> <span class="key">Y/H</span>
+    &nbsp;|&nbsp; 90°: <span class="key">X</span> <span class="key">Z</span>
+    &nbsp;|&nbsp; <span class="key">1</span>~<span class="key">6</span> 선택
+  `;
+  // Update placed badges
+  const btns = nozzleBtnsDiv.querySelectorAll('button[data-idx]');
+  btns.forEach(b => {
+    const idx = parseInt(b.dataset.idx);
+    if (idx < 4) b.classList.toggle('placed', nozzleMeshes[idx]?.userData.placed || false);
+    else if (idx === 4) b.classList.toggle('placed', adapterMesh?.userData.placed || false);
+    else if (idx === 5) b.classList.toggle('placed', tubetipMesh?.userData.placed || false);
+  });
+}
+
+// ===== Place nozzle on click =====
+// Auto-place adapter at splint dome (based on product photo)
+// Photo shows: splint on top, adapter hanging below the dome, tube going down
+window.autoPlaceAdapter = function() {
+  if (!splintMeshRef) { alert('조립 모드를 먼저 실행하세요.'); return; }
+  if (!adapterMesh) { alert('어댑터 로딩 중입니다. 잠시 후 다시 눌러주세요.'); return; }
+
+  // Place adapter at origin (visible, near splint) so user can position it manually
+  adapterStep = 0;
+  adapterSplintPoint = null;
+  adapterMesh.userData.placed = true;
+
+  adapterMesh.position.set(0, 0, 0);
+  adapterMesh.quaternion.set(0, 0, 0, 1);
+  adapterMesh.visible = true;
+  adapterMesh.traverse(c => {
+    c.visible = true;
+    if (c.isMesh) {
+      c.material.transparent = false;
+      c.material.opacity = 1;
+      c.material.depthWrite = true;
+      c.material.needsUpdate = true;
+    }
+  });
+
+  // Refit camera to show both splint and adapter
+  const fullBox = new THREE.Box3();
+  currentObjects.forEach(o => { if (o.visible) fullBox.expandByObject(o); });
+  fitAllCameras(fullBox);
+
+  selectedIdx = 4;
+  nozzleBtnsDiv.querySelectorAll('button[data-idx]').forEach(b => b.classList.toggle('sel', parseInt(b.dataset.idx)===4));
+  updateUI();
+};
+
+// Try different orientations with number keys 6-9 for quick testing
+window.rotateAdapterPreset = function(axis, angle) {
+  if (!adapterMesh || selectedIdx !== 4) return;
+  const q = new THREE.Quaternion().setFromAxisAngle(axis, angle);
+  adapterMesh.quaternion.premultiply(q);
+};
+
+// Step 1: user clicked splint surface for adapter
+function adapterPickSplint(hit) {
+  const point = hit.point.clone();
+  const normal = hit.face.normal.clone();
+  normal.transformDirection(splintMeshRef.matrixWorld);
+  adapterSplintPoint = { point, normal };
+  adapterStep = 2;
+
+  // Show adapter for step 2 clicking
+  adapterMesh.position.copy(point).addScaledVector(normal, 25);
+  adapterMesh.visible = true;
+
+  // Show a marker on splint
+  const markerGeo = new THREE.SphereGeometry(1.2, 16, 16);
+  const marker = new THREE.Mesh(markerGeo, new THREE.MeshBasicMaterial({ color: 0x00ffaa }));
+  marker.position.copy(point);
+  marker.userData.tempMarker = true;
+  scene.add(marker); currentObjects.push(marker);
+
+  updateUI();
+}
+
+// Step 2: user clicked a point on the adapter
+function adapterPickSelf(hit) {
+  if (!adapterMesh || !adapterSplintPoint) return;
+
+  // The clicked point on the adapter (in world space)
+  const adapterClickWorld = hit.point.clone();
+  // Convert to adapter's local space
+  const adapterClickLocal = adapterMesh.worldToLocal(adapterClickWorld.clone());
+
+  const adapterNormal = hit.face.normal.clone();
+  // Transform adapter face normal to world space
+  adapterNormal.transformDirection(hit.object.matrixWorld);
+
+  // We want:
+  // 1. The adapter's clicked point to meet the splint's clicked point
+  // 2. The adapter's surface normal at click point to face OPPOSITE the splint's normal (face-to-face)
+
+  // First: orient adapter so its normal at click point is opposite to splint normal
+  const targetNormal = adapterSplintPoint.normal.clone().negate();
+  const q = new THREE.Quaternion().setFromUnitVectors(adapterNormal.normalize(), targetNormal.normalize());
+  adapterMesh.quaternion.premultiply(q);
+
+  // After rotation, recalculate where adapterClickLocal is in world space
+  const rotatedClickWorld = adapterClickLocal.clone().applyQuaternion(adapterMesh.quaternion).add(adapterMesh.position);
+
+  // Translate so rotated click point lands on splint point
+  const offset = adapterSplintPoint.point.clone().sub(rotatedClickWorld);
+  adapterMesh.position.add(offset);
+
+  adapterMesh.visible = true;
+  adapterMesh.userData.placed = true;
+  adapterStep = 0;
+  adapterSplintPoint = null;
+
+  // Remove temp markers
+  const toRemove = currentObjects.filter(o => o.userData.tempMarker);
+  toRemove.forEach(m => { scene.remove(m); m.geometry?.dispose(); m.material?.dispose(); });
+  currentObjects = currentObjects.filter(o => !o.userData.tempMarker);
+
+  // Flash
+  adapterMesh.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(0x444444); });
+  setTimeout(() => adapterMesh.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(0x222222); }), 200);
+
+  updateUI();
+}
+
+function placeNozzle(hit) {
+  const mesh = getSelectedMesh();
+  if (!mesh) return;
+  saveUndo();
+
+  const point = hit.point.clone();
+  const normal = hit.face.normal.clone();
+  normal.transformDirection(splintMeshRef.matrixWorld);
+
+  if (selectedIdx < 4) {
+    // Nozzle: Z-axis aligns with surface normal
+    mesh.position.copy(point).addScaledVector(normal, 3);
+    const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1), normal);
+    mesh.quaternion.copy(q);
+  } else if (selectedIdx === 5) {
+    // Tubetip: Z-axis aligns with surface normal
+    mesh.position.copy(point).addScaledVector(normal, 3);
+    const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1), normal);
+    mesh.quaternion.copy(q);
+  } else {
+    // Adapter: Y-axis aligns with surface normal (hanging below)
+    // normal points outward from splint surface
+    // Adapter top connects to splint, body hangs in normal direction
+    mesh.position.copy(point).addScaledVector(normal, 0);
+    const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), normal);
+    mesh.quaternion.copy(q);
+    // Force visible
+    mesh.traverse(c => {
+      c.visible = true;
+      if (c.isMesh) {
+        c.material.transparent = false;
+        c.material.opacity = 1;
+        c.material.depthWrite = true;
+        c.material.needsUpdate = true;
+      }
+    });
+  }
+
+  mesh.visible = true;
+  mesh.userData.placed = true;
+
+  // Flash
+  if (mesh.material) {
+    mesh.material.emissive?.setHex(0x444444);
+    setTimeout(() => mesh.material.emissive?.setHex(0x222222), 200);
+  } else {
+    mesh.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(0x444444); });
+    setTimeout(() => mesh.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(0x222222); }), 200);
+  }
+
+  // Auto-advance to next unplaced item (nozzles 0-3, adapter 4, tubetip 5)
+  let next = -1;
+  for (let i = 1; i <= 6; i++) {
+    const ni = (selectedIdx + i) % 6;
+    const m = ni < 4 ? nozzleMeshes[ni] : ni === 4 ? adapterMesh : tubetipMesh;
+    if (m && !m.userData.placed) { next = ni; break; }
+  }
+  if (next >= 0) selectNozzle(next);
+  updateUI();
+}
+
+// Click on splint in ANY viewport = place nozzle
+function setupClickPlace(vp) {
+  const el = vp.renderer.domElement;
+  let downTime = 0;
+  let downPos = {x:0, y:0};
+
+  el.addEventListener('pointerdown', (e) => {
+    downTime = Date.now();
+    downPos = {x: e.clientX, y: e.clientY};
+  });
+
+  el.addEventListener('click', (e) => {
+    if (!assemblyMode || !splintMeshRef) return;
+    // Only on short clicks (not drags)
+    if (Date.now() - downTime > 400) return;
+    const dx = e.clientX - downPos.x, dy = e.clientY - downPos.y;
+    if (Math.sqrt(dx*dx + dy*dy) > 5) return;
+
+    const rect = el.getBoundingClientRect();
+    const ndc = new THREE.Vector2(
+      ((e.clientX - rect.left) / rect.width) * 2 - 1,
+      -((e.clientY - rect.top) / rect.height) * 2 + 1
+    );
+    raycaster.setFromCamera(ndc, vp.camera);
+
+    // For nozzles/adapter: click existing placed item to select it
+    const nozzleHits = raycaster.intersectObjects(nozzleMeshes.filter(m => m.visible));
+    if (nozzleHits.length > 0) {
+      selectNozzle(nozzleHits[0].object.userData.nozzleIndex);
+      return;
+    }
+
+    // Otherwise place on splint surface
+    const splintHits = raycaster.intersectObject(splintMeshRef);
+    if (splintHits.length > 0) {
+      placeNozzle(splintHits[0]);
+    }
+  });
+
+  // Hover preview on splint
+  el.addEventListener('pointermove', (e) => {
+    if (!assemblyMode || !splintMeshRef) { cursorEl.style.display='none'; return; }
+    const rect = el.getBoundingClientRect();
+    const ndc = new THREE.Vector2(
+      ((e.clientX - rect.left) / rect.width) * 2 - 1,
+      -((e.clientY - rect.top) / rect.height) * 2 + 1
+    );
+    raycaster.setFromCamera(ndc, vp.camera);
+    const hits = raycaster.intersectObject(splintMeshRef);
+    if (hits.length > 0) {
+      cursorEl.style.display = 'block';
+      cursorEl.style.left = e.clientX + 'px';
+      cursorEl.style.top = e.clientY + 'px';
+      const cc = selectedIdx < 4 ? nozzleColors[selectedIdx] : ADAPTER_COLOR;
+      cursorEl.style.borderColor = '#' + cc.toString(16).padStart(6,'0');
+    } else {
+      cursorEl.style.display = 'none';
+    }
+  });
+  el.addEventListener('pointerleave', () => { cursorEl.style.display='none'; });
+}
+
+viewports.forEach(vp => setupClickPlace(vp));
+
+// ===== Keyboard: fine-tune + rotate =====
+window.addEventListener('keydown', (e) => {
+  if (!assemblyMode) return;
+  // Ctrl+Z = undo
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.code === 'KeyZ')) { e.preventDefault(); undo(); return; }
+  // 숫자키: e.code 기반 (한글 입력 모드 대응)
+  const digitCodes = {'Digit1':0,'Digit2':1,'Digit3':2,'Digit4':3,'Digit5':4,'Digit6':5};
+  if (e.code in digitCodes) { selectNozzle(digitCodes[e.code]); return; }
+
+  const mesh = getSelectedMesh();
+  if (!mesh || !mesh.visible) return;
+
+  const step = e.shiftKey ? 0.2 : e.altKey ? 5 : 1;
+  const rotStep = e.shiftKey ? 0.02 : 0.1;
+
+  // Debounced undo: save once per key-hold session
+  if (!mesh._undoSaved) { saveUndo(); mesh._undoSaved = true; }
+  clearTimeout(mesh._undoTimer);
+  mesh._undoTimer = setTimeout(() => { mesh._undoSaved = false; }, 500);
+
+  if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','PageUp','PageDown'].includes(e.key)) {
+    e.preventDefault();
+    if (e.key==='ArrowRight') mesh.position.x += step;
+    if (e.key==='ArrowLeft')  mesh.position.x -= step;
+    if (e.key==='ArrowUp')    mesh.position.y += step;
+    if (e.key==='ArrowDown')  mesh.position.y -= step;
+    if (e.key==='PageUp')     mesh.position.z += step;
+    if (e.key==='PageDown')   mesh.position.z -= step;
+  }
+  // Rotation keys — e.code 기반 (한글 입력 모드에서도 동작)
+  const codeMap = {
+    'KeyR': 'r', 'KeyF': 'f', 'KeyT': 't', 'KeyG': 'g',
+    'KeyY': 'y', 'KeyH': 'h', 'KeyX': 'x', 'KeyZ': 'z',
+  };
+  const k = codeMap[e.code];
+  if (k) {
+    e.preventDefault();
+    if (k==='r') mesh.rotateOnAxis(new THREE.Vector3(0,0,1), rotStep);
+    if (k==='f') mesh.rotateOnAxis(new THREE.Vector3(0,0,1), -rotStep);
+    if (k==='t') mesh.rotateOnAxis(new THREE.Vector3(1,0,0), rotStep);
+    if (k==='g') mesh.rotateOnAxis(new THREE.Vector3(1,0,0), -rotStep);
+    if (k==='y') mesh.rotateOnAxis(new THREE.Vector3(0,1,0), rotStep);
+    if (k==='h') mesh.rotateOnAxis(new THREE.Vector3(0,1,0), -rotStep);
+    if (k==='x') mesh.rotateOnAxis(new THREE.Vector3(1,0,0), Math.PI/2);
+    if (k==='z') mesh.rotateOnAxis(new THREE.Vector3(0,0,1), Math.PI/2);
+    console.log('회전:', k, '현재 quaternion:', mesh.quaternion.x.toFixed(2), mesh.quaternion.y.toFixed(2), mesh.quaternion.z.toFixed(2), mesh.quaternion.w.toFixed(2));
+  }
+});
+
+// ===== Undo =====
+const undoStack = [];
+const MAX_UNDO = 50;
+
+function saveUndo() {
+  const state = [];
+  nozzleMeshes.forEach(m => {
+    state.push({ pos: m.position.clone(), quat: m.quaternion.clone(), visible: m.visible, placed: m.userData.placed });
+  });
+  if (adapterMesh) {
+    state.push({ pos: adapterMesh.position.clone(), quat: adapterMesh.quaternion.clone(), visible: adapterMesh.visible, placed: adapterMesh.userData.placed });
+  }
+  if (tubetipMesh) {
+    state.push({ pos: tubetipMesh.position.clone(), quat: tubetipMesh.quaternion.clone(), visible: tubetipMesh.visible, placed: tubetipMesh.userData.placed });
+  }
+  undoStack.push(state);
+  if (undoStack.length > MAX_UNDO) undoStack.shift();
+}
+
+window.undo = function() {
+  if (undoStack.length === 0) return;
+  const state = undoStack.pop();
+  state.forEach((s, i) => {
+    let mesh;
+    if (i < 4) mesh = nozzleMeshes[i];
+    else if (i === 4) mesh = adapterMesh;
+    else if (i === 5) mesh = tubetipMesh;
+    if (!mesh) return;
+    mesh.position.copy(s.pos);
+    mesh.quaternion.copy(s.quat);
+    mesh.visible = s.visible;
+    mesh.userData.placed = s.placed;
+    if (mesh.isGroup) mesh.traverse(c => { if (c.isMesh) c.visible = s.visible; });
+  });
+  updateUI();
+};
+
+// ===== Save / Load =====
+function getLayoutData() {
+  const items = nozzleMeshes.map(m => ({
+    pos: [m.position.x, m.position.y, m.position.z],
+    rot: [m.quaternion.x, m.quaternion.y, m.quaternion.z, m.quaternion.w],
+    placed: m.userData.placed,
+  }));
+  // Index 4 = adapter
+  if (adapterMesh) {
+    items.push({
+      pos: [adapterMesh.position.x, adapterMesh.position.y, adapterMesh.position.z],
+      rot: [adapterMesh.quaternion.x, adapterMesh.quaternion.y, adapterMesh.quaternion.z, adapterMesh.quaternion.w],
+      placed: adapterMesh.userData.placed,
+    });
+  }
+  // Index 5 = tubetip
+  if (tubetipMesh) {
+    items.push({
+      pos: [tubetipMesh.position.x, tubetipMesh.position.y, tubetipMesh.position.z],
+      rot: [tubetipMesh.quaternion.x, tubetipMesh.quaternion.y, tubetipMesh.quaternion.z, tubetipMesh.quaternion.w],
+      placed: tubetipMesh.userData.placed,
+    });
+  }
+  return items;
+}
+function applyLayout(data) {
+  if (!Array.isArray(data)) return;
+  data.forEach((d, i) => {
+    if (!d.pos || !d.rot) return;
+    if (i < 4 && i < nozzleMeshes.length) {
+      nozzleMeshes[i].position.set(...d.pos);
+      nozzleMeshes[i].quaternion.set(...d.rot);
+      nozzleMeshes[i].visible = !!d.placed;
+      nozzleMeshes[i].userData.placed = !!d.placed;
+    } else if (i === 4 && adapterMesh) {
+      adapterMesh.position.set(...d.pos);
+      adapterMesh.quaternion.set(...d.rot);
+      const vis = !!d.placed;
+      adapterMesh.visible = vis;
+      adapterMesh.traverse(c => { c.visible = vis; });
+      adapterMesh.userData.placed = vis;
+    } else if (i === 5 && tubetipMesh) {
+      tubetipMesh.position.set(...d.pos);
+      tubetipMesh.quaternion.set(...d.rot);
+      tubetipMesh.visible = !!d.placed;
+      tubetipMesh.userData.placed = !!d.placed;
+    }
+  });
+  updateUI();
+}
+// 자동저장 비활성화 — splint_adapter.json만 사용
+
+window.saveLayout = function() {
+  if (!assemblyMode) return;
+  const blob = new Blob([JSON.stringify({
+    date: new Date().toISOString(), nozzles: getLayoutData(),
+  }, null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `nozzle-layout-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+};
+window.loadLayout = function(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.nozzles) { applyLayout(data.nozzles); localStorage.setItem('nozzle-layout', JSON.stringify(data.nozzles)); }
+    } catch(err) { alert('파일을 읽을 수 없습니다.'); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+};
+
+// ===== STEP =====
+let occtInitPromise = null;
+async function initOcct() {
+  if (!occtInitPromise) occtInitPromise = occtimportjs({ locateFile: n=>`https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/${n}` });
+  return occtInitPromise;
+}
+window.loadSTEP = async function(filename, btn) {
+  setActiveButton(btn); loadingEl.textContent='Loading STEP...'; loadingEl.style.display='block'; clearScene();
+  try {
+    const occt=await initOcct(); const r=await fetch(filename); const buf=await r.arrayBuffer();
+    const result=occt.ReadStepFile(new Uint8Array(buf),null);
+    const grp=new THREE.Group(); const cols=[0x5588cc,0x66aa66,0xcc8855,0xaa5577];
+    for(let i=0;i<result.meshes.length;i++){
+      const md=result.meshes[i]; const geo=new THREE.BufferGeometry();
+      geo.setAttribute('position',new THREE.Float32BufferAttribute(new Float32Array(md.attributes.position.array),3));
+      if(md.attributes.normal)geo.setAttribute('normal',new THREE.Float32BufferAttribute(new Float32Array(md.attributes.normal.array),3));
+      if(md.index)geo.setIndex(new THREE.BufferAttribute(new Uint32Array(md.index.array),1));
+      let col=cols[i%cols.length]; if(md.color)col=new THREE.Color(md.color[0],md.color[1],md.color[2]);
+      grp.add(new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:col,specular:0x222222,shininess:60,side:THREE.DoubleSide})));
+    }
+    scene.add(grp); currentObjects.push(grp);
+    const box=new THREE.Box3().setFromObject(grp); const c=new THREE.Vector3(); box.getCenter(c);
+    grp.position.sub(c); fitAllCameras(box.clone().translate(c.negate()));
+    loadingEl.style.display='none';
+  } catch(e){ loadingEl.textContent='STEP error: '+e.message; }
+};
+
+// ===== Render =====
+function resizeViewports() {
+  viewports.forEach(vp => {
+    const w=vp.el.clientWidth, h=vp.el.clientHeight;
+    vp.renderer.setSize(w,h);
+    if (vp.camera.isPerspectiveCamera) vp.camera.aspect=w/h;
+    else {
+      const aspect=w/h; const halfH=(vp.camera.top-vp.camera.bottom)/2;
+      vp.camera.left=-halfH*aspect; vp.camera.right=halfH*aspect;
+    }
+    vp.camera.updateProjectionMatrix();
+  });
+}
+function animate() {
+  requestAnimationFrame(animate);
+  viewports.forEach(vp => { vp.controls.update(); vp.renderer.render(scene, vp.camera); });
+}
+window.addEventListener('resize', resizeViewports);
+setTimeout(() => { resizeViewports(); animate(); }, 50);
+
+// ===== Assembly Animation + Recording =====
+let animRunning = false;
+let animRecording = false;
+let mediaRecorder = null;
+let recordedChunks = [];
+
+function easeInOutCubic(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
+
+window.stopAnimation = function() {
+  animRunning = false;
+  document.getElementById('anim-overlay').style.display = 'none';
+  if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+};
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && animRunning) stopAnimation();
+});
+
+window.playAnimation = async function(record) {
+  if (!assemblyMode || !nozzleMeshes.length) return;
+
+  const targets = nozzleMeshes.map(m => ({
+    pos: m.position.clone(),
+    quat: m.quaternion.clone(),
+    placed: m.userData.placed,
+  }));
+
+  const placedCount = targets.filter(t => t.placed).length;
+  if (placedCount === 0) { alert('먼저 노즐을 배치하세요.'); return; }
+
+  const overlay = document.getElementById('anim-overlay');
+  const canvas = document.getElementById('anim-canvas');
+  const statusEl = document.getElementById('anim-status');
+  overlay.style.display = 'block';
+
+  // Use existing adapterMesh and tubetipMesh (already loaded in assembly mode)
+  const adapterGroup = adapterMesh; // reuse, no separate load needed
+  const hasAdapter = adapterGroup && adapterGroup.userData.placed;
+  const hasTubetip = tubetipMesh && tubetipMesh.userData.placed;
+
+  const W = 1920, H = 1080;
+  canvas.width = W; canvas.height = H;
+  canvas.style.width = '100%'; canvas.style.height = '100%'; canvas.style.objectFit = 'contain';
+
+  const animRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  animRenderer.setSize(W, H);
+  animRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+  animRenderer.toneMappingExposure = 1.8;
+
+  const animCam = new THREE.PerspectiveCamera(40, W/H, 0.1, 10000);
+
+  const sceneCenter = new THREE.Vector3();
+  const fullBox = new THREE.Box3();
+  if (splintMeshRef) {
+    fullBox.setFromObject(splintMeshRef);
+    fullBox.getCenter(sceneCenter);
+  }
+  // 모든 배치 부품의 위치를 포함하도록 바운딩박스 확장
+  targets.forEach(t => { if (t.placed) fullBox.expandByPoint(t.pos); });
+  if (hasAdapter) fullBox.expandByPoint(adapterGroup.position);
+  if (hasTubetip) fullBox.expandByPoint(tubetipMesh.position);
+  const sceneSize = new THREE.Vector3(); fullBox.getSize(sceneSize);
+  const camDist = Math.max(80, Math.max(sceneSize.x, sceneSize.y, sceneSize.z) * 0.9);
+  animRunning = true;
+  animRecording = record;
+
+  // Recording setup
+  if (record) {
+    recordedChunks = [];
+    const stream = canvas.captureStream(30);
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9', videoBitsPerSecond: 8000000 });
+    mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = async () => {
+      const webmBlob = new Blob(recordedChunks, { type: 'video/webm' });
+      const fname = `assembly-${new Date().toISOString().slice(0,10)}`;
+
+      // Convert WebM to MP4 in browser using WebCodecs + mp4-muxer
+      statusEl.textContent = 'MP4 변환 중...';
+      try {
+        // Dynamic import mp4-muxer
+        const { Muxer, ArrayBufferTarget } = await import('https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/+esm');
+
+        // Decode WebM frames using VideoDecoder
+        const videoEl = document.createElement('video');
+        videoEl.muted = true;
+        videoEl.src = URL.createObjectURL(webmBlob);
+        await new Promise(r => { videoEl.onloadedmetadata = r; });
+        const vw = videoEl.videoWidth || W;
+        const vh = videoEl.videoHeight || H;
+        const duration = videoEl.duration;
+
+        // Use canvas to extract frames
+        const tmpCanvas = document.createElement('canvas');
+        tmpCanvas.width = vw; tmpCanvas.height = vh;
+        const tmpCtx = tmpCanvas.getContext('2d');
+
+        const fps = 30;
+        const totalFrames = Math.ceil(duration * fps);
+
+        const muxer = new Muxer({
+          target: new ArrayBufferTarget(),
+          video: { codec: 'avc', width: vw, height: vh },
+          fastStart: 'in-memory',
+        });
+
+        const encoder = new VideoEncoder({
+          output: (chunk, meta) => muxer.addVideoChunk(chunk, meta),
+          error: (e) => console.error('Encoder error:', e),
+        });
+        encoder.configure({
+          codec: 'avc1.640028',
+          width: vw, height: vh,
+          bitrate: 8_000_000,
+          framerate: fps,
+        });
+
+        for (let i = 0; i < totalFrames; i++) {
+          videoEl.currentTime = i / fps;
+          await new Promise(r => { videoEl.onseeked = r; });
+          tmpCtx.drawImage(videoEl, 0, 0, vw, vh);
+          const frame = new VideoFrame(tmpCanvas, { timestamp: (i / fps) * 1_000_000 });
+          encoder.encode(frame, { keyFrame: i % 30 === 0 });
+          frame.close();
+          if (i % 10 === 0) statusEl.textContent = `MP4 변환 중... ${Math.round(i/totalFrames*100)}%`;
+        }
+
+        await encoder.flush();
+        encoder.close();
+        muxer.finalize();
+
+        const mp4Blob = new Blob([muxer.target.buffer], { type: 'video/mp4' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(mp4Blob);
+        a.download = `${fname}.mp4`;
+        a.click();
+        URL.revokeObjectURL(videoEl.src);
+        statusEl.textContent = 'MP4 저장 완료!';
+      } catch(e) {
+        console.error('MP4 변환 실패:', e);
+        // Fallback: save WebM
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(webmBlob);
+        a.download = `${fname}.webm`;
+        a.click();
+        statusEl.textContent = 'WebM으로 저장됨 (MP4 변환 미지원 브라우저)';
+      }
+      setTimeout(() => { overlay.style.display = 'none'; }, 2000);
+    };
+    mediaRecorder.start();
+    statusEl.textContent = '녹화 중...';
+  } else {
+    statusEl.textContent = '재생 중... (ESC: 닫기)';
+  }
+
+  // 로고를 Three.js 텍스처로 로드 (동일 WebGL 컨텍스트 사용)
+  const logoTexture = await new Promise(res => {
+    new THREE.TextureLoader().load('fixonlogo.jpg', tex => {
+      tex.colorSpace = THREE.SRGBColorSpace; // 원본 색 유지
+      res(tex);
+    }, undefined, () => res(null));
+  });
+  let logoScene = null, logoCam = null, logoPlaneRef = null;
+  if (logoTexture) {
+    logoScene = new THREE.Scene();
+    logoScene.background = new THREE.Color(0xffffff); // 깨끗한 흰 배경
+    logoCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const aspect = logoTexture.image.width / logoTexture.image.height;
+    const scale = 0.32;
+    const logoMat = new THREE.MeshBasicMaterial({
+      map: logoTexture, transparent: false,
+    });
+    const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(scale * aspect * 2, scale * 2),
+      logoMat,
+    );
+    plane.userData.logoPlane = true;
+    logoPlaneRef = plane;
+    logoScene.add(plane);
+  }
+
+  // Hide all nozzles, adapter, tubetip initially
+  nozzleMeshes.forEach(m => m.visible = false);
+  if (adapterGroup) { adapterGroup.visible = false; adapterGroup.traverse(c => { c.visible = false; }); }
+  if (tubetipMesh) tubetipMesh.visible = false;
+
+  // Timeline:
+  // Phase 0: Logo intro (2.5s) — fade in, hold, fade out
+  // Phase 1: Intro - splint only (1.5s)
+  // Phase 2: Nozzles fly in one by one (1.5s each + 0.3s pause)
+  // Phase 3: Pause after nozzles (1s)
+  // Phase 4: Adapter flies in (2.5s)
+  // Phase 5: Tubetip flies in (2s)
+  // Phase 6: Outro - full orbit (3s)
+  const LOGO_DURATION = 2.5;
+  const INTRO = 1.5;
+  const PER_NOZZLE = 1.5;
+  const PAUSE = 0.3;
+  const NOZZLE_DONE_PAUSE = 1.0;
+  const ADAPTER_DURATION = 2.5;
+  const TUBETIP_DURATION = 2.0;
+  const OUTRO = 3.0;
+
+  const placedIndices = targets.map((t,i) => t.placed ? i : -1).filter(i => i >= 0);
+  const assemblyStart = LOGO_DURATION; // 로고 이후 조립 시작
+  const nozzlePhaseEnd = assemblyStart + INTRO + placedIndices.length * (PER_NOZZLE + PAUSE);
+  const adapterStart = nozzlePhaseEnd + NOZZLE_DONE_PAUSE;
+  const adapterEnd = hasAdapter ? adapterStart + ADAPTER_DURATION : adapterStart;
+  const tubetipStart = adapterEnd + (hasAdapter ? 0.5 : 0);
+  const tubetipEnd = hasTubetip ? tubetipStart + TUBETIP_DURATION : tubetipStart;
+  const totalDuration = tubetipEnd + OUTRO;
+
+  // Starting positions for nozzles (fly in from outside)
+  const startPositions = placedIndices.map((idx, i) => {
+    const target = targets[idx].pos;
+    const dir = target.clone().sub(sceneCenter).normalize();
+    return target.clone().add(dir.multiplyScalar(60));
+  });
+
+  // Adapter animation positions
+  const adapterTargetPos = hasAdapter ? adapterGroup.position.clone() : sceneCenter.clone();
+  const adapterTargetQuat = hasAdapter ? adapterGroup.quaternion.clone() : new THREE.Quaternion();
+  const adDir = adapterTargetPos.clone().sub(sceneCenter);
+  const adapterStartPos = adDir.length() > 0.1
+    ? adapterTargetPos.clone().add(adDir.normalize().multiplyScalar(60))
+    : adapterTargetPos.clone().add(new THREE.Vector3(0, 60, 0));
+
+  // Tubetip animation positions
+  const tubetipTargetPos = hasTubetip ? tubetipMesh.position.clone() : sceneCenter.clone();
+  const tubetipTargetQuat = hasTubetip ? tubetipMesh.quaternion.clone() : new THREE.Quaternion();
+  const ttDir = tubetipTargetPos.clone().sub(sceneCenter);
+  const tubetipStartPos = ttDir.length() > 0.1
+    ? tubetipTargetPos.clone().add(ttDir.normalize().multiplyScalar(60))
+    : tubetipTargetPos.clone().add(new THREE.Vector3(0, 60, 0));
+
+  const t0 = performance.now();
+
+  function animFrame() {
+    if (!animRunning) {
+      // Restore nozzles
+      nozzleMeshes.forEach((m, i) => {
+        if (targets[i].placed) {
+          m.position.copy(targets[i].pos);
+          m.quaternion.copy(targets[i].quat);
+          m.visible = true;
+        }
+      });
+      animRenderer.dispose();
+      return;
+    }
+
+    const elapsed = (performance.now() - t0) / 1000;
+    const progress = Math.min(elapsed / totalDuration, 1);
+
+    // Phase 0: 로고 인트로 (Three.js 렌더링, 톤맵핑 OFF로 원색 유지)
+    if (elapsed < LOGO_DURATION && logoScene) {
+      // 페이드: 0~0.8s 흰 배경 페이드인, 0.8~1.8s 홀드, 1.8~2.5s 다크 배경으로 페이드
+      let bgFade = 1; // 1 = 흰색, 0 = 다크
+      if (elapsed < 0.5) bgFade = elapsed / 0.5; // 다크→흰 전환
+      else if (elapsed > LOGO_DURATION - 0.7) bgFade = (LOGO_DURATION - elapsed) / 0.7; // 흰→다크 전환
+      bgFade = Math.max(0, Math.min(1, bgFade));
+
+      // 배경색 보간 (다크 #1a1a2e ↔ 흰 #ffffff)
+      const dark = new THREE.Color(0x1a1a2e);
+      const white = new THREE.Color(0xffffff);
+      logoScene.background = dark.clone().lerp(white, bgFade);
+
+      // 로고 불투명도
+      if (logoPlaneRef) {
+        logoPlaneRef.material.transparent = bgFade < 0.99;
+        logoPlaneRef.material.opacity = bgFade;
+        // 살짝 스케일 애니메이션 (0.95 → 1.0)
+        const s = 0.95 + 0.05 * Math.min(1, elapsed / 1.5);
+        logoPlaneRef.scale.set(s, s, 1);
+      }
+
+      // 톤맵핑 꺼서 로고 원색 보존
+      animRenderer.toneMapping = THREE.NoToneMapping;
+      animRenderer.render(logoScene, logoCam);
+      animRenderer.toneMapping = THREE.ACESFilmicToneMapping; // 복원
+
+      const remaining = Math.max(0, totalDuration - elapsed);
+      if (animRecording) statusEl.textContent = `녹화 중... ${remaining.toFixed(1)}초 남음`;
+      else statusEl.textContent = `재생 중... ${remaining.toFixed(1)}초 (ESC: 닫기)`;
+
+      requestAnimationFrame(animFrame);
+      return;
+    }
+    // 로고 → 스플린트 전환 시 splint 보이게
+    if (!animFrame._splintShown) {
+      if (splintMeshRef) splintMeshRef.visible = true;
+      animFrame._splintShown = true;
+    }
+
+    // Determine which nozzle is currently animating
+    let activeNi = -1;
+    let activeT = 0;
+    for (let ni = 0; ni < placedIndices.length; ni++) {
+      const ns = assemblyStart + INTRO + ni * (PER_NOZZLE + PAUSE);
+      const ne = ns + PER_NOZZLE;
+      if (elapsed >= ns && elapsed < ne) { activeNi = ni; activeT = (elapsed - ns) / PER_NOZZLE; break; }
+      if (elapsed < ns) break;
+    }
+
+    // Camera: look at the nozzle target being assembled
+    let lookTarget = sceneCenter.clone();
+    let camCloseDist = camDist;
+
+    // Fixed lookAt, smooth orbit far out. Offset to center product visually.
+    const center = sceneCenter.clone();
+    const orbitAngle = (elapsed - assemblyStart) * 0.3;
+    const farDist = camDist * 1.6;
+    animCam.position.set(
+      center.x + Math.cos(orbitAngle) * farDist,
+      center.y + farDist * 0.5,
+      center.z + Math.sin(orbitAngle) * farDist
+    );
+    animCam.lookAt(center);
+
+    // Nozzle animations
+    for (let ni = 0; ni < placedIndices.length; ni++) {
+      const idx = placedIndices[ni];
+      const nozzleStart = INTRO + ni * (PER_NOZZLE + PAUSE);
+      const nozzleEnd = nozzleStart + PER_NOZZLE;
+      const mesh = nozzleMeshes[idx];
+
+      if (elapsed < nozzleStart) {
+        mesh.visible = false;
+      } else if (elapsed < nozzleEnd) {
+        mesh.visible = true;
+        const t = easeInOutCubic((elapsed - nozzleStart) / PER_NOZZLE);
+        mesh.position.lerpVectors(startPositions[ni], targets[idx].pos, t);
+
+        const startQuat = new THREE.Quaternion().setFromUnitVectors(
+          new THREE.Vector3(0,0,1),
+          startPositions[ni].clone().sub(targets[idx].pos).normalize()
+        );
+        mesh.quaternion.slerpQuaternions(startQuat, targets[idx].quat, t);
+
+        mesh.material.emissive.setHex(0x333333);
+      } else {
+        mesh.visible = true;
+        mesh.position.copy(targets[idx].pos);
+        mesh.quaternion.copy(targets[idx].quat);
+        // Brief flash when just landed
+        const timeSinceLand = elapsed - nozzleEnd;
+        mesh.material.emissive.setHex(timeSinceLand < 0.3 ? 0x444444 : 0x000000);
+      }
+    }
+
+    // Adapter animation
+    if (adapterGroup) {
+      if (elapsed < adapterStart) {
+        adapterGroup.visible = false;
+        adapterGroup.traverse(c => { c.visible = false; });
+      } else if (elapsed < adapterEnd) {
+        adapterGroup.visible = true;
+        adapterGroup.traverse(c => { c.visible = true; });
+        const t = easeInOutCubic((elapsed - adapterStart) / ADAPTER_DURATION);
+        adapterGroup.position.lerpVectors(adapterStartPos, adapterTargetPos, t);
+        const startQ = new THREE.Quaternion();
+        adapterGroup.quaternion.slerpQuaternions(startQ, adapterTargetQuat, t);
+        adapterGroup.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(0x222222); });
+      } else {
+        adapterGroup.visible = true;
+        adapterGroup.traverse(c => { c.visible = true; });
+        adapterGroup.position.copy(adapterTargetPos);
+        adapterGroup.quaternion.copy(adapterTargetQuat);
+        const flash = elapsed - adapterEnd;
+        const hex = flash < 0.3 ? 0x444444 : 0x000000;
+        adapterGroup.traverse(c => { if (c.material?.emissive) c.material.emissive.setHex(hex); });
+      }
+    }
+
+    // Tubetip animation
+    if (tubetipMesh && hasTubetip) {
+      if (elapsed < tubetipStart) {
+        tubetipMesh.visible = false;
+      } else if (elapsed < tubetipEnd) {
+        tubetipMesh.visible = true;
+        const t = easeInOutCubic((elapsed - tubetipStart) / TUBETIP_DURATION);
+        tubetipMesh.position.lerpVectors(tubetipStartPos, tubetipTargetPos, t);
+        const startQ = new THREE.Quaternion();
+        tubetipMesh.quaternion.slerpQuaternions(startQ, tubetipTargetQuat, t);
+        tubetipMesh.material.emissive.setHex(0x333333);
+      } else {
+        tubetipMesh.visible = true;
+        tubetipMesh.position.copy(tubetipTargetPos);
+        tubetipMesh.quaternion.copy(tubetipTargetQuat);
+        const flash = elapsed - tubetipEnd;
+        tubetipMesh.material.emissive.setHex(flash < 0.3 ? 0x444444 : 0x000000);
+      }
+    }
+
+    // Status
+    const remaining = Math.max(0, totalDuration - elapsed);
+    if (animRecording) {
+      statusEl.textContent = `녹화 중... ${remaining.toFixed(1)}초 남음`;
+    } else {
+      statusEl.textContent = `재생 중... ${remaining.toFixed(1)}초 (ESC: 닫기)`;
+    }
+
+    animRenderer.render(scene, animCam);
+
+    if (elapsed >= totalDuration) {
+      // Cleanup function
+      function restoreAll() {
+        nozzleMeshes.forEach((m, i) => {
+          if (targets[i].placed) {
+            m.position.copy(targets[i].pos); m.quaternion.copy(targets[i].quat);
+            m.visible = true; m.material.emissive.setHex(0);
+          }
+        });
+        // Restore adapter to its saved position (don't remove - it's the original)
+        if (adapterGroup && hasAdapter) {
+          adapterGroup.position.copy(adapterTargetPos);
+          adapterGroup.quaternion.copy(adapterTargetQuat);
+          adapterGroup.visible = true;
+          adapterGroup.traverse(c => { c.visible = true; if (c.material?.emissive) c.material.emissive.setHex(0); });
+        }
+        // Restore tubetip
+        if (tubetipMesh && hasTubetip) {
+          tubetipMesh.position.copy(tubetipTargetPos);
+          tubetipMesh.quaternion.copy(tubetipTargetQuat);
+          tubetipMesh.visible = true;
+          tubetipMesh.material.emissive.setHex(0);
+        }
+        animRenderer.dispose();
+      }
+
+      if (animRecording && mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        animRecording = false;
+        animRunning = false;
+        restoreAll();
+        return;
+      }
+      animRunning = false;
+      restoreAll();
+      statusEl.textContent = '완료! (클릭하여 닫기)';
+      overlay.onclick = () => { overlay.style.display='none'; overlay.onclick=null; };
+      return;
+    }
+
+    requestAnimationFrame(animFrame);
+  }
+
+  requestAnimationFrame(animFrame);
+};
+
+loadAssembly(document.querySelector('#toolbar > button.active'));
+</script>
+</body>
+</html>

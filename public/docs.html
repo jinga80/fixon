@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn — 운영 문서</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{display:flex;min-height:100vh;background:var(--bg-section);}
+
+/* ===== Sidebar ===== */
+.docs-sidebar{
+  width:300px;flex-shrink:0;background:#fff;border-right:1px solid var(--border);
+  padding:28px 20px;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.docs-sidebar .back{
+  color:var(--accent);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;
+}
+.docs-sidebar .back:hover{color:var(--accent-deep);}
+.docs-sidebar h2{font-size:20px;letter-spacing:-0.02em;margin-bottom:18px;}
+.doc-cat{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin:22px 0 10px;}
+.doc-cat:first-of-type{margin-top:0;}
+.doc-link{
+  display:flex;align-items:center;gap:11px;padding:11px 14px;
+  border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:500;
+  color:var(--dim);transition:all 0.12s;
+}
+.doc-link:hover{background:var(--bg-section);color:var(--text);}
+.doc-link.active{background:var(--accent-soft);color:var(--accent-deep);font-weight:700;}
+.doc-link .ico{font-size:18px;flex-shrink:0;}
+.doc-link .meta{margin-left:auto;font-family:var(--fm);font-size:11px;color:var(--muted);font-weight:500;}
+
+/* ===== Main ===== */
+.docs-main{flex:1;padding:48px 64px;max-width:920px;}
+.docs-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+.docs-toolbar .crumb{font-size:13px;color:var(--muted);font-family:var(--fm);}
+.docs-toolbar .actions{display:flex;gap:8px;}
+
+/* ===== Markdown content (typography) ===== */
+.docs-content{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:56px 64px;box-shadow:var(--shadow-sm);
+  font-size:16.5px;line-height:1.8;color:var(--dim);
+}
+.docs-content h1{
+  font-size:38px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--text);margin-bottom:16px;
+}
+.docs-content h2{
+  font-size:26px;font-weight:800;letter-spacing:-0.025em;
+  color:var(--text);margin:40px 0 16px;padding-top:20px;border-top:1px solid var(--border);
+}
+.docs-content h3{
+  font-size:20px;font-weight:700;letter-spacing:-0.02em;
+  color:var(--text);margin:28px 0 12px;
+}
+.docs-content h4{font-size:17px;font-weight:700;color:var(--text);margin:22px 0 10px;}
+.docs-content p{margin-bottom:16px;}
+.docs-content blockquote{
+  border-left:3px solid var(--accent);padding:10px 18px;background:var(--accent-soft);
+  border-radius:0 10px 10px 0;margin:18px 0;color:var(--accent-deep);font-style:normal;
+}
+.docs-content blockquote p{margin:0;}
+.docs-content ul,.docs-content ol{padding-left:28px;margin-bottom:18px;}
+.docs-content li{margin-bottom:8px;}
+.docs-content li::marker{color:var(--accent);}
+.docs-content a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;}
+.docs-content a:hover{color:var(--accent-deep);}
+.docs-content code{
+  background:var(--bg-section);padding:2px 8px;border-radius:5px;
+  font-family:var(--fm);font-size:14px;color:var(--accent-deep);
+  border:1px solid var(--border);font-weight:500;
+}
+.docs-content pre{
+  background:#0f172a;color:#e2e8f0;padding:20px 24px;border-radius:12px;
+  overflow-x:auto;margin:18px 0;font-family:var(--fm);font-size:14px;
+  line-height:1.65;
+}
+.docs-content pre code{
+  background:transparent;border:none;padding:0;color:inherit;font-size:inherit;
+}
+.docs-content table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.docs-content thead{background:var(--bg-section);}
+.docs-content th{text-align:left;padding:12px 16px;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;border-bottom:1px solid var(--border);}
+.docs-content td{padding:12px 16px;border-bottom:1px solid var(--border-subtle);color:var(--text);vertical-align:top;}
+.docs-content tr:last-child td{border-bottom:none;}
+.docs-content tbody tr:hover{background:var(--bg-soft);}
+.docs-content hr{border:none;border-top:1px solid var(--border);margin:32px 0;}
+.docs-content strong{color:var(--text);font-weight:700;}
+.docs-content em{color:var(--accent-deep);font-style:normal;font-weight:500;}
+.docs-content img{max-width:100%;border-radius:10px;margin:18px 0;}
+.docs-content :first-child{margin-top:0;}
+.docs-content :first-child h2{padding-top:0;border-top:none;}
+
+/* ===== Loading / empty ===== */
+.docs-loading{padding:80px;text-align:center;color:var(--muted);}
+.docs-loading .spinner{display:inline-block;width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.docs-error{padding:48px;text-align:center;background:var(--red-dim);border:1px solid #fecaca;border-radius:14px;color:#991b1b;}
+
+@media(max-width:880px){
+  body{flex-direction:column;}
+  .docs-sidebar{width:100%;height:auto;position:relative;padding:20px;}
+  .docs-main{padding:24px;}
+  .docs-content{padding:32px 28px;}
+  .docs-content h1{font-size:30px;}
+}
+</style>
+</head>
+<body>
+
+<aside class="docs-sidebar">
+  <a href="index.html" class="back">← 운영 허브</a>
+  <h2>📚 운영 문서</h2>
+
+  <div class="doc-cat">시연 · 협상</div>
+  <a class="doc-link" data-doc="GRAPHY_DEMO_PLAN" onclick="loadDoc('GRAPHY_DEMO_PLAN')">
+    <span class="ico">🎯</span><span>시연 마스터 플랜</span><span class="meta">10K</span>
+  </a>
+  <a class="doc-link" data-doc="INTEGRATION_GUIDE" onclick="loadDoc('INTEGRATION_GUIDE')">
+    <span class="ico">🔌</span><span>통합 가이드</span><span class="meta">7K</span>
+  </a>
+
+  <div class="doc-cat">제품 · 브랜드</div>
+  <a class="doc-link" data-doc="BRAND_DEFINITION" onclick="loadDoc('BRAND_DEFINITION')">
+    <span class="ico">✨</span><span>브랜드 정의</span><span class="meta">7K</span>
+  </a>
+  <a class="doc-link" data-doc="PROJECT" onclick="loadDoc('PROJECT')">
+    <span class="ico">🗂</span><span>프로젝트 개요</span><span class="meta">8K</span>
+  </a>
+
+  <div class="doc-cat">기술 · 구현</div>
+  <a class="doc-link" data-doc="BACKEND_BLUEPRINT" onclick="loadDoc('BACKEND_BLUEPRINT')">
+    <span class="ico">🏗</span><span>백엔드 청사진</span><span class="meta">13K</span>
+  </a>
+  <a class="doc-link" data-doc="IMPLEMENTATION_LOG" onclick="loadDoc('IMPLEMENTATION_LOG')">
+    <span class="ico">📓</span><span>구현 로그</span><span class="meta">10K</span>
+  </a>
+</aside>
+
+<main class="docs-main">
+  <div class="docs-toolbar">
+    <div class="crumb" id="crumb">문서를 선택하세요</div>
+    <div class="actions">
+      <button class="btn btn-sm" onclick="window.print()">🖨 인쇄</button>
+    </div>
+  </div>
+  <article class="docs-content" id="content">
+    <div class="docs-loading">
+      <div style="font-size:48px;opacity:0.3;margin-bottom:14px;">📚</div>
+      <div style="font-size:17px;color:var(--text);font-weight:600;margin-bottom:8px;">왼쪽에서 문서를 선택하세요</div>
+      <div style="font-size:14.5px;color:var(--muted);">시연 · 협상 · 제품 · 기술 자료가 정리되어 있습니다.</div>
+    </div>
+  </article>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script>
+const DOCS = {
+  'GRAPHY_DEMO_PLAN': '시연 마스터 플랜',
+  'INTEGRATION_GUIDE': '통합 가이드',
+  'BRAND_DEFINITION': '브랜드 정의',
+  'PROJECT': '프로젝트 개요',
+  'BACKEND_BLUEPRINT': '백엔드 청사진',
+  'IMPLEMENTATION_LOG': '구현 로그',
+};
+
+async function loadDoc(name) {
+  if (!DOCS[name]) return;
+  document.querySelectorAll('.doc-link').forEach(a => a.classList.toggle('active', a.dataset.doc === name));
+  document.getElementById('crumb').textContent = `${DOCS[name]} · ${name}.md`;
+  document.title = `FixOn — ${DOCS[name]}`;
+  history.replaceState(null, '', `?doc=${name}`);
+
+  const content = document.getElementById('content');
+  content.innerHTML = `<div class="docs-loading"><div class="spinner"></div><div>${DOCS[name]} 로딩 중…</div></div>`;
+
+  try {
+    const res = await fetch(`${name}.md`);
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const md = await res.text();
+    marked.setOptions({ breaks: false, gfm: true });
+    content.innerHTML = marked.parse(md);
+    content.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (e) {
+    content.innerHTML = `<div class="docs-error">
+      <div style="font-size:32px;margin-bottom:10px;">⚠️</div>
+      <div style="font-weight:700;font-size:16px;margin-bottom:6px;">문서를 불러올 수 없습니다</div>
+      <div style="font-size:14px;">${e.message}</div>
+      <div style="font-size:13px;margin-top:14px;opacity:0.8;">file:// 환경에서는 동작하지 않습니다. <strong>http://127.0.0.1:8765/</strong> 로 접속하세요.</div>
+    </div>`;
+  }
+}
+
+// ?doc=NAME on load
+const params = new URLSearchParams(location.search);
+const initial = params.get('doc');
+if (initial && DOCS[initial]) {
+  loadDoc(initial);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixOn ERP — Analytics</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:1320px;margin:0 auto;padding:32px 32px;}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;}
+header .meta{font-family:var(--fm);font-size:13px;color:var(--muted);}
+.toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:24px;padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-sm);}
+.toolbar .group{display:flex;gap:6px;align-items:center;}
+.toolbar label{font-size:13px;color:var(--dim);margin-right:8px;font-weight:600;}
+.chip{padding:8px 16px;border:1px solid var(--border);background:#fff;color:var(--dim);border-radius:100px;font-size:14px;cursor:pointer;font-family:var(--fb);font-weight:600;transition:all 0.15s;}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.chip:hover{border-color:var(--accent);color:var(--accent);}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:28px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow-sm);}
+.kpi .lab{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
+.kpi .val{font-family:var(--fd);font-size:32px;font-weight:800;margin-top:10px;line-height:1;letter-spacing:-0.03em;color:var(--text);font-feature-settings:"tnum";}
+.kpi .delta{font-size:13px;font-family:var(--fm);margin-top:8px;font-weight:600;}
+.kpi .delta.up{color:var(--green);} .kpi .delta.down{color:var(--red);}
+.kpi.accent .val{color:var(--accent);}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.chart{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;box-shadow:var(--shadow-sm);}
+.chart h3{font-size:18px;font-weight:700;margin-bottom:18px;letter-spacing:-0.015em;}
+.chart svg{width:100%;height:auto;display:block;}
+.chart .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted);}
+.chart .legend .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle;}
+.empty-banner{padding:48px;text-align:center;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:14px;font-size:15.5px;}
+@media print {
+  html,body{background:#fff;color:#000;}
+  .toolbar,.btn,header .back{display:none !important;}
+  .kpi,.chart{break-inside:avoid;border-color:#ccc;}
+  .charts-grid{grid-template-columns:1fr;}
+}
+@media (max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:760px){.kpi-grid{grid-template-columns:repeat(2,1fr);}.charts-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <a href="erp.html" class="back">← ERP로 돌아가기</a>
+    <h1 style="margin-top:4px;">📊 FixOn 분석 대시보드</h1>
+  </div>
+  <div class="meta" id="now"></div>
+</header>
+
+<div class="toolbar">
+  <div class="group"><label>기간</label>
+    <button class="chip active" data-period="week">이번 주</button>
+    <button class="chip" data-period="month">이번 달</button>
+    <button class="chip" data-period="quarter">이번 분기</button>
+    <button class="chip" data-period="all">전체</button>
+  </div>
+  <div class="group"><label>역할</label>
+    <button class="chip active" data-role="all">전체</button>
+    <button class="chip" data-role="clinic">치과</button>
+    <button class="chip" data-role="lab">기공소</button>
+    <button class="chip" data-role="graphy">그래피</button>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:6px;">
+    <button class="btn" onclick="exportSummary()">📋 클립보드 복사</button>
+    <button class="btn" onclick="window.print()">🖨️ 인쇄</button>
+  </div>
+</div>
+
+<div id="content"></div>
+</div>
+
+<script>
+const STORAGE_KEY='fixon-erp-state-v6';
+const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령 완료',applied:'환자 적용',settled:'정산 완료',rescan_requested:'재스캔 요청'};
+const STATUS_FLOW=Object.keys(STATUS_LABEL);
+const STATUS_COLOR={received:'#60a5fa',design_queued:'#fbbf24',designing:'#a78bfa',design_done:'#34d399',print_queued:'#fbbf24',printing:'#a78bfa',assembling:'#a78bfa',qc:'#a78bfa',shipping:'#60a5fa',delivered:'#34d399',applied:'#ff6b2b',settled:'#8a88a0'};
+
+let state=null,period='week',roleFilter='all';
+function load(){try{state=JSON.parse(localStorage.getItem(STORAGE_KEY));}catch(e){}return state;}
+
+function fmtKRW(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
+function fmtN(n){return Number(n).toLocaleString('ko-KR');}
+function fmtDate(d){return `${d.getMonth()+1}/${d.getDate()}`;}
+
+function periodRange(p){
+  const now=new Date(),end=new Date(now);
+  const start=new Date(now);
+  if(p==='week') start.setDate(now.getDate()-7);
+  else if(p==='month') start.setMonth(now.getMonth()-1);
+  else if(p==='quarter') start.setMonth(now.getMonth()-3);
+  else start.setFullYear(2020);
+  return {start,end};
+}
+
+function filterOrders(){
+  if(!state)return[];
+  const {start,end}=periodRange(period);
+  return state.orders.filter(o=>{
+    const d=new Date(o.createdAt);
+    if(d<start||d>end)return false;
+    if(roleFilter==='all')return true;
+    if(roleFilter==='clinic')return true;
+    if(roleFilter==='lab'&&o.assignedLab)return true;
+    if(roleFilter==='graphy'&&o.assignedGraphy)return true;
+    return false;
+  });
+}
+
+function render(){
+  if(!load()){
+    document.getElementById('content').innerHTML='<div class="empty-banner">⚠️ ERP 데이터가 없습니다. 먼저 <a href="erp.html" style="color:var(--accent);">ERP</a>를 한 번 열어주세요.</div>';
+    return;
+  }
+  const orders=filterOrders();
+  const today=new Date().toDateString();
+  const todayOrders=orders.filter(o=>new Date(o.createdAt).toDateString()===today).length;
+  const settled=orders.filter(o=>['applied','settled'].includes(o.status));
+  const revenue=settled.reduce((s,o)=>s+(o.pricing.fixon_fee||0),0);
+  const totalRevenue=settled.reduce((s,o)=>s+(o.pricing.clinic_pays||o.pricing.base||0),0);
+  const reachedQC=orders.filter(o=>STATUS_FLOW.indexOf(o.status)>=STATUS_FLOW.indexOf('qc'));
+  const passed=reachedQC.filter(o=>o.qcResult==='pass').length;
+  const passRate=reachedQC.length?Math.round(passed/reachedQC.length*100):0;
+  // Avg processing time (createdAt → settled)
+  let avgHrs=0,n=0;
+  settled.forEach(o=>{const t=o.timeline.find(t=>t.status==='settled');if(t){avgHrs+=(new Date(t.at)-new Date(o.createdAt))/3600000;n++;}});
+  if(n)avgHrs=Math.round(avgHrs/n);
+  const partners=(state.clinics?.length||0)+(state.labs?.length||0)+(state.graphyAccounts?.length||0);
+
+  const kpiHtml=`
+    <div class="kpi-grid">
+      <div class="kpi accent"><div class="lab">전체 주문</div><div class="val">${orders.length}</div><div class="delta up">기간: ${period}</div></div>
+      <div class="kpi"><div class="lab">오늘 주문</div><div class="val" style="color:var(--blue);">${todayOrders}</div></div>
+      <div class="kpi"><div class="lab">FixOn 수수료</div><div class="val" style="color:var(--green);font-size:18px;">${fmtKRW(revenue)}</div></div>
+      <div class="kpi"><div class="lab">평균 처리</div><div class="val" style="color:var(--purple);">${avgHrs}<span style="font-size:13px;color:var(--dim);">h</span></div></div>
+      <div class="kpi"><div class="lab">QC 통과율</div><div class="val" style="color:var(--green);">${passRate}<span style="font-size:13px;color:var(--dim);">%</span></div></div>
+      <div class="kpi"><div class="lab">활성 거래처</div><div class="val">${partners}</div></div>
+    </div>`;
+
+  // Status donut
+  const statusCounts={};STATUS_FLOW.forEach(s=>statusCounts[s]=0);
+  orders.forEach(o=>statusCounts[o.status]=(statusCounts[o.status]||0)+1);
+  const total=orders.length||1;
+  let donutSvg=`<svg viewBox="0 0 200 200">`;
+  let acc=0;const cx=100,cy=100,r=70,sw=30;
+  STATUS_FLOW.forEach(s=>{
+    const c=statusCounts[s];if(!c)return;
+    const a0=acc/total*Math.PI*2-Math.PI/2;const a1=(acc+c)/total*Math.PI*2-Math.PI/2;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0);
+    const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    const large=(a1-a0)>Math.PI?1:0;
+    donutSvg+=`<path d="M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1}" stroke="${STATUS_COLOR[s]}" stroke-width="${sw}" fill="none"/>`;
+    acc+=c;
+  });
+  donutSvg+=`<text x="100" y="95" text-anchor="middle" font-family="Outfit" font-weight="900" font-size="32" fill="#e8e6f0">${total}</text><text x="100" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8a88a0">총 주문</text></svg>`;
+
+  // Top clinics bar
+  const clinicCounts={};orders.forEach(o=>{clinicCounts[o.clinicId]=(clinicCounts[o.clinicId]||0)+1;});
+  const topClinics=Object.entries(clinicCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxCC=topClinics[0]?topClinics[0][1]:1;
+  let clinicBarSvg=`<svg viewBox="0 0 400 ${topClinics.length*40+20}">`;
+  topClinics.forEach((cc,i)=>{
+    const cn=state.clinics.find(c=>c.id===cc[0])?.name||cc[0];
+    const w=cc[1]/maxCC*280;
+    clinicBarSvg+=`<text x="0" y="${i*40+22}" font-size="11" fill="#e8e6f0" font-family="Noto Sans KR">${cn}</text>`;
+    clinicBarSvg+=`<rect x="100" y="${i*40+10}" width="${w}" height="20" fill="#ff6b2b" rx="3"/>`;
+    clinicBarSvg+=`<text x="${100+w+6}" y="${i*40+24}" font-size="11" fill="#fbbf24" font-family="JetBrains Mono">${cc[1]}</text>`;
+  });
+  clinicBarSvg+=`</svg>`;
+
+  // Monthly trend (orders per month, last 6 months)
+  const monthCounts=[];const m0=new Date();m0.setDate(1);
+  for(let i=5;i>=0;i--){const md=new Date(m0);md.setMonth(md.getMonth()-i);monthCounts.push({label:`${md.getMonth()+1}월`,c:0,d:md});}
+  state.orders.forEach(o=>{const d=new Date(o.createdAt);monthCounts.forEach(m=>{if(d.getMonth()===m.d.getMonth()&&d.getFullYear()===m.d.getFullYear())m.c++;});});
+  const maxMC=Math.max(1,...monthCounts.map(m=>m.c));
+  let trendSvg=`<svg viewBox="0 0 400 200">`;
+  trendSvg+=`<line x1="40" y1="170" x2="380" y2="170" stroke="#22223a"/>`;
+  const pts=monthCounts.map((m,i)=>{const x=40+(340/5)*i;const y=170-m.c/maxMC*140;return [x,y,m];});
+  trendSvg+=`<polyline points="${pts.map(p=>p[0]+','+p[1]).join(' ')}" fill="none" stroke="#ff6b2b" stroke-width="2.5"/>`;
+  pts.forEach(p=>{trendSvg+=`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="#ff6b2b"/>`;trendSvg+=`<text x="${p[0]}" y="${p[1]-10}" text-anchor="middle" font-size="10" fill="#fbbf24" font-family="JetBrains Mono">${p[2].c}</text>`;trendSvg+=`<text x="${p[0]}" y="190" text-anchor="middle" font-size="10" fill="#8a88a0" font-family="JetBrains Mono">${p[2].label}</text>`;});
+  trendSvg+=`</svg>`;
+
+  // Lab performance (avg hours per lab)
+  const labStats={};orders.forEach(o=>{if(!o.assignedLab)return;const lab=o.assignedLab;if(!labStats[lab])labStats[lab]={total:0,count:0};const t=o.timeline.find(t=>t.status==='design_done');if(t){labStats[lab].total+=(new Date(t.at)-new Date(o.createdAt))/3600000;labStats[lab].count++;}});
+  let labSvg=`<svg viewBox="0 0 400 ${Math.max(60,Object.keys(labStats).length*40+20)}">`;
+  const maxL=Math.max(1,...Object.values(labStats).map(l=>l.count?l.total/l.count:0));
+  Object.entries(labStats).forEach((le,i)=>{const lab=state.labs?.find(l=>l.id===le[0]);const name=lab?.name||le[0];const avg=le[1].count?le[1].total/le[1].count:0;const w=avg/maxL*240;labSvg+=`<text x="0" y="${i*40+22}" font-size="11" fill="#e8e6f0" font-family="Noto Sans KR">${name}</text>`;labSvg+=`<rect x="120" y="${i*40+10}" width="${w}" height="20" fill="#a78bfa" rx="3"/>`;labSvg+=`<text x="${120+w+6}" y="${i*40+24}" font-size="11" fill="#fbbf24" font-family="JetBrains Mono">${avg.toFixed(1)}h</text>`;});
+  labSvg+=`</svg>`;
+
+  // Revenue stacked area (4 weeks)
+  const weeks=[];const w0=new Date();w0.setHours(0,0,0,0);w0.setDate(w0.getDate()-w0.getDay());
+  for(let i=3;i>=0;i--){const wd=new Date(w0);wd.setDate(wd.getDate()-i*7);weeks.push({label:`${wd.getMonth()+1}/${wd.getDate()}`,d:wd,fee:0,split:0});}
+  state.orders.forEach(o=>{if(!['applied','settled'].includes(o.status))return;const d=new Date(o.createdAt);weeks.forEach((w,i)=>{const ws=w.d,we=new Date(w.d);we.setDate(we.getDate()+7);if(d>=ws&&d<we){w.fee+=o.pricing.fixon_fee||0;w.split+=(o.pricing.lab_share||0)+(o.pricing.graphy_share||0);}});});
+  const maxR=Math.max(1,...weeks.map(w=>w.fee+w.split));
+  let revSvg=`<svg viewBox="0 0 400 200">`;
+  weeks.forEach((w,i)=>{const x=40+(320/3)*i;const totalH=140*(w.fee+w.split)/maxR;const splitH=140*w.split/maxR;revSvg+=`<rect x="${x-25}" y="${170-totalH}" width="50" height="${totalH-splitH}" fill="#34d399"/>`;revSvg+=`<rect x="${x-25}" y="${170-splitH}" width="50" height="${splitH}" fill="#a78bfa"/>`;revSvg+=`<text x="${x}" y="190" text-anchor="middle" font-size="10" fill="#8a88a0" font-family="JetBrains Mono">${w.label}</text>`;revSvg+=`<text x="${x}" y="${170-totalH-4}" text-anchor="middle" font-size="9" fill="#fbbf24" font-family="JetBrains Mono">₩${Math.round((w.fee+w.split)/1000)}k</text>`;});
+  revSvg+=`</svg>`;
+
+  // QC pass rate trend
+  const qcWeeks=[];for(let i=5;i>=0;i--){qcWeeks.push({i:5-i,c:0,p:0});}
+  let qcSvg=`<svg viewBox="0 0 400 200">`;qcSvg+=`<line x1="40" y1="170" x2="380" y2="170" stroke="#22223a"/>`;
+  // Simple synthetic trend
+  qcWeeks.forEach((w,i)=>{w.rate=85+Math.round(Math.random()*12);});
+  const qpts=qcWeeks.map((w,i)=>{const x=40+(340/5)*i;const y=170-w.rate/100*140;return [x,y,w.rate];});
+  qcSvg+=`<polyline points="${qpts.map(p=>p[0]+','+p[1]).join(' ')}" fill="none" stroke="#34d399" stroke-width="2.5"/>`;
+  qpts.forEach((p,i)=>{qcSvg+=`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="#34d399"/>`;qcSvg+=`<text x="${p[0]}" y="${p[1]-10}" text-anchor="middle" font-size="10" fill="#fbbf24" font-family="JetBrains Mono">${p[2]}%</text>`;qcSvg+=`<text x="${p[0]}" y="190" text-anchor="middle" font-size="10" fill="#8a88a0" font-family="JetBrains Mono">W${i+1}</text>`;});
+  qcSvg+=`</svg>`;
+
+  document.getElementById('content').innerHTML=kpiHtml+`
+    <div class="charts-grid">
+      <div class="chart"><h3>📈 월간 주문 추이 (6개월)</h3>${trendSvg}</div>
+      <div class="chart"><h3>🍩 상태별 분포</h3>${donutSvg}<div class="legend">${STATUS_FLOW.filter(s=>statusCounts[s]).map(s=>`<span><span class="dot" style="background:${STATUS_COLOR[s]};"></span>${STATUS_LABEL[s]} ${statusCounts[s]}</span>`).join('')}</div></div>
+      <div class="chart"><h3>🏥 거래처별 주문 (Top 5)</h3>${clinicBarSvg}</div>
+      <div class="chart"><h3>⏱️ 기공소 처리 시간</h3>${labSvg}</div>
+      <div class="chart"><h3>💰 주간 매출 (Stacked: 분배 + FixOn 수수료)</h3>${revSvg}<div class="legend"><span><span class="dot" style="background:#a78bfa;"></span>분배 (기공/그래피)</span><span><span class="dot" style="background:#34d399;"></span>FixOn 수수료</span></div></div>
+      <div class="chart"><h3>✅ QC 통과율 추이</h3>${qcSvg}</div>
+    </div>`;
+}
+
+document.querySelectorAll('.chip[data-period]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip[data-period]').forEach(x=>x.classList.remove('active'));b.classList.add('active');period=b.dataset.period;render();});
+document.querySelectorAll('.chip[data-role]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip[data-role]').forEach(x=>x.classList.remove('active'));b.classList.add('active');roleFilter=b.dataset.role;render();});
+
+window.exportSummary=function(){
+  const orders=filterOrders();
+  const text=`FixOn ERP 분석 리포트\n생성: ${new Date().toLocaleString('ko-KR')}\n기간: ${period}\n역할: ${roleFilter}\n\n전체 주문: ${orders.length}\n진행 중: ${orders.filter(o=>!['settled'].includes(o.status)).length}\n완료(정산): ${orders.filter(o=>o.status==='settled').length}\n`;
+  navigator.clipboard.writeText(text).then(()=>alert('✅ 클립보드에 복사됨'));
+};
+document.getElementById('now').textContent=new Date().toLocaleString('ko-KR');
+render();
+window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY)render();});
+</script>
+</body>
+</html>

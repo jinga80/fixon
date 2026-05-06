@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixOn 메시지</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+html,body{height:100vh;overflow:hidden;}
+.app{display:flex;flex-direction:column;height:100vh;}
+header{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#fff;}
+header .left{display:flex;align-items:center;gap:18px;}
+header h1{font-size:20px;font-weight:800;letter-spacing:-0.02em;}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+.role-pill{padding:7px 14px;background:#fff;border:1px solid var(--border);border-radius:100px;font-size:13.5px;display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:500;transition:all 0.15s;}
+.role-pill:hover{border-color:var(--border-strong);background:var(--bg-section);}
+.role-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+.body{display:flex;flex:1;overflow:hidden;}
+.conv-pane{width:360px;border-right:1px solid var(--border);background:#fff;display:flex;flex-direction:column;}
+.search{padding:14px 18px;border-bottom:1px solid var(--border-subtle);}
+.search input{width:100%;padding:11px 14px;font-size:14.5px;}
+.role-filter{padding:12px 18px;display:flex;gap:6px;border-bottom:1px solid var(--border-subtle);overflow-x:auto;}
+.role-filter button{padding:7px 14px;background:#fff;border:1px solid var(--border);color:var(--dim);border-radius:100px;font-size:13px;cursor:pointer;font-family:var(--fb);white-space:nowrap;font-weight:600;transition:all 0.15s;}
+.role-filter button:hover{border-color:var(--accent);color:var(--accent);}
+.role-filter button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.conv-list{flex:1;overflow-y:auto;}
+.conv{padding:16px 18px;border-bottom:1px solid var(--border-subtle);cursor:pointer;transition:background 0.12s;}
+.conv:hover{background:var(--bg-section);}
+.conv.active{background:var(--accent-soft);border-left:3px solid var(--accent);padding-left:15px;}
+.conv .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.conv .name{font-weight:600;font-size:15px;color:var(--text);}
+.conv .time{font-size:12.5px;color:var(--muted);font-family:var(--fm);}
+.conv .preview{font-size:14px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.conv .badge{display:inline-block;padding:2px 9px;background:var(--accent);color:#fff;border-radius:100px;font-size:11.5px;font-family:var(--fm);margin-left:6px;font-weight:700;}
+.conv .order-tag{font-size:11.5px;color:var(--purple);font-family:var(--fm);font-weight:600;}
+.thread-pane{flex:1;display:flex;flex-direction:column;background:var(--bg-section);}
+.thread-head{padding:18px 28px;border-bottom:1px solid var(--border);background:#fff;}
+.thread-head h2{font-size:18px;font-weight:800;letter-spacing:-0.02em;}
+.thread-head .ctx{font-size:13.5px;color:var(--muted);margin-top:4px;}
+.msg-list{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:12px;}
+.msg{max-width:70%;padding:13px 18px;border-radius:18px;font-size:15px;line-height:1.55;}
+.msg.own{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:6px;box-shadow:0 4px 10px -2px var(--accent-glow);}
+.msg.other{align-self:flex-start;background:#fff;border:1px solid var(--border);border-bottom-left-radius:6px;color:var(--text);box-shadow:var(--shadow-sm);}
+.msg .meta{font-size:11.5px;color:var(--muted);margin-top:5px;font-family:var(--fm);}
+.msg.own .meta{color:rgba(255,255,255,0.8);}
+.day-sep{align-self:center;font-size:12.5px;color:var(--muted);padding:7px 16px;background:#fff;border:1px solid var(--border);border-radius:100px;margin:8px 0;font-family:var(--fm);font-weight:600;}
+.composer{padding:18px 28px;border-top:1px solid var(--border);background:#fff;}
+.quick-replies{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.quick-replies button{padding:7px 14px;border:1px solid var(--border);background:#fff;color:var(--dim);border-radius:100px;font-size:13px;cursor:pointer;font-family:var(--fb);font-weight:600;transition:all 0.15s;}
+.quick-replies button:hover{border-color:var(--accent);color:var(--accent);}
+.composer .input-row{display:flex;gap:10px;align-items:flex-end;}
+.composer textarea{flex:1;padding:13px 16px;font-size:15px;resize:none;min-height:44px;max-height:140px;}
+.composer button.send{padding:13px 22px;background:var(--accent);border:none;color:#fff;border-radius:10px;cursor:pointer;font-size:15px;font-weight:700;font-family:var(--fb);transition:all 0.15s;}
+.composer button.send:hover{background:var(--accent-deep);box-shadow:0 4px 10px -2px var(--accent-glow);}
+.empty-conv{flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:15px;flex-direction:column;gap:10px;}
+.role-icon{display:inline-flex;width:36px;height:36px;border-radius:50%;background:var(--accent-soft);align-items:center;justify-content:center;font-size:16px;}
+.role-clinic{background:var(--blue-dim);}
+.role-lab{background:var(--purple-dim);}
+.role-graphy{background:var(--green-dim);}
+.role-fixon{background:var(--accent-soft);}
+@media (max-width:780px){.conv-pane{width:100%;position:absolute;z-index:10;}.thread-pane{width:100%;}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="left">
+    <a href="erp.html" class="back">← ERP</a>
+    <h1>💬 FixOn 메시지</h1>
+  </div>
+  <div class="role-pill" id="rolepill" onclick="cycleRole()">
+    <span class="dot"></span><span id="role-name">FixOn</span>
+  </div>
+</header>
+
+<div class="body">
+<aside class="conv-pane">
+  <div class="search"><input id="search" type="text" placeholder="🔍 메시지 검색..." oninput="renderConvList()"></div>
+  <div class="role-filter">
+    <button class="active" data-rf="all" onclick="setRoleFilter('all',this)">전체</button>
+    <button data-rf="clinic" onclick="setRoleFilter('clinic',this)">치과</button>
+    <button data-rf="lab" onclick="setRoleFilter('lab',this)">기공소</button>
+    <button data-rf="graphy" onclick="setRoleFilter('graphy',this)">그래피</button>
+    <button data-rf="fixon" onclick="setRoleFilter('fixon',this)">FixOn</button>
+  </div>
+  <div class="conv-list" id="conv-list"></div>
+</aside>
+<div class="thread-pane" id="thread-pane">
+  <div class="empty-conv">
+    <div style="font-size:32px;opacity:0.3;">💬</div>
+    <div>대화를 선택하세요</div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+const KEY='fixon-messages-v1';
+const ROLE_LABEL={clinic:'치과',lab:'기공소',graphy:'그래피',fixon:'FixOn'};
+const ROLE_ICON={clinic:'🦷',lab:'🔧',graphy:'🖨️',fixon:'⚙️'};
+const ROLES=['clinic','lab','graphy','fixon'];
+let currentRole='fixon',roleFilter='all',activeId=null,convs=[],searchQ='';
+
+function seed(){
+  const now=Date.now();
+  const h=n=>new Date(now-n*3600000).toISOString();
+  return [
+    {id:'c1',participants:['clinic','lab'],orderId:'ORD-2026-0011',patient:'박OO',messages:[
+      {id:'m1',from:'clinic',text:'박OO 환자 스플린트 디자인 부탁드립니다. 노즐은 제1대구치 양측 + 견치에 4개 요청합니다.',at:h(8),read:true},
+      {id:'m2',from:'lab',text:'네 확인했습니다. 스캔 데이터 받았습니다. 24시간 내 디자인 완료 예정입니다.',at:h(7.5),read:true},
+      {id:'m3',from:'clinic',text:'감사합니다. 환자분이 특히 우측 잇몸 마사지를 원하셔서 #46 노즐 각도를 조금 더 잇몸 방향으로 부탁드립니다.',at:h(2),read:false}
+    ]},
+    {id:'c2',participants:['lab','graphy'],orderId:'ORD-2026-0010',messages:[
+      {id:'m4',from:'lab',text:'ORD-2026-0010 디자인 완료했습니다. STL 첨부합니다.',at:h(18),read:true},
+      {id:'m5',from:'graphy',text:'수령했습니다. 인쇄 시작하겠습니다.',at:h(17.8),read:true},
+      {id:'m6',from:'graphy',text:'인쇄 완료, 조립 단계로 이동합니다.',at:h(2),read:true}
+    ]},
+    {id:'c3',participants:['fixon','clinic'],orderId:null,messages:[
+      {id:'m7',from:'fixon',text:'4월 정산 명세서 보내드립니다. 확인 부탁드립니다.',at:h(48),read:true},
+      {id:'m8',from:'clinic',text:'확인했습니다. 감사합니다.',at:h(47),read:true}
+    ]},
+    {id:'c4',participants:['clinic','graphy'],orderId:'ORD-2026-0003',messages:[
+      {id:'m9',from:'graphy',text:'배송 완료되었습니다. 송장: TRK384729',at:h(120),read:true},
+      {id:'m10',from:'clinic',text:'수령 확인했습니다. 환자에게 적용 진행하겠습니다.',at:h(118),read:true}
+    ]},
+    {id:'c5',participants:['fixon','lab'],orderId:null,messages:[
+      {id:'m11',from:'fixon',text:'4월 작업량 통계 공유드립니다. 평균 처리시간 24시간으로 우수합니다.',at:h(72),read:true},
+      {id:'m12',from:'lab',text:'감사합니다. 다음 달도 잘 부탁드립니다.',at:h(70),read:true}
+    ]},
+    {id:'c6',participants:['fixon','graphy'],orderId:null,messages:[
+      {id:'m13',from:'fixon',text:'TC-85 재고 확인 부탁드립니다. 곧 재주문 시점입니다.',at:h(24),read:false},
+      {id:'m14',from:'graphy',text:'현재 1240g 남았습니다. 다음 주 발주 예정입니다.',at:h(23),read:true}
+    ]},
+    {id:'c7',participants:['clinic','lab','fixon'],orderId:'ORD-2026-0005',messages:[
+      {id:'m15',from:'clinic',text:'급한 케이스입니다. 임플란트 환자라 가능한 빨리 부탁드립니다.',at:h(60),read:true},
+      {id:'m16',from:'lab',text:'우선순위 상향 조정했습니다. 12시간 내 완료 가능합니다.',at:h(59),read:true},
+      {id:'m17',from:'fixon',text:'특급 처리 승인했습니다. 추가 비용 없이 진행 부탁드립니다.',at:h(58),read:true}
+    ]}
+  ];
+}
+
+function load(){try{const x=localStorage.getItem(KEY);if(x)return JSON.parse(x);}catch(e){}const s=seed();save(s);return s;}
+function save(c){localStorage.setItem(KEY,JSON.stringify(c||convs));}
+
+function fmtRel(iso){const d=(Date.now()-new Date(iso))/60000;if(d<60)return Math.floor(d)+'분';if(d<1440)return Math.floor(d/60)+'시간';if(d<2880)return '어제';const dt=new Date(iso);return `${dt.getMonth()+1}/${dt.getDate()}`;}
+function fmtTime(iso){const dt=new Date(iso);return `${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;}
+function lastMsg(c){return c.messages[c.messages.length-1];}
+function unreadCount(c){return c.messages.filter(m=>!m.read&&m.from!==currentRole).length;}
+
+function setRoleFilter(r,el){roleFilter=r;document.querySelectorAll('.role-filter button').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderConvList();}
+function cycleRole(){const i=ROLES.indexOf(currentRole);currentRole=ROLES[(i+1)%4];document.getElementById('role-name').textContent=ROLE_LABEL[currentRole];renderConvList();if(activeId)openConv(activeId);}
+
+function convTitle(c){return c.participants.map(p=>ROLE_ICON[p]+ROLE_LABEL[p]).join(' ↔ ');}
+
+function renderConvList(){
+  searchQ=document.getElementById('search').value.toLowerCase();
+  let list=convs.filter(c=>{
+    if(roleFilter!=='all'&&!c.participants.includes(roleFilter))return false;
+    if(searchQ){return convTitle(c).toLowerCase().includes(searchQ)||c.messages.some(m=>m.text.toLowerCase().includes(searchQ));}
+    return true;
+  }).sort((a,b)=>new Date(lastMsg(b).at)-new Date(lastMsg(a).at));
+  const html=list.map(c=>{
+    const m=lastMsg(c);const u=unreadCount(c);
+    return `<div class="conv ${c.id===activeId?'active':''}" onclick="openConv('${c.id}')">
+      <div class="top"><span class="name">${convTitle(c)}${u?`<span class="badge">${u}</span>`:''}</span><span class="time">${fmtRel(m.at)}</span></div>
+      ${c.orderId?`<div class="order-tag">📋 ${c.orderId}${c.patient?' · '+c.patient:''}</div>`:''}
+      <div class="preview">${m.from===currentRole?'나: ':''}${m.text}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('conv-list').innerHTML=html||'<div style="padding:30px;text-align:center;color:var(--muted);font-size:11px;">대화 없음</div>';
+}
+
+function openConv(id){
+  activeId=id;const c=convs.find(x=>x.id===id);if(!c)return;
+  c.messages.filter(m=>m.from!==currentRole).forEach(m=>m.read=true);save();
+  const isParticipant=c.participants.includes(currentRole);
+  let lastDay='';
+  const msgsHtml=c.messages.map(m=>{
+    const dt=new Date(m.at);const day=`${dt.getMonth()+1}/${dt.getDate()}`;
+    let sep='';if(day!==lastDay){sep=`<div class="day-sep">${day}</div>`;lastDay=day;}
+    return sep+`<div class="msg ${m.from===currentRole?'own':'other'}"><div>${m.text.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div><div class="meta">${ROLE_ICON[m.from]} ${ROLE_LABEL[m.from]} · ${fmtTime(m.at)}</div></div>`;
+  }).join('');
+  document.getElementById('thread-pane').innerHTML=`
+    <div class="thread-head">
+      <h2>${convTitle(c)}</h2>
+      ${c.orderId?`<div class="ctx">📋 주문 ${c.orderId}${c.patient?' · 환자 '+c.patient:''}</div>`:''}
+    </div>
+    <div class="msg-list" id="msg-list">${msgsHtml}</div>
+    <div class="composer">
+      <div class="quick-replies">
+        ${['확인했습니다 ✓','작업 완료했습니다 ✅','수정 필요합니다 ⚠️','급한 건입니다 🚨','감사합니다 🙏'].map(q=>`<button onclick="quickReply('${q}')">${q}</button>`).join('')}
+      </div>
+      <div class="input-row">
+        <textarea id="composer-text" placeholder="${isParticipant?'메시지 입력...':'이 대화의 참여자가 아닙니다 (역할 전환 필요)'}" ${isParticipant?'':'disabled'} onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea>
+        <button class="send" onclick="sendMsg()" ${isParticipant?'':'disabled'}>전송</button>
+      </div>
+    </div>`;
+  setTimeout(()=>{const ml=document.getElementById('msg-list');if(ml)ml.scrollTop=ml.scrollHeight;},10);
+  renderConvList();
+}
+
+function quickReply(t){const ta=document.getElementById('composer-text');ta.value=t;ta.focus();}
+function sendMsg(){
+  const ta=document.getElementById('composer-text');const t=ta.value.trim();if(!t)return;
+  const c=convs.find(x=>x.id===activeId);if(!c)return;
+  c.messages.push({id:'m'+Date.now(),from:currentRole,text:t,at:new Date().toISOString(),read:false});
+  save();ta.value='';openConv(activeId);
+}
+
+convs=load();
+document.getElementById('role-name').textContent=ROLE_LABEL[currentRole];
+renderConvList();
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn QC 센터</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:1320px;margin:0 auto;padding:32px 32px;}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow-sm);}
+.kpi .l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
+.kpi .v{font-family:var(--fd);font-size:32px;font-weight:800;margin-top:10px;line-height:1;letter-spacing:-0.03em;color:var(--text);font-feature-settings:"tnum";}
+.tabs{display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid var(--border);}
+.tab{padding:14px 22px;border:none;background:transparent;color:var(--muted);font-family:var(--fb);font-size:15px;cursor:pointer;border-bottom:2px solid transparent;font-weight:600;transition:all 0.15s;}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+.tab:hover{color:var(--text);}
+.panel{display:none;}.panel.active{display:block;}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow-sm);}
+.card h3{font-size:18px;margin-bottom:18px;letter-spacing:-0.015em;font-weight:700;}
+.st-pass{background:var(--green-dim);color:var(--green);padding:5px 12px;border-radius:100px;font-size:13px;font-weight:600;}
+.st-fail{background:var(--red-dim);color:var(--red);padding:5px 12px;border-radius:100px;font-size:13px;font-weight:600;}
+.st-pending{background:var(--yellow-dim);color:var(--yellow);padding:5px 12px;border-radius:100px;font-size:13px;font-weight:600;}
+.st-margin{background:var(--blue-dim);color:var(--blue);padding:5px 12px;border-radius:100px;font-size:13px;font-weight:600;}
+.axis{margin-bottom:20px;}
+.axis-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.axis-h strong{font-size:15.5px;font-weight:700;color:var(--text);}
+.axis-h .grade-pills{display:flex;gap:6px;}
+.gp{padding:6px 14px;border:1px solid var(--border);background:#fff;color:var(--dim);border-radius:100px;font-size:13px;cursor:pointer;font-family:var(--fb);font-weight:600;transition:all 0.15s;}
+.gp.sel{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);}
+.gp.pass.sel{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.gp.fail.sel{border-color:var(--red);color:var(--red);background:var(--red-dim);}
+.measure{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--dim);}
+.measure input{padding:9px 14px;width:100px;font-family:var(--fm);font-size:14px;}
+.bar-text{display:inline-block;width:240px;background:var(--bg-section);height:22px;border-radius:6px;overflow:hidden;vertical-align:middle;border:1px solid var(--border);}
+.bar-fill{height:100%;background:var(--green);}
+.bar-fill.bad{background:var(--red);}
+.cert{background:#fff;color:#000;padding:36px;border-radius:14px;font-family:var(--fb);border:1px solid var(--border);}
+.cert h2{color:var(--accent);font-family:var(--fd);font-size:24px;letter-spacing:-0.02em;}
+@media print{body{background:#fff;color:#000;}.tabs,.btn,header .back{display:none !important;}}
+@media (max-width:880px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><a href="erp.html" class="back">← ERP</a><h1 style="margin-top:4px;">✔️ QC 센터</h1></div>
+  <div style="font-family:var(--fm);font-size:11px;color:var(--muted);" id="now"></div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="l">QC 큐</div><div class="v" style="color:var(--yellow);" id="kpi-q">0</div></div>
+  <div class="kpi"><div class="l">금일 검사</div><div class="v" style="color:var(--blue);" id="kpi-t">0</div></div>
+  <div class="kpi"><div class="l">통과율 (월)</div><div class="v" style="color:var(--green);" id="kpi-r">0%</div></div>
+  <div class="kpi"><div class="l">재작업 진행</div><div class="v" style="color:var(--red);" id="kpi-rw">0</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-t="queue" onclick="setTab('queue',this)">📥 QC 큐</button>
+  <button class="tab" data-t="inspect" onclick="setTab('inspect',this)">🔍 상세 검수</button>
+  <button class="tab" data-t="rework" onclick="setTab('rework',this)">♻️ 재작업</button>
+  <button class="tab" data-t="stats" onclick="setTab('stats',this)">📊 통계</button>
+  <button class="tab" data-t="cert" onclick="setTab('cert',this)">🏆 인증서</button>
+</div>
+
+<div id="panels"></div>
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6',QKEY='fixon-qc-data-v1';
+let state=null,qcdata=null,currentTab='queue',activeOrder=null;
+const STATUS_FLOW=['received','design_queued','designing','design_done','print_queued','printing','assembling','qc','shipping','delivered','applied','settled'];
+const STATUS_LABEL_FULL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령 완료',applied:'환자 적용',settled:'정산 완료',rescan_requested:'재스캔 요청'};
+const AXES=['치수 정확도','노즐 분사','표면 마감','어댑터 결합','수밀 테스트','환자 적합성'];
+
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}try{qcdata=JSON.parse(localStorage.getItem(QKEY));}catch(e){}if(!qcdata){qcdata=seed();saveQ();}return state;}
+function saveQ(){localStorage.setItem(QKEY,JSON.stringify(qcdata));}
+function seed(){return {reports:[
+  {orderId:'ORD-2026-0001',inspector:'이은성',at:new Date(Date.now()-200*3600000).toISOString(),result:'pass',axes:{치수정확도:'pass',노즐분사:'pass',표면마감:'pass',어댑터결합:'pass',수밀테스트:'pass',환자적합성:'pass'},notes:'모든 항목 정상'},
+  {orderId:'ORD-2026-0002',inspector:'이은성',at:new Date(Date.now()-150*3600000).toISOString(),result:'pass',axes:{치수정확도:'pass',노즐분사:'pass',표면마감:'marginal',어댑터결합:'pass',수밀테스트:'pass',환자적합성:'pass'},notes:'표면 약간 거침, 폴리싱 필요'},
+  {orderId:'ORD-2026-0003',inspector:'박민지',at:new Date(Date.now()-100*3600000).toISOString(),result:'pass',axes:{치수정확도:'pass',노즐분사:'pass',표면마감:'pass',어댑터결합:'pass',수밀테스트:'pass',환자적합성:'pass'},notes:''},
+  {orderId:'ORD-2026-0004',inspector:'이은성',at:new Date(Date.now()-80*3600000).toISOString(),result:'pass',axes:{치수정확도:'pass',노즐분사:'marginal',표면마감:'pass',어댑터결합:'pass',수밀테스트:'pass',환자적합성:'pass'},notes:'#36 노즐 흐름 약함'},
+  {orderId:'ORD-2026-0005',inspector:'박민지',at:new Date(Date.now()-50*3600000).toISOString(),result:'fail',axes:{치수정확도:'pass',노즐분사:'fail',표면마감:'pass',어댑터결합:'fail',수밀테스트:'pass',환자적합성:'fail'},notes:'어댑터 결합 토크 부족, 재제작 필요'},
+],rework:[
+  {orderId:'ORD-2026-0005',reason:'어댑터 결합 토크 부족',stage:'in_progress',createdAt:new Date(Date.now()-50*3600000).toISOString()}
+]};}
+
+function fmtRel(iso){const d=(Date.now()-new Date(iso))/60000;if(d<60)return Math.floor(d)+'분 전';if(d<1440)return Math.floor(d/60)+'시간 전';return Math.floor(d/1440)+'일 전';}
+
+function setTab(t,el){currentTab=t;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));el.classList.add('active');render();}
+
+function render(){
+  if(!load()){document.getElementById('panels').innerHTML='<div class="empty">⚠️ ERP 데이터 없음. <a href="erp.html" style="color:var(--accent);">ERP를 먼저 열어주세요</a></div>';return;}
+  // KPIs
+  const queue=state.orders.filter(o=>o.status==='qc');
+  const today=new Date().toDateString();
+  const todayQc=qcdata.reports.filter(r=>new Date(r.at).toDateString()===today).length;
+  const monthAgo=Date.now()-30*86400000;
+  const monthReports=qcdata.reports.filter(r=>new Date(r.at)>monthAgo);
+  const passRate=monthReports.length?Math.round(monthReports.filter(r=>r.result==='pass').length/monthReports.length*100):0;
+  document.getElementById('kpi-q').textContent=queue.length;
+  document.getElementById('kpi-t').textContent=todayQc;
+  document.getElementById('kpi-r').textContent=passRate+'%';
+  document.getElementById('kpi-rw').textContent=qcdata.rework.filter(r=>r.stage==='in_progress').length;
+
+  const panels={queue:rQueue,inspect:rInspect,rework:rRework,stats:rStats,cert:rCert};
+  document.getElementById('panels').innerHTML=`<div class="panel active">${panels[currentTab]()}</div>`;
+}
+
+function rQueue(){
+  const queue=state.orders.filter(o=>o.status==='qc');
+  if(!queue.length)return '<div class="card empty"><div style="font-size:32px;opacity:0.3;">📥</div><div style="margin-top:8px;">QC 대기 중인 주문이 없습니다</div></div>';
+  return `<div class="card"><h3>QC 대기 큐 (${queue.length})</h3>
+    <table class="tbl"><thead><tr><th>주문번호</th><th>치과</th><th>대기 시간</th><th>우선순위</th><th></th></tr></thead><tbody>
+      ${queue.map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);const age=(Date.now()-new Date(o.createdAt))/3600000;const pri=age>72?'🔴 긴급':age>48?'🟡 주의':'🟢 일반';return `<tr><td style="font-family:var(--fm);">${o.id}</td><td>${c?.name||'-'}</td><td style="font-family:var(--fm);">${age.toFixed(1)}h</td><td>${pri}</td><td><button class="btn primary" onclick="event.stopPropagation();openInspect('${o.id}')">검수 시작</button></td></tr>`;}).join('')}
+    </tbody></table></div>`;
+}
+
+function openInspect(id){activeOrder=id;currentTab='inspect';document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.t==='inspect'));render();}
+
+function rInspect(){
+  if(!activeOrder)return '<div class="card empty">QC 큐에서 주문을 선택하세요</div>';
+  const o=state.orders.find(x=>x.id===activeOrder);if(!o)return '<div class="empty">주문 없음</div>';
+  const c=state.clinics.find(x=>x.id===o.clinicId);
+  return `<div class="card">
+    <h3>🔍 상세 검수 — ${o.id} <span style="color:var(--dim);font-size:11px;">(${c?.name||'-'})</span></h3>
+    ${AXES.map((a,i)=>`<div class="axis">
+      <div class="axis-h"><strong>${i+1}. ${a}</strong>
+        <div class="grade-pills">
+          <span class="gp pass" onclick="grade(this,'${a}','pass')">PASS</span>
+          <span class="gp" onclick="grade(this,'${a}','marginal')">MARGINAL</span>
+          <span class="gp fail" onclick="grade(this,'${a}','fail')">FAIL</span>
+        </div>
+      </div>
+      <div class="measure">${a==='치수 정확도'?'측정값:<input type="text" placeholder="±0.0mm">':a==='수밀 테스트'?'압력:<input type="text" placeholder="bar"> 시간:<input type="text" placeholder="초">':a==='어댑터 결합'?'토크:<input type="text" placeholder="N·m">':'<span style="font-size:10px;color:var(--muted);">메모: <input type="text" style="width:300px;"></span>'}</div>
+    </div>`).join('')}
+    <div class="axis"><div class="axis-h"><strong>📋 검수자 서명</strong></div><input type="text" id="ins-name" placeholder="검수자명" style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);width:200px;"></div>
+    <div class="axis"><div class="axis-h"><strong>📝 메모</strong></div><textarea id="ins-notes" rows="3" placeholder="특이사항..." style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--fb);"></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+      <button class="btn danger" onclick="saveQc('fail')">실패 처리</button>
+      <button class="btn primary" onclick="saveQc('pass')">통과 처리</button>
+    </div>
+  </div>`;
+}
+
+function grade(el,axis,g){el.parentElement.querySelectorAll('.gp').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
+function saveQc(result){
+  const axes={};AXES.forEach(a=>{const sel=document.querySelector(`.axis-h strong:nth-of-type(0)`);});
+  document.querySelectorAll('.axis').forEach((ax,i)=>{const sel=ax.querySelector('.gp.sel');if(sel&&i<AXES.length)axes[AXES[i].replace(/ /g,'')]=sel.textContent.toLowerCase();});
+  qcdata.reports.push({orderId:activeOrder,inspector:document.getElementById('ins-name')?.value||'미상',at:new Date().toISOString(),result,axes,notes:document.getElementById('ins-notes')?.value||''});
+  if(result==='fail'){qcdata.rework.push({orderId:activeOrder,reason:document.getElementById('ins-notes')?.value||'QC 실패',stage:'pending',createdAt:new Date().toISOString()});}
+  saveQ();alert(`✅ ${result==='pass'?'통과':'실패'} 처리 완료`);activeOrder=null;currentTab='queue';document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.t==='queue'));render();
+}
+
+function rRework(){
+  return `<div class="card"><h3>♻️ 재작업 큐 (${qcdata.rework.length})</h3>
+    ${qcdata.rework.length?`<table class="tbl"><thead><tr><th>주문번호</th><th>사유</th><th>단계</th><th>등록일</th><th></th></tr></thead><tbody>
+      ${qcdata.rework.map((r,i)=>`<tr><td style="font-family:var(--fm);">${r.orderId}</td><td>${r.reason}</td><td><span class="st ${r.stage==='in_progress'?'st-pending':'st-margin'}">${r.stage==='pending'?'대기':r.stage==='in_progress'?'진행중':r.stage==='reQC_pass'?'재QC 통과':'재QC 실패'}</span></td><td style="font-family:var(--fm);">${fmtRel(r.createdAt)}</td><td><button class="btn" onclick="advanceRework(${i})">단계 진행</button></td></tr>`).join('')}
+    </tbody></table>`:'<div class="empty">재작업 항목 없음</div>'}
+  </div>`;
+}
+function advanceRework(i){const stages=['pending','in_progress','reQC_pass'];const r=qcdata.rework[i];const idx=stages.indexOf(r.stage);if(idx<stages.length-1){r.stage=stages[idx+1];saveQ();render();}}
+
+function rStats(){
+  const monthAgo=Date.now()-30*86400000;
+  const recent=qcdata.reports.filter(r=>new Date(r.at)>monthAgo);
+  const defects={};recent.forEach(r=>{Object.entries(r.axes||{}).forEach(([k,v])=>{if(v==='fail'||v==='marginal'){defects[k]=(defects[k]||0)+1;}});});
+  const sortedD=Object.entries(defects).sort((a,b)=>b[1]-a[1]);
+  const max=Math.max(1,...sortedD.map(d=>d[1]));
+  return `<div class="card"><h3>📊 결함 분포 (최근 30일)</h3>
+    ${sortedD.length?sortedD.map(([k,v])=>`<div style="margin-bottom:8px;display:flex;align-items:center;gap:10px;font-size:12px;"><span style="width:120px;">${k}</span><span class="bar-text"><span class="bar-fill bad" style="width:${v/max*100}%;"></span></span><span style="font-family:var(--fm);color:var(--red);">${v}회</span></div>`).join(''):'<div style="color:var(--muted);text-align:center;padding:20px;">결함 데이터 없음</div>'}
+  </div>
+  <div class="card"><h3>📈 기공소별 품질</h3>
+    <table class="tbl"><thead><tr><th>기공소</th><th>총 검사</th><th>통과율</th></tr></thead><tbody>
+      ${(state.labs||[]).map(l=>{const r=qcdata.reports.filter(rep=>{const o=state.orders.find(x=>x.id===rep.orderId);return o&&o.assignedLab===l.id;});const p=r.filter(x=>x.result==='pass').length;const rate=r.length?Math.round(p/r.length*100):0;return `<tr><td>${l.name}</td><td style="font-family:var(--fm);">${r.length}</td><td><span class="bar-text"><span class="bar-fill" style="width:${rate}%;"></span></span> <span style="font-family:var(--fm);">${rate}%</span></td></tr>`;}).join('')}
+    </tbody></table></div>`;
+}
+
+function rCert(){
+  const passed=qcdata.reports.filter(r=>r.result==='pass');
+  return `<div class="card"><h3>🏆 QC 통과 인증서 발급</h3>
+    <p style="font-size:12px;color:var(--dim);margin-bottom:14px;">통과한 주문에 대해 인증서를 다운로드 할 수 있습니다.</p>
+    <table class="tbl"><thead><tr><th>주문번호</th><th>검사일</th><th>검수자</th><th></th></tr></thead><tbody>
+      ${passed.map(r=>`<tr><td style="font-family:var(--fm);">${r.orderId}</td><td style="font-family:var(--fm);">${fmtRel(r.at)}</td><td>${r.inspector}</td><td><button class="btn primary" onclick="dlCert('${r.orderId}','${r.inspector}','${r.at}')">⬇ 인증서</button></td></tr>`).join('')}
+    </tbody></table>
+  </div>`;
+}
+
+function dlCert(id,inspector,at){
+  const html=`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>QC 인증서 ${id}</title><style>body{font-family:'Noto Sans KR',sans-serif;padding:60px;background:#fff;color:#000;}h1{color:#ff6b2b;font-size:32px;text-align:center;border-bottom:3px solid #ff6b2b;padding-bottom:14px;}.field{margin:14px 0;font-size:14px;}.field strong{display:inline-block;width:140px;color:#666;}.seal{margin-top:60px;text-align:right;font-size:12px;color:#888;}</style></head><body><h1>FixOn 품질 인증서</h1><div class="field"><strong>주문번호:</strong> ${id}</div><div class="field"><strong>검사일:</strong> ${new Date(at).toLocaleString('ko-KR')}</div><div class="field"><strong>검수자:</strong> ${inspector}</div><div class="field"><strong>판정:</strong> ✅ 통과 (PASS)</div><div style="margin-top:30px;font-size:13px;line-height:1.7;">위 주문 제품은 FixOn 품질 검수 6-axis 평가 (치수 정확도, 노즐 분사, 표면 마감, 어댑터 결합, 수밀 테스트, 환자 적합성) 모든 항목을 통과하였음을 인증합니다.</div><div class="seal">FixOn × Graphy 품질관리부<br>발행: ${new Date().toLocaleDateString('ko-KR')}</div></body></html>`;
+  const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`fixon-cert-${id}.html`;a.click();URL.revokeObjectURL(url);
+}
+
+document.getElementById('now').textContent=new Date().toLocaleString('ko-KR');
+render();
+</script>
+</body>
+</html>

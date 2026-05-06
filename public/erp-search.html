@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn — 통합 검색</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+.wrap{max-width:980px;margin:0 auto;padding:32px 28px;}
+.search-bar{position:sticky;top:0;background:var(--bg);padding:18px 0;z-index:10;}
+.search-bar input{width:100%;padding:18px 22px;font-size:18px;border-radius:14px;}
+.filters{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.filter-chip{padding:8px 16px;border:1px solid var(--border);background:#fff;color:var(--dim);border-radius:100px;font-size:14.5px;cursor:pointer;font-family:var(--fb);font-weight:600;transition:all 0.15s;}
+.filter-chip:hover{border-color:var(--border-strong);background:var(--bg-section);}
+.filter-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.results{margin-top:20px;}
+.result-group{margin-bottom:32px;}
+.result-group h3{font-size:13px;color:var(--muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+.result-group h3 .count{color:var(--accent);font-family:var(--fm);background:var(--accent-soft);padding:3px 10px;border-radius:6px;font-size:12px;}
+.r-item{padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm);}
+.r-item:hover{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.r-item .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.r-item .name{font-weight:600;font-size:16px;color:var(--text);}
+.r-item .id{font-family:var(--fm);font-size:13px;color:var(--muted);}
+.r-item .meta{font-size:14px;color:var(--dim);}
+.empty-state{text-align:center;padding:60px 24px;color:var(--muted);}
+.empty-state .em-icon{font-size:48px;opacity:0.25;margin-bottom:14px;}
+.empty-state .em-text{font-size:17px;margin-bottom:18px;}
+.suggestions{display:flex;flex-direction:column;gap:8px;max-width:480px;margin:0 auto;}
+.suggestion{padding:14px 18px;background:#fff;border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14.5px;color:var(--dim);text-align:left;transition:all 0.15s;}
+.suggestion:hover{border-color:var(--accent);color:var(--text);background:var(--accent-soft);}
+.suggestion strong{color:var(--accent);font-family:var(--fm);font-size:13.5px;}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="wrap" style="padding:0 28px;">
+    <a href="erp.html" class="back">← ERP</a>
+    <h1>🔍 통합 검색</h1>
+    <p>주문 · 환자 · 거래처 · 알림을 한 번에</p>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="search-bar">
+  <input type="text" id="q" placeholder="주문번호, 환자명, 치과명, 상태, 키워드..." oninput="search(this.value)">
+  <div class="filters">
+    <button class="filter-chip active" data-f="all" onclick="setFilter('all',this)">전체</button>
+    <button class="filter-chip" data-f="orders" onclick="setFilter('orders',this)">주문</button>
+    <button class="filter-chip" data-f="patients" onclick="setFilter('patients',this)">환자</button>
+    <button class="filter-chip" data-f="clinics" onclick="setFilter('clinics',this)">치과</button>
+    <button class="filter-chip" data-f="labs" onclick="setFilter('labs',this)">기공소</button>
+    <button class="filter-chip" data-f="notifications" onclick="setFilter('notifications',this)">알림</button>
+  </div>
+</div>
+
+<div class="results" id="results">
+<div class="empty-state">
+  <div class="em-icon">🔍</div>
+  <div class="em-text">검색어를 입력하세요</div>
+  <div class="suggestions">
+    <div class="suggestion" onclick="qfill('ORD-2026')">예: <strong>ORD-2026</strong> — 주문번호로 검색</div>
+    <div class="suggestion" onclick="qfill('박')">예: <strong>박</strong> — 환자/원장 이름</div>
+    <div class="suggestion" onclick="qfill('qc')">예: <strong>qc</strong> — 품질검수 단계</div>
+    <div class="suggestion" onclick="qfill('서울')">예: <strong>서울</strong> — 지역명</div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6';
+const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령',applied:'적용',settled:'정산',rescan_requested:'재스캔 요청'};
+let state=null,filter='all';
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
+function setFilter(f,el){filter=f;document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));el.classList.add('active');search(document.getElementById('q').value);}
+function qfill(t){document.getElementById('q').value=t;search(t);}
+function highlight(text,q){if(!q)return text;return String(text).replace(new RegExp(`(${q.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')})`,'gi'),'<mark>$1</mark>');}
+
+function search(q){
+  q=q.trim().toLowerCase();
+  if(!q){document.getElementById('results').innerHTML=`<div class="empty-state"><div class="em-icon">🔍</div><div class="em-text">검색어를 입력하세요</div></div>`;return;}
+  if(!load()){document.getElementById('results').innerHTML='<div class="empty-state"><div class="em-icon">⚠️</div><div class="em-text">ERP 데이터 없음</div></div>';return;}
+  const groups=[];
+  if(filter==='all'||filter==='orders'){
+    const matches=state.orders.filter(o=>{
+      const c=state.clinics.find(x=>x.id===o.clinicId);
+      const p=state.patients.find(x=>x.id===o.patientId);
+      const text=`${o.id} ${c?.name||''} ${c?.doctor||''} ${p?.name||''} ${p?.note||''} ${STATUS_LABEL[o.status]||''} ${o.status}`.toLowerCase();
+      return text.includes(q);
+    });
+    if(matches.length){groups.push({title:'주문',count:matches.length,items:matches.map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);const p=state.patients.find(x=>x.id===o.patientId);return {kind:'order',name:`${highlight(o.id,q)} · ${highlight(p?.name||'',q)}`,id:o.id,meta:`${highlight(c?.name||'',q)} · ${highlight(STATUS_LABEL[o.status],q)}`,onclick:`location.href='erp.html?order=${o.id}'`};})});}
+  }
+  if(filter==='all'||filter==='patients'){
+    const matches=state.patients.filter(p=>{const text=`${p.id} ${p.name} ${p.note||''}`.toLowerCase();return text.includes(q);});
+    if(matches.length){groups.push({title:'환자',count:matches.length,items:matches.map(p=>{const c=state.clinics.find(x=>x.id===p.clinicId);return {kind:'patient',name:`${highlight(p.name,q)} (${p.age}/${p.sex})`,id:p.id,meta:`${c?.name||'-'} · ${highlight(p.note||'',q)}`};})});}
+  }
+  if(filter==='all'||filter==='clinics'){
+    const matches=(state.clinics||[]).filter(c=>{const text=`${c.id} ${c.name} ${c.doctor||''} ${c.region||''}`.toLowerCase();return text.includes(q);});
+    if(matches.length){groups.push({title:'치과',count:matches.length,items:matches.map(c=>({kind:'clinic',name:`${highlight(c.name,q)}`,id:c.id,meta:`${highlight(c.doctor||'',q)} · ${highlight(c.region||'',q)}`}))});}
+  }
+  if(filter==='all'||filter==='labs'){
+    const matches=(state.labs||[]).filter(l=>{const text=`${l.id} ${l.name} ${l.region||''}`.toLowerCase();return text.includes(q);});
+    if(matches.length){groups.push({title:'기공소',count:matches.length,items:matches.map(l=>({kind:'lab',name:`${highlight(l.name,q)}`,id:l.id,meta:`${highlight(l.region||'',q)} · 평균 ${l.avgHours||'-'}h`}))});}
+  }
+  if(filter==='all'||filter==='notifications'){
+    const matches=(state.notifications||[]).filter(n=>n.message&&n.message.toLowerCase().includes(q));
+    if(matches.length){groups.push({title:'알림',count:matches.length,items:matches.slice(0,20).map(n=>({kind:'notif',name:`${highlight(n.message,q)}`,id:n.id||'',meta:`${n.to} · ${new Date(n.at).toLocaleString('ko-KR')}`}))});}
+  }
+  if(!groups.length){document.getElementById('results').innerHTML=`<div class="empty-state"><div class="em-icon">😶</div><div class="em-text">"${q}" 결과 없음</div></div>`;return;}
+  document.getElementById('results').innerHTML=groups.map(g=>`<div class="result-group"><h3>${g.title}<span class="count">${g.count}</span></h3>${g.items.map(it=>`<div class="r-item" ${it.onclick?`onclick="${it.onclick}"`:''}><div class="top"><span class="name">${it.name}</span><span class="id">${it.id}</span></div><div class="meta">${it.meta}</div></div>`).join('')}</div>`).join('');
+}
+
+const params=new URLSearchParams(location.search);if(params.get('q')){document.getElementById('q').value=params.get('q');search(params.get('q'));}
+window.addEventListener('storage',e=>{if(e.key===KEY){const q=document.getElementById('q').value;if(q)search(q);}});
+if(window.top===window){document.getElementById('q').focus();}
+</script>
+</body>
+</html>

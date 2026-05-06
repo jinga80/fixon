@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>FixOn — 재고/자재 관리</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 32px;}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;margin-top:6px;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow-sm);}
+.kpi .l{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;}
+.kpi .v{font-family:var(--fd);font-size:32px;font-weight:800;margin-top:10px;line-height:1;letter-spacing:-0.03em;color:var(--text);font-feature-settings:"tnum";}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow-sm);}
+.card h3{font-size:18px;margin-bottom:18px;font-weight:700;letter-spacing:-0.015em;}
+.bar{display:inline-block;width:160px;height:18px;background:var(--bg-section);border-radius:5px;overflow:hidden;vertical-align:middle;border:1px solid var(--border);}
+.bar-fill{height:100%;border-radius:5px;}
+.bar-fill.ok{background:var(--green);}.bar-fill.warn{background:var(--yellow);}.bar-fill.danger{background:var(--red);}
+.alert{padding:16px 20px;border-radius:10px;border-left:3px solid var(--red);background:var(--red-dim);margin-bottom:18px;font-size:14.5px;color:#991b1b;line-height:1.6;}
+@media print{body{background:#fff;color:#000;}header .back,.btn{display:none !important;}.card{background:#fff;border-color:#ccc;}}
+@media (max-width:880px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><a href="erp.html" class="back">← ERP</a><h1 style="margin-top:4px;">📦 재고/자재 관리</h1></div>
+  <div style="font-family:var(--fm);font-size:11px;color:var(--muted);" id="now"></div>
+</header>
+
+<div id="alerts"></div>
+
+<div class="kpi-row" id="kpis"></div>
+
+<div class="card">
+  <h3>📊 재고 현황</h3>
+  <table class="tbl"><thead><tr><th>품목</th><th>현재 재고</th><th>임계치</th><th>상태</th><th>예상 소진일</th><th></th></tr></thead><tbody id="inv-tbody"></tbody></table>
+</div>
+
+<div class="card">
+  <h3>🛒 자동 재주문 규칙</h3>
+  <p style="font-size:11px;color:var(--dim);margin-bottom:10px;">재고가 임계치 이하로 떨어지면 자동으로 발주서를 생성합니다.</p>
+  <table class="tbl"><thead><tr><th>품목</th><th>최소 발주량</th><th>공급사</th><th>리드타임</th><th>활성</th></tr></thead><tbody id="rules-tbody"></tbody></table>
+</div>
+
+<div class="card">
+  <h3>📥 최근 입고 / 📤 출고 기록</h3>
+  <div id="movements"></div>
+</div>
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6',IKEY='fixon-inventory-v1';
+let state=null,invd=null;
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}try{invd=JSON.parse(localStorage.getItem(IKEY));}catch(e){}if(!invd){invd=seed();saveI();}return state;}
+function saveI(){localStorage.setItem(IKEY,JSON.stringify(invd));}
+function seed(){
+  const now=Date.now();const h=n=>new Date(now-n*3600000).toISOString();
+  return {rules:{
+    'TC-85 Resin':{minOrder:5000,supplier:'Graphy Korea',leadDays:7,active:true},
+    'Nozzle (분사형)':{minOrder:200,supplier:'FixOn 자체',leadDays:14,active:true},
+    'Adapter':{minOrder:100,supplier:'FixOn 자체',leadDays:21,active:true},
+    'Tube Tip':{minOrder:100,supplier:'외주 협력사',leadDays:10,active:true}
+  },movements:[
+    {at:h(2),item:'TC-85 Resin',type:'out',qty:32,reason:'ORD-2026-0006 인쇄'},
+    {at:h(8),item:'Nozzle (분사형)',type:'out',qty:4,reason:'ORD-2026-0005 조립'},
+    {at:h(24),item:'Adapter',type:'out',qty:1,reason:'ORD-2026-0004 조립'},
+    {at:h(72),item:'TC-85 Resin',type:'in',qty:5000,reason:'정기 발주 입고'},
+    {at:h(120),item:'Nozzle (분사형)',type:'in',qty:200,reason:'분기 입고'}
+  ]};
+}
+function fmtKRW(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
+function fmtN(n){return Number(n).toLocaleString('ko-KR');}
+function fmtRel(iso){const d=(Date.now()-new Date(iso))/60000;if(d<60)return Math.floor(d)+'분';if(d<1440)return Math.floor(d/60)+'시간';return Math.floor(d/1440)+'일';}
+
+function render(){
+  if(!load()){document.body.innerHTML='<div class="empty" style="padding:80px;">⚠️ ERP 데이터 없음. <a href="erp.html" style="color:var(--accent);">ERP를 먼저 열어주세요</a></div>';return;}
+  const inv=state.inventory||{};
+  const lowItems=Object.entries(inv).filter(([k,v])=>v.stock<v.threshold);
+  const totalValue=Object.entries(inv).reduce((s,[k,v])=>s+v.stock*100,0);
+  const totalSKU=Object.keys(inv).length;
+  // alerts
+  document.getElementById('alerts').innerHTML=lowItems.length?lowItems.map(([k,v])=>`<div class="alert">⚠️ <strong>${k}</strong> 재고 부족 (${v.stock} ${v.unit} / 최소 ${v.threshold}) — 자동 발주 권장</div>`).join(''):'';
+  // kpis
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="l">총 SKU</div><div class="v" style="color:var(--blue);">${totalSKU}</div></div>
+    <div class="kpi"><div class="l">재주문 필요</div><div class="v" style="color:var(--red);">${lowItems.length}</div></div>
+    <div class="kpi"><div class="l">최근 30일 출고</div><div class="v" style="color:var(--purple);">${invd.movements.filter(m=>m.type==='out').length}</div></div>
+    <div class="kpi"><div class="l">예상 자재비 (월)</div><div class="v" style="color:var(--accent);font-size:16px;">${fmtKRW(2400000)}</div></div>`;
+  // inventory table
+  document.getElementById('inv-tbody').innerHTML=Object.entries(inv).map(([k,v])=>{
+    const recent=invd.movements.filter(m=>m.item===k&&m.type==='out');
+    const dailyUse=recent.length?recent.reduce((s,m)=>s+m.qty,0)/30:1;
+    const days=Math.round(v.stock/Math.max(1,dailyUse));
+    const ratio=v.stock/v.threshold;
+    const cls=ratio<1?'danger':ratio<2?'warn':'ok';
+    const status=ratio<1?'⚠️ 재주문':ratio<2?'⚡ 주의':'✓ 정상';
+    return `<tr><td><strong>${k}</strong></td><td style="font-family:var(--fm);">${fmtN(v.stock)} ${v.unit}</td><td style="font-family:var(--fm);color:var(--dim);">${v.threshold} ${v.unit}</td><td><span class="bar"><span class="bar-fill ${cls}" style="width:${Math.min(100,ratio*50)}%;"></span></span> ${status}</td><td style="font-family:var(--fm);color:${days<7?'var(--red)':'var(--text)'};">${days}일</td><td><button class="btn" onclick="reorder('${k}')">발주</button></td></tr>`;
+  }).join('');
+  // rules
+  document.getElementById('rules-tbody').innerHTML=Object.entries(invd.rules).map(([k,r])=>`<tr><td>${k}</td><td style="font-family:var(--fm);">${fmtN(r.minOrder)}</td><td>${r.supplier}</td><td style="font-family:var(--fm);">${r.leadDays}일</td><td><label style="cursor:pointer;"><input type="checkbox" ${r.active?'checked':''} onchange="toggleRule('${k}',this.checked)"> ${r.active?'활성':'비활성'}</label></td></tr>`).join('');
+  // movements
+  document.getElementById('movements').innerHTML=`<table class="tbl"><thead><tr><th>일시</th><th>품목</th><th>유형</th><th>수량</th><th>사유</th></tr></thead><tbody>${invd.movements.slice(0,15).map(m=>`<tr><td style="font-family:var(--fm);font-size:11px;">${fmtRel(m.at)} 전</td><td>${m.item}</td><td><span style="color:${m.type==='in'?'var(--green)':'var(--red)'};font-family:var(--fm);">${m.type==='in'?'📥 입고':'📤 출고'}</span></td><td style="font-family:var(--fm);">${m.qty}</td><td style="color:var(--dim);">${m.reason}</td></tr>`).join('')}</tbody></table>`;
+}
+window.reorder=function(item){const r=invd.rules[item];if(!r){alert('규칙 없음');return;}invd.movements.unshift({at:new Date().toISOString(),item,type:'in',qty:r.minOrder,reason:`${r.supplier}로 발주 (자동, ${r.leadDays}일 후 입고 예정)`});state.inventory[item].stock+=r.minOrder;saveI();localStorage.setItem(KEY,JSON.stringify(state));alert(`✅ ${item} ${r.minOrder} 발주 완료`);render();};
+window.toggleRule=function(k,on){invd.rules[k].active=on;saveI();};
+document.getElementById('now').textContent=new Date().toLocaleString('ko-KR');
+render();
+window.addEventListener('storage',e=>{if(e.key===KEY)render();});
+</script>
+</body>
+</html>

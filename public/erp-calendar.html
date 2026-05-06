@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>FixOn — 일정/스케줄</title>
+<link rel="stylesheet" href="assets/design-system.css">
+<style>
+body{background:var(--bg-section);min-height:100vh;}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 32px;}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:24px;}
+header .back{color:var(--accent);font-size:14px;font-weight:600;}
+header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;margin-top:6px;}
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+.month-nav{display:flex;gap:8px;align-items:center;}
+.month-nav .label{font-family:var(--fd);font-size:22px;font-weight:800;min-width:160px;text-align:center;letter-spacing:-0.02em;}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+.cal-h{background:var(--bg-section);padding:14px;text-align:center;font-size:13px;color:var(--muted);text-transform:uppercase;font-weight:700;letter-spacing:0.06em;}
+.cal-d{background:#fff;min-height:120px;padding:10px;cursor:pointer;transition:background 0.12s;position:relative;}
+.cal-d:hover{background:var(--accent-soft);}
+.cal-d.today{background:var(--accent-soft);}
+.cal-d.other{opacity:0.4;background:var(--bg-soft);}
+.cal-d .num{font-family:var(--fm);font-size:13px;color:var(--muted);font-weight:600;}
+.cal-d.today .num{color:var(--accent-deep);font-weight:800;}
+.cal-d .ev{margin-top:5px;font-size:12px;padding:3px 8px;border-radius:5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;}
+.ev.received{background:var(--blue-dim);color:var(--blue);}
+.ev.designing{background:var(--purple-dim);color:var(--purple);}
+.ev.qc{background:var(--yellow-dim);color:var(--yellow);}
+.ev.delivered{background:var(--green-dim);color:var(--green);}
+.ev.applied{background:var(--accent-soft);color:var(--accent-deep);}
+.legend{display:flex;gap:18px;margin-top:18px;flex-wrap:wrap;font-size:13.5px;color:var(--dim);}
+.legend .dot{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:middle;}
+.day-detail{margin-top:22px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;display:none;box-shadow:var(--shadow-sm);}
+.day-detail.show{display:block;}
+.day-detail h3{font-size:18px;margin-bottom:14px;font-weight:700;letter-spacing:-0.015em;}
+.day-evlist{display:flex;flex-direction:column;gap:8px;}
+.day-evlist .ev-row{padding:14px 16px;background:var(--bg-section);border-radius:10px;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;}
+@media (max-width:780px){.cal-d{min-height:72px;}.cal-d .ev{display:none;}.cal-d::after{content:attr(data-count);position:absolute;bottom:5px;right:5px;font-size:11px;color:var(--accent);font-family:var(--fm);font-weight:700;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><a href="erp.html" class="back">← ERP</a><h1 style="margin-top:4px;">📅 일정/스케줄</h1></div>
+  <div style="font-family:var(--fm);font-size:11px;color:var(--muted);" id="now"></div>
+</header>
+
+<div class="toolbar">
+  <div class="month-nav">
+    <button class="btn" onclick="navM(-1)">←</button>
+    <span class="label" id="m-label"></span>
+    <button class="btn" onclick="navM(1)">→</button>
+    <button class="btn" onclick="goToday()">오늘</button>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:6px;">
+    <button class="btn" onclick="exportICS()">📥 ICS 내보내기</button>
+  </div>
+</div>
+
+<div id="calendar-grid"></div>
+
+<div class="legend">
+  <span><span class="dot" style="background:#60a5fa;"></span>접수</span>
+  <span><span class="dot" style="background:#a78bfa;"></span>디자인/제작 중</span>
+  <span><span class="dot" style="background:#fbbf24;"></span>QC</span>
+  <span><span class="dot" style="background:#34d399;"></span>배송/수령</span>
+  <span><span class="dot" style="background:#ff6b2b;"></span>적용/정산</span>
+</div>
+
+<div class="day-detail" id="day-detail"></div>
+</div>
+
+<script>
+const KEY='fixon-erp-state-v6';
+const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령',applied:'적용',settled:'정산',rescan_requested:'재스캔 요청'};
+let state=null,viewYear,viewMonth;
+function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
+function evClass(s){if(['received','design_queued'].includes(s))return 'received';if(['designing','design_done','print_queued','printing','assembling'].includes(s))return 'designing';if(s==='qc')return 'qc';if(['shipping','delivered'].includes(s))return 'delivered';return 'applied';}
+function getDayEvents(date){if(!state)return[];const ds=date.toDateString();const events=[];state.orders.forEach(o=>{o.timeline.forEach(t=>{if(new Date(t.at).toDateString()===ds){events.push({orderId:o.id,status:t.status,patient:o.patientId,clinic:o.clinicId,at:t.at});}});});return events;}
+
+function render(){
+  if(!load()){document.getElementById('calendar-grid').innerHTML='<div style="text-align:center;padding:60px;color:var(--muted);">⚠️ ERP 데이터 없음. <a href="erp.html" style="color:var(--accent);">먼저 ERP 열기</a></div>';return;}
+  const monthName=`${viewYear}년 ${viewMonth+1}월`;
+  document.getElementById('m-label').textContent=monthName;
+  const first=new Date(viewYear,viewMonth,1);
+  const last=new Date(viewYear,viewMonth+1,0);
+  const startDay=first.getDay();
+  const daysInMonth=last.getDate();
+  const todayStr=new Date().toDateString();
+  const cells=[];
+  for(let i=0;i<startDay;i++){const d=new Date(viewYear,viewMonth,1-(startDay-i));cells.push({d,other:true});}
+  for(let i=1;i<=daysInMonth;i++){cells.push({d:new Date(viewYear,viewMonth,i),other:false});}
+  while(cells.length%7)cells.push({d:new Date(viewYear,viewMonth+1,cells.length-startDay-daysInMonth+1),other:true});
+  const html=`<div class="cal">${['일','월','화','수','목','금','토'].map(h=>`<div class="cal-h">${h}</div>`).join('')}${cells.map(c=>{const evs=getDayEvents(c.d);const isToday=c.d.toDateString()===todayStr;return `<div class="cal-d ${c.other?'other':''} ${isToday?'today':''}" data-count="${evs.length?'•'+evs.length:''}" onclick="showDay('${c.d.toISOString()}')"><div class="num">${c.d.getDate()}</div>${evs.slice(0,3).map(e=>`<span class="ev ${evClass(e.status)}">${e.orderId.slice(-4)} ${STATUS_LABEL[e.status]||e.status}</span>`).join('')}${evs.length>3?`<span style="font-size:9px;color:var(--muted);">+${evs.length-3}건</span>`:''}</div>`;}).join('')}</div>`;
+  document.getElementById('calendar-grid').innerHTML=html;
+}
+window.navM=function(d){viewMonth+=d;if(viewMonth<0){viewMonth=11;viewYear--;}else if(viewMonth>11){viewMonth=0;viewYear++;}render();};
+window.goToday=function(){const n=new Date();viewYear=n.getFullYear();viewMonth=n.getMonth();render();};
+window.showDay=function(iso){const d=new Date(iso);const evs=getDayEvents(d);const dt=document.getElementById('day-detail');if(evs.length){dt.classList.add('show');dt.innerHTML=`<h3>${d.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})} — ${evs.length}건</h3><div class="day-evlist">${evs.map(e=>{const c=state.clinics.find(x=>x.id===e.clinic);return `<div class="ev-row" onclick="location.href='erp.html?order=${e.orderId}'"><div><strong style="font-family:var(--fm);">${e.orderId}</strong> · ${c?.name||e.clinic}</div><span class="ev ${evClass(e.status)}">${STATUS_LABEL[e.status]||e.status}</span></div>`;}).join('')}</div>`;}else{dt.classList.remove('show');}};
+window.exportICS=function(){
+  if(!state)return;const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FixOn//ERP//KR'];
+  state.orders.forEach(o=>{o.timeline.forEach(t=>{const d=new Date(t.at);const dt=d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';lines.push('BEGIN:VEVENT',`UID:${o.id}-${t.status}@fixon`,`DTSTAMP:${dt}`,`DTSTART:${dt}`,`SUMMARY:${o.id} ${STATUS_LABEL[t.status]||t.status}`,`DESCRIPTION:${o.id}`,'END:VEVENT');});});
+  lines.push('END:VCALENDAR');
+  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='fixon-calendar.ics';a.click();URL.revokeObjectURL(u);
+};
+const n=new Date();viewYear=n.getFullYear();viewMonth=n.getMonth();
+document.getElementById('now').textContent=n.toLocaleString('ko-KR');
+render();
+window.addEventListener('storage',e=>{if(e.key===KEY)render();});
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>FixOn 청구서 — 샘플</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;color:#222;background:#f4f4f8;padding:40px 20px;line-height:1.5;}
+.wrap{max-width:780px;margin:0 auto;background:#fff;padding:50px 60px;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.06);}
+header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #ff6b2b;padding-bottom:24px;margin-bottom:32px;}
+.logo{font-family:'Outfit';font-weight:900;font-size:28px;color:#ff6b2b;letter-spacing:-1px;}
+.logo span{color:#222;font-weight:400;font-size:11px;display:block;text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;}
+.doc-title{text-align:right;}
+.doc-title h1{font-family:'Outfit';font-size:28px;font-weight:800;letter-spacing:-1px;}
+.doc-title .doc-no{font-family:'JetBrains Mono';font-size:12px;color:#666;margin-top:4px;}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:32px;}
+.party h4{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#888;font-family:'JetBrains Mono';margin-bottom:6px;}
+.party strong{font-size:15px;}
+.party .pinfo{font-size:12px;color:#666;line-height:1.6;margin-top:4px;}
+table{width:100%;border-collapse:collapse;margin-bottom:24px;}
+table th{text-align:left;background:#f7f7f9;padding:10px 12px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:#666;border-bottom:2px solid #ddd;font-family:'JetBrains Mono';}
+table th.num{text-align:right;}
+table td{padding:14px 12px;border-bottom:1px solid #eee;font-size:13px;}
+table td.num{text-align:right;font-family:'JetBrains Mono';}
+.totals{margin-left:auto;width:340px;}
+.totals .row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;}
+.totals .row.grand{border-top:2px solid #222;margin-top:8px;padding-top:14px;font-weight:700;font-size:18px;color:#ff6b2b;font-family:'Outfit';}
+.split{margin-top:30px;background:#fafafa;border-radius:8px;padding:18px 22px;font-size:11px;}
+.split h4{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#888;margin-bottom:10px;}
+.split table{margin:0;}
+.split table td{padding:6px 0;border:none;font-size:12px;}
+.split table td:nth-child(2){text-align:right;font-family:'JetBrains Mono';}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid #eee;text-align:center;font-size:11px;color:#888;}
+.bank{margin-top:18px;background:#fff8f3;border:1px solid #ffd9c2;border-radius:8px;padding:14px 18px;font-size:12px;}
+.bank strong{color:#ff6b2b;}
+@media print {
+  body{background:#fff;padding:0;}
+  .wrap{box-shadow:none;border-radius:0;padding:30px 40px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <div class="logo">FixOn<span>Operations</span></div>
+  </div>
+  <div class="doc-title">
+    <h1>거래명세서 / 청구서</h1>
+    <div class="doc-no">No. INV-2026-0042 · 발행일 2026-04-27</div>
+  </div>
+</header>
+
+<div class="parties">
+  <div class="party">
+    <h4>공급자 (Supplier)</h4>
+    <strong>FixOn (이중우)</strong>
+    <div class="pinfo">
+      서울 강남구 OO로 OO길 12<br>
+      사업자: 123-45-67890<br>
+      hzara@naver.com · 010-5474-1750
+    </div>
+  </div>
+  <div class="party">
+    <h4>공급받는자 (Customer)</h4>
+    <strong>올리브서울치과</strong>
+    <div class="pinfo">
+      이중우 원장 · 서울 강남구<br>
+      사업자: 543-21-09876<br>
+      02-555-1234
+    </div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>품목</th><th>주문번호</th><th>환자</th><th class="num">수량</th><th class="num">단가</th><th class="num">금액</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>FixOn Washer 스플린트</strong><div style="font-size:11px;color:#888;">하악, 분사노즐 4 + 어댑터 + 튜브팁</div></td>
+      <td style="font-family:'JetBrains Mono';font-size:11px;">ORD-2026-0001</td>
+      <td>김OO (52/M)</td>
+      <td class="num">1</td>
+      <td class="num">280,000</td>
+      <td class="num">280,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="totals">
+  <div class="row"><span>공급가액</span><span style="font-family:'JetBrains Mono';">₩254,545</span></div>
+  <div class="row"><span>부가세 (10%)</span><span style="font-family:'JetBrains Mono';">₩25,455</span></div>
+  <div class="row grand"><span>합계</span><span>₩280,000</span></div>
+</div>
+
+<div class="split">
+  <h4>매출 분배 (FixOn 내부 정산용)</h4>
+  <table>
+    <tbody>
+      <tr><td>↳ 기공소 (스마일덴탈랩 — 디자인 작업)</td><td>₩60,000 (21.4%)</td></tr>
+      <tr><td>↳ 그래피 (생산팀 — 인쇄/조립/QC/배송)</td><td>₩110,000 (39.3%)</td></tr>
+      <tr><td>↳ FixOn 수수료 (플랫폼/SW/QA)</td><td>₩110,000 (39.3%)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bank">
+  💳 <strong>입금 안내:</strong> 신한은행 110-XXX-XXXXXX (예금주: 이중우) · 결제기한: 발행일 + 14일
+</div>
+
+<footer>
+  본 거래명세서는 전자세금계산서로 별도 발행됩니다.<br>
+  <strong style="color:#ff6b2b;">FixOn × Graphy</strong> · Operations Console
+</footer>
+
+</div>
+</body>
+</html>
