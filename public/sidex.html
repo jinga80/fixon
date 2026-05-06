@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FixOn × Graphy — SIDEX 2026 Keynote</title>
+<meta name="description" content="이중우 대표원장 SIDEX 2026 발표 슬라이드 — 웹 프레젠테이션 + PPTX 다운로드">
+
+<!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FixOn">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="Graphy Style — SIDEX 2026 Keynote">
+<meta property="og:description" content="이중우 대표원장 발표 슬라이드 (웹 + PPTX 다운로드)">
+<meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://fixon-production.up.railway.app/sidex.html">
+
+<!-- ===== Favicons ===== -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ff6b2b">
+
+<link rel="stylesheet" href="/assets/design-system.css">
+
+<style>
+:root{
+  --slide-w:1280px;--slide-h:720px;
+  --slide-pad:64px;
+}
+html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:var(--fb);overflow:hidden;height:100vh;}
+
+/* ===== Stage ===== */
+.stage{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:#0f172a;
+}
+.deck{
+  position:relative;
+  width:var(--slide-w);height:var(--slide-h);
+  transform-origin:center center;
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+
+/* ===== Slide ===== */
+.slide{
+  position:absolute;inset:0;padding:var(--slide-pad);
+  background:#fff;color:var(--text);
+  display:none;flex-direction:column;
+  font-size:18px;line-height:1.55;letter-spacing:-0.01em;
+  opacity:0;transition:opacity 0.35s ease;
+}
+.slide.active{display:flex;opacity:1;animation:fadeIn 0.35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+
+.slide.warm{background:#fff7f0;}
+.slide.section-warm{background:linear-gradient(135deg,#fff7f0 0%,#ffe7d3 100%);}
+.slide.dark{background:#0f172a;color:#fff;}
+.slide.dark .eyebrow{color:#f4b888;}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:#fff;}
+.slide.dark p{color:#cbd5e1;}
+
+.eyebrow{
+  font-size:14px;font-weight:700;letter-spacing:0.08em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:18px;
+}
+
+.slide h1{
+  font-size:88px;font-weight:900;letter-spacing:-0.04em;
+  line-height:1.05;color:var(--text);margin:0 0 16px;
+}
+.slide h1.medium{font-size:64px;}
+.slide h1.small{font-size:48px;}
+.slide h1 .accent{color:var(--accent);}
+.slide h1 .underline{position:relative;}
+.slide h1 .underline::after{
+  content:'';position:absolute;left:0;right:0;bottom:6px;height:12px;
+  background:#fef0e6;z-index:-1;border-radius:6px;
+}
+.slide h2{font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.15;margin:0 0 12px;}
+.slide h3{font-size:30px;font-weight:700;letter-spacing:-0.02em;}
+
+.slide p{font-size:22px;line-height:1.55;color:var(--dim);margin:0;}
+.slide p.lead{font-size:24px;color:var(--dim);}
+.slide p.big{font-size:28px;}
+
+/* ===== Common components ===== */
+.brand-row{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.brand-mark{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  color:#fff;display:grid;place-items:center;
+  font-weight:900;font-size:24px;letter-spacing:-0.05em;
+}
+.brand-text{font-size:24px;font-weight:800;letter-spacing:-0.02em;}
+.brand-sub{font-size:14px;color:var(--muted);font-family:var(--fm);margin-top:2px;}
+
+.cards{display:grid;gap:16px;}
+.cards.cols-3{grid-template-columns:repeat(3,1fr);}
+.cards.cols-4{grid-template-columns:repeat(4,1fr);}
+.cards.cols-5{grid-template-columns:repeat(5,1fr);}
+
+.card-tile{
+  background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;
+  display:flex;flex-direction:column;
+}
+.card-tile.soft{background:var(--bg-section);}
+.card-tile.warm{background:var(--accent-soft);border-color:#ffd9bf;}
+.card-tile h4{font-size:20px;font-weight:700;color:var(--text);margin:8px 0 8px;letter-spacing:-0.015em;}
+.card-tile p{font-size:14.5px;color:var(--muted);line-height:1.55;}
+.card-tile .num{font-family:var(--fm);font-size:13px;color:var(--accent);font-weight:700;margin-bottom:6px;}
+.card-tile .ico{
+  width:54px;height:54px;border-radius:12px;
+  background:var(--accent-soft);display:grid;place-items:center;font-size:26px;
+  margin-bottom:14px;
+}
+.card-tile .ico.blue{background:var(--blue-dim);}
+.card-tile .ico.green{background:var(--green-dim);}
+.card-tile .ico.purple{background:var(--purple-dim);}
+
+.callout{
+  margin-top:auto;padding:14px 22px;background:var(--accent-soft);border-radius:12px;
+  font-size:15px;font-weight:600;color:var(--accent-deep);text-align:center;
+}
+
+.video-frame{
+  background:var(--bg-section);border:2px dashed var(--border-strong);
+  border-radius:14px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:var(--muted);
+}
+.video-frame .play{
+  width:72px;height:72px;border-radius:50%;background:var(--accent);
+  color:#fff;display:grid;place-items:center;font-size:30px;margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(255,107,43,0.3);
+}
+.video-frame .label{font-family:var(--fm);font-size:14px;font-weight:600;}
+
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.flow-step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;}
+.flow-step .circle{
+  width:48px;height:48px;border-radius:50%;border:2px solid var(--accent);
+  background:var(--accent-soft);color:var(--accent-deep);
+  display:grid;place-items:center;font-family:var(--fm);font-weight:800;font-size:16px;
+  margin:0 auto 14px;
+}
+.flow-step .icon{font-size:36px;margin-bottom:10px;}
+.flow-step .name{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.flow-step .desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:24px;}
+
+.spec-row{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px;}
+.spec-row .badge{
+  width:48px;height:48px;border-radius:12px;background:var(--accent-soft);
+  color:var(--accent-deep);display:grid;place-items:center;
+  font-size:22px;font-weight:800;flex-shrink:0;
+}
+.spec-row .text h4{font-size:22px;font-weight:700;color:var(--text);margin:0 0 4px;letter-spacing:-0.015em;}
+.spec-row .text p{font-size:15px;color:var(--muted);}
+
+.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+.pill{
+  padding:8px 18px;background:var(--accent-soft);border-radius:100px;
+  color:var(--accent-deep);font-size:14px;font-weight:700;
+}
+.pill.blue{background:var(--blue-dim);color:var(--blue);}
+.pill.green{background:var(--green-dim);color:var(--green);}
+.pill.purple{background:var(--purple-dim);color:var(--purple);}
+
+.url-card{
+  margin:30px auto;padding:32px 48px;
+  background:#fff;border:2px solid var(--accent);border-radius:18px;
+  text-align:center;max-width:680px;
+}
+.url-card .lbl{
+  font-size:14px;color:var(--muted);font-family:var(--fm);font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;
+}
+.url-card .url{
+  font-family:var(--fm);font-size:48px;font-weight:800;color:var(--accent);
+  letter-spacing:-0.02em;
+}
+
+.spk-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 22px;
+}
+.spk-card .name{font-size:18px;font-weight:700;color:var(--text);}
+.spk-card .role{font-size:13px;color:var(--muted);margin-top:2px;}
+
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px;}
+
+/* Cover slide special */
+.cover{
+  position:relative;justify-content:flex-start;
+}
+.cover::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,#fef0e6,transparent 70%);
+  pointer-events:none;
+}
+.cover h1{font-size:140px;line-height:1;}
+.cover .topbar{display:flex;align-items:center;gap:14px;}
+.cover .speaker-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
+
+/* Closing */
+.closing{align-items:center;justify-content:center;text-align:center;}
+.closing h1{font-size:160px;font-weight:900;color:#fff;letter-spacing:-0.04em;}
+.closing .sub{font-size:32px;color:#cbd5e1;margin-top:14px;}
+.closing .accent-strip{position:absolute;top:0;left:0;right:0;height:6px;background:var(--accent);}
+
+/* Slide number */
+.slide-num{
+  position:absolute;bottom:32px;right:32px;
+  font-family:var(--fm);font-size:14px;color:var(--muted);font-weight:700;
+}
+
+/* ===== Controls ===== */
+.controls{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:8px;padding:8px;
+  background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:100px;
+  z-index:100;
+}
+.ctrl-btn{
+  background:transparent;border:none;color:#cbd5e1;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:18px;
+  transition:all 0.15s;font-family:var(--fb);
+}
+.ctrl-btn:hover{background:rgba(255,255,255,0.1);color:#fff;}
+.ctrl-btn.primary{background:var(--accent);color:#fff;width:auto;padding:0 18px;border-radius:100px;font-weight:600;font-size:14px;height:40px;}
+.ctrl-btn.primary:hover{background:var(--accent-deep);}
+.counter{
+  font-family:var(--fm);font-size:13px;color:#cbd5e1;font-weight:600;
+  padding:0 12px;letter-spacing:0.02em;min-width:60px;text-align:center;
+}
+.divider{width:1px;height:24px;background:rgba(255,255,255,0.1);margin:0 4px;}
+
+/* Progress bar */
+.progress-bar{
+  position:fixed;top:0;left:0;right:0;height:3px;
+  background:rgba(255,255,255,0.05);z-index:101;
+}
+.progress-fill{
+  height:100%;background:var(--accent);
+  transition:width 0.35s ease;
+}
+
+/* Notes panel */
+.notes-panel{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(15,23,42,0.96);backdrop-filter:blur(10px);
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding:24px 36px 80px;color:#e8e6f0;font-size:16px;line-height:1.75;
+  max-height:40vh;overflow-y:auto;
+  transform:translateY(100%);transition:transform 0.3s ease;
+  z-index:90;
+}
+.notes-panel.open{transform:translateY(0);}
+.notes-panel .label{
+  font-size:11px;color:#94a3b8;font-family:var(--fm);font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;
+}
+
+/* Overview mode */
+.overview{
+  position:fixed;inset:0;background:#0f172a;
+  padding:48px;z-index:200;display:none;overflow-y:auto;
+}
+.overview.open{display:block;}
+.overview h2{color:#fff;font-size:28px;margin:0 0 24px;letter-spacing:-0.02em;}
+.overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.overview-thumb{
+  background:#fff;border:2px solid transparent;border-radius:8px;
+  aspect-ratio:16/9;cursor:pointer;padding:14px;font-size:11px;
+  transition:all 0.15s;position:relative;overflow:hidden;
+}
+.overview-thumb:hover,.overview-thumb.active{border-color:var(--accent);transform:translateY(-2px);}
+.overview-thumb .num{font-family:var(--fm);font-size:9px;color:var(--muted);}
+.overview-thumb .title{font-size:12px;font-weight:700;color:var(--text);margin-top:6px;line-height:1.2;}
+
+/* Hint banner */
+.hint{
+  position:fixed;top:24px;right:24px;
+  background:rgba(15,23,42,0.85);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:10px;
+  padding:14px 18px;color:#cbd5e1;font-size:12px;
+  z-index:90;font-family:var(--fm);
+  opacity:0;transition:opacity 0.4s;pointer-events:none;
+}
+.hint.show{opacity:1;}
+.hint kbd{
+  display:inline-block;padding:1px 7px;background:rgba(255,255,255,0.12);
+  border-radius:4px;font-family:var(--fm);font-size:11px;margin:0 3px;
+}
+
+/* Loading toast */
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:14px 22px;font-size:14px;font-weight:600;color:var(--text);
+  box-shadow:0 12px 32px rgba(0,0,0,0.4);z-index:300;
+  opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media print{
+  .controls,.progress-bar,.notes-panel,.hint,.toast,.overview{display:none !important;}
+  .stage{position:static;}
+  .deck{box-shadow:none;border-radius:0;page-break-after:always;}
+  .slide{display:flex !important;opacity:1 !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div class="hint" id="hint">
+  <kbd>←</kbd><kbd>→</kbd> 이동 · <kbd>N</kbd> 노트 · <kbd>O</kbd> 개요 · <kbd>F</kbd> 풀스크린
+</div>
+
+<div class="stage" id="stage">
+  <div class="deck" id="deck">
+
+    <!-- ============ 1. COVER ============ -->
+    <section class="slide cover warm active" data-slide="1"
+      data-notes="안녕하세요. 주식회사 그래피 솔루션개발팀 자문역을 맡고 있는 올리브서울치과 이중우 원장입니다.">
+      <div class="brand-row topbar">
+        <div class="brand-mark">G</div>
+        <div>
+          <div class="brand-text">Graphy</div>
+          <div class="brand-sub">× FixOn — Solution Lab</div>
+        </div>
+      </div>
+      <div class="eyebrow" style="margin-top:48px;">SIDEX 2026 · KEYNOTE</div>
+      <h1>Graphy Style</h1>
+      <h2 style="color:var(--accent);font-weight:800;font-size:44px;margin-top:8px;">
+        3D 프린팅으로 만드는 개인 맞춤 구강 케어
+      </h2>
+      <div class="speaker-row" style="gap:24px;">
+        <div class="spk-card" style="flex:1;">
+          <div class="name">이중우 · 올리브서울치과 대표원장</div>
+          <div class="role">(주)그래피 솔루션개발팀 자문역</div>
+        </div>
+        <div style="font-family:var(--fm);font-size:18px;font-weight:700;color:var(--text);text-align:right;">
+          graphystyle.com<br>
+          <span style="font-size:13px;color:var(--muted);font-weight:500;">공유 플랫폼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. INTRO ============ -->
+    <section class="slide" data-slide="2"
+      data-notes="오늘 말씀드릴 내용은 그래피의 형상기억소재를 사용해서 3D 프린터로 출력하는 개인 맞춤형 치아세정기와 다양한 잇몸 관리 기구들, 그리고 원장님들이 함께 개발에 참여하시는 공유 플랫폼입니다.">
+      <div class="eyebrow">INTRODUCTION</div>
+      <h1 class="medium">안녕하세요.</h1>
+      <p class="big" style="margin:24px 0 48px;">
+        올리브서울치과 이중우 원장입니다.<br>
+        그래피 솔루션개발팀 자문역을 맡고 있습니다.
+      </p>
+      <div class="cards cols-3" style="margin-top:auto;">
+        <div class="card-tile soft">
+          <div class="num">01</div>
+          <h4>Graphy Style</h4>
+          <p>형상기억소재 + 3D 프린팅 + 개인 맞춤</p>
+        </div>
+        <div class="card-tile soft">
+          <div class="num">02</div>
+          <h4>Graphy Style Devices</h4>
+          <p>Point Shower 외 개발 중인 디바이스들</p>
+        </div>
+        <div class="card-tile soft">
+          <div class="num">03</div>
+          <h4>공유 플랫폼</h4>
+          <p>graphystyle.com 으로 함께 만들어 갑니다</p>
+        </div>
+      </div>
+      <div class="slide-num">02 / 14</div>
+    </section>
+
+    <!-- ============ 3. CONCEPT ============ -->
+    <section class="slide" data-slide="3"
+      data-notes="먼저 자주 언급될 그래피 스타일이라는 용어에 대한 설명을 하고 시작하겠습니다. Graphy Style은 그래피의 형상기억소재로 3D 프린터를 이용해 개인 맞춤형으로 제작하는 형태를 말하는 겁니다. 형상기억소재, 3D 프린팅, 개인 맞춤 — 이 3가지 컨셉을 기억해주세요.">
+      <div class="eyebrow">§ 01 · CONCEPT</div>
+      <h2>Graphy Style 이란?</h2>
+      <p class="lead">그래피의 형상기억소재로 3D 프린터를 이용해 개인 맞춤형으로 제작하는 형태</p>
+      <div class="cards cols-3" style="margin-top:36px;flex:1;">
+        <div class="card-tile">
+          <div class="ico">🧬</div>
+          <h4>형상기억소재</h4>
+          <p>Tera Harz Clear — 끓는 물에서 변형, 37℃ 복원</p>
+        </div>
+        <div class="card-tile">
+          <div class="ico blue">🖨️</div>
+          <h4>3D 프린팅</h4>
+          <p>그래피 프린터로 정밀 출력. 환자별 데이터 기반</p>
+        </div>
+        <div class="card-tile">
+          <div class="ico green">👤</div>
+          <h4>개인 맞춤</h4>
+          <p>환자 치열·잇몸·요구에 맞춰 노즐 위치까지 설계</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:24px;">
+        👉  본 발표에서 "Graphy Style" 이 등장하면, 위 3가지 컨셉을 떠올려 주세요.
+      </div>
+      <div class="slide-num">03 / 14</div>
+    </section>
+
+    <!-- ============ 4. MATERIAL ============ -->
+    <section class="slide" data-slide="4"
+      data-notes="그래피의 형상기억소재 Tera Harz Clear 는 FDA 승인을 받은 안전성이 확보된 소재이고, 끓는 물에 열소독이 가능합니다. 이때 말랑말랑해지면서 약간 변형이 오는데, 37도가 되면 다시 원래의 형태로 복원되는 첨단 소재입니다.">
+      <div class="eyebrow">§ 01 · 소재</div>
+      <h2>Tera Harz Clear</h2>
+      <p class="lead">안전성 + 열소독 + 형상기억 — 임상에서 바로 쓸 수 있는 첨단 소재</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:32px;flex:1;">
+        <div>
+          <div class="spec-row"><div class="badge">✓</div><div class="text"><h4>FDA 승인</h4><p>안전성이 확보된 의료용 레진</p></div></div>
+          <div class="spec-row"><div class="badge">♨</div><div class="text"><h4>열 소독 가능</h4><p>끓는 물에서 멸균 — 위생 관리 간단</p></div></div>
+          <div class="spec-row"><div class="badge">◐</div><div class="text"><h4>형상 기억</h4><p>37℃ 복원 — 변형 후에도 원형 유지</p></div></div>
+        </div>
+        <div class="video-frame">
+          <div class="play">▶</div>
+          <div class="label">Tera Harz Clear · 형상기억 시연 영상</div>
+          <div style="font-size:12px;color:var(--subtle);margin-top:8px;">(발표 시 영상 삽입 위치)</div>
+        </div>
+      </div>
+      <div class="slide-num">04 / 14</div>
+    </section>
+
+    <!-- ============ 5. POINT SHOWER ============ -->
+    <section class="slide" data-slide="5"
+      data-notes="Point Shower 입니다. 환자의 치열과 잇몸 형태에 맞춰 스플린트 형태로 제작되어 구강에 안착시키고, 정확히 원하는 위치로 물이 분사되어 세척하는 개인 맞춤 치아세정기입니다. 스플린트, 어댑터, 아쿠아픽 이렇게 3 파트로 구성되어 있습니다.">
+      <div class="eyebrow">§ 02 · FLAGSHIP DEVICE</div>
+      <h1 style="font-size:96px;color:var(--accent);">Point Shower</h1>
+      <p class="lead" style="margin-top:8px;">환자의 치열·잇몸 형태에 맞춘 개인 맞춤 치아 세정기</p>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:40px;margin-top:28px;flex:1;">
+        <div>
+          <p style="font-size:20px;color:var(--text);line-height:1.7;">
+            스플린트 형태로 구강에 안착시키고,<br>
+            정확히 원하는 위치로 물이 분사되어 세척됩니다.
+          </p>
+          <p style="font-size:17px;color:var(--muted);margin-top:18px;line-height:1.7;">
+            핵심 파트인 스플린트는 환자의 치열과 구조에 맞추어 3D 프린터로 제작합니다.
+          </p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card-tile" style="padding:16px 22px;display:flex;flex-direction:row;align-items:center;gap:16px;background:var(--accent-soft);border-color:#ffd9bf;">
+            <div style="font-family:var(--fm);font-weight:800;color:var(--accent-deep);">01</div>
+            <div style="flex:1;"><div style="font-weight:700;color:var(--text);font-size:18px;">스플린트</div><div style="font-size:13px;color:var(--muted);">환자별 맞춤 3D 프린팅</div></div>
+          </div>
+          <div class="card-tile" style="padding:16px 22px;display:flex;flex-direction:row;align-items:center;gap:16px;background:var(--blue-dim);border-color:#bfdbfe;">
+            <div style="font-family:var(--fm);font-weight:800;color:var(--blue);">02</div>
+            <div style="flex:1;"><div style="font-weight:700;color:var(--text);font-size:18px;">어댑터</div><div style="font-size:13px;color:var(--muted);">노즐 - 호스 연결부</div></div>
+          </div>
+          <div class="card-tile" style="padding:16px 22px;display:flex;flex-direction:row;align-items:center;gap:16px;background:var(--purple-dim);border-color:#ddd6fe;">
+            <div style="font-family:var(--fm);font-weight:800;color:var(--purple);">03</div>
+            <div style="flex:1;"><div style="font-weight:700;color:var(--text);font-size:18px;">아쿠아픽</div><div style="font-size:13px;color:var(--muted);">수류 공급 본체</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:auto;background:var(--bg-section);color:var(--muted);">
+        🎞   모션그래픽 — Point Shower 작동 원리 (발표 시 재생)
+      </div>
+      <div class="slide-num">05 / 14</div>
+    </section>
+
+    <!-- ============ 6. PROCESS ============ -->
+    <section class="slide" data-slide="6"
+      data-notes="스텝별로 말씀드리겠습니다. 먼저 환자의 구강을 스캔한 파일이 필요한데요. 스캐너가 없으신 경우가 많기 때문에 임프레션 모델을 이용해서 진행하는 방법으로 말씀드리겠습니다. 접수부터 딜리버리까지 일주일 정도 걸립니다. 부스에서 실제 Point Shower 를 직접 체험하실 수 있습니다.">
+      <div class="eyebrow">§ 02 · 제작 프로세스</div>
+      <h2>접수에서 딜리버리까지, 약 1주일</h2>
+      <p class="lead">스캐너가 없어도 임프레션 모델로 진행 가능 — 기공물 작업과 같은 흐름</p>
+      <div class="flow" style="margin-top:36px;flex:1;align-items:flex-start;">
+        <div class="flow-step"><div class="circle">01</div><div class="icon">📩</div><div class="name">지시 접수</div><div class="desc">모델 + 세척 부위 표시 및 요구사항</div></div>
+        <div class="flow-step"><div class="circle">02</div><div class="icon">📡</div><div class="name">스캔</div><div class="desc">임프레션 모델을 그래피가 스캔</div></div>
+        <div class="flow-step"><div class="circle">03</div><div class="icon">✏️</div><div class="name">설계</div><div class="desc">노즐 위치 + 수류 통로 디자인</div></div>
+        <div class="flow-step"><div class="circle">04</div><div class="icon">🖨️</div><div class="name">3D 프린팅</div><div class="desc">스플린트 출력 + 노즐·어댑터 결합</div></div>
+        <div class="flow-step"><div class="circle">05</div><div class="icon">📦</div><div class="name">딜리버리</div><div class="desc">아쿠아픽과 함께 원장님께 전달</div></div>
+      </div>
+      <div class="callout" style="margin-top:auto;">
+        💡  부스에서 실제 Point Shower 를 직접 체험하실 수 있습니다 — 발표 후 방문해 주세요.
+      </div>
+      <div class="slide-num">06 / 14</div>
+    </section>
+
+    <!-- ============ 7. PIPELINE ============ -->
+    <section class="slide section-warm" data-slide="7"
+      data-notes="다음은 개발 진행 중인 그래피 스타일 디바이스들을 소개하겠습니다.">
+      <div class="eyebrow">§ 02 · DEVICES PIPELINE</div>
+      <h2>Point Shower 는 시작입니다.</h2>
+      <p class="lead" style="max-width:920px;">
+        Graphy Style 의 형상기억 + 3D 프린팅 + 개인 맞춤 컨셉으로<br>
+        다양한 구강·잇몸 케어 디바이스를 개발하고 있습니다.
+      </p>
+      <div class="cards cols-4" style="margin-top:auto;">
+        <div class="card-tile" style="padding:0;overflow:hidden;">
+          <div style="background:var(--green-dim);color:var(--green);padding:8px 16px;font-size:12px;font-weight:700;">✅ 출시 완료</div>
+          <div style="padding:20px;flex:1;">
+            <h4>Point Shower</h4><p>치아 세정기</p>
+            <div style="font-family:var(--fm);font-size:48px;font-weight:800;color:var(--green-dim);text-align:right;margin-top:auto;">01</div>
+          </div>
+        </div>
+        <div class="card-tile" style="padding:0;overflow:hidden;">
+          <div style="background:var(--accent-soft);color:var(--accent-deep);padding:8px 16px;font-size:12px;font-weight:700;">🚧 개발 중</div>
+          <div style="padding:20px;flex:1;">
+            <h4>Point Mediffuser</h4><p>약물 정밀 도포</p>
+            <div style="font-family:var(--fm);font-size:48px;font-weight:800;color:var(--accent-soft);text-align:right;margin-top:auto;">02</div>
+          </div>
+        </div>
+        <div class="card-tile" style="padding:0;overflow:hidden;">
+          <div style="background:var(--blue-dim);color:var(--blue);padding:8px 16px;font-size:12px;font-weight:700;">🚧 개발 중</div>
+          <div style="padding:20px;flex:1;">
+            <h4>Night Pack Splint</h4><p>야간 잇몸 마스크팩</p>
+            <div style="font-family:var(--fm);font-size:48px;font-weight:800;color:var(--blue-dim);text-align:right;margin-top:auto;">03</div>
+          </div>
+        </div>
+        <div class="card-tile" style="padding:0;overflow:hidden;">
+          <div style="background:var(--purple-dim);color:var(--purple);padding:8px 16px;font-size:12px;font-weight:700;">💡 아이디어</div>
+          <div style="padding:20px;flex:1;">
+            <h4>Perio Touch / MTS</h4><p>잇몸 저주파 / MTS</p>
+            <div style="font-family:var(--fm);font-size:48px;font-weight:800;color:var(--purple-dim);text-align:right;margin-top:auto;">04</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">07 / 14</div>
+    </section>
+
+    <!-- ============ 8. POINT MEDIFFUSER ============ -->
+    <section class="slide" data-slide="8"
+      data-notes="Point Mediffuser 입니다. 필요한 부위에 정확하게 약물을 주입해주는 기구입니다. 헥사메딘이나 샐라인 같은 액체 주입용과 미노싸이클린 연고와 같은 페이스트 주입용 두 가지 타입으로 제약회사와 함께 개발할 예정입니다.">
+      <div class="eyebrow">§ 02 · DEVICE 02</div>
+      <h1 class="small" style="color:var(--accent);font-size:80px;">Point Mediffuser</h1>
+      <p class="lead">필요한 부위에 정확하게 약물을 주입하는 기구</p>
+      <div class="cards" style="grid-template-columns:1fr 1fr;margin-top:36px;flex:1;gap:24px;">
+        <div class="card-tile" style="background:var(--blue-dim);border-color:#bfdbfe;padding:32px;">
+          <div style="font-size:44px;">💧</div>
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--blue);margin-top:14px;">TYPE A · 액체</div>
+          <h4 style="font-size:28px;margin:8px 0 18px;">액상 약물 정밀 분사</h4>
+          <ul style="list-style:none;padding:0;font-size:18px;color:var(--text);line-height:2;">
+            <li>▸ 헥사메딘 (구강 살균)</li>
+            <li>▸ 샐라인 (생리식염수)</li>
+            <li>▸ 기타 액상 처방</li>
+          </ul>
+        </div>
+        <div class="card-tile" style="background:var(--accent-soft);border-color:#ffd9bf;padding:32px;">
+          <div style="font-size:44px;">🧴</div>
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--accent-deep);margin-top:14px;">TYPE B · 페이스트</div>
+          <h4 style="font-size:28px;margin:8px 0 18px;">연고형 약제 정밀 도포</h4>
+          <ul style="list-style:none;padding:0;font-size:18px;color:var(--text);line-height:2;">
+            <li>▸ 미노싸이클린 연고</li>
+            <li>▸ 항염·항균 처방</li>
+            <li>▸ 제약사 협업 카트리지</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:20px;background:var(--bg-section);color:var(--muted);">
+        🤝  제약회사와 함께 개발 예정 — 공동 임상 · 공동 카트리지
+      </div>
+      <div class="slide-num">08 / 14</div>
+    </section>
+
+    <!-- ============ 9. NIGHT PACK ============ -->
+    <section class="slide" data-slide="9"
+      data-notes="Night Pack Splint 입니다. 피부 관리를 위해 잠자기 전에 마스크팩을 하는 것처럼, 구강 유산균이나 프로폴리스 등 잇몸 건강에 도움을 줄 수 있는 제제를 잇몸 라인을 따라 도포할 수 있는 기구입니다.">
+      <div class="eyebrow">§ 02 · DEVICE 03</div>
+      <h1 class="small" style="color:var(--blue);font-size:80px;">Night Pack Splint</h1>
+      <p class="lead">잠자기 전, 잇몸을 위한 마스크팩</p>
+      <p class="big" style="margin-top:36px;color:var(--text);line-height:1.65;">
+        피부 관리를 위해 잠자기 전에 마스크팩을 하는 것처럼,<br>
+        잇몸 건강을 돕는 제제를 잇몸 라인을 따라 도포할 수 있는 기구입니다.
+      </p>
+      <div class="pill-row" style="margin-top:auto;">
+        <span class="pill blue">구강 유산균</span>
+        <span class="pill blue">프로폴리스</span>
+        <span class="pill blue">자일리톨</span>
+        <span class="pill blue">비타민 C</span>
+      </div>
+      <p style="margin-top:14px;font-size:15px;color:var(--muted);">→ 잇몸 라인 따라 도포되는 균일한 카트리지 형태</p>
+      <div class="slide-num">09 / 14</div>
+    </section>
+
+    <!-- ============ 10. PERIO IDEAS ============ -->
+    <section class="slide" data-slide="10"
+      data-notes="피부 관리 기구들의 원리를 이용해서 잇몸 관리 기구도 만들 수 있지 않을까? 그래서 몇 가지 아이디어를 내보았습니다. Perio Touch — 잇몸용 저주파 치료기. Perio MTS — micro needle therapy system. 아이디어는 좋은데 과연 이렇게 만들 수 있을까 하는 생각이 드시죠. 저도 마찬가지입니다.">
+      <div class="eyebrow">§ 02 · DEVICE 04+05 · 아이디어</div>
+      <h2>피부 관리 원리를 잇몸으로</h2>
+      <p class="lead">이미 검증된 피부 관리 기구의 원리를 구강에 응용한다면?</p>
+      <div class="cards" style="grid-template-columns:1fr 1fr;margin-top:32px;flex:1;gap:20px;">
+        <div class="card-tile" style="border:2px solid var(--purple);padding:30px;">
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--purple);">💡 IDEA · 04</div>
+          <h4 style="font-size:32px;margin:12px 0 8px;">Perio Touch</h4>
+          <div style="font-size:18px;color:var(--accent);font-weight:600;">잇몸용 저주파 치료기</div>
+          <p style="margin-top:18px;font-size:16px;line-height:1.7;color:var(--dim);">
+            피부 EMS 의 원리를 잇몸 혈류 자극으로.<br>
+            맞춤 트레이가 전극 위치를 정확하게.
+          </p>
+        </div>
+        <div class="card-tile" style="border:2px solid var(--purple);padding:30px;">
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--purple);">💡 IDEA · 05</div>
+          <h4 style="font-size:32px;margin:12px 0 8px;">Perio MTS</h4>
+          <div style="font-size:18px;color:var(--accent);font-weight:600;">Micro Needle Therapy System</div>
+          <p style="margin-top:18px;font-size:16px;line-height:1.7;color:var(--dim);">
+            피부 MTS 가 콜라겐 재생을 유도하듯,<br>
+            잇몸 조직 재생을 자극.<br>
+            맞춤 스플린트가 안전한 깊이와 정밀한 위치를 보장.
+          </p>
+        </div>
+      </div>
+      <div class="callout">
+        ✨  Point Shower 는 성공했지만 — 다른 아이템은 아무도 모릅니다. 함께 만들어 가야 합니다.
+      </div>
+      <div class="slide-num">10 / 14</div>
+    </section>
+
+    <!-- ============ 11. PLATFORM ============ -->
+    <section class="slide section-warm" data-slide="11"
+      data-notes="이제부터는 여러 원장님들과 함께 집단 지성을 이용해서 진행하려고 이런 자리도 만들고 플랫폼도 만들었습니다. graphystyle.com — 이 사이트에 들어오셔서 자유롭게 아이디어를 제안하고 피드백을 주시면서 의견을 교환하다 보면 좀 더 완성도 높고 빠르게 개발이 진행되지 않을까 생각합니다.">
+      <div class="eyebrow">§ 03 · SHARED PLATFORM</div>
+      <h1 class="medium">혼자가 아닌, 함께.</h1>
+      <p class="big" style="margin:28px 0 36px;">
+        원장님들의 집단 지성을 모아<br>
+        더 완성도 높고 빠른 개발을 함께 만들어 갑니다.
+      </p>
+      <div class="url-card" style="margin:20px auto;">
+        <div class="lbl">공유 플랫폼</div>
+        <div class="url">graphystyle.com</div>
+      </div>
+      <div class="pill-row" style="justify-content:center;margin-top:20px;">
+        <span class="pill">IDEA POOL</span>
+        <span class="pill">FEEDBACK</span>
+        <span class="pill">공모전</span>
+        <span class="pill">수익 분배</span>
+      </div>
+      <div class="slide-num">11 / 14</div>
+    </section>
+
+    <!-- ============ 12. REWARDS ============ -->
+    <section class="slide" data-slide="12"
+      data-notes="아이디어 공모전을 열어서 시상하고, 상품화까지 되면 수익도 분배할 수 있도록 하고, 적극 참여해주시는 분들에게도 혜택이 돌아갈 수 있도록 다양한 보상 정책도 준비할 예정입니다. 네이버가 검색에서 시작해 카페·지식인·쇼핑까지 확장한 것처럼, 우리도 단계적으로 함께 자라갑니다.">
+      <div class="eyebrow">§ 03 · REWARDS & VISION</div>
+      <h2>참여하시는 만큼, 보상도 함께</h2>
+      <p class="lead">원장님들이 만들어주신 가치는 정당하게 분배됩니다.</p>
+      <div class="cards cols-4" style="margin-top:36px;flex:1;">
+        <div class="card-tile soft" style="text-align:center;align-items:center;">
+          <div class="ico" style="margin:0 auto 14px;background:#fff;border:2px solid var(--accent);">🏆</div>
+          <h4>아이디어 공모전</h4><p>제안된 아이디어 중 우수작 시상</p>
+        </div>
+        <div class="card-tile soft" style="text-align:center;align-items:center;">
+          <div class="ico" style="margin:0 auto 14px;background:#fff;border:2px solid var(--accent);">💰</div>
+          <h4>수익 분배</h4><p>상품화 시 제안자에게 로열티</p>
+        </div>
+        <div class="card-tile soft" style="text-align:center;align-items:center;">
+          <div class="ico" style="margin:0 auto 14px;background:#fff;border:2px solid var(--accent);">🎁</div>
+          <h4>참여 보상</h4><p>활발한 피드백 기여자 혜택</p>
+        </div>
+        <div class="card-tile soft" style="text-align:center;align-items:center;">
+          <div class="ico" style="margin:0 auto 14px;background:#fff;border:2px solid var(--accent);">🌐</div>
+          <h4>확장 비전</h4><p>검색→카페→쇼핑처럼 단계적 확장</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:20px;">
+        🚀  "네이버가 검색에서 시작해 카페·지식인·쇼핑·페이로 확장했듯이" — 우리도 단계적으로 함께 자라갑니다.
+      </div>
+      <div class="slide-num">12 / 14</div>
+    </section>
+
+    <!-- ============ 13. BOOTH ============ -->
+    <section class="slide section-warm" data-slide="13"
+      data-notes="실제로 체험하실 수 있도록 부스에 준비되어 있으니 발표 후에 오셔서 직접 확인해 보시기 바랍니다.">
+      <div class="eyebrow">BOOTH VISIT</div>
+      <h1 class="medium" style="margin-top:24px;">직접 체험해 보세요.</h1>
+      <p class="big" style="margin-top:32px;line-height:1.65;">
+        Point Shower 가 부스에 준비되어 있습니다.<br>
+        발표 후 방문하셔서 직접 손에 쥐고 작동 원리를 확인해 보세요.
+      </p>
+      <div class="card-tile" style="margin-top:auto;border:2px solid var(--accent);padding:28px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;">
+        <div>
+          <div style="font-family:var(--fm);font-size:13px;font-weight:700;color:var(--accent-deep);">📍 BOOTH</div>
+          <h4 style="font-size:28px;margin-top:8px;">그래피 부스 — Point Shower 시연</h4>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:var(--fm);font-size:18px;font-weight:700;color:var(--accent-deep);">graphystyle.com</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px;">공유 플랫폼 즉시 가입</div>
+        </div>
+      </div>
+      <div class="slide-num">13 / 14</div>
+    </section>
+
+    <!-- ============ 14. CLOSING ============ -->
+    <section class="slide dark closing" data-slide="14"
+      data-notes="감사합니다. (Q&A 전환)">
+      <div class="accent-strip"></div>
+      <h1>감사합니다.</h1>
+      <p class="sub">함께 만들어 가는 Graphy Style.</p>
+      <div class="foot-grid">
+        <div>
+          <div style="font-family:var(--fm);font-size:18px;font-weight:700;color:var(--accent);">graphystyle.com</div>
+          <div style="font-size:14px;color:#94a3b8;margin-top:6px;">이중우 · 올리브서울치과 대표원장</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:18px;font-weight:700;color:#fff;font-family:var(--fm);">SIDEX 2026</div>
+          <div style="font-size:14px;color:#94a3b8;margin-top:6px;">(주)그래피 솔루션개발팀 자문역</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Notes panel -->
+<div class="notes-panel" id="notes-panel">
+  <div class="label">SPEAKER NOTES</div>
+  <div id="notes-text"></div>
+</div>
+
+<!-- Overview -->
+<div class="overview" id="overview">
+  <h2>전체 슬라이드 (14)</h2>
+  <div class="overview-grid" id="overview-grid"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Controls -->
+<div class="controls">
+  <button class="ctrl-btn" id="prev" title="이전 (←)">‹</button>
+  <span class="counter" id="counter">1 / 14</span>
+  <button class="ctrl-btn" id="next" title="다음 (→)">›</button>
+  <div class="divider"></div>
+  <button class="ctrl-btn" id="overview-btn" title="개요 (O)">⊞</button>
+  <button class="ctrl-btn" id="notes-btn" title="노트 (N)">📝</button>
+  <button class="ctrl-btn" id="fullscreen-btn" title="풀스크린 (F)">⛶</button>
+  <div class="divider"></div>
+  <button class="ctrl-btn primary" id="export-btn" title="PPTX 다운로드">📥 PPTX</button>
+</div>
+
+<!-- PptxGenJS for client-side PPT generation -->
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+
+<script>
+// ============================================================
+// Stage scaling — keep 1280×720 fitting viewport
+// ============================================================
+const TOTAL = 14;
+const stage = document.getElementById('stage');
+const deck = document.getElementById('deck');
+
+function scaleStage(){
+  const margin = 60;
+  const sx = (window.innerWidth - margin) / 1280;
+  const sy = (window.innerHeight - margin) / 720;
+  const scale = Math.min(sx, sy, 1.2);
+  deck.style.transform = `scale(${scale})`;
+}
+window.addEventListener('resize', scaleStage);
+scaleStage();
+
+// ============================================================
+// Navigation
+// ============================================================
+let current = 1;
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+const progressFill = document.getElementById('progress-fill');
+const notesPanel = document.getElementById('notes-panel');
+const notesText = document.getElementById('notes-text');
+
+function show(n){
+  current = Math.max(1, Math.min(TOTAL, n));
+  slides.forEach(s => {
+    const isActive = parseInt(s.dataset.slide) === current;
+    s.classList.toggle('active', isActive);
+  });
+  counter.textContent = `${current} / ${TOTAL}`;
+  progressFill.style.width = `${(current / TOTAL) * 100}%`;
+  // update notes
+  const active = document.querySelector('.slide.active');
+  if (active) notesText.textContent = active.dataset.notes || '';
+  // sync overview selection
+  document.querySelectorAll('.overview-thumb').forEach(t => {
+    t.classList.toggle('active', parseInt(t.dataset.slide) === current);
+  });
+  // update URL hash
+  history.replaceState(null, '', `#${current}`);
+}
+
+document.getElementById('prev').onclick = () => show(current - 1);
+document.getElementById('next').onclick = () => show(current + 1);
+
+// Click on slide to advance
+deck.addEventListener('click', e => {
+  if (e.target.closest('button,a,input')) return;
+  const x = e.clientX;
+  const rect = deck.getBoundingClientRect();
+  if (x < rect.left + rect.width / 3) show(current - 1);
+  else if (x > rect.left + rect.width * 2 / 3) show(current + 1);
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea')) return;
+  switch (e.key) {
+    case 'ArrowRight': case 'PageDown': case ' ': e.preventDefault(); show(current + 1); break;
+    case 'ArrowLeft': case 'PageUp': e.preventDefault(); show(current - 1); break;
+    case 'Home': show(1); break;
+    case 'End': show(TOTAL); break;
+    case 'n': case 'N': toggleNotes(); break;
+    case 'o': case 'O': case 'Escape': toggleOverview(); break;
+    case 'f': case 'F': toggleFullscreen(); break;
+    case 'p': case 'P': case 'd': case 'D': exportPptx(); break;
+  }
+  if (/^[0-9]$/.test(e.key)) {
+    const n = parseInt(e.key);
+    if (n >= 1 && n <= TOTAL) show(n);
+  }
+});
+
+// Swipe (touch)
+let touchX = 0;
+deck.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+deck.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+});
+
+// Initial slide from URL
+const initial = parseInt(location.hash.slice(1));
+if (initial >= 1 && initial <= TOTAL) show(initial);
+
+// ============================================================
+// Notes / Overview / Fullscreen
+// ============================================================
+function toggleNotes(){
+  notesPanel.classList.toggle('open');
+}
+document.getElementById('notes-btn').onclick = toggleNotes;
+
+function toggleFullscreen(){
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+}
+document.getElementById('fullscreen-btn').onclick = toggleFullscreen;
+
+const overview = document.getElementById('overview');
+const overviewGrid = document.getElementById('overview-grid');
+
+// Build overview thumbs
+slides.forEach(s => {
+  const num = parseInt(s.dataset.slide);
+  const titleEl = s.querySelector('h1, h2');
+  const title = titleEl ? titleEl.textContent.trim().substring(0, 30) : `Slide ${num}`;
+  const thumb = document.createElement('div');
+  thumb.className = 'overview-thumb';
+  thumb.dataset.slide = num;
+  thumb.innerHTML = `<div class="num">${String(num).padStart(2,'0')} / 14</div><div class="title">${title}</div>`;
+  thumb.onclick = () => { show(num); toggleOverview(); };
+  overviewGrid.appendChild(thumb);
+});
+
+function toggleOverview(){
+  overview.classList.toggle('open');
+}
+document.getElementById('overview-btn').onclick = toggleOverview;
+
+// ============================================================
+// Toast
+// ============================================================
+function toast(msg, ms=2400){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), ms);
+}
+
+// Show hint briefly on load
+const hint = document.getElementById('hint');
+hint.classList.add('show');
+setTimeout(() => hint.classList.remove('show'), 4500);
+
+// ============================================================
+// PPTX EXPORT (PptxGenJS)
+// ============================================================
+const PPTX_COLORS = {
+  ACCENT: 'FF6B2B',
+  ACCENT_DEEP: 'C84A14',
+  ACCENT_SOFT: 'FFF4EE',
+  ACCENT_TINT: 'FEF0E6',
+  INK: '0F172A',
+  DIM: '475569',
+  MUTED: '64748B',
+  SUBTLE: '94A3B8',
+  BG: 'FFFFFF',
+  BG_SECTION: 'F7F8FA',
+  BORDER: 'E5E7EB',
+  WARM_BG: 'FFF7F0',
+  GREEN: '059669', GREEN_DIM: 'ECFDF5',
+  BLUE: '2563EB', BLUE_DIM: 'EFF6FF',
+  PURPLE: '7C3AED', PURPLE_DIM: 'F5F3FF',
+};
+
+function exportPptx(){
+  toast('PPTX 생성 중…');
+  setTimeout(() => doExport(), 100);
+}
+document.getElementById('export-btn').onclick = exportPptx;
+
+function doExport(){
+  const pptx = new PptxGenJS();
+  pptx.layout = 'LAYOUT_WIDE'; // 13.333 x 7.5
+  pptx.title = 'Graphy Style — SIDEX 2026';
+  pptx.author = '이중우 · 올리브서울치과';
+  pptx.company = '(주)그래피';
+
+  // Helper: simple text
+  const txt = (s, x, y, w, h, t, opts={}) => {
+    s.addText(t, { x, y, w, h, fontFace: 'Pretendard', color: PPTX_COLORS.INK,
+      fontSize: 18, valign: 'top', align: 'left', ...opts });
+  };
+
+  // Helper: rounded rect
+  const rect = (s, x, y, w, h, fill, line) => {
+    s.addShape(pptx.ShapeType.roundRect, {
+      x, y, w, h, fill: { color: fill }, line: line ? { color: line, width: 1 } : { type: 'none' },
+      rectRadius: 0.08
+    });
+  };
+
+  // Notes helper
+  const note = (s, t) => s.addNotes(t);
+
+  // ---------- 1. Cover ----------
+  let s = pptx.addSlide();
+  s.background = { color: PPTX_COLORS.WARM_BG };
+  s.addShape(pptx.ShapeType.ellipse, { x: 9, y: -2, w: 7, h: 7,
+    fill: { color: PPTX_COLORS.ACCENT_TINT }, line: { type: 'none' } });
+  // Brand mark
+  rect(s, 0.7, 0.7, 0.7, 0.7, PPTX_COLORS.ACCENT);
+  txt(s, 0.7, 0.7, 0.7, 0.7, 'G', { fontSize: 28, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle' });
+  txt(s, 1.55, 0.7, 6, 0.4, 'Graphy', { fontSize: 22, bold: true });
+  txt(s, 1.55, 1.1, 6, 0.3, '× FixOn — Solution Lab', { fontSize: 12, color: PPTX_COLORS.MUTED, fontFace: 'JetBrains Mono' });
+
+  txt(s, 0.7, 2.5, 11.5, 0.4, 'SIDEX 2026 · KEYNOTE', { fontSize: 14, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 3.0, 11.5, 1.6, 'Graphy Style', { fontSize: 88, bold: true });
+  txt(s, 0.7, 4.5, 11.5, 0.9, '3D 프린팅으로 만드는 개인 맞춤 구강 케어', { fontSize: 30, color: PPTX_COLORS.ACCENT });
+
+  rect(s, 0.7, 6.0, 6.5, 0.9, PPTX_COLORS.BG, PPTX_COLORS.BORDER);
+  txt(s, 0.95, 6.05, 6, 0.4, '이중우 · 올리브서울치과 대표원장', { fontSize: 15, bold: true, valign: 'middle' });
+  txt(s, 0.95, 6.4, 6, 0.4, '(주)그래피 솔루션개발팀 자문역', { fontSize: 12, color: PPTX_COLORS.MUTED, valign: 'middle' });
+  txt(s, 8.2, 6.0, 4.5, 0.45, 'graphystyle.com', { fontSize: 14, bold: true, fontFace: 'JetBrains Mono', align: 'right' });
+  txt(s, 8.2, 6.4, 4.5, 0.4, '공유 플랫폼', { fontSize: 12, color: PPTX_COLORS.MUTED, align: 'right' });
+  note(s, '안녕하세요. 주식회사 그래피 솔루션개발팀 자문역을 맡고 있는 올리브서울치과 이중우 원장입니다.');
+
+  // ---------- 2. Intro ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, 'INTRODUCTION', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.4, '안녕하세요.', { fontSize: 64, bold: true });
+  txt(s, 0.7, 2.7, 11.5, 2.0, '올리브서울치과 이중우 원장입니다.\n그래피 솔루션개발팀 자문역을 맡고 있습니다.', { fontSize: 24, color: PPTX_COLORS.DIM });
+  const topics = [
+    ['01', 'Graphy Style', '형상기억소재 + 3D프린팅 + 개인 맞춤'],
+    ['02', 'Graphy Style Devices', 'Point Shower 외 개발 중인 디바이스들'],
+    ['03', '공유 플랫폼', 'graphystyle.com 으로 함께 만들어 갑니다'],
+  ];
+  topics.forEach(([num, title, desc], i) => {
+    const x = 0.7 + i * 3.9;
+    rect(s, x, 5.0, 3.7, 1.8, PPTX_COLORS.BG_SECTION, PPTX_COLORS.BORDER);
+    txt(s, x + 0.25, 5.18, 2, 0.3, num, { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT, fontFace: 'JetBrains Mono' });
+    txt(s, x + 0.25, 5.5, 3.2, 0.5, title, { fontSize: 20, bold: true });
+    txt(s, x + 0.25, 6.05, 3.2, 0.7, desc, { fontSize: 13, color: PPTX_COLORS.DIM });
+  });
+  note(s, '오늘 말씀드릴 내용은 그래피의 형상기억소재를 사용해서 3D 프린터로 출력하는 개인 맞춤형 치아세정기와 다양한 잇몸 관리 기구들, 그리고 원장님들이 함께 개발에 참여하시는 공유 플랫폼입니다.');
+
+  // ---------- 3. Concept ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 01 · CONCEPT', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Graphy Style 이란?', { fontSize: 48, bold: true });
+  txt(s, 0.7, 2.4, 11.5, 0.6, '그래피의 형상기억소재로 3D 프린터를 이용해 개인 맞춤형으로 제작하는 형태', { fontSize: 18, color: PPTX_COLORS.DIM });
+  const concepts = [
+    ['🧬', '형상기억소재', 'Tera Harz Clear\n끓는 물에서 변형, 37℃ 복원'],
+    ['🖨️', '3D 프린팅', '그래피 프린터로 정밀 출력\n환자별 데이터 기반'],
+    ['👤', '개인 맞춤', '환자 치열·잇몸·요구에 맞춰\n노즐 위치까지 설계'],
+  ];
+  concepts.forEach(([icon, title, desc], i) => {
+    const x = 0.7 + i * 3.9;
+    rect(s, x, 3.5, 3.7, 3.2, PPTX_COLORS.BG, PPTX_COLORS.BORDER);
+    rect(s, x + 0.35, 3.9, 0.85, 0.85, PPTX_COLORS.ACCENT_SOFT);
+    txt(s, x + 0.35, 3.9, 0.85, 0.85, icon, { fontSize: 32, align: 'center', valign: 'middle' });
+    txt(s, x + 0.35, 5.0, 3.0, 0.5, title, { fontSize: 22, bold: true });
+    txt(s, x + 0.35, 5.55, 3.0, 1.0, desc, { fontSize: 14, color: PPTX_COLORS.DIM });
+  });
+  rect(s, 0.7, 6.85, 11.5, 0.5, PPTX_COLORS.ACCENT_SOFT);
+  txt(s, 0.7, 6.85, 11.5, 0.5, '👉  본 발표에서 \'Graphy Style\' 이라는 단어가 등장하면, 위 3가지 컨셉을 떠올려 주세요.',
+    { fontSize: 13, bold: true, color: PPTX_COLORS.ACCENT_DEEP, align: 'center', valign: 'middle' });
+  note(s, '먼저 자주 언급될 그래피 스타일이라는 용어에 대한 설명을 하고 시작하겠습니다. Graphy Style은 그래피의 형상기억소재로 3D 프린터를 이용해 개인 맞춤형으로 제작하는 형태를 말하는 겁니다.');
+
+  // ---------- 4. Material ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 01 · 소재', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Tera Harz Clear', { fontSize: 52, bold: true });
+  txt(s, 0.7, 2.3, 11.5, 0.6, '안전성 + 열소독 + 형상기억 — 임상에서 바로 쓸 수 있는 첨단 소재', { fontSize: 18, color: PPTX_COLORS.DIM });
+  const specs = [
+    ['✓', 'FDA 승인', '안전성이 확보된 의료용 레진'],
+    ['♨', '열 소독 가능', '끓는 물에서 멸균 — 위생 관리 간단'],
+    ['◐', '형상 기억', '37℃ 복원 — 변형 후에도 원형 유지'],
+  ];
+  specs.forEach(([sym, title, desc], i) => {
+    const y = 3.3 + i * 0.95;
+    rect(s, 0.7, y, 0.6, 0.6, PPTX_COLORS.ACCENT_SOFT);
+    txt(s, 0.7, y, 0.6, 0.6, sym, { fontSize: 22, bold: true, color: PPTX_COLORS.ACCENT_DEEP, align: 'center', valign: 'middle' });
+    txt(s, 1.55, y - 0.05, 5, 0.45, title, { fontSize: 20, bold: true });
+    txt(s, 1.55, y + 0.4, 5, 0.45, desc, { fontSize: 14, color: PPTX_COLORS.DIM });
+  });
+  // Video frame
+  rect(s, 7.0, 3.3, 5.2, 2.85, PPTX_COLORS.BG_SECTION, PPTX_COLORS.BORDER);
+  s.addShape(pptx.ShapeType.ellipse, { x: 9.2, y: 4.3, w: 0.8, h: 0.85,
+    fill: { color: PPTX_COLORS.ACCENT }, line: { type: 'none' } });
+  txt(s, 9.2, 4.3, 0.8, 0.85, '▶', { fontSize: 22, color: 'FFFFFF', align: 'center', valign: 'middle', bold: true });
+  txt(s, 7.0, 5.3, 5.2, 0.4, 'Tera Harz Clear · 형상기억 시연 영상', { fontSize: 12, color: PPTX_COLORS.MUTED, align: 'center', fontFace: 'JetBrains Mono' });
+  txt(s, 7.0, 5.7, 5.2, 0.4, '(발표 시 영상 삽입 위치)', { fontSize: 10, color: PPTX_COLORS.SUBTLE, align: 'center' });
+  note(s, '그래피의 형상기억소재 Tera Harz Clear 는 FDA 승인을 받은 안전성이 확보된 소재이고, 끓는 물에 열소독이 가능합니다. 37도가 되면 다시 원래의 형태로 복원되는 첨단 소재입니다.');
+
+  // ---------- 5. Point Shower ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · FLAGSHIP DEVICE', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.4, 'Point Shower', { fontSize: 72, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 2.5, 11.5, 0.6, '환자의 치열·잇몸 형태에 맞춘 개인 맞춤 치아 세정기', { fontSize: 20, color: PPTX_COLORS.DIM });
+  txt(s, 0.7, 3.4, 6.5, 2.3, '스플린트 형태로 구강에 안착시키고,\n정확히 원하는 위치로 물이 분사되어 세척됩니다.\n\n핵심 파트인 스플린트는 환자의 치열과 구조에 맞추어 3D 프린터로 제작합니다.', { fontSize: 16 });
+  const parts = [
+    ['01', '스플린트', '환자별 맞춤 3D 프린팅', PPTX_COLORS.ACCENT, PPTX_COLORS.ACCENT_SOFT],
+    ['02', '어댑터', '노즐 - 호스 연결부', PPTX_COLORS.BLUE, PPTX_COLORS.BLUE_DIM],
+    ['03', '아쿠아픽', '수류 공급 본체', PPTX_COLORS.PURPLE, PPTX_COLORS.PURPLE_DIM],
+  ];
+  parts.forEach(([num, name, desc, color, soft], i) => {
+    const y = 3.4 + i * 0.95;
+    rect(s, 7.5, y, 4.7, 0.8, soft);
+    txt(s, 7.75, y, 0.6, 0.8, num, { fontSize: 14, bold: true, color, fontFace: 'JetBrains Mono', valign: 'middle' });
+    txt(s, 8.5, y, 2, 0.8, name, { fontSize: 17, bold: true, valign: 'middle' });
+    txt(s, 10.2, y, 2, 0.8, desc, { fontSize: 12, color: PPTX_COLORS.DIM, valign: 'middle' });
+  });
+  rect(s, 0.7, 6.4, 11.5, 0.7, PPTX_COLORS.BG_SECTION);
+  txt(s, 0.7, 6.4, 11.5, 0.7, '🎞   모션그래픽 — Point Shower 작동 원리   (발표 시 재생)',
+    { fontSize: 13, bold: true, color: PPTX_COLORS.MUTED, align: 'center', valign: 'middle', fontFace: 'JetBrains Mono' });
+  note(s, 'Point Shower 입니다. 환자의 치열과 잇몸 형태에 맞춰 스플린트 형태로 제작되어 구강에 안착시키고, 정확히 원하는 위치로 물이 분사되어 세척하는 개인 맞춤 치아세정기입니다.');
+
+  // ---------- 6. Process ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · 제작 프로세스', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, '접수에서 딜리버리까지, 약 1주일', { fontSize: 42, bold: true });
+  txt(s, 0.7, 2.3, 11.5, 0.6, '스캐너가 없어도 임프레션 모델로 진행 가능', { fontSize: 16, color: PPTX_COLORS.DIM });
+  const steps = [
+    ['01', '📩', '지시 접수', '모델 + 세척 부위\n표시 및 요구사항'],
+    ['02', '📡', '스캔', '임프레션 모델을\n그래피가 스캔'],
+    ['03', '✏️', '설계', '노즐 위치 + 수류\n통로 디자인'],
+    ['04', '🖨️', '3D 프린팅', '스플린트 출력\n+ 노즐·어댑터 결합'],
+    ['05', '📦', '딜리버리', '아쿠아픽과 함께\n원장님께 전달'],
+  ];
+  steps.forEach(([num, icon, name, desc], i) => {
+    const x = 0.7 + i * 2.35;
+    rect(s, x, 3.3, 2.2, 2.85, PPTX_COLORS.BG, PPTX_COLORS.BORDER);
+    s.addShape(pptx.ShapeType.ellipse, { x: x + 0.8, y: 3.55, w: 0.6, h: 0.6,
+      fill: { color: PPTX_COLORS.ACCENT_SOFT }, line: { color: PPTX_COLORS.ACCENT, width: 1 } });
+    txt(s, x, 3.57, 2.2, 0.55, num, { fontSize: 13, bold: true, color: PPTX_COLORS.ACCENT_DEEP, fontFace: 'JetBrains Mono', align: 'center', valign: 'middle' });
+    txt(s, x, 4.3, 2.2, 0.7, icon, { fontSize: 32, align: 'center' });
+    txt(s, x, 5.0, 2.2, 0.4, name, { fontSize: 15, bold: true, align: 'center' });
+    txt(s, x, 5.45, 2.2, 0.7, desc, { fontSize: 11, color: PPTX_COLORS.MUTED, align: 'center' });
+  });
+  rect(s, 0.7, 6.4, 11.5, 0.7, PPTX_COLORS.BG_SECTION);
+  txt(s, 1.0, 6.4, 11.0, 0.7, '💡  부스에서 실제 Point Shower 를 직접 체험하실 수 있습니다.', { fontSize: 14, bold: true, valign: 'middle' });
+  note(s, '접수부터 딜리버리까지 일주일 정도 걸립니다. 부스에 준비되어 있으니 발표 후에 오셔서 직접 확인해 보시기 바랍니다.');
+
+  // ---------- 7. Pipeline ----------
+  s = pptx.addSlide();
+  s.background = { color: PPTX_COLORS.WARM_BG };
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICES PIPELINE', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Shower 는 시작입니다.', { fontSize: 46, bold: true });
+  txt(s, 0.7, 2.4, 11.5, 1.0, 'Graphy Style 의 형상기억 + 3D 프린팅 + 개인 맞춤 컨셉으로\n다양한 구강·잇몸 케어 디바이스를 개발하고 있습니다.', { fontSize: 20, color: PPTX_COLORS.DIM });
+  const devices = [
+    ['Point Shower', '치아 세정기', '✅ 출시 완료', PPTX_COLORS.GREEN, PPTX_COLORS.GREEN_DIM],
+    ['Point Mediffuser', '약물 정밀 도포', '🚧 개발 중', PPTX_COLORS.ACCENT, PPTX_COLORS.ACCENT_SOFT],
+    ['Night Pack Splint', '야간 잇몸 마스크팩', '🚧 개발 중', PPTX_COLORS.BLUE, PPTX_COLORS.BLUE_DIM],
+    ['Perio Touch / MTS', '잇몸 저주파 / MTS', '💡 아이디어', PPTX_COLORS.PURPLE, PPTX_COLORS.PURPLE_DIM],
+  ];
+  devices.forEach(([name, sub, status, color, soft], i) => {
+    const x = 0.5 + i * 2.95;
+    rect(s, x, 4.2, 2.85, 3.0, PPTX_COLORS.BG, PPTX_COLORS.BORDER);
+    rect(s, x, 4.2, 2.85, 0.3, soft);
+    txt(s, x + 0.2, 4.2, 2.45, 0.3, status, { fontSize: 11, bold: true, color, valign: 'middle' });
+    txt(s, x + 0.25, 4.75, 2.35, 0.6, name, { fontSize: 17, bold: true });
+    txt(s, x + 0.25, 5.35, 2.35, 0.5, sub, { fontSize: 13, color: PPTX_COLORS.DIM });
+    txt(s, x + 0.25, 6.35, 2.35, 0.7, String(i + 1).padStart(2, '0'), { fontSize: 44, bold: true, color: soft, fontFace: 'JetBrains Mono', align: 'right' });
+  });
+  note(s, '다음은 개발 진행 중인 그래피 스타일 디바이스들을 소개하겠습니다.');
+
+  // ---------- 8. Mediffuser ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 02', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Mediffuser', { fontSize: 58, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 2.4, 11.5, 0.6, '필요한 부위에 정확하게 약물을 주입하는 기구', { fontSize: 20, color: PPTX_COLORS.DIM });
+  // Liquid
+  rect(s, 0.7, 3.4, 5.6, 3.5, PPTX_COLORS.BLUE_DIM);
+  txt(s, 1.1, 3.7, 0.6, 0.6, '💧', { fontSize: 32, valign: 'middle' });
+  txt(s, 1.1, 4.4, 4.8, 0.5, 'TYPE A · 액체', { fontSize: 12, bold: true, color: PPTX_COLORS.BLUE, fontFace: 'JetBrains Mono' });
+  txt(s, 1.1, 4.8, 4.8, 0.6, '액상 약물 정밀 분사', { fontSize: 22, bold: true });
+  txt(s, 1.1, 5.5, 4.8, 1.2, '▸ 헥사메딘 (구강 살균)\n▸ 샐라인 (생리식염수)\n▸ 기타 액상 처방', { fontSize: 15, color: PPTX_COLORS.DIM });
+  // Paste
+  rect(s, 6.6, 3.4, 5.6, 3.5, PPTX_COLORS.ACCENT_SOFT);
+  txt(s, 7.0, 3.7, 0.6, 0.6, '🧴', { fontSize: 32, valign: 'middle' });
+  txt(s, 7.0, 4.4, 4.8, 0.5, 'TYPE B · 페이스트', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT_DEEP, fontFace: 'JetBrains Mono' });
+  txt(s, 7.0, 4.8, 4.8, 0.6, '연고형 약제 정밀 도포', { fontSize: 22, bold: true });
+  txt(s, 7.0, 5.5, 4.8, 1.2, '▸ 미노싸이클린 연고\n▸ 항염·항균 처방\n▸ 제약사 협업 카트리지', { fontSize: 15, color: PPTX_COLORS.DIM });
+  rect(s, 0.7, 7.05, 11.5, 0.4, PPTX_COLORS.BG_SECTION);
+  txt(s, 0.7, 7.05, 11.5, 0.4, '🤝  제약회사와 함께 개발 예정 — 공동 임상·공동 카트리지',
+    { fontSize: 12, bold: true, color: PPTX_COLORS.DIM, align: 'center', valign: 'middle' });
+  note(s, 'Point Mediffuser 입니다. 헥사메딘이나 샐라인 같은 액체 주입용과 미노싸이클린 연고와 같은 페이스트 주입용 두 가지 타입으로 제약회사와 함께 개발할 예정입니다.');
+
+  // ---------- 9. Night Pack ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 03', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Night Pack Splint', { fontSize: 58, bold: true, color: PPTX_COLORS.BLUE });
+  txt(s, 0.7, 2.4, 11.5, 0.6, '잠자기 전, 잇몸을 위한 마스크팩', { fontSize: 20, color: PPTX_COLORS.DIM });
+  txt(s, 0.7, 3.4, 11.5, 2.5, '피부 관리를 위해 잠자기 전에 마스크팩을 하는 것처럼,\n잇몸 건강을 돕는 제제를 잇몸 라인을 따라 도포할 수 있는 기구입니다.', { fontSize: 22 });
+  ['구강 유산균', '프로폴리스', '자일리톨', '비타민 C'].forEach((ing, i) => {
+    rect(s, 0.7 + i * 2.7, 5.6, 2.5, 0.7, PPTX_COLORS.BLUE_DIM);
+    txt(s, 0.7 + i * 2.7, 5.6, 2.5, 0.7, ing, { fontSize: 15, bold: true, color: PPTX_COLORS.BLUE, align: 'center', valign: 'middle' });
+  });
+  txt(s, 0.7, 6.6, 11.5, 0.5, '→ 잇몸 라인 따라 도포되는 균일한 카트리지 형태', { fontSize: 14, color: PPTX_COLORS.MUTED });
+  note(s, 'Night Pack Splint 입니다. 피부 관리 마스크팩처럼 잇몸 건강을 돕는 제제를 잇몸 라인을 따라 도포할 수 있는 기구입니다.');
+
+  // ---------- 10. Perio ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 04+05  (아이디어)', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, '피부 관리 원리를 잇몸으로', { fontSize: 42, bold: true });
+  txt(s, 0.7, 2.3, 11.5, 0.6, '이미 검증된 피부 관리 기구의 원리를 구강에 응용한다면?', { fontSize: 18, color: PPTX_COLORS.DIM });
+  // Perio Touch
+  rect(s, 0.7, 3.3, 5.6, 3.6, PPTX_COLORS.BG, PPTX_COLORS.PURPLE);
+  txt(s, 1.1, 3.6, 2, 0.4, '💡 IDEA · 04', { fontSize: 11, bold: true, color: PPTX_COLORS.PURPLE, fontFace: 'JetBrains Mono' });
+  txt(s, 1.1, 4.05, 4.8, 0.6, 'Perio Touch', { fontSize: 26, bold: true });
+  txt(s, 1.1, 4.7, 4.8, 0.5, '잇몸용 저주파 치료기', { fontSize: 16, color: PPTX_COLORS.ACCENT });
+  txt(s, 1.1, 5.3, 4.8, 1.5, '피부 EMS 의 원리를\n잇몸 혈류 자극으로.\n\n맞춤 트레이가 전극 위치를 정확하게.', { fontSize: 14, color: PPTX_COLORS.DIM });
+  // Perio MTS
+  rect(s, 6.6, 3.3, 5.6, 3.6, PPTX_COLORS.BG, PPTX_COLORS.PURPLE);
+  txt(s, 7.0, 3.6, 2, 0.4, '💡 IDEA · 05', { fontSize: 11, bold: true, color: PPTX_COLORS.PURPLE, fontFace: 'JetBrains Mono' });
+  txt(s, 7.0, 4.05, 4.8, 0.6, 'Perio MTS', { fontSize: 26, bold: true });
+  txt(s, 7.0, 4.7, 4.8, 0.5, 'Micro Needle Therapy System', { fontSize: 16, color: PPTX_COLORS.ACCENT });
+  txt(s, 7.0, 5.3, 4.8, 1.5, '피부 MTS 가 콜라겐 재생을 유도하듯,\n잇몸 조직 재생을 자극.\n\n맞춤 스플린트가 안전한 깊이와\n정밀한 위치를 보장.', { fontSize: 14, color: PPTX_COLORS.DIM });
+  rect(s, 0.7, 7.05, 11.5, 0.4, PPTX_COLORS.ACCENT_SOFT);
+  txt(s, 0.7, 7.05, 11.5, 0.4, '✨  Point Shower 는 성공했지만 — 다른 아이템은 아무도 모릅니다. 함께 만들어 가야 합니다.',
+    { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT_DEEP, align: 'center', valign: 'middle' });
+  note(s, '피부 관리 기구들의 원리를 이용해서 잇몸 관리 기구도 만들 수 있지 않을까? 그래서 몇 가지 아이디어를 내보았습니다.');
+
+  // ---------- 11. Platform ----------
+  s = pptx.addSlide();
+  s.background = { color: PPTX_COLORS.WARM_BG };
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 03 · SHARED PLATFORM', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, '혼자가 아닌, 함께.', { fontSize: 64, bold: true });
+  txt(s, 0.7, 2.5, 11.5, 1.4, '원장님들의 집단 지성을 모아\n더 완성도 높고 빠른 개발을 함께 만들어 갑니다.', { fontSize: 24, color: PPTX_COLORS.DIM });
+  rect(s, 2.0, 4.7, 8.9, 1.4, PPTX_COLORS.BG, PPTX_COLORS.ACCENT);
+  txt(s, 2.0, 4.85, 8.9, 0.4, '공유 플랫폼', { fontSize: 12, bold: true, color: PPTX_COLORS.MUTED, fontFace: 'JetBrains Mono', align: 'center' });
+  txt(s, 2.0, 5.2, 8.9, 0.7, 'graphystyle.com', { fontSize: 44, bold: true, color: PPTX_COLORS.ACCENT, fontFace: 'JetBrains Mono', align: 'center' });
+  ['IDEA POOL', 'FEEDBACK', '공모전', '수익 분배'].forEach((t, i) => {
+    rect(s, 2.0 + i * 2.3, 6.5, 2.0, 0.5, PPTX_COLORS.ACCENT_SOFT);
+    txt(s, 2.0 + i * 2.3, 6.5, 2.0, 0.5, t, { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT_DEEP, fontFace: 'JetBrains Mono', align: 'center', valign: 'middle' });
+  });
+  note(s, 'graphystyle.com — 이 사이트에 들어오셔서 자유롭게 아이디어를 제안하고 피드백을 주시기 바랍니다.');
+
+  // ---------- 12. Rewards ----------
+  s = pptx.addSlide();
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 03 · REWARDS & VISION', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, '참여하시는 만큼, 보상도 함께', { fontSize: 42, bold: true });
+  txt(s, 0.7, 2.4, 11.5, 0.6, '원장님들이 만들어주신 가치는 정당하게 분배됩니다.', { fontSize: 18, color: PPTX_COLORS.DIM });
+  const pillars = [
+    ['🏆', '아이디어 공모전', '제안된 아이디어 중 우수작 시상'],
+    ['💰', '수익 분배', '상품화 시 제안자에게 로열티'],
+    ['🎁', '참여 보상', '활발한 피드백 기여자 혜택'],
+    ['🌐', '확장 비전', '검색→카페→쇼핑처럼 단계적 확장'],
+  ];
+  pillars.forEach(([icon, title, desc], i) => {
+    const x = 0.5 + i * 2.95;
+    rect(s, x, 3.4, 2.85, 3.4, PPTX_COLORS.BG_SECTION, PPTX_COLORS.BORDER);
+    s.addShape(pptx.ShapeType.ellipse, { x: x + 1.0, y: 3.9, w: 0.85, h: 0.85,
+      fill: { color: 'FFFFFF' }, line: { color: PPTX_COLORS.ACCENT, width: 1.5 } });
+    txt(s, x + 1.0, 3.9, 0.85, 0.85, icon, { fontSize: 28, align: 'center', valign: 'middle' });
+    txt(s, x + 0.4, 5.0, 2.05, 0.5, title, { fontSize: 18, bold: true, align: 'center' });
+    txt(s, x + 0.4, 5.6, 2.05, 1.0, desc, { fontSize: 13, color: PPTX_COLORS.DIM, align: 'center' });
+  });
+  rect(s, 0.5, 7.0, 12.2, 0.6, PPTX_COLORS.ACCENT_SOFT);
+  txt(s, 0.5, 7.0, 12.2, 0.6, '🚀  네이버가 검색→카페→쇼핑으로 확장했듯이, 우리도 단계적으로 함께 자라갑니다.',
+    { fontSize: 13, bold: true, color: PPTX_COLORS.ACCENT_DEEP, align: 'center', valign: 'middle' });
+  note(s, '아이디어 공모전, 수익 분배, 참여 보상, 그리고 단계적인 확장 비전을 준비하고 있습니다.');
+
+  // ---------- 13. Booth ----------
+  s = pptx.addSlide();
+  s.background = { color: PPTX_COLORS.WARM_BG };
+  s.addShape(pptx.ShapeType.ellipse, { x: -3, y: 2, w: 8, h: 8,
+    fill: { color: PPTX_COLORS.ACCENT_TINT }, line: { type: 'none' } });
+  txt(s, 0.7, 0.7, 8, 0.4, 'BOOTH VISIT', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.5, 11.5, 2.4, '직접 체험해 보세요.', { fontSize: 72, bold: true });
+  txt(s, 0.7, 3.6, 11.5, 1.4, 'Point Shower 가 부스에 준비되어 있습니다.\n발표 후 방문하셔서 직접 손에 쥐고 작동 원리를 확인해 보세요.', { fontSize: 22, color: PPTX_COLORS.DIM });
+  rect(s, 0.7, 5.8, 11.5, 1.3, PPTX_COLORS.BG, PPTX_COLORS.ACCENT);
+  txt(s, 0.95, 5.95, 7, 0.5, '📍 BOOTH', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT_DEEP, fontFace: 'JetBrains Mono' });
+  txt(s, 0.95, 6.4, 7, 0.6, '그래피 부스 — Point Shower 시연', { fontSize: 22, bold: true });
+  txt(s, 8.0, 5.95, 4.2, 1.2, 'graphystyle.com\n공유 플랫폼 즉시 가입',
+    { fontSize: 14, bold: true, color: PPTX_COLORS.ACCENT_DEEP, fontFace: 'JetBrains Mono', align: 'right', valign: 'middle' });
+  note(s, '실제로 체험하실 수 있도록 부스에 준비되어 있으니 발표 후에 오셔서 직접 확인해 보시기 바랍니다.');
+
+  // ---------- 14. Closing ----------
+  s = pptx.addSlide();
+  s.background = { color: PPTX_COLORS.INK };
+  rect(s, 0, 0, 13.333, 0.18, PPTX_COLORS.ACCENT);
+  txt(s, 0.7, 2.0, 11.5, 2.4, '감사합니다.', { fontSize: 120, bold: true, color: 'FFFFFF', align: 'center' });
+  txt(s, 0.7, 4.5, 11.5, 0.7, '함께 만들어 가는 Graphy Style.', { fontSize: 24, color: 'CBD5E1', align: 'center' });
+  txt(s, 0.7, 6.4, 5, 0.4, 'graphystyle.com', { fontSize: 14, bold: true, color: PPTX_COLORS.ACCENT, fontFace: 'JetBrains Mono' });
+  txt(s, 0.7, 6.75, 5, 0.4, '이중우 · 올리브서울치과 대표원장', { fontSize: 12, color: '94A3B8' });
+  txt(s, 7.2, 6.4, 5, 0.4, '(주)그래피 솔루션개발팀 자문역', { fontSize: 12, color: '94A3B8', align: 'right' });
+  txt(s, 7.2, 6.75, 5, 0.4, 'SIDEX 2026', { fontSize: 14, bold: true, color: 'FFFFFF', fontFace: 'JetBrains Mono', align: 'right' });
+  note(s, '감사합니다. (Q&A 전환)');
+
+  // Save
+  const fname = 'Graphy_Style_SIDEX_2026.pptx';
+  pptx.writeFile({ fileName: fname }).then(() => {
+    toast(`✅ ${fname} 다운로드 완료`);
+  }).catch(err => {
+    console.error(err);
+    toast('❌ PPTX 생성 실패 — 콘솔 확인');
+  });
+}
+</script>
+</body>
+</html>
