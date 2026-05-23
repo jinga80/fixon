@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Point Shower Community — 의료진 커뮤니티</title>
+<title>graphystyle 커뮤니티 — 원장 공동개발 채널</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Point Shower">
+<meta property="og:site_name" content="graphystyle">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="Point Shower Community — 의료진 커뮤니티">
-<meta property="og:description" content="임상 사례 공유·아이디어 투표·잠재 거래처 채널.">
-<meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
+<meta property="og:title" content="graphystyle 커뮤니티 — 원장 공동개발 채널">
+<meta property="og:description" content="원장님과 함께 만드는 graphystyle — 아이디어 제안·임상 피드백·신제품 우선 체험.">
+<meta property="og:image" content="https://graphystyle.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
-<meta property="og:url" content="https://fixon-production.up.railway.app/point-shower-community/">
+<meta property="og:image:alt" content="graphystyle — 3D 프린팅 개인 맞춤 구강 케어">
+<meta property="og:url" content="https://graphystyle.com/point-shower-community/">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Point Shower Community — 의료진 커뮤니티">
-<meta name="twitter:description" content="임상 사례 공유·아이디어 투표·잠재 거래처 채널.">
-<meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
+<meta name="twitter:title" content="graphystyle 커뮤니티 — 원장 공동개발 채널">
+<meta name="twitter:description" content="원장님과 함께 만드는 graphystyle — 아이디어 제안·임상 피드백·신제품 우선 체험.">
+<meta name="twitter:image" content="https://graphystyle.com/og-image.png">
 
 <!-- ===== Favicon / PWA ===== -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -30,42 +30,42 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="Point Shower">
-<meta name="application-name" content="Point Shower">
+<meta name="apple-mobile-web-app-title" content="graphystyle">
+<meta name="application-name" content="graphystyle">
 
 <!-- ===== SEO ===== -->
-<meta name="description" content="임상 사례 공유·아이디어 투표·잠재 거래처 채널.">
-<meta name="author" content="Point Shower × Graphy">
-<link rel="canonical" href="https://fixon-production.up.railway.app/point-shower-community/">
+<meta name="description" content="원장님과 함께 만드는 graphystyle — 아이디어 제안·임상 피드백·신제품 우선 체험.">
+<meta name="author" content="graphystyle">
+<link rel="canonical" href="https://graphystyle.com/point-shower-community/">
 
 <link rel="stylesheet" href="../assets/design-system.css">
 <style>
-body{min-height:100vh;background:var(--bg-section);}
+body{min-height:100vh;background:var(--bg-section);margin:0;}
 
 /* GNB */
 .gnb{position:sticky;top:0;left:0;right:0;z-index:500;
   background:rgba(255,255,255,0.92);backdrop-filter:saturate(180%) blur(12px);
   border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;height:64px;}
-.gnb-logo{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-right:36px;display:flex;align-items:center;gap:10px;}
-.gnb-logo::before{content:'F';width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;display:grid;place-items:center;font-weight:900;font-size:15px;letter-spacing:-0.05em;}
+.gnb-logo{font-size:21px;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-right:32px;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.gnb-logo::before{content:'G';width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;display:grid;place-items:center;font-weight:900;font-size:16px;flex:none;}
+.gnb-logo .st{color:var(--accent);}
 .gnb-tabs{display:flex;gap:6px;}
-.gnb-tab{padding:10px 18px;font-size:15px;font-weight:600;color:var(--dim);border-radius:8px;cursor:pointer;border:none;background:none;font-family:var(--fb);transition:all 0.15s;}
+.gnb-tab{padding:11px 16px;font-size:15px;font-weight:600;color:var(--dim);border-radius:8px;cursor:pointer;border:none;background:none;font-family:var(--fb);transition:all 0.15s;}
 .gnb-tab:hover{color:var(--text);background:var(--bg-section);}
 .gnb-tab.active{color:var(--accent-deep);background:var(--accent-soft);}
-.gnb-right{margin-left:auto;display:flex;align-items:center;gap:14px;}
+.gnb-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
 .gnb-member{font-size:14px;color:var(--muted);}
-.btn-join{padding:10px 20px;border-radius:9px;border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all 0.15s;}
+.btn-join{padding:10px 20px;border-radius:9px;border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all 0.15s;text-decoration:none;display:inline-block;}
 .btn-join:hover{background:var(--accent-deep);box-shadow:0 4px 10px -2px var(--accent-glow);}
 
 /* Container */
-.container{max-width:980px;margin:0 auto;padding:48px 28px 80px;}
+.container{max-width:980px;margin:0 auto;padding:48px 28px 64px;}
 .page{display:none;}.page.active{display:block;}
-
-/* Section */
 .page-title{font-size:32px;font-weight:800;margin-bottom:6px;letter-spacing:-0.025em;color:var(--text);}
-.page-sub{font-size:16px;color:var(--muted);margin-bottom:32px;}
+.page-sub{font-size:16px;color:var(--muted);margin-bottom:24px;}
+.demo-note{font-size:12.5px;color:var(--accent-deep);background:var(--accent-soft);border:1px solid #ffd9bf;border-radius:10px;padding:10px 14px;margin-bottom:20px;}
 
-/* Cards */
+/* Idea cards */
 .idea-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;box-shadow:var(--shadow-sm);transition:all 0.15s;}
 .idea-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-md);}
 .idea-header{display:flex;align-items:flex-start;gap:18px;}
@@ -77,41 +77,29 @@ body{min-height:100vh;background:var(--bg-section);}
 .idea-body{flex:1;}
 .idea-title{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text);letter-spacing:-0.015em;}
 .idea-desc{font-size:15px;color:var(--dim);line-height:1.65;}
-.idea-meta{display:flex;gap:14px;margin-top:14px;font-size:13px;color:var(--muted);}
+.idea-meta{display:flex;gap:14px;margin-top:14px;font-size:13px;color:var(--muted);flex-wrap:wrap;}
 .idea-status{font-size:12px;padding:4px 11px;border-radius:100px;font-weight:600;}
 .st-new{background:var(--blue-dim);color:var(--blue);}
 .st-review{background:var(--yellow-dim);color:var(--yellow);}
 .st-adopted{background:var(--green-dim);color:var(--green);}
 .st-dev{background:var(--purple-dim);color:var(--purple);}
+.empty{text-align:center;color:var(--muted);padding:48px 0;font-size:15px;}
 
 /* Form */
 .form-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
 .form-card h3{font-size:20px;font-weight:700;margin-bottom:20px;letter-spacing:-0.02em;}
 .field{margin-bottom:18px;}
 .field label{display:block;font-size:14px;color:var(--dim);margin-bottom:8px;font-weight:600;}
-.field input,.field textarea,.field select{width:100%;padding:12px 16px;font-size:15px;}
+.field input,.field textarea,.field select{width:100%;padding:13px 16px;font-size:16px;border:1px solid var(--border);border-radius:10px;font-family:inherit;background:#fff;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .field textarea{resize:vertical;min-height:90px;}
-
-/* Feedback stars */
-.rating{display:flex;gap:6px;margin:8px 0;}
-.rating span{font-size:28px;cursor:pointer;color:var(--border-strong);transition:color 0.15s;}
+.rating{display:flex;gap:4px;margin:8px 0;}
+.rating span{font-size:30px;cursor:pointer;color:var(--border-strong);transition:color 0.15s;padding:4px;}
 .rating span.on{color:#f59e0b;}
-
-/* Members */
-.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
-.member-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-sm);}
-.member-avatar{width:48px;height:48px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;font-weight:800;color:var(--accent-deep);}
-.member-info{flex:1;}
-.member-name{font-size:16px;font-weight:600;color:var(--text);}
-.member-clinic{font-size:13px;color:var(--muted);margin-top:2px;}
-.member-badges{display:flex;gap:5px;margin-top:6px;}
-.badge{font-size:11px;padding:3px 9px;border-radius:100px;font-weight:600;}
-.b-founding{background:var(--accent-soft);color:var(--accent-deep);}
-.b-beta{background:var(--green-dim);color:var(--green);}
-.b-contributor{background:var(--blue-dim);color:var(--blue);}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;}
 
 /* Stats bar */
-.stats-bar{display:flex;gap:18px;margin-bottom:32px;}
+.stats-bar{display:flex;gap:18px;margin-bottom:28px;}
 .stat-box{flex:1;background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center;box-shadow:var(--shadow-sm);}
 .stat-num{font-family:var(--fd);font-size:34px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;font-feature-settings:"tnum";}
 .stat-label{font-size:13.5px;color:var(--muted);margin-top:8px;font-weight:600;}
@@ -119,57 +107,67 @@ body{min-height:100vh;background:var(--bg-section);}
 /* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.5);backdrop-filter:blur(4px);z-index:600;display:none;align-items:center;justify-content:center;padding:24px;}
 .modal-overlay.show{display:flex;}
-.modal{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px;width:100%;max-width:520px;position:relative;box-shadow:var(--shadow-lg);}
+.modal{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px;width:100%;max-width:520px;position:relative;box-shadow:var(--shadow-lg);}
 .modal h2{font-size:24px;font-weight:800;margin-bottom:6px;letter-spacing:-0.025em;}
-.modal .close{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;}
+.modal .close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;width:44px;height:44px;border-radius:8px;display:grid;place-items:center;}
 .modal .close:hover{background:var(--bg-section);color:var(--text);}
 
 /* About page */
-.about-hero{text-align:center;padding:24px 0 36px;}
-.about-hero h1{font-size:48px;font-weight:900;letter-spacing:-0.035em;margin-bottom:10px;color:var(--text);}
+.about-hero{text-align:center;padding:20px 0 32px;}
+.about-hero h1{font-size:46px;font-weight:900;letter-spacing:-0.035em;margin-bottom:10px;color:var(--text);}
 .about-hero h1 span{color:var(--accent);}
 .about-hero .ah-sub{font-size:18px;color:var(--muted);line-height:1.65;max-width:600px;margin:0 auto;}
-
 .about-section{margin-bottom:32px;}
 .about-section-title{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .about-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#ffd9bf,transparent);}
-
-.about-quote{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 14px 14px 0;padding:22px 26px;margin-bottom:32px;}
+.about-quote{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 14px 14px 0;padding:22px 26px;margin-bottom:28px;}
 .about-quote .q-text{font-size:22px;font-weight:700;color:var(--text);line-height:1.45;margin-bottom:8px;letter-spacing:-0.02em;}
 .about-quote .q-from{font-size:14px;color:var(--muted);}
-
 .about-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:10px;}
 .about-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:var(--shadow-sm);}
 .about-card .ac-icon{font-size:34px;margin-bottom:12px;}
 .about-card .ac-title{font-size:17px;font-weight:700;margin-bottom:8px;color:var(--text);letter-spacing:-0.015em;}
 .about-card .ac-desc{font-size:13.5px;color:var(--muted);line-height:1.6;}
-
+/* Product lineup */
+.lineup{display:grid;gap:10px;}
+.lineup .row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow-sm);}
+.lineup .nm{font-weight:800;font-size:16px;color:var(--text);}
+.lineup .ds{font-size:13.5px;color:var(--muted);}
+.lineup .st2{font-size:11.5px;font-weight:700;font-family:var(--fm);padding:4px 10px;border-radius:7px;white-space:nowrap;}
+.st2.live{background:var(--green-dim);color:var(--green);}.st2.dev{background:var(--accent-soft);color:var(--accent-deep);}.st2.idea{background:var(--purple-dim);color:var(--purple);}
 .about-why{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .why-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow-sm);}
 .why-num{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:15px;font-weight:800;color:#fff;flex-shrink:0;}
 .why-text .wt-title{font-size:15.5px;font-weight:700;margin-bottom:4px;color:var(--text);}
 .why-text .wt-desc{font-size:13.5px;color:var(--muted);line-height:1.6;}
-
 .about-cta{text-align:center;padding:36px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));border-radius:16px;margin-top:32px;color:#fff;}
 .about-cta .cta-title{font-size:24px;font-weight:800;margin-bottom:8px;letter-spacing:-0.025em;}
-.about-cta .cta-desc{font-size:15px;color:rgba(255,255,255,0.85);margin-bottom:18px;}
-.about-cta button{padding:13px 32px;border-radius:10px;border:2px solid #fff;background:transparent;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all 0.15s;}
-.about-cta button:hover{background:#fff;color:var(--accent);}
-
+.about-cta .cta-desc{font-size:15px;color:rgba(255,255,255,0.9);margin-bottom:18px;}
+.about-cta a.cta-btn{display:inline-block;padding:13px 32px;border-radius:10px;border:2px solid #fff;background:#fff;color:var(--accent-deep);font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;transition:all 0.15s;}
+.about-cta a.cta-btn:hover{background:transparent;color:#fff;}
 .about-process{display:flex;align-items:center;gap:0;margin-bottom:10px;}
-.ap-step{flex:1;text-align:center;padding:14px 6px;position:relative;}
+.ap-step{flex:1;text-align:center;padding:14px 6px;}
 .ap-num{font-family:var(--fm);font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;}
 .ap-icon{font-size:26px;margin-bottom:6px;}
 .ap-label{font-size:14px;font-weight:700;color:var(--text);}
-.ap-desc{font-size:11.5px;color:var(--muted);margin-top:3px;}
+.ap-desc{font-size:12px;color:var(--dim);margin-top:3px;}
 .ap-arrow{color:var(--border-strong);font-size:18px;flex-shrink:0;}
+
+/* Footer */
+.cm-foot{border-top:1px solid var(--border);background:#fff;padding:28px;text-align:center;color:var(--muted);font-size:13px;}
+.cm-foot a{color:var(--accent);font-weight:700;text-decoration:none;}
 
 /* Responsive */
 @media(max-width:600px){
-  .gnb-tabs{overflow-x:auto;}.gnb-tab{font-size:13.5px;padding:8px 12px;}
-  .stats-bar{flex-direction:column;gap:10px;}.member-grid{grid-template-columns:1fr;}
-  .gnb-right{display:none;}
+  .gnb{padding:0 16px;}
+  .gnb-logo{margin-right:14px;font-size:18px;}
+  .gnb-tabs{overflow-x:auto;}.gnb-tab{font-size:13.5px;padding:10px 11px;white-space:nowrap;}
+  .gnb-member{display:none;}              /* 라벨만 숨기고 Join CTA 는 유지 */
+  .container{padding:32px 18px 56px;}
+  .stats-bar{flex-direction:column;gap:10px;}
   .about-grid{grid-template-columns:1fr;}.about-why{grid-template-columns:1fr;}
+  .about-process{flex-direction:column;}.ap-arrow{transform:rotate(90deg);}
+  .lineup .row{grid-template-columns:1fr auto;}.lineup .ds{grid-column:1/-1;}
 }
 </style>
 </head>
@@ -177,41 +175,24 @@ body{min-height:100vh;background:var(--bg-section);}
 
 <!-- GNB -->
 <nav class="gnb">
-  <div class="gnb-logo">Point Shower Community</div>
+  <a class="gnb-logo" href="/">graphy<span class="st">style</span> 커뮤니티</a>
   <div class="gnb-tabs">
-    <button class="gnb-tab active" onclick="showPage('about')">About</button>
-    <button class="gnb-tab" onclick="showPage('ideas')">Ideas</button>
-    <button class="gnb-tab" onclick="showPage('feedback')">Feedback</button>
-    <button class="gnb-tab" onclick="showPage('members')">Members</button>
+    <button class="gnb-tab active" onclick="showPage('about')">소개</button>
+    <button class="gnb-tab" onclick="showPage('ideas')">아이디어</button>
+    <button class="gnb-tab" onclick="showPage('feedback')">피드백</button>
   </div>
   <div class="gnb-right">
     <span class="gnb-member" id="gnb-user"></span>
-    <button class="btn-join" id="gnb-join-btn" onclick="openModal('join')">Join</button>
+    <a class="btn-join" id="gnb-join-btn" href="join.html">가입</a>
   </div>
 </nav>
-
-<!-- Join Modal -->
-<div class="modal-overlay" id="modal-join">
-  <div class="modal">
-    <button class="close" onclick="closeModal('join')">&times;</button>
-    <h2>Founding Member 가입</h2>
-    <p style="font-size:13px;color:var(--dim);margin-bottom:12px;">Point Shower는 치과의사의 집단 지성으로 만들어지는 제품입니다.</p>
-    <div style="font-size:11px;color:var(--dim);margin-bottom:16px;padding:10px 14px;background:var(--accent-dim);border-radius:8px;line-height:1.6;">
-      <span style="color:var(--accent);font-weight:600;">Founding Member 혜택:</span> 제품 방향 투표권 / 베타 제품 우선 제공 / 정식 출시 시 크레딧 표기
-    </div>
-    <div class="field"><label>이름</label><input id="join-name" placeholder="홍길동"></div>
-    <div class="field"><label>병원명</label><input id="join-clinic" placeholder="OO치과"></div>
-    <div class="field"><label>이메일</label><input id="join-email" type="email" placeholder="you@example.com"></div>
-    <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="submitJoin()">Founding Member로 가입</button>
-  </div>
-</div>
 
 <!-- Idea Submit Modal -->
 <div class="modal-overlay" id="modal-idea">
   <div class="modal">
     <button class="close" onclick="closeModal('idea')">&times;</button>
     <h2>아이디어 제안</h2>
-    <p style="font-size:13px;color:var(--dim);margin-bottom:20px;">Point Shower를 더 좋게 만들 아이디어를 공유해주세요.</p>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:20px;">graphystyle 제품을 더 좋게 만들 아이디어를 공유해주세요. 채택되면 개발로 연결됩니다.</p>
     <div class="field"><label>제목</label><input id="idea-title" placeholder="한 줄로 요약"></div>
     <div class="field"><label>상세 설명</label><textarea id="idea-desc" placeholder="어떤 문제를 해결하는지, 어떻게 개선하면 좋을지 자유롭게 적어주세요."></textarea></div>
     <div class="field"><label>카테고리</label>
@@ -229,43 +210,43 @@ body{min-height:100vh;background:var(--bg-section);}
 <!-- ===== ABOUT ===== -->
 <div class="page active" id="page-about">
   <div class="about-hero">
-    <h1><span>Point Shower</span> Community</h1>
-    <div class="ah-sub">치과의사가 함께 만드는 구강세정 디바이스</div>
+    <h1>graphy<span>style</span> 커뮤니티</h1>
+    <div class="ah-sub">원장님과 함께 만드는 3D 프린팅 개인 맞춤 구강 케어</div>
   </div>
 
-  <!-- 제품 소개 -->
+  <!-- graphystyle 소개 -->
   <div class="about-section">
-    <div class="about-section-title">Point Shower가 뭔가요?</div>
+    <div class="about-section-title">graphystyle 이란?</div>
     <div class="about-quote">
-      <div class="q-text">"환자들이 구강세정기를 사도 제대로 못 쓴다."</div>
+      <div class="q-text">"환자들이 좋은 기구를 사도 제대로 못 쓴다."</div>
       <div class="q-from">매일 진료실에서 마주하는 이 문제에서 출발했습니다.</div>
     </div>
+    <p style="font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:18px;">그래피의 형상기억소재(Tera Harz Clear)를 3D 프린터로 출력해, 환자 한 분께 꼭 맞게 제작하는 개인 맞춤 구강 케어입니다.</p>
     <div class="about-grid">
-      <div class="about-card">
-        <div class="ac-icon">&#129463;</div>
-        <div class="ac-title">환자 맞춤 스플린트</div>
-        <div class="ac-desc">구강 스캔 기반 3D 프린팅으로 환자에게 딱 맞는 마우스피스를 제작합니다.</div>
-      </div>
-      <div class="about-card">
-        <div class="ac-icon">&#127919;</div>
-        <div class="ac-title">정확한 위치에 세정</div>
-        <div class="ac-desc">치과의사가 지정한 위치에서 물이 분사됩니다. 환자가 조준할 필요가 없습니다.</div>
-      </div>
-      <div class="about-card">
-        <div class="ac-icon">&#128588;</div>
-        <div class="ac-title">누구나 쉽게</div>
-        <div class="ac-desc">끼우고 버튼만 누르면 끝. 어르신이나 장애인 환자도 혼자 사용할 수 있습니다.</div>
-      </div>
+      <div class="about-card"><div class="ac-icon">&#129516;</div><div class="ac-title">형상기억소재</div><div class="ac-desc">끓는 물에서 변형됐다가 체온(37℃)에서 원래 형태로 복원되는 FDA 승인 소재.</div></div>
+      <div class="about-card"><div class="ac-icon">&#128424;</div><div class="ac-title">3D 프린팅</div><div class="ac-desc">환자별 데이터를 바탕으로 정밀하게 출력합니다.</div></div>
+      <div class="about-card"><div class="ac-icon">&#128100;</div><div class="ac-title">개인 맞춤</div><div class="ac-desc">환자의 치열·잇몸 형태에 맞춰 노즐 위치까지 설계합니다.</div></div>
     </div>
   </div>
 
-  <!-- 사용 과정 -->
+  <!-- 제품 라인업 -->
   <div class="about-section">
-    <div class="about-section-title">이렇게 만들어집니다</div>
+    <div class="about-section-title">제품 라인업</div>
+    <div class="lineup">
+      <div class="row"><span class="nm">Point Shower</span><span class="ds">개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사</span><span class="st2 live">개발 완료</span></div>
+      <div class="row"><span class="nm">Point Infuser</span><span class="ds">맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달</span><span class="st2 dev">개발 중</span></div>
+      <div class="row"><span class="nm">Night Pack Splint</span><span class="ds">잠자기 전 잇몸을 위한 맞춤 마스크팩</span><span class="st2 dev">개발 중</span></div>
+      <div class="row"><span class="nm">Perio Touch / MTS</span><span class="ds">잇몸 저주파·재생 케어 — 함께 구상 중</span><span class="st2 idea">아이디어</span></div>
+    </div>
+  </div>
+
+  <!-- Point Shower 제작 과정 (예시) -->
+  <div class="about-section">
+    <div class="about-section-title">Point Shower는 이렇게 만들어집니다</div>
     <div class="about-process">
       <div class="ap-step"><div class="ap-num">01</div><div class="ap-icon">&#128065;</div><div class="ap-label">구강 스캔</div><div class="ap-desc">환자 구강을 디지털 스캔</div></div>
       <div class="ap-arrow">&#10132;</div>
-      <div class="ap-step"><div class="ap-num">02</div><div class="ap-icon">&#128187;</div><div class="ap-label">맞춤 설계</div><div class="ap-desc">소프트웨어로 노즐 위치 설계</div></div>
+      <div class="ap-step"><div class="ap-num">02</div><div class="ap-icon">&#128187;</div><div class="ap-label">맞춤 설계</div><div class="ap-desc">노즐 위치 설계</div></div>
       <div class="ap-arrow">&#10132;</div>
       <div class="ap-step"><div class="ap-num">03</div><div class="ap-icon">&#9881;</div><div class="ap-label">3D 프린팅</div><div class="ap-desc">스플린트+노즐 제작</div></div>
       <div class="ap-arrow">&#10132;</div>
@@ -273,56 +254,33 @@ body{min-height:100vh;background:var(--bg-section);}
     </div>
   </div>
 
-  <!-- 왜 참여해야 하는가 -->
+  <!-- 왜 참여하나 -->
   <div class="about-section">
-    <div class="about-section-title">왜 여기에 참여해야 하나요?</div>
+    <div class="about-section-title">왜 함께해야 하나요?</div>
     <div class="about-why">
-      <div class="why-card">
-        <div class="why-num">1</div>
-        <div class="why-text">
-          <div class="wt-title">아직 초기 단계입니다</div>
-          <div class="wt-desc">Point Shower는 한 명의 치과의사 아이디어에서 시작했습니다. 지금 참여하면 제품의 방향을 직접 바꿀 수 있습니다.</div>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">2</div>
-        <div class="why-text">
-          <div class="wt-title">현장의 목소리가 필요합니다</div>
-          <div class="wt-desc">다양한 임상 환경에서의 경험이 더 좋은 제품을 만듭니다. 선생님의 환자 케이스가 곧 개선 방향입니다.</div>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">3</div>
-        <div class="why-text">
-          <div class="wt-title">기여가 기록됩니다</div>
-          <div class="wt-desc">채택된 아이디어, 피드백, 베타 테스트 참여 — 모든 기여가 프로필에 남고 인정받습니다.</div>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">4</div>
-        <div class="why-text">
-          <div class="wt-title">Founding Member 혜택</div>
-          <div class="wt-desc">지금 가입하면 Founding Member 뱃지 + 향후 베타 제품 우선 제공 + 정식 출시 시 크레딧 표기.</div>
-        </div>
-      </div>
+      <div class="why-card"><div class="why-num">1</div><div class="why-text"><div class="wt-title">이제 막 시작했습니다</div><div class="wt-desc">Point Shower는 첫 제품일 뿐입니다. 지금 함께하시면 다음 제품의 방향을 직접 정할 수 있습니다.</div></div></div>
+      <div class="why-card"><div class="why-num">2</div><div class="why-text"><div class="wt-title">현장의 목소리가 필요합니다</div><div class="wt-desc">다양한 임상 환경의 경험이 더 좋은 제품을 만듭니다. 원장님의 환자 케이스가 곧 개선 방향입니다.</div></div></div>
+      <div class="why-card"><div class="why-num">3</div><div class="why-text"><div class="wt-title">신제품 우선 체험</div><div class="wt-desc">개발 중인 디바이스를 가장 먼저 체험하고, 출시·사전예약 소식을 가장 먼저 받습니다.</div></div></div>
+      <div class="why-card"><div class="why-num">4</div><div class="why-text"><div class="wt-title">Founding Member 혜택</div><div class="wt-desc">지금 합류하시면 창립 멤버로서 우선 체험·특전을 드립니다.</div></div></div>
     </div>
   </div>
 
   <!-- CTA -->
   <div class="about-cta">
-    <div class="cta-title">치과의사가 함께 만드는 제품, Point Shower</div>
-    <div class="cta-desc">아이디어 제안, 임상 피드백, 베타 테스트 — 어떤 형태로든 참여할 수 있습니다.</div>
-    <button onclick="openModal('join')">Founding Member로 참여하기</button>
+    <div class="cta-title">원장님과 함께 만드는 graphystyle</div>
+    <div class="cta-desc">아이디어 제안, 임상 피드백, 신제품 우선 체험 — 1분이면 합류하실 수 있습니다.</div>
+    <a class="cta-btn" href="join.html">Founding Member로 합류하기 &rarr;</a>
   </div>
 </div>
 
 <!-- ===== IDEAS ===== -->
 <div class="page" id="page-ideas">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-    <div class="page-title">Ideas</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px;">
+    <div class="page-title">아이디어</div>
     <button class="btn btn-primary" onclick="requireAuth(()=>openModal('idea'))">+ 아이디어 제안</button>
   </div>
-  <div class="page-sub">Point Shower를 함께 개선합니다. 좋은 아이디어에 투표해주세요.</div>
+  <div class="page-sub">graphystyle 제품을 원장님과 함께 개선합니다. 좋은 아이디어에 투표해주세요.</div>
+  <div class="demo-note">&#128161; 아래 목록은 <b>예시</b>이며 이 브라우저에 저장됩니다. 제안하신 아이디어는 graphystyle 팀에 전달됩니다.</div>
 
   <div class="stats-bar">
     <div class="stat-box"><div class="stat-num" id="stat-ideas">0</div><div class="stat-label">아이디어</div></div>
@@ -335,8 +293,8 @@ body{min-height:100vh;background:var(--bg-section);}
 
 <!-- ===== FEEDBACK ===== -->
 <div class="page" id="page-feedback">
-  <div class="page-title">Clinical Feedback</div>
-  <div class="page-sub">Point Shower 사용 경험을 공유해주세요. 제품 개선에 직접 반영됩니다.</div>
+  <div class="page-title">임상 피드백</div>
+  <div class="page-sub">graphystyle 제품 사용 경험을 공유해주세요. graphystyle 팀에 전달되어 제품 개선에 반영됩니다.</div>
 
   <div class="form-card">
     <h3>사용 후기 작성</h3>
@@ -346,7 +304,7 @@ body{min-height:100vh;background:var(--bg-section);}
     <div class="field"><label>착용감</label>
       <div class="rating" id="rating-comfort"><span onclick="rate('comfort',1)">&#9733;</span><span onclick="rate('comfort',2)">&#9733;</span><span onclick="rate('comfort',3)">&#9733;</span><span onclick="rate('comfort',4)">&#9733;</span><span onclick="rate('comfort',5)">&#9733;</span></div>
     </div>
-    <div class="field"><label>세정 효과</label>
+    <div class="field"><label>세정/사용 효과</label>
       <div class="rating" id="rating-cleaning"><span onclick="rate('cleaning',1)">&#9733;</span><span onclick="rate('cleaning',2)">&#9733;</span><span onclick="rate('cleaning',3)">&#9733;</span><span onclick="rate('cleaning',4)">&#9733;</span><span onclick="rate('cleaning',5)">&#9733;</span></div>
     </div>
     <div class="field"><label>환자 반응</label>
@@ -356,266 +314,141 @@ body{min-height:100vh;background:var(--bg-section);}
     <div class="field"><label>특히 좋았던 점</label><textarea id="fb-good" placeholder="만족스러웠던 부분"></textarea></div>
     <button class="btn btn-primary" onclick="requireAuth(()=>submitFeedback())">피드백 제출</button>
   </div>
-
-  <div id="feedback-list"></div>
-</div>
-
-<!-- ===== MEMBERS ===== -->
-<div class="page" id="page-members">
-  <div class="page-title">Members</div>
-  <div class="page-sub">Point Shower Community에 참여하고 있는 치과의사들</div>
-
-  <div class="stats-bar">
-    <div class="stat-box"><div class="stat-num" id="stat-members">0</div><div class="stat-label">멤버</div></div>
-    <div class="stat-box"><div class="stat-num" id="stat-founding">0</div><div class="stat-label">Founding</div></div>
-    <div class="stat-box"><div class="stat-num" id="stat-contrib">0</div><div class="stat-label">기여 활동</div></div>
-  </div>
-
-  <div class="member-grid" id="members-list"></div>
 </div>
 
 </div><!-- /container -->
 
+<footer class="cm-foot">© 2026 graphystyle · (주)그래피 · <a href="/">graphystyle.com</a></footer>
+
 <script>
-// ===== Data Store (localStorage) =====
-function load(key) { try { return JSON.parse(localStorage.getItem('pointshower-' + key)) || []; } catch { return []; } }
-function save(key, data) { localStorage.setItem('pointshower-' + key, JSON.stringify(data)); }
-function getUser() { try { return JSON.parse(localStorage.getItem('pointshower-user')); } catch { return null; } }
-function setUser(u) { localStorage.setItem('pointshower-user', JSON.stringify(u)); }
+// ===== Store (localStorage: UX 캐시 + 로컬 데모) =====
+function load(key){ try { return JSON.parse(localStorage.getItem('pointshower-' + key)) || []; } catch { return []; } }
+function save(key, data){ localStorage.setItem('pointshower-' + key, JSON.stringify(data)); }
+function getUser(){ try { return JSON.parse(localStorage.getItem('pointshower-user')); } catch { return null; } }
 
-// ===== Init with sample data =====
-function initSampleData() {
-  if (load('ideas').length > 0) return;
-  const samples = [
-    { id: 1, title: '노즐 각도 미세조정 기능', desc: '환자마다 치주 포켓 깊이가 다르므로, 노즐 분사 각도를 5도 단위로 조절할 수 있으면 좋겠습니다.', cat: '제품 구조', votes: 7, voters: [], status: 'review', author: '김민수', clinic: '미소치과', date: '2026-04-26' },
-    { id: 2, title: '소프트웨어에 AI 자동 노즐 배치', desc: '구강 스캔 데이터를 분석해서 최적의 노즐 위치를 자동으로 추천하는 기능이 있으면 설계 시간을 크게 줄일 수 있을 것 같습니다.', cat: '소프트웨어', votes: 12, voters: [], status: 'new', author: '박지영', clinic: '서울스마일치과', date: '2026-04-25' },
-    { id: 3, title: '소아용 소형 스플린트 사이즈', desc: '성인용만 있는데, 소아/청소년 환자도 많습니다. 작은 사이즈 라인업이 있으면 시장이 넓어질 것 같습니다.', cat: '새 기능', votes: 5, voters: [], status: 'new', author: '최현우', clinic: '해피키즈치과', date: '2026-04-24' },
-    { id: 4, title: '야간 세정 모드 (저압)', desc: '취침 전 낮은 수압으로 부드럽게 세정하는 모드. 노즐 구경을 달리한 야간용 세트가 있으면 환자 만족도가 올라갈 것 같습니다.', cat: '사용성/착용감', votes: 3, voters: [], status: 'new', author: '이서연', clinic: '올리브서울치과', date: '2026-04-23' },
-  ];
-  save('ideas', samples);
-
-  const sampleMembers = [
-    { name: '이중우', clinic: '올리브서울치과', email: 'hzara@naver.com', date: '2026-04-20', badges: ['founding'], contributions: 8 },
-    { name: '김민수', clinic: '미소치과', email: '', date: '2026-04-25', badges: ['founding','contributor'], contributions: 3 },
-    { name: '박지영', clinic: '서울스마일치과', email: '', date: '2026-04-25', badges: ['founding'], contributions: 2 },
-    { name: '최현우', clinic: '해피키즈치과', email: '', date: '2026-04-24', badges: ['founding'], contributions: 1 },
-  ];
-  save('members', sampleMembers);
+// 백엔드 전달 (best-effort) — 실제 수집은 Postgres(/api/signup)
+function sendLead(extra){
+  const u = getUser() || {};
+  const payload = Object.assign({ name: u.name || '', clinic: u.clinic || '', email: u.email || '', interests: ['point_shower'], preorder: false }, extra);
+  if (!payload.name) payload.name = '커뮤니티 회원';
+  try {
+    fetch('/api/signup', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(()=>{});
+  } catch(e){}
 }
 
-// ===== Page Navigation =====
-function showPage(name) {
+// ===== Sample ideas (로컬 데모, 가명/PII 없음) =====
+function initSampleData(){
+  if (load('ideas').length > 0) return;
+  save('ideas', [
+    { id:1, title:'노즐 각도 미세조정 기능', desc:'환자마다 치주 포켓 깊이가 다르므로, 노즐 분사 각도를 5도 단위로 조절할 수 있으면 좋겠습니다.', cat:'제품 구조', votes:7, voters:[], status:'review', author:'예시', date:'2026-04-26' },
+    { id:2, title:'AI 자동 노즐 배치', desc:'구강 스캔 데이터를 분석해 최적의 노즐 위치를 자동 추천하면 설계 시간을 크게 줄일 수 있을 것 같습니다.', cat:'소프트웨어', votes:12, voters:[], status:'new', author:'예시', date:'2026-04-25' },
+    { id:3, title:'소아용 소형 스플린트', desc:'성인용만 있는데 소아/청소년 환자도 많습니다. 작은 사이즈 라인업이 있으면 좋겠습니다.', cat:'새 기능', votes:5, voters:[], status:'new', author:'예시', date:'2026-04-24' },
+    { id:4, title:'야간 저압 모드', desc:'취침 전 낮은 수압으로 부드럽게 사용하는 모드가 있으면 환자 만족도가 올라갈 것 같습니다.', cat:'사용성/착용감', votes:3, voters:[], status:'new', author:'예시', date:'2026-04-23' },
+  ]);
+}
+
+// ===== Navigation =====
+function showPage(name){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.gnb-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + name)?.classList.add('active');
   const tabs = document.querySelectorAll('.gnb-tab');
-  const names = ['about','ideas','feedback','members'];
-  const idx = names.indexOf(name);
+  const idx = ['about','ideas','feedback'].indexOf(name);
   if (idx >= 0 && tabs[idx]) tabs[idx].classList.add('active');
   render();
 }
+function openModal(name){ document.getElementById('modal-' + name)?.classList.add('show'); }
+function closeModal(name){ document.getElementById('modal-' + name)?.classList.remove('show'); }
 
-// ===== Modal =====
-function openModal(name) { document.getElementById('modal-' + name)?.classList.add('show'); }
-function closeModal(name) { document.getElementById('modal-' + name)?.classList.remove('show'); }
-
-// ===== Auth =====
-function requireAuth(fn) {
-  if (!getUser()) { openModal('join'); return; }
+// ===== Auth (localStorage 캐시; 미가입 시 가입 페이지로) =====
+function requireAuth(fn){
+  if (!getUser()) { window.location.href = 'join.html'; return; }
   fn();
 }
-function updateAuthUI() {
+function updateAuthUI(){
   const u = getUser();
   const btn = document.getElementById('gnb-join-btn');
   const label = document.getElementById('gnb-user');
-  if (u) {
-    btn.style.display = 'none';
-    label.textContent = u.name + ' · ' + u.clinic;
-  } else {
-    btn.style.display = '';
-    label.textContent = '';
-  }
-}
-
-// ===== Join =====
-function submitJoin() {
-  const name = document.getElementById('join-name').value.trim();
-  const clinic = document.getElementById('join-clinic').value.trim();
-  const email = document.getElementById('join-email').value.trim();
-  if (!name || !clinic) { alert('이름과 병원명을 입력해주세요.'); return; }
-  const user = { name, clinic, email };
-  setUser(user);
-  // Add to members
-  const members = load('members');
-  if (!members.find(m => m.name === name && m.clinic === clinic)) {
-    members.push({ ...user, date: new Date().toISOString().slice(0,10), badges: ['founding'], contributions: 0 });
-    save('members', members);
-  }
-  closeModal('join');
-  updateAuthUI();
-  render();
+  if (u) { btn.style.display = 'none'; label.textContent = u.name + ' 원장님'; }
+  else { btn.style.display = ''; label.textContent = ''; }
 }
 
 // ===== Ideas =====
-function submitIdea() {
+function submitIdea(){
   const title = document.getElementById('idea-title').value.trim();
   const desc = document.getElementById('idea-desc').value.trim();
   const cat = document.getElementById('idea-cat').value;
   if (!title) { alert('제목을 입력해주세요.'); return; }
   const user = getUser();
   const ideas = load('ideas');
-  ideas.unshift({
-    id: Date.now(), title, desc, cat, votes: 1, voters: [user.name],
-    status: 'new', author: user.name, clinic: user.clinic,
-    date: new Date().toISOString().slice(0,10)
-  });
+  ideas.unshift({ id:Date.now(), title, desc, cat, votes:1, voters:[user.name], status:'new', author:user.name, date:new Date().toISOString().slice(0,10) });
   save('ideas', ideas);
+  sendLead({ note: ('[아이디어] ' + title + ' / ' + cat + '\n' + desc).slice(0,1000), source:'community_idea' });
   document.getElementById('idea-title').value = '';
   document.getElementById('idea-desc').value = '';
   closeModal('idea');
-  // Update contribution
-  addContribution(user.name);
   render();
+  alert('제안 감사합니다! graphystyle 팀에 전달되었습니다.');
 }
-
-function toggleVote(id) {
+function toggleVote(id){
   requireAuth(() => {
     const user = getUser();
     const ideas = load('ideas');
     const idea = ideas.find(i => i.id === id);
     if (!idea) return;
     if (!idea.voters) idea.voters = [];
-    const idx = idea.voters.indexOf(user.name);
-    if (idx >= 0) { idea.voters.splice(idx, 1); idea.votes--; }
-    else { idea.voters.push(user.name); idea.votes++; }
+    const i = idea.voters.indexOf(user.name);
+    if (i >= 0) { idea.voters.splice(i,1); idea.votes--; } else { idea.voters.push(user.name); idea.votes++; }
     save('ideas', ideas);
     render();
   });
 }
 
-function addContribution(name) {
-  const members = load('members');
-  const m = members.find(m => m.name === name);
-  if (m) { m.contributions = (m.contributions || 0) + 1; if (!m.badges.includes('contributor')) m.badges.push('contributor'); }
-  save('members', members);
-}
-
 // ===== Feedback =====
-const ratings = { overall: 0, comfort: 0, cleaning: 0, patient: 0 };
-function rate(key, val) {
+const ratings = { overall:0, comfort:0, cleaning:0, patient:0 };
+function rate(key, val){
   ratings[key] = val;
-  const el = document.getElementById('rating-' + key);
-  el.querySelectorAll('span').forEach((s, i) => s.classList.toggle('on', i < val));
+  document.getElementById('rating-' + key).querySelectorAll('span').forEach((s,i) => s.classList.toggle('on', i < val));
 }
-function submitFeedback() {
-  const user = getUser();
+function submitFeedback(){
   if (ratings.overall === 0) { alert('전체 만족도를 선택해주세요.'); return; }
-  const feedbacks = load('feedbacks');
-  feedbacks.unshift({
-    ...ratings,
-    improve: document.getElementById('fb-improve').value.trim(),
-    good: document.getElementById('fb-good').value.trim(),
-    author: user.name, clinic: user.clinic,
-    date: new Date().toISOString().slice(0,10)
-  });
-  save('feedbacks', feedbacks);
-  // Reset
+  const improve = document.getElementById('fb-improve').value.trim();
+  const good = document.getElementById('fb-good').value.trim();
+  const note = ('[피드백] 만족도 ' + ratings.overall + '/착용감 ' + ratings.comfort + '/효과 ' + ratings.cleaning + '/환자반응 ' + ratings.patient
+    + (good ? '\n좋았던 점: ' + good : '') + (improve ? '\n개선 필요: ' + improve : '')).slice(0,1000);
+  sendLead({ note, source:'community_feedback' });
   Object.keys(ratings).forEach(k => { ratings[k] = 0; rate(k, 0); });
   document.getElementById('fb-improve').value = '';
   document.getElementById('fb-good').value = '';
-  addContribution(user.name);
-  alert('피드백 감사합니다!');
-  render();
+  alert('피드백 감사합니다! graphystyle 팀에 전달되었습니다.');
 }
 
-// ===== Render =====
-function render() {
+// ===== Render (Ideas + stats only) =====
+function render(){
   const ideas = load('ideas');
-  const members = load('members');
-  const feedbacks = load('feedbacks');
   const user = getUser();
-
-  // Stats
   document.getElementById('stat-ideas').textContent = ideas.length;
-  document.getElementById('stat-votes').textContent = ideas.reduce((s, i) => s + i.votes, 0);
+  document.getElementById('stat-votes').textContent = ideas.reduce((s,i) => s + i.votes, 0);
   document.getElementById('stat-adopted').textContent = ideas.filter(i => i.status === 'adopted').length;
-  document.getElementById('stat-members').textContent = members.length;
-  document.getElementById('stat-founding').textContent = members.filter(m => m.badges?.includes('founding')).length;
-  document.getElementById('stat-contrib').textContent = members.reduce((s, m) => s + (m.contributions || 0), 0);
 
-  // Ideas list (sorted by votes)
-  const sorted = [...ideas].sort((a, b) => b.votes - a.votes);
-  const statusMap = { new: ['NEW', 'st-new'], review: ['REVIEW', 'st-review'], adopted: ['ADOPTED', 'st-adopted'], dev: ['DEV', 'st-dev'] };
+  const sorted = [...ideas].sort((a,b) => b.votes - a.votes);
+  const statusMap = { new:['NEW','st-new'], review:['REVIEW','st-review'], adopted:['ADOPTED','st-adopted'], dev:['DEV','st-dev'] };
   document.getElementById('ideas-list').innerHTML = sorted.length === 0
-    ? '<div class="empty"><div class="empty-icon">&#128161;</div>아직 아이디어가 없습니다. 첫 번째로 제안해보세요!</div>'
+    ? '<div class="empty">&#128161; 아직 아이디어가 없습니다. 첫 번째로 제안해보세요!</div>'
     : sorted.map(idea => {
       const voted = user && idea.voters?.includes(user.name);
-      const [stLabel, stClass] = statusMap[idea.status] || ['NEW', 'st-new'];
-      return `<div class="idea-card">
-        <div class="idea-header">
-          <button class="vote-btn ${voted ? 'voted' : ''}" onclick="toggleVote(${idea.id})">
-            <span class="vote-arrow">&#9650;</span>
-            <span class="vote-count">${idea.votes}</span>
-          </button>
-          <div class="idea-body">
-            <div class="idea-title">${esc(idea.title)}</div>
-            <div class="idea-desc">${esc(idea.desc)}</div>
-            <div class="idea-meta">
-              <span class="idea-status ${stClass}">${stLabel}</span>
-              <span>${esc(idea.cat)}</span>
-              <span>${esc(idea.author)} · ${esc(idea.clinic)}</span>
-              <span>${idea.date}</span>
-            </div>
-          </div>
-        </div>
-      </div>`;
+      const [stLabel, stClass] = statusMap[idea.status] || ['NEW','st-new'];
+      return '<div class="idea-card"><div class="idea-header">'
+        + '<button class="vote-btn ' + (voted ? 'voted' : '') + '" onclick="toggleVote(' + idea.id + ')"><span class="vote-arrow">&#9650;</span><span class="vote-count">' + idea.votes + '</span></button>'
+        + '<div class="idea-body"><div class="idea-title">' + esc(idea.title) + '</div><div class="idea-desc">' + esc(idea.desc) + '</div>'
+        + '<div class="idea-meta"><span class="idea-status ' + stClass + '">' + stLabel + '</span><span>' + esc(idea.cat) + '</span><span>' + esc(idea.author) + '</span><span>' + esc(idea.date) + '</span></div>'
+        + '</div></div></div>';
     }).join('');
-
-  // Members
-  document.getElementById('members-list').innerHTML = members.map(m => {
-    const initials = m.name.slice(0, 1);
-    const badgeHtml = (m.badges || []).map(b => {
-      if (b === 'founding') return '<span class="badge b-founding">FOUNDING</span>';
-      if (b === 'beta') return '<span class="badge b-beta">BETA</span>';
-      if (b === 'contributor') return '<span class="badge b-contributor">CONTRIBUTOR</span>';
-      return '';
-    }).join('');
-    return `<div class="member-card">
-      <div class="member-avatar">${esc(initials)}</div>
-      <div class="member-info">
-        <div class="member-name">${esc(m.name)}</div>
-        <div class="member-clinic">${esc(m.clinic)}</div>
-        <div class="member-badges">${badgeHtml}</div>
-      </div>
-      <div style="font-family:var(--font-m);font-size:11px;color:var(--muted);">${m.contributions || 0} 기여</div>
-    </div>`;
-  }).join('');
-
-  // Feedbacks
-  document.getElementById('feedback-list').innerHTML = feedbacks.map(f => {
-    const stars = n => '&#9733;'.repeat(n) + '<span style="color:var(--muted);">' + '&#9733;'.repeat(5 - n) + '</span>';
-    return `<div class="idea-card" style="margin-top:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-weight:600;font-size:14px;">${esc(f.author)} · ${esc(f.clinic)}</span>
-        <span style="font-size:11px;color:var(--muted);">${f.date}</span>
-      </div>
-      <div style="font-size:12px;display:grid;grid-template-columns:80px 1fr;gap:4px 12px;">
-        <span style="color:var(--dim);">만족도</span><span>${stars(f.overall)}</span>
-        <span style="color:var(--dim);">착용감</span><span>${stars(f.comfort)}</span>
-        <span style="color:var(--dim);">세정효과</span><span>${stars(f.cleaning)}</span>
-        <span style="color:var(--dim);">환자반응</span><span>${stars(f.patient)}</span>
-      </div>
-      ${f.good ? '<div style="margin-top:10px;font-size:12px;"><span style="color:var(--green);">&#10003; 좋았던 점:</span> ' + esc(f.good) + '</div>' : ''}
-      ${f.improve ? '<div style="margin-top:4px;font-size:12px;"><span style="color:var(--yellow);">&#9650; 개선 필요:</span> ' + esc(f.improve) + '</div>' : ''}
-    </div>`;
-  }).join('');
 
   updateAuthUI();
 }
+function esc(s){ const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
-function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
-
-// Init
 initSampleData();
 render();
 </script>
