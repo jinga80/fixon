@@ -38,3 +38,6 @@ public/fixon-washer/output/
 *.mp4
 *.webm
 !public/samples/*.mp4
+# 발표용 영상 (SIDEX 덱 조립 애니메이션)
+!public/video/
+!public/video/*.mp4

@@ -321,8 +321,44 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* Video trigger (slide CTA → opens lightbox) */
+.video-trigger{
+  display:flex;align-items:center;gap:16px;width:100%;
+  padding:16px 24px;border:none;cursor:pointer;text-align:left;
+  background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  color:#fff;border-radius:12px;font-family:var(--fb);
+  box-shadow:0 8px 24px rgba(255,107,43,0.28);
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.video-trigger:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,43,0.4);}
+.video-trigger .vt-play{
+  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.22);
+  display:grid;place-items:center;font-size:15px;flex-shrink:0;
+}
+.video-trigger .vt-text{font-size:17px;font-weight:700;letter-spacing:-0.01em;}
+.video-trigger .vt-hint{margin-left:auto;font-size:13px;font-weight:600;opacity:0.85;font-family:var(--fm);}
+
+/* Video lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:400;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(8,12,24,0.94);backdrop-filter:blur(6px);
+}
+.lightbox.open{display:flex;}
+.lightbox video{
+  max-width:92vw;max-height:88vh;width:auto;border-radius:12px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);background:#000;
+}
+.lb-close{
+  position:absolute;top:24px;right:28px;
+  width:44px;height:44px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);
+  color:#fff;font-size:20px;display:grid;place-items:center;transition:background 0.15s;
+}
+.lb-close:hover{background:rgba(255,255,255,0.22);}
+
 @media print{
-  .controls,.progress-bar,.notes-panel,.hint,.toast,.overview{display:none !important;}
+  .controls,.progress-bar,.notes-panel,.hint,.toast,.overview,.lightbox{display:none !important;}
   .stage{position:static;}
   .deck{box-shadow:none;border-radius:0;page-break-after:always;}
   .slide{display:flex !important;opacity:1 !important;}
@@ -477,9 +513,11 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
           </div>
         </div>
       </div>
-      <div class="callout" style="margin-top:auto;background:var(--bg-section);color:var(--muted);">
-        🎞   모션그래픽 — Point Shower 작동 원리 (발표 시 재생)
-      </div>
+      <button class="video-trigger" data-video="/video/point-shower-assembly.mp4" style="margin-top:auto;">
+        <span class="vt-play">▶</span>
+        <span class="vt-text">모션그래픽 — Point Shower 조립·작동 원리</span>
+        <span class="vt-hint">클릭하여 재생</span>
+      </button>
       <div class="slide-num">05 / 14</div>
     </section>
 
@@ -739,6 +777,13 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
   <div class="overview-grid" id="overview-grid"></div>
 </div>
 
+<!-- Video lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close" title="닫기 (Esc)">✕</button>
+  <video id="lb-video" controls playsinline preload="none"
+    poster="/video/point-shower-assembly-poster.jpg"></video>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -819,6 +864,27 @@ function resetTimer(){ pauseTimer(); elapsed = 0; timerEverStarted = false; rend
 timerBtn.onclick = toggleTimer;
 renderTimer();
 
+// ============================================================
+// Video lightbox (슬라이드 영상 재생)
+// ============================================================
+const lightbox = document.getElementById('lightbox');
+const lbVideo = document.getElementById('lb-video');
+function openVideo(src){
+  if (lbVideo.getAttribute('src') !== src) lbVideo.src = src;
+  lightbox.classList.add('open');
+  lbVideo.currentTime = 0;
+  lbVideo.play().catch(() => {});
+}
+function closeVideo(){
+  lbVideo.pause();
+  lightbox.classList.remove('open');
+}
+document.querySelectorAll('.video-trigger').forEach(btn => {
+  btn.addEventListener('click', () => openVideo(btn.dataset.video));
+});
+document.getElementById('lb-close').onclick = closeVideo;
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeVideo(); });
+
 function show(n){
   current = Math.max(1, Math.min(TOTAL, n));
   slides.forEach(s => {
@@ -857,6 +923,12 @@ deck.addEventListener('click', e => {
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.target.matches('input,textarea')) return;
+  // 영상 재생 중에는 슬라이드 이동을 막고 Esc/Space 만 처리
+  if (lightbox.classList.contains('open')) {
+    if (e.key === 'Escape') { e.preventDefault(); closeVideo(); }
+    else if (e.key === ' ') { e.preventDefault(); lbVideo.paused ? lbVideo.play() : lbVideo.pause(); }
+    return;
+  }
   switch (e.key) {
     case 'ArrowRight': case 'PageDown': case ' ': e.preventDefault(); show(current + 1); break;
     case 'ArrowLeft': case 'PageUp': e.preventDefault(); show(current - 1); break;
@@ -1100,9 +1172,10 @@ function doExport(){
     txt(s, 8.5, y, 2, 0.8, name, { fontSize: 17, bold: true, valign: 'middle' });
     txt(s, 10.2, y, 2, 0.8, desc, { fontSize: 12, color: PPTX_COLORS.DIM, valign: 'middle' });
   });
-  rect(s, 0.7, 6.4, 11.5, 0.7, PPTX_COLORS.BG_SECTION);
-  txt(s, 0.7, 6.4, 11.5, 0.7, '🎞   모션그래픽 — Point Shower 작동 원리   (발표 시 재생)',
-    { fontSize: 13, bold: true, color: PPTX_COLORS.MUTED, align: 'center', valign: 'middle', fontFace: 'JetBrains Mono' });
+  rect(s, 0.7, 6.4, 11.5, 0.7, PPTX_COLORS.ACCENT_SOFT);
+  txt(s, 0.7, 6.4, 11.5, 0.7, '🎞   모션그래픽 — Point Shower 조립·작동 원리   (클릭 시 영상 재생)',
+    { fontSize: 13, bold: true, color: PPTX_COLORS.ACCENT_DEEP, align: 'center', valign: 'middle', fontFace: 'JetBrains Mono',
+      hyperlink: { url: 'https://fixon-production.up.railway.app/video/point-shower-assembly.mp4', tooltip: 'Point Shower 조립 애니메이션' } });
   note(s, `[3:30–5:00 · 90초] 이 소재로 만든 첫 제품이 Point Shower입니다. 환자의 치열과 잇몸 형태에 꼭 맞춘 개인 맞춤 치아 세정기입니다. 사용법은 간단합니다. 스플린트 형태의 본체를 구강에 안착시키면, 미리 설계된 위치로 물이 정확하게 분사되며 세척됩니다. 일반 세정기는 사용자가 노즐을 직접 움직여야 하지만, Point Shower는 임플란트 주변이나 교정 장치 사이, 치주 포켓처럼 가장 관리가 필요한 부위로 물줄기가 자동으로 향합니다. 구성은 세 파트입니다. 스플린트 — 환자별로 3D 프린팅하는 핵심 파트, 어댑터 — 노즐과 호스를 잇는 연결부, 아쿠아픽 — 실제 수류를 공급하는 본체입니다. 지금 작동 원리를 모션그래픽으로 보시겠습니다. 이렇게 스플린트에 노즐과 어댑터가 결합되고, 아쿠아픽과 연결되어 작동합니다.`);
 
   // ---------- 6. Process ----------
