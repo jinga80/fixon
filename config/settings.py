@@ -1,5 +1,5 @@
 """
-FixOn — Django settings (production-ready static site).
+Point Shower — Django settings (production-ready static site).
 
 이 프로젝트는 정적 HTML/CSS/JS/STL 자산을 Django + WhiteNoise 로 서빙합니다.
 DB / admin / auth 등은 사용하지 않습니다.
@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ============================================================
 SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
-    "fixon-dev-only-replace-in-production-with-50chars-random-key!!",
+    "pointshower-dev-only-replace-in-production-with-50chars-random-key!!",
 )
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"

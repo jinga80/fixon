@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FixOn 리포트 생성기</title>
+<title>Point Shower 리포트 생성기</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 리포트 생성기">
+<meta property="og:title" content="Point Shower 리포트 생성기">
 <meta property="og:description" content="월간 정산·QC·생산 리포트 자동 생성.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-reports.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 리포트 생성기">
+<meta name="twitter:title" content="Point Shower 리포트 생성기">
 <meta name="twitter:description" content="월간 정산·QC·생산 리포트 자동 생성.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="월간 정산·QC·생산 리포트 자동 생성.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-reports.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -103,7 +103,7 @@ html,body{display:flex;height:100vh;overflow:hidden;background:var(--bg-section)
 </main>
 
 <script>
-const KEY='fixon-erp-state-v6';
+const KEY='pointshower-erp-state-v6';
 let state=null,current='revenue';
 function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
 function fmtKRW(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
@@ -134,12 +134,12 @@ function rRevenue(){
   let orders=state.orders.filter(o=>['applied','settled'].includes(o.status));
   if(month!=='all')orders=orders.filter(o=>new Date(o.createdAt).getMonth()+1===+month);
   const total=orders.reduce((s,o)=>s+(o.pricing.clinic_pays||o.pricing.base||0),0);
-  const totalFee=orders.reduce((s,o)=>s+(o.pricing.fixon_fee||0),0);
+  const totalFee=orders.reduce((s,o)=>s+(o.pricing.pointshower_fee||0),0);
   const settled=orders.filter(o=>o.status==='settled');
   let groupRows='';
   const groupBy=group==='clinic'?'clinicId':group==='lab'?'assignedLab':null;
   if(groupBy){
-    const map={};orders.forEach(o=>{const k=o[groupBy];if(!map[k])map[k]={count:0,total:0,fee:0};map[k].count++;map[k].total+=o.pricing.clinic_pays||o.pricing.base;map[k].fee+=o.pricing.fixon_fee;});
+    const map={};orders.forEach(o=>{const k=o[groupBy];if(!map[k])map[k]={count:0,total:0,fee:0};map[k].count++;map[k].total+=o.pricing.clinic_pays||o.pricing.base;map[k].fee+=o.pricing.pointshower_fee;});
     const lookup=group==='clinic'?(state.clinics||[]):(state.labs||[]);
     groupRows=Object.entries(map).map(([k,v])=>{const name=lookup.find(x=>x.id===k)?.name||k;return `<tr><td>${name}</td><td style="text-align:right;font-family:var(--fm);">${v.count}</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(v.total)}</td><td style="text-align:right;font-family:var(--fm);color:var(--accent);">${fmtKRW(v.fee)}</td></tr>`;}).join('');
   }
@@ -150,7 +150,7 @@ function rRevenue(){
       <div class="kpi"><div class="l">전체 주문</div><div class="v">${orders.length}</div></div>
       <div class="kpi"><div class="l">정산 완료</div><div class="v" style="color:var(--green);">${settled.length}</div></div>
       <div class="kpi"><div class="l">총 매출</div><div class="v" style="color:var(--accent);font-size:16px;">${fmtKRW(total)}</div></div>
-      <div class="kpi"><div class="l">FixOn 수수료</div><div class="v" style="color:var(--green);font-size:16px;">${fmtKRW(totalFee)}</div></div>
+      <div class="kpi"><div class="l">Point Shower 수수료</div><div class="v" style="color:var(--green);font-size:16px;">${fmtKRW(totalFee)}</div></div>
     </div>
     ${groupBy?`<table><thead><tr><th>${group==='clinic'?'치과':'기공소'}</th><th style="text-align:right;">주문수</th><th style="text-align:right;">청구액</th><th style="text-align:right;">수수료</th></tr></thead><tbody>${groupRows}</tbody></table>`:''}
   </div>`;
@@ -176,7 +176,7 @@ function rOrder(){
       <tr><td>치과 청구액</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(o.pricing.base)}</td></tr>
       <tr><td>↳ 기공소 분배</td><td style="text-align:right;font-family:var(--fm);color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td></tr>
       <tr><td>↳ 그래피 분배</td><td style="text-align:right;font-family:var(--fm);color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td></tr>
-      <tr class="total"><td>↳ FixOn 수수료</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(o.pricing.fixon_fee)}</td></tr>
+      <tr class="total"><td>↳ Point Shower 수수료</td><td style="text-align:right;font-family:var(--fm);">${fmtKRW(o.pricing.pointshower_fee)}</td></tr>
     </tbody></table>
     <h3 style="font-family:var(--fd);font-size:14px;margin-top:20px;">진행 타임라인</h3>
     <table><thead><tr><th>일시</th><th>상태</th><th>담당</th><th>비고</th></tr></thead><tbody>
@@ -245,7 +245,7 @@ function rSettlement(){
   let orders=state.orders.filter(o=>o.status==='settled');
   if(start)orders=orders.filter(o=>fmtDate(o.createdAt)>=start);
   if(end)orders=orders.filter(o=>fmtDate(o.createdAt)<=end);
-  const totals=orders.reduce((s,o)=>{s.total+=o.pricing.base;s.lab+=o.pricing.lab_share;s.graphy+=o.pricing.graphy_share;s.fee+=o.pricing.fixon_fee;return s;},{total:0,lab:0,graphy:0,fee:0});
+  const totals=orders.reduce((s,o)=>{s.total+=o.pricing.base;s.lab+=o.pricing.lab_share;s.graphy+=o.pricing.graphy_share;s.fee+=o.pricing.pointshower_fee;return s;},{total:0,lab:0,graphy:0,fee:0});
   return `<div class="report">
     <h2>💵 정산 명세서</h2>
     <div class="sub">생성: ${new Date().toLocaleString('ko-KR')} · 기간: ${start||'전체'} ~ ${end||'전체'}</div>
@@ -253,17 +253,17 @@ function rSettlement(){
       <div class="kpi"><div class="l">정산 건수</div><div class="v">${orders.length}</div></div>
       <div class="kpi"><div class="l">총 청구액</div><div class="v" style="font-size:14px;">${fmtKRW(totals.total)}</div></div>
       <div class="kpi"><div class="l">총 분배</div><div class="v" style="font-size:14px;color:var(--purple);">${fmtKRW(totals.lab+totals.graphy)}</div></div>
-      <div class="kpi"><div class="l">FixOn 수익</div><div class="v" style="font-size:14px;color:var(--green);">${fmtKRW(totals.fee)}</div></div>
+      <div class="kpi"><div class="l">Point Shower 수익</div><div class="v" style="font-size:14px;color:var(--green);">${fmtKRW(totals.fee)}</div></div>
     </div>
-    <table><thead><tr><th>주문번호</th><th>치과</th><th>청구</th><th>기공소</th><th>그래피</th><th>FixOn</th></tr></thead><tbody>
-      ${orders.map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);return `<tr><td style="font-family:var(--fm);">${o.id}</td><td>${c?.name||o.clinicId}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(o.pricing.base)}</td><td style="font-family:var(--fm);text-align:right;color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--accent);">${fmtKRW(o.pricing.fixon_fee)}</td></tr>`;}).join('')}
+    <table><thead><tr><th>주문번호</th><th>치과</th><th>청구</th><th>기공소</th><th>그래피</th><th>Point Shower</th></tr></thead><tbody>
+      ${orders.map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);return `<tr><td style="font-family:var(--fm);">${o.id}</td><td>${c?.name||o.clinicId}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(o.pricing.base)}</td><td style="font-family:var(--fm);text-align:right;color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td><td style="font-family:var(--fm);text-align:right;color:var(--accent);">${fmtKRW(o.pricing.pointshower_fee)}</td></tr>`;}).join('')}
       <tr class="total"><td colspan="2">합계</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.total)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.lab)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.graphy)}</td><td style="font-family:var(--fm);text-align:right;">${fmtKRW(totals.fee)}</td></tr>
     </tbody></table>
   </div>`;
 }
 
 function copy(){const t=document.getElementById('out').innerText;navigator.clipboard.writeText(t).then(()=>alert('✅ 복사됨'));}
-function dl(){const html=`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>FixOn 리포트</title><style>body{font-family:'Noto Sans KR',sans-serif;padding:30px;}table{width:100%;border-collapse:collapse;}th,td{padding:8px;border:1px solid #ccc;}th{background:#f5f5f5;text-align:left;}</style></head><body>${document.getElementById('out').innerHTML}</body></html>`;const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`fixon-report-${current}-${new Date().toISOString().slice(0,10)}.html`;a.click();URL.revokeObjectURL(url);}
+function dl(){const html=`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>Point Shower 리포트</title><style>body{font-family:'Noto Sans KR',sans-serif;padding:30px;}table{width:100%;border-collapse:collapse;}th,td{padding:8px;border:1px solid #ccc;}th{background:#f5f5f5;text-align:left;}</style></head><body>${document.getElementById('out').innerHTML}</body></html>`;const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`pointshower-report-${current}-${new Date().toISOString().slice(0,10)}.html`;a.click();URL.revokeObjectURL(url);}
 
 document.getElementById('filters').innerHTML=FILTERS.revenue;
 gen();

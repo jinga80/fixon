@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FixOn 3D 조립 모드 — STL Viewer</title>
+<title>Point Shower 3D 조립 모드 — STL Viewer</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 3D 조립 모드 — STL Viewer">
+<meta property="og:title" content="Point Shower 3D 조립 모드 — STL Viewer">
 <meta property="og:description" content="트레이 + 노즐 + 어댑터 + 튜브팁 4-뷰포트 시각화.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
-<meta property="og:url" content="https://fixon-production.up.railway.app/fixon-washer/stl_viewer.html">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:url" content="https://fixon-production.up.railway.app/point-shower/stl_viewer.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 3D 조립 모드 — STL Viewer">
+<meta name="twitter:title" content="Point Shower 3D 조립 모드 — STL Viewer">
 <meta name="twitter:description" content="트레이 + 노즐 + 어댑터 + 튜브팁 4-뷰포트 시각화.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,13 +29,13 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="트레이 + 노즐 + 어댑터 + 튜브팁 4-뷰포트 시각화.">
-<meta name="author" content="FixOn × Graphy">
-<link rel="canonical" href="https://fixon-production.up.railway.app/fixon-washer/stl_viewer.html">
+<meta name="author" content="Point Shower × Graphy">
+<link rel="canonical" href="https://fixon-production.up.railway.app/point-shower/stl_viewer.html">
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -121,7 +121,7 @@
       <div style="color:#888;margin-bottom:6px;"># 1) 터미널에서:</div>
       <div>cd /Users/jin/lander && python3 -m http.server 8765</div>
       <div style="color:#888;margin-top:10px;margin-bottom:6px;"># 2) 브라우저:</div>
-      <div><a href="http://127.0.0.1:8765/fixon-washer/stl_viewer.html" style="color:#ff9966;">http://127.0.0.1:8765/fixon-washer/stl_viewer.html</a></div>
+      <div><a href="http://127.0.0.1:8765/point-shower/stl_viewer.html" style="color:#ff9966;">http://127.0.0.1:8765/point-shower/stl_viewer.html</a></div>
     </div>
     <p style="color:#888;font-size:12px;">서버가 이미 켜져 있으면 위 링크를 클릭하세요.</p>
   </div>
@@ -138,7 +138,7 @@ if (location.protocol === 'file:') {
 <div id="toolbar">
   <button onclick="loadSTL('nozzle0306_bin.stl', this)">nozzle0306</button>
   <button onclick="loadSTL('splint0306.stl', this)">splint0306</button>
-  <button onclick="loadSTEP('fixon어댑터.stp', this)">fixon어댑터</button>
+  <button onclick="loadSTEP('point-shower-어댑터.stp', this)">point-shower-어댑터</button>
   <button class="active" onclick="loadAssembly(this)" style="background:#cc6633;border-color:#cc6633;">조립 모드</button>
   <span style="color:#555;">|</span>
   <div id="nozzle-btns" style="display:none;">
@@ -409,7 +409,7 @@ window.loadAssembly = async function(btn) {
   loadingEl.textContent = '어댑터 로딩 중...';
   try {
     const occt = await initOcct();
-    const resp = await fetch(encodeURI('fixon어댑터.stp'));
+    const resp = await fetch(encodeURI('point-shower-어댑터.stp'));
     const buf = await resp.arrayBuffer();
     const result = occt.ReadStepFile(new Uint8Array(buf), null);
     adapterMesh = new THREE.Group();
@@ -1170,7 +1170,7 @@ window.playAnimation = async function(record) {
 
   // 로고를 Three.js 텍스처로 로드 (동일 WebGL 컨텍스트 사용)
   const logoTexture = await new Promise(res => {
-    new THREE.TextureLoader().load('fixonlogo.jpg', tex => {
+    new THREE.TextureLoader().load('point-shower-logo.jpg', tex => {
       tex.colorSpace = THREE.SRGBColorSpace; // 원본 색 유지
       res(tex);
     }, undefined, () => res(null));

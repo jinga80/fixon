@@ -1,4 +1,4 @@
-"""WSGI config for FixOn (Railway / gunicorn entrypoint)."""
+"""WSGI config for Point Shower (Railway / gunicorn entrypoint)."""
 
 import os
 from django.core.wsgi import get_wsgi_application

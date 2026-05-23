@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-<title>FixOn 모바일 컴패니언</title>
+<title>Point Shower 모바일 컴패니언</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 모바일 컴패니언">
+<meta property="og:title" content="Point Shower 모바일 컴패니언">
 <meta property="og:description" content="현장에서 바로 쓰는 터치 최적화 뷰. 알림·주문 진행·간편 액션.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-mobile.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 모바일 컴패니언">
+<meta name="twitter:title" content="Point Shower 모바일 컴패니언">
 <meta name="twitter:description" content="현장에서 바로 쓰는 터치 최적화 뷰. 알림·주문 진행·간편 액션.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -30,12 +30,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="현장에서 바로 쓰는 터치 최적화 뷰. 알림·주문 진행·간편 액션.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-mobile.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -95,10 +95,10 @@ body{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:calc(72px + e
 <body>
 <header class="app-header">
   <div>
-    <h1>📱 FixOn</h1>
+    <h1>📱 Point Shower</h1>
     <a href="erp.html" class="desktop-link">데스크탑 보기 →</a>
   </div>
-  <div class="role-pill" onclick="cycleRole()"><span class="dot"></span><span id="role-name">FixOn</span></div>
+  <div class="role-pill" onclick="cycleRole()"><span class="dot"></span><span id="role-name">Point Shower</span></div>
 </header>
 
 <div class="tab-content active" data-tab="home" id="t-home"></div>
@@ -124,13 +124,13 @@ body{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:calc(72px + e
 </div>
 
 <script>
-const KEY='fixon-erp-state-v6';
-const ROLE_LABEL={clinic:'치과',lab:'기공소',graphy:'그래피',fixon:'FixOn'};
-const ROLES=['clinic','lab','graphy','fixon'];
+const KEY='pointshower-erp-state-v6';
+const ROLE_LABEL={clinic:'치과',lab:'기공소',graphy:'그래피',pointshower:'Point Shower'};
+const ROLES=['clinic','lab','graphy','pointshower'];
 const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령 완료',applied:'환자 적용',settled:'정산 완료',rescan_requested:'재스캔 요청'};
 const STATUS_FLOW=['received','design_queued','designing','design_done','print_queued','printing','assembling','qc','shipping','delivered','applied','settled'];
 function statusProgressIdx(s){const i=STATUS_FLOW.indexOf(s);return i>=0?i:(s==='rescan_requested'?1:0);}
-let state=null,currentTab='home',currentRole='fixon';
+let state=null,currentTab='home',currentRole='pointshower';
 function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));}
 function fmtKRW(n){return '₩'+Math.round(n).toLocaleString('ko-KR');}
@@ -151,12 +151,12 @@ function rHome(){
   const todayOrders=state.orders.filter(o=>new Date(o.createdAt).toDateString()===today);
   const inProgress=state.orders.filter(o=>!['settled'].includes(o.status));
   const urgent=state.orders.filter(o=>{const age=(Date.now()-new Date(o.createdAt))/3600000;return age>72&&!['settled','applied','delivered'].includes(o.status);});
-  const revenue=state.orders.filter(o=>o.status==='settled').reduce((s,o)=>s+(o.pricing.fixon_fee||0),0);
+  const revenue=state.orders.filter(o=>o.status==='settled').reduce((s,o)=>s+(o.pricing.pointshower_fee||0),0);
   return `<div class="kpi-grid">
     <div class="kpi accent"><div class="l">진행 중</div><div class="v">${inProgress.length}</div></div>
     <div class="kpi blue"><div class="l">오늘</div><div class="v">${todayOrders.length}</div></div>
     <div class="kpi purple"><div class="l">긴급 처리</div><div class="v">${urgent.length}</div></div>
-    <div class="kpi green"><div class="l">FixOn 누적</div><div class="v" style="font-size:14px;">${fmtKRW(revenue)}</div></div>
+    <div class="kpi green"><div class="l">Point Shower 누적</div><div class="v" style="font-size:14px;">${fmtKRW(revenue)}</div></div>
   </div>
   <div class="section-h">최근 주문</div>
   ${state.orders.slice(0,5).map(o=>{const c=state.clinics.find(x=>x.id===o.clinicId);return `<div class="card order-card" onclick="openOrderSheet('${o.id}')"><div class="o-info"><div class="o-id">${o.id}</div><div class="o-name">${c?.name||'-'}</div><div class="o-meta">${fmtRel(o.createdAt)}</div></div><span class="st ${statusKlass(o.status)}">${STATUS_LABEL[o.status]}</span></div>`;}).join('')}`;

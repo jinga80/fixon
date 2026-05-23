@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FixOn ERP — 전체 프로세스 시연 가이드</title>
+<title>Point Shower ERP — 전체 프로세스 시연 가이드</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -36,7 +36,7 @@ li{margin-bottom:6px;}
 .role-tag.clinic{background:rgba(96,165,250,0.15);color:var(--blue);}
 .role-tag.lab{background:rgba(167,139,250,0.15);color:var(--purple);}
 .role-tag.graphy{background:rgba(52,211,153,0.15);color:var(--green);}
-.role-tag.fixon{background:rgba(255,107,43,0.15);color:var(--accent);}
+.role-tag.pointshower{background:rgba(255,107,43,0.15);color:var(--accent);}
 
 .box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:20px;}
 .box-info{border-left:3px solid var(--blue);}
@@ -86,7 +86,7 @@ footer strong{color:var(--accent);}
 <div class="wrap">
 
 <header>
-  <h1>FixOn ERP <span>시연 가이드</span></h1>
+  <h1>Point Shower ERP <span>시연 가이드</span></h1>
   <div class="sub">전체 프로세스를 한 번에 시연하기 위한 단계별 워크플로우</div>
   <div class="meta">
     <span>4 Stakeholders</span>
@@ -104,7 +104,7 @@ footer strong{color:var(--accent);}
   <a href="#step2b"><span class="toc-num">04</span>(선택) 재스캔 요청 시나리오</a>
   <a href="#step3"><span class="toc-num">05</span>그래피 — 인쇄 → 조립 → QC → 배송</a>
   <a href="#step4"><span class="toc-num">06</span>치과 — 수령 및 환자 적용</a>
-  <a href="#step5"><span class="toc-num">07</span>FixOn — 정산 처리</a>
+  <a href="#step5"><span class="toc-num">07</span>Point Shower — 정산 처리</a>
   <a href="#files"><span class="toc-num">08</span>샘플 파일 다운로드</a>
 </div>
 
@@ -140,7 +140,7 @@ footer strong{color:var(--accent);}
   <div class="flow-step">배송</div><span class="flow-arrow">→</span>
   <div class="flow-step">치과 수령</div><span class="flow-arrow">→</span>
   <div class="flow-step">환자 적용</div><span class="flow-arrow">→</span>
-  <div class="flow-step">FixOn 정산</div>
+  <div class="flow-step">Point Shower 정산</div>
 </div>
 
 <table>
@@ -148,18 +148,18 @@ footer strong{color:var(--accent);}
   <tbody>
     <tr><td>1. 환자 스캔 & 주문</td><td><span class="role-tag clinic">치과</span></td><td>구강스캐너 또는 치아본 스캔 → 파일 업로드 → 주문 등록</td><td>design_queued</td></tr>
     <tr><td>2. 스캔 검토</td><td><span class="role-tag lab">기공소</span></td><td>스캔 품질 확인 → 디자인 시작 또는 재스캔 요청</td><td>designing</td></tr>
-    <tr><td>3. 디자인 완료</td><td><span class="role-tag lab">기공소</span></td><td>FixOn 디자인 SW로 스플린트 설계 완료</td><td>print_queued</td></tr>
+    <tr><td>3. 디자인 완료</td><td><span class="role-tag lab">기공소</span></td><td>Point Shower 디자인 SW로 스플린트 설계 완료</td><td>print_queued</td></tr>
     <tr><td>4. 인쇄</td><td><span class="role-tag graphy">그래피</span></td><td>프린터 자동 배정 → 3D 프린팅 시작</td><td>printing → assembling</td></tr>
     <tr><td>5. 조립</td><td><span class="role-tag graphy">그래피</span></td><td>분사노즐 4개 + 어댑터 + 튜브팁 결합</td><td>qc</td></tr>
     <tr><td>6. QC</td><td><span class="role-tag graphy">그래피</span></td><td>치수/노즐/표면 검수 → 통과 시 송장 자동 생성</td><td>shipping</td></tr>
     <tr><td>7. 수령 & 적용</td><td><span class="role-tag clinic">치과</span></td><td>배송 도착 확인 → 환자 적용 완료</td><td>applied</td></tr>
-    <tr><td>8. 정산</td><td><span class="role-tag fixon">FixOn</span></td><td>주문별 매출 분배 (치과 → 기공소/그래피/FixOn)</td><td>settled</td></tr>
+    <tr><td>8. 정산</td><td><span class="role-tag pointshower">Point Shower</span></td><td>주문별 매출 분배 (치과 → 기공소/그래피/Point Shower)</td><td>settled</td></tr>
   </tbody>
 </table>
 
 <!-- ===== STEP 1: CLINIC ORDER ===== -->
 <h2 id="step1"><span class="step-num">2</span>치과 — 환자 스캔 + 신규 주문</h2>
-<p class="lead"><span class="role-tag clinic">치과 역할</span> 환자 구강을 스캔하고 FixOn에 스플린트 제작을 의뢰합니다.</p>
+<p class="lead"><span class="role-tag clinic">치과 역할</span> 환자 구강을 스캔하고 Point Shower에 스플린트 제작을 의뢰합니다.</p>
 
 <h3>① 역할 전환</h3>
 <p>헤더 우측 드롭다운에서 <strong>"치과"</strong>를 선택합니다. 사이드바가 치과 메뉴(대시보드/신규 주문/주문 목록/환자 관리/결제)로 바뀝니다.</p>
@@ -194,7 +194,7 @@ footer strong{color:var(--accent);}
 
 <!-- ===== STEP 2: LAB ===== -->
 <h2 id="step2"><span class="step-num">3</span>기공소 — 스캔 검토 + 디자인 작업</h2>
-<p class="lead"><span class="role-tag lab">기공소 역할</span> 도착한 스캔을 검토하고 FixOn 디자인 SW로 스플린트를 설계합니다.</p>
+<p class="lead"><span class="role-tag lab">기공소 역할</span> 도착한 스캔을 검토하고 Point Shower 디자인 SW로 스플린트를 설계합니다.</p>
 
 <h3>① 역할 전환 → 기공소</h3>
 <p>드롭다운에서 <strong>"기공소"</strong> 선택. 알림 🔔에 새 의뢰가 들어와 있습니다.</p>
@@ -290,13 +290,13 @@ footer strong{color:var(--accent);}
   <li>다시 모달에서 <strong>"환자 적용 완료"</strong> 클릭 → applied (정산 대기)</li>
 </ol>
 
-<!-- ===== STEP 5: FIXON SETTLEMENT ===== -->
-<h2 id="step5"><span class="step-num">7</span>FixOn — 정산 처리</h2>
+<!-- ===== STEP 5: POINT SHOWER SETTLEMENT ===== -->
+<h2 id="step5"><span class="step-num">7</span>Point Shower — 정산 처리</h2>
 
-<p><span class="role-tag fixon">FixOn 관리자</span>로 전환.</p>
+<p><span class="role-tag pointshower">Point Shower 관리자</span>로 전환.</p>
 <ol>
   <li>사이드바 <strong>"💰 정산"</strong> 클릭</li>
-  <li>"정산 대기 목록"에서 방금 적용 완료된 주문 확인 — 분배 내역(기공소/그래피/FixOn) 표시</li>
+  <li>"정산 대기 목록"에서 방금 적용 완료된 주문 확인 — 분배 내역(기공소/그래피/Point Shower) 표시</li>
   <li>오른쪽 <strong>"정산"</strong> 버튼 클릭 → settled</li>
 </ol>
 
@@ -304,7 +304,7 @@ footer strong{color:var(--accent);}
   <h4>✓ 시연 마무리</h4>
   <ul>
     <li>전체 대시보드에서 파이프라인 카운트 확인</li>
-    <li>FixOn 매출 KPI에 ₩110,000 (수수료) 가산 확인</li>
+    <li>Point Shower 매출 KPI에 ₩110,000 (수수료) 가산 확인</li>
     <li>주문 모달의 타임라인이 12단계 모두 채워진 것 확인</li>
   </ul>
 </div>
@@ -324,12 +324,12 @@ footer strong{color:var(--accent);}
 
 <h4>디자인 출력물</h4>
 <div class="file-row"><span><span class="role-tag lab">✏️ 디자인</span> <span class="fr-name">design_splint_sample.stl</span></span><span class="fr-size"><a href="design_splint_sample.stl" download>↓ 다운로드</a> · 52KB</span></div>
-<div class="file-row"><span><span class="role-tag graphy">🖨️ 실제 제품</span> <span class="fr-name">../fixon-washer/splint0306.stl</span></span><span class="fr-size"><a href="../fixon-washer/splint0306.stl" download>↓ 다운로드</a> · 19MB · 실제 FixOn Washer 디자인</span></div>
+<div class="file-row"><span><span class="role-tag graphy">🖨️ 실제 제품</span> <span class="fr-name">../point-shower/splint0306.stl</span></span><span class="fr-size"><a href="../point-shower/splint0306.stl" download>↓ 다운로드</a> · 19MB · 실제 Point Shower 디자인</span></div>
 
 <h4>관련 문서</h4>
-<div class="file-row"><span><span class="role-tag fixon">📄 청구서</span> <span class="fr-name">sample_invoice.html</span></span><span class="fr-size"><a href="sample_invoice.html" target="_blank">↗ 열기</a> · 샘플 청구서</span></div>
+<div class="file-row"><span><span class="role-tag pointshower">📄 청구서</span> <span class="fr-name">sample_invoice.html</span></span><span class="fr-size"><a href="sample_invoice.html" target="_blank">↗ 열기</a> · 샘플 청구서</span></div>
 <div class="file-row"><span><span class="role-tag graphy">📄 QC 리포트</span> <span class="fr-name">sample_qc_report.html</span></span><span class="fr-size"><a href="sample_qc_report.html" target="_blank">↗ 열기</a> · QC 통과 리포트 예시</span></div>
-<div class="file-row"><span><span class="role-tag clinic">🔍 STL 뷰어</span> <span class="fr-name">../fixon-washer/stl_viewer.html</span></span><span class="fr-size"><a href="../fixon-washer/stl_viewer.html" target="_blank">↗ 열기</a> · 실제 3D 뷰어</span></div>
+<div class="file-row"><span><span class="role-tag clinic">🔍 STL 뷰어</span> <span class="fr-name">../point-shower/stl_viewer.html</span></span><span class="fr-size"><a href="../point-shower/stl_viewer.html" target="_blank">↗ 열기</a> · 실제 3D 뷰어</span></div>
 
 <div style="text-align:center;margin-top:50px;">
   <a href="../erp.html" class="cta">ERP에서 시연 시작 →</a>
@@ -337,8 +337,8 @@ footer strong{color:var(--accent);}
 </div>
 
 <footer>
-  <strong>FixOn ERP Demo</strong> · Operations Console v0.1<br>
-  생성: 2026 · Powered by FixOn × Graphy
+  <strong>Point Shower ERP Demo</strong> · Operations Console v0.1<br>
+  생성: 2026 · Powered by Point Shower × Graphy
 </footer>
 
 </div>

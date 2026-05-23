@@ -8,19 +8,19 @@
 
 ```
 /Users/jin/lander/
-├── fixon-washer/          # [메인] FixOn Washer 3D 조립 뷰어
+├── point-shower/          # [메인] Point Shower 3D 조립 뷰어
 │   ├── stl_viewer.html    # Three.js 기반 메인 뷰어 (1380줄)
 │   ├── splint0306.stl     # 스플린트 3D 모델 (19MB, 388K 삼각형)
 │   ├── nozzle0306_bin.stl # 노즐 3D 모델 (4.5MB, 바이너리)
 │   ├── tubetip.stl        # 튜브팁 3D 모델 (466KB)
-│   ├── fixon어댑터.stp    # 어댑터 STEP 파일
+│   ├── point-shower-어댑터.stp    # 어댑터 STEP 파일
 │   ├── splint_adapter.json# 현재 부품 배치 데이터 (6개 부품)
-│   ├── fixonlogo.jpg      # FixOn Washer 로고 (애니메이션 인트로용)
-│   ├── fixonbanner3.jpg   # 배너 이미지
-│   ├── fixon결합사진.jpg  # 제품 결합 참고사진
-│   ├── fixon분리사진.jpg  # 제품 분리 참고사진
+│   ├── point-shower-logo.jpg      # Point Shower 로고 (애니메이션 인트로용)
+│   ├── point-shower-banner3.jpg   # 배너 이미지
+│   ├── point-shower-결합사진.jpg  # 제품 결합 참고사진
+│   ├── point-shower-분리사진.jpg  # 제품 분리 참고사진
 │   ├── convert_to_mp4.sh  # WebM→MP4 변환 스크립트
-│   ├── FixOnWasher동영상.docx # 원본 요구사항 문서
+│   ├── PointShower동영상.docx # 원본 요구사항 문서
 │   └── output/            # 렌더링 결과물
 │       ├── assembly-2026-04-16.mp4
 │       ├── assembly-2026-04-16.webm
@@ -43,10 +43,10 @@
 
 ---
 
-## 1. FixOn Washer 조립 뷰어 (`fixon-washer/`)
+## 1. Point Shower 조립 뷰어 (`point-shower/`)
 
 ### 개요
-Aquapick 구강세정기용 **FixOn 스플린트 어셈블리**를 3D로 시각화하고, 조립 애니메이션 영상을 생성하는 웹 기반 뷰어.
+Aquapick 구강세정기용 **Point Shower 스플린트 어셈블리**를 3D로 시각화하고, 조립 애니메이션 영상을 생성하는 웹 기반 뷰어.
 
 - **의뢰인**: 이중우 대표님
 - **제품**: 투명 스플린트 + 노즐 4개 + 어댑터 1개 + 튜브팁 1개
@@ -59,7 +59,7 @@ Aquapick 구강세정기용 **FixOn 스플린트 어셈블리**를 3D로 시각�
 
 ### 실행 방법
 ```bash
-cd /Users/jin/lander/fixon-washer
+cd /Users/jin/lander/point-shower
 python3 -m http.server 8080
 open http://localhost:8080/stl_viewer.html
 ```
@@ -71,7 +71,7 @@ open http://localhost:8080/stl_viewer.html
 | 2 | 노즐 초록 | nozzle0306_bin.stl | #44cc66 | `2` |
 | 3 | 노즐 파랑 | nozzle0306_bin.stl | #4488ff | `3` |
 | 4 | 노즐 노랑 | nozzle0306_bin.stl | #ffcc22 | `4` |
-| 5 | 어댑터 | fixon어댑터.stp | #44aadd | `5` |
+| 5 | 어댑터 | point-shower-어댑터.stp | #44aadd | `5` |
 | 6 | 튜브팁 | tubetip.stl | #eeeeee (불투명 흰) | `6` |
 
 ### 배치 데이터 (`splint_adapter.json`)
@@ -82,7 +82,7 @@ open http://localhost:8080/stl_viewer.html
 ### 조립 애니메이션 타임라인
 | 구간 | 내용 |
 |------|------|
-| 0~2.5s | FixOn Washer 로고 (페이드 인/아웃) |
+| 0~2.5s | Point Shower 로고 (페이드 인/아웃) |
 | 2.5~4.0s | 스플린트 회전 인트로 |
 | 4.0~11.2s | 노즐 1→2→3→4 바깥에서 날아와 결합 |
 | 12.2~14.7s | 어댑터 날아와 결합 |
@@ -108,7 +108,7 @@ open http://localhost:8080/stl_viewer.html
    - `assembly-2026-04-16.webm/mp4` 첫 결과물 생성
 2. **2026-04-20**: 튜브팁 추가 + 로고 인트로
    - `tubetip.stl`을 6번째 부품으로 추가 (인덱스 5, 흰색 불투명)
-   - FixOn Washer 로고를 애니메이션 인트로에 추가 (Three.js 텍스처)
+   - Point Shower 로고를 애니메이션 인트로에 추가 (Three.js 텍스처)
    - 키보드 단축키를 `e.code` 기반으로 변경 (한글 입력 모드 호환)
    - 버튼 `data-idx` 속성으로 선택 UI 버그 수정
    - localStorage 자동저장 제거, `splint_adapter.json` 파일 기반으로 전환
@@ -166,7 +166,7 @@ SIDEX 2026(서울국제치과기자재전시회)에서 그래피(Graphy) 부스 
 - **강연자**: 이중우 원장 / 올리브서울치과
 - **행사**: 2026.05.29~31, COEX Hall D
 - **부스**: D-601~610, 701~710 (그래피 20부스)
-- **내용**: FixOn Washer 제품 소개 + 디지털 치과 워크플로
+- **내용**: Point Shower 제품 소개 + 디지털 치과 워크플로
 
 ### 작업 이력
 1. **2026-04-26**: 프로젝트 초기 셋업

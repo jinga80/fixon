@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FixOn ERP — 운영 콘솔</title>
+<title>Point Shower ERP — 운영 콘솔</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn ERP — 운영 콘솔">
+<meta property="og:title" content="Point Shower ERP — 운영 콘솔">
 <meta property="og:description" content="치과·기공소·그래피·관리자 4-역할 통합 ERP. 주문·디자인·생산·QC·정산을 단일 흐름으로.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn ERP — 운영 콘솔">
+<meta name="twitter:title" content="Point Shower ERP — 운영 콘솔">
 <meta name="twitter:description" content="치과·기공소·그래피·관리자 4-역할 통합 ERP. 주문·디자인·생산·QC·정산을 단일 흐름으로.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -30,12 +30,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="치과·기공소·그래피·관리자 4-역할 통합 ERP. 주문·디자인·생산·QC·정산을 단일 흐름으로.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp.html">
 
 <script type="importmap">
@@ -131,7 +131,7 @@ button{font-family:inherit;color:inherit;}
 .role-dot.clinic{background:var(--blue);}
 .role-dot.lab{background:var(--purple);}
 .role-dot.graphy{background:var(--green);}
-.role-dot.fixon{background:var(--accent);}
+.role-dot.pointshower{background:var(--accent);}
 .role-name{font-weight:600;color:var(--text);}
 .role-user{color:var(--muted);font-size:14px;}
 .role-arrow{color:var(--subtle);font-size:12px;}
@@ -488,10 +488,10 @@ button{font-family:inherit;color:inherit;}
 
 <!-- ===== Sidebar ===== -->
 <aside class="sidebar">
-  <div class="sb-logo">FixOn ERP<span>Operations Console</span></div>
+  <div class="sb-logo">Point Shower ERP<span>Operations Console</span></div>
   <div id="sidebar-nav"></div>
   <div class="sb-spacer"></div>
-  <div class="sb-footer">v0.1 · 2026<br><span style="color:var(--accent);">FixOn × Graphy</span></div>
+  <div class="sb-footer">v0.1 · 2026<br><span style="color:var(--accent);">Point Shower × Graphy</span></div>
 </aside>
 
 <!-- ===== Main ===== -->
@@ -505,7 +505,7 @@ button{font-family:inherit;color:inherit;}
       <div class="role-switch" onclick="toggleRoleMenu(event)">
         <div class="role-dot" id="role-dot"></div>
         <div>
-          <div class="role-name" id="role-name">FixOn 관리자</div>
+          <div class="role-name" id="role-name">Point Shower 관리자</div>
         </div>
         <span class="role-arrow">▾</span>
         <div class="role-menu" id="role-menu">
@@ -521,9 +521,9 @@ button{font-family:inherit;color:inherit;}
             <div class="role-dot graphy"></div>
             <div><div class="ro-name">그래피</div><div class="ro-sub" style="font-size:10px;color:var(--dim);">생산팀</div></div>
           </div>
-          <div class="role-opt" onclick="switchRole('fixon',event)">
-            <div class="role-dot fixon"></div>
-            <div><div class="ro-name">FixOn 관리자</div><div class="ro-sub" style="font-size:10px;color:var(--dim);">전체 운영 총괄</div></div>
+          <div class="role-opt" onclick="switchRole('pointshower',event)">
+            <div class="role-dot pointshower"></div>
+            <div><div class="ro-name">Point Shower 관리자</div><div class="ro-sub" style="font-size:10px;color:var(--dim);">전체 운영 총괄</div></div>
           </div>
         </div>
       </div>
@@ -585,7 +585,7 @@ button{font-family:inherit;color:inherit;}
   <!-- HEADER -->
   <div class="dm-head">
     <div>
-      <span class="dh-title">🎨 FixOn Splint 디자이너</span>
+      <span class="dh-title">🎨 Point Shower Splint 디자이너</span>
       <span class="dh-meta" id="dm-order-meta"></span>
     </div>
     <div class="dh-tools">
@@ -1095,7 +1095,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* =====================================================================
-   FixOn 3D Designer — 5-step Hybrid Wizard
+   Point Shower 3D Designer — 5-step Hybrid Wizard
    Step 1: Import scan
    Step 2: Auto-detect 14 teeth (FDI labels)
    Step 3: Template fit (splint0306 → patient scan via affine transform)
@@ -1992,7 +1992,7 @@ window.resetDesignerCamera = function() {
 /* ============================================================
    STATE & STORAGE
    ============================================================ */
-const STORAGE_KEY = 'fixon-erp-state-v6';
+const STORAGE_KEY = 'pointshower-erp-state-v6';
 
 // Linear forward flow (12 steps)
 const STATUS_FLOW = [
@@ -2083,7 +2083,7 @@ window.NOZZLE_LAYOUTS = NOZZLE_LAYOUTS;
 window.TOOTH_BY_FDI = TOOTH_BY_FDI;
 window.LOWER_TEETH = LOWER_TEETH;
 window.getOrderTeeth = getOrderTeeth;
-const ROLE_LABEL = { clinic: '치과', lab: '기공소', graphy: '그래피', fixon: 'FixOn 관리자' };
+const ROLE_LABEL = { clinic: '치과', lab: '기공소', graphy: '그래피', pointshower: 'Point Shower 관리자' };
 
 let state = loadState();
 
@@ -2152,7 +2152,7 @@ function seedState() {
     { id: 'P-006', clinicId: 'clinic-003', name: '강OO', age: 41, sex: 'F', note: '잇몸 마사지 겸용', createdAt: daysAgo(1) }
   ];
 
-  const pricing = { base: 280000, lab_share: 60000, graphy_share: 110000, fixon_fee: 110000 };
+  const pricing = { base: 280000, lab_share: 60000, graphy_share: 110000, pointshower_fee: 110000 };
 
   const mkScan = (method, scanner, arch, fileSize, daysOff) => ({
     method, scanner, format: 'stl', arch,
@@ -2256,14 +2256,14 @@ function seedState() {
   };
 
   const notifications = [
-    { id: 'n1', to: 'fixon', message: '새 주문 ORD-2026-0012 (연세웃음치과)', at: hoursAgo(2), read: false },
+    { id: 'n1', to: 'pointshower', message: '새 주문 ORD-2026-0012 (연세웃음치과)', at: hoursAgo(2), read: false },
     { id: 'n2', to: 'lab', message: 'ORD-2026-0011 디자인 의뢰 들어왔습니다', at: hoursAgo(8), read: false },
     { id: 'n3', to: 'graphy', message: 'ORD-2026-0009 디자인 완료 — 생산 시작', at: hoursAgo(30), read: false },
     { id: 'n4', to: 'clinic', message: 'ORD-2026-0003 배송 완료', at: hoursAgo(120), read: true }
   ];
 
   return {
-    currentRole: 'fixon',
+    currentRole: 'pointshower',
     currentClinic: 'clinic-001',
     currentLab: 'lab-001',
     currentGraphy: 'graphy-prod',
@@ -2287,7 +2287,7 @@ function actorOf(status) {
   if (['received','delivered','applied'].includes(status)) return 'clinic';
   if (['design_queued','designing','design_done'].includes(status)) return 'lab';
   if (['print_queued','printing','assembling','qc','shipping'].includes(status)) return 'graphy';
-  return 'fixon';
+  return 'pointshower';
 }
 
 /* ============================================================
@@ -2315,7 +2315,7 @@ const NAV = {
     { id: 'shipping', icon: '🚚', label: '배송' },
     { id: 'inventory', icon: '📦', label: '재고' }
   ],
-  fixon: [
+  pointshower: [
     { id: 'dashboard', icon: '📊', label: '전체 대시보드' },
     { id: 'all-orders', icon: '📋', label: '모든 주문' },
     { id: 'partners', icon: '🏢', label: '거래처 관리' },
@@ -2345,7 +2345,7 @@ const PAGE_TITLES = {
   'settlement': ['정산', '주문별 매출 분배 및 송금'],
   'pricing-policy': ['단가 정책', '주문 1건당 분배율 설정'],
   'quality': ['품질 리포트', 'QC 통과율 / 클레임 / 반품'],
-  'community': ['커뮤니티 연동', 'FixOn Community 회원 → 잠재 거래처']
+  'community': ['커뮤니티 연동', 'Point Shower Community 회원 → 잠재 거래처']
 };
 
 /* ============================================================
@@ -2402,7 +2402,7 @@ document.addEventListener('click', closeAllPanels);
 function renderSidebar() {
   const nav = NAV[state.currentRole];
   const html = `
-    <div class="sb-section">${state.currentRole === 'fixon' ? '운영' : ROLE_LABEL[state.currentRole]}</div>
+    <div class="sb-section">${state.currentRole === 'pointshower' ? '운영' : ROLE_LABEL[state.currentRole]}</div>
     ${nav.map(item => {
       const badge = item.badge ? item.badge() : 0;
       return `<div class="sb-item ${state.activeNav === item.id ? 'active' : ''}" onclick="setNav('${item.id}')">
@@ -2421,7 +2421,7 @@ function renderSidebar() {
     <div class="sb-item" onclick="location.href='erp-inventory.html'"><span class="sb-icon">📦</span><span>재고 관리</span></div>
     <div class="sb-item" onclick="location.href='erp-workflow.html'"><span class="sb-icon">⚙️</span><span>워크플로우 자동화</span></div>
     <div class="sb-item" onclick="location.href='erp-portal.html'"><span class="sb-icon">🦷</span><span>환자 포털</span></div>
-    <div class="sb-item" onclick="window.open('fixon-patient.html','_blank')"><span class="sb-icon">📄</span><span>환자용 안내 페이지</span></div>
+    <div class="sb-item" onclick="window.open('point-shower-patient.html','_blank')"><span class="sb-icon">📄</span><span>환자용 안내 페이지</span></div>
     <div class="sb-item" onclick="location.href='erp-mobile.html'"><span class="sb-icon">📱</span><span>모바일 뷰</span></div>
     <div class="sb-item" onclick="location.href='erp-help.html'"><span class="sb-icon">📖</span><span>도움말 / 가이드</span></div>
     <div class="sb-section">시스템</div>
@@ -2486,7 +2486,7 @@ function statusBadge(s) { return `<span class="st st-${s}">${STATUS_LABEL[s]}</s
 function clinicName(id) { return state.clinics.find(c => c.id === id)?.name || id; }
 function clinicDoctor(id) { return state.clinics.find(c => c.id === id)?.doctor || ''; }
 // PII masking: only the patient's own clinic + the patient themselves see full name.
-// FixOn admin / lab / graphy see masked name like "김**" (개인정보보호법 Art. 28)
+// Point Shower admin / lab / graphy see masked name like "김**" (개인정보보호법 Art. 28)
 function maskName(name) {
   if (!name) return '';
   return name.replace(/[가-힣A-Za-z]/g, (m, i) => i === 0 ? m : '*');
@@ -2497,7 +2497,7 @@ function patientName(id) {
   // Clinic role: full visibility for own clinic patients
   if (state.currentRole === 'clinic' && p.clinicId === state.currentClinic) return p.name;
   // Other roles: mask
-  if (['lab', 'graphy', 'fixon'].includes(state.currentRole)) return maskName(p.name);
+  if (['lab', 'graphy', 'pointshower'].includes(state.currentRole)) return maskName(p.name);
   return p.name;
 }
 window.patientName = patientName;
@@ -2535,7 +2535,7 @@ function advanceOrder(orderId, targetStatus, by, note) {
   } else if (targetStatus === 'delivered') {
     addNotif('clinic', `${o.id} 수령 완료`);
   } else if (targetStatus === 'applied') {
-    addNotif('fixon', `${o.id} 환자 적용 완료 — 정산 대기`);
+    addNotif('pointshower', `${o.id} 환자 적용 완료 — 정산 대기`);
   } else if (targetStatus === 'settled') {
     addNotif('clinic', `${o.id} 정산 완료`);
   }
@@ -2690,7 +2690,7 @@ function openOrder(orderId) {
             치과 청구: <strong>${fmtKRW(o.pricing.clinic_pays || o.pricing.base)}</strong><br>
             ↳ 기공소: ${fmtKRW(o.pricing.lab_share)}<br>
             ↳ 그래피: ${fmtKRW(o.pricing.graphy_share)}<br>
-            ↳ FixOn 수수료: ${fmtKRW(o.pricing.fixon_fee)}
+            ↳ Point Shower 수수료: ${fmtKRW(o.pricing.pointshower_fee)}
           </div>
         </div>
       </div>
@@ -2725,7 +2725,7 @@ function renderOrderActions(o) {
   }
   if (role === 'clinic' && s === 'shipping') acts.push(['수령 확인', `advanceOrder('${o.id}','delivered','clinic')`, 'primary']);
   if (role === 'clinic' && s === 'delivered') acts.push(['환자 적용 완료', `advanceOrder('${o.id}','applied','clinic')`, 'primary']);
-  if (role === 'fixon' && s === 'applied') acts.push(['정산 완료', `advanceOrder('${o.id}','settled','fixon')`, 'primary']);
+  if (role === 'pointshower' && s === 'applied') acts.push(['정산 완료', `advanceOrder('${o.id}','settled','pointshower')`, 'primary']);
 
   return acts.map(([label, fn, cls]) =>
     `<button class="btn ${cls === 'primary' ? 'btn-primary' : (cls === 'danger' ? 'btn-danger' : '')}" onclick="${fn}">${label}</button>`
@@ -3154,7 +3154,7 @@ PAGES['clinic:new-order'] = () => {
           <div style="font-size:11px;color:var(--muted);line-height:1.7;">
             ↳ 기공소 ${fmtKRW(state.pricing.lab_share)}<br>
             ↳ 그래피 ${fmtKRW(state.pricing.graphy_share)}<br>
-            ↳ FixOn 수수료 ${fmtKRW(state.pricing.fixon_fee)}
+            ↳ Point Shower 수수료 ${fmtKRW(state.pricing.pointshower_fee)}
           </div>
         </div>
         <div class="divider"></div>
@@ -3372,7 +3372,7 @@ PAGES['lab:queue'] = () => {
       </div>
     </div>
     <div style="margin-top:20px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--dim);">
-      💡 <strong>워크플로우</strong>: 카드 클릭 → 스캔 데이터 검토 → "📷 스캔 검토 OK · 디자인 시작" 또는 "⚠️ 재스캔 요청" 선택 → FixOn 디자인 SW로 작업 후 "디자인 완료"
+      💡 <strong>워크플로우</strong>: 카드 클릭 → 스캔 데이터 검토 → "📷 스캔 검토 OK · 디자인 시작" 또는 "⚠️ 재스캔 요청" 선택 → Point Shower 디자인 SW로 작업 후 "디자인 완료"
     </div>
   `;
 };
@@ -3601,12 +3601,12 @@ PAGES['graphy:inventory'] = () => {
 };
 
 /* ============================================================
-   FIXON (admin) PAGES
+   POINT SHOWER (admin) PAGES
    ============================================================ */
-PAGES['fixon:dashboard'] = () => {
+PAGES['pointshower:dashboard'] = () => {
   const all = state.orders;
   const inProgress = all.filter(o => !['settled'].includes(o.status));
-  const revenue = all.filter(o => ['applied','settled'].includes(o.status)).reduce((s,o) => s + o.pricing.fixon_fee, 0);
+  const revenue = all.filter(o => ['applied','settled'].includes(o.status)).reduce((s,o) => s + o.pricing.pointshower_fee, 0);
   const todayOrders = all.filter(o => new Date(o.createdAt).toDateString() === new Date().toDateString());
 
   const stageCount = {};
@@ -3617,13 +3617,13 @@ PAGES['fixon:dashboard'] = () => {
       <div class="ab-icon" style="color:var(--accent);">📖</div>
       <div class="ab-body">
         <div class="ab-title" style="color:var(--accent);">전체 프로세스를 시연하시려면 시연 가이드를 참고하세요</div>
-        <div class="ab-text">치과 → 기공소 → 그래피 → FixOn 4개 역할의 전체 워크플로우와 샘플 파일이 포함되어 있습니다.</div>
+        <div class="ab-text">치과 → 기공소 → 그래피 → Point Shower 4개 역할의 전체 워크플로우와 샘플 파일이 포함되어 있습니다.</div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="window.open('samples/DEMO_GUIDE.html','_blank')">시연 가이드 열기 →</button>
     </div>
     <div class="grid-4">
       <div class="card kpi kpi-accent"><div class="kpi-label">전체 주문</div><div class="kpi-value">${all.length}</div><div class="kpi-foot">진행 중 ${inProgress.length}건</div></div>
-      <div class="card kpi kpi-green"><div class="kpi-label">FixOn 매출</div><div class="kpi-value" style="font-size:22px;">${fmtKRW(revenue)}</div><div class="kpi-foot">수수료 합계</div></div>
+      <div class="card kpi kpi-green"><div class="kpi-label">Point Shower 매출</div><div class="kpi-value" style="font-size:22px;">${fmtKRW(revenue)}</div><div class="kpi-foot">수수료 합계</div></div>
       <div class="card kpi kpi-blue"><div class="kpi-label">오늘 신규</div><div class="kpi-value">${todayOrders.length}<span class="kv-unit">건</span></div></div>
       <div class="card kpi kpi-purple"><div class="kpi-label">활성 거래처</div><div class="kpi-value">${state.clinics.length+state.labs.length+state.graphyAccounts.length}</div><div class="kpi-foot">치과 ${state.clinics.length} · 기공소 ${state.labs.length} · 그래피 ${state.graphyAccounts.length}</div></div>
     </div>
@@ -3667,7 +3667,7 @@ PAGES['fixon:dashboard'] = () => {
   `;
 };
 
-PAGES['fixon:all-orders'] = () => {
+PAGES['pointshower:all-orders'] = () => {
   const list = state.orders.sort((a,b) => b.createdAt.localeCompare(a.createdAt));
   return `<div class="card has-table">
     <div class="tbl-wrap">
@@ -3682,7 +3682,7 @@ PAGES['fixon:all-orders'] = () => {
   </div>`;
 };
 
-PAGES['fixon:partners'] = () => {
+PAGES['pointshower:partners'] = () => {
   return `
     <div class="grid-3">
       <div class="card">
@@ -3714,7 +3714,7 @@ PAGES['fixon:partners'] = () => {
   `;
 };
 
-PAGES['fixon:settlement'] = () => {
+PAGES['pointshower:settlement'] = () => {
   const pending = state.orders.filter(o => o.status === 'applied');
   const done = state.orders.filter(o => o.status === 'settled');
   const sumPending = pending.reduce((s,o) => s + o.pricing.base, 0);
@@ -3724,20 +3724,20 @@ PAGES['fixon:settlement'] = () => {
     <div class="grid-3">
       <div class="card kpi kpi-yellow"><div class="kpi-label">정산 대기</div><div class="kpi-value">${pending.length}<span class="kv-unit">건</span></div><div class="kpi-foot" style="color:var(--yellow);">${fmtKRW(sumPending)}</div></div>
       <div class="card kpi kpi-green"><div class="kpi-label">정산 완료</div><div class="kpi-value">${done.length}<span class="kv-unit">건</span></div><div class="kpi-foot" style="color:var(--green);">${fmtKRW(sumDone)}</div></div>
-      <div class="card kpi kpi-accent"><div class="kpi-label">총 매출 (FixOn)</div><div class="kpi-value" style="font-size:22px;">${fmtKRW([...pending,...done].reduce((s,o) => s + o.pricing.fixon_fee, 0))}</div></div>
+      <div class="card kpi kpi-accent"><div class="kpi-label">총 매출 (Point Shower)</div><div class="kpi-value" style="font-size:22px;">${fmtKRW([...pending,...done].reduce((s,o) => s + o.pricing.pointshower_fee, 0))}</div></div>
     </div>
 
     <h3 style="font-family:var(--fd);font-size:14px;margin-bottom:10px;color:var(--dim);">정산 대기 목록</h3>
     <div class="card" style="padding:0;margin-bottom:24px;">
-      <table class="tbl"><thead><tr><th>주문</th><th>치과</th><th class="num">청구</th><th class="num">기공소</th><th class="num">그래피</th><th class="num">FixOn</th><th></th></tr></thead>
+      <table class="tbl"><thead><tr><th>주문</th><th>치과</th><th class="num">청구</th><th class="num">기공소</th><th class="num">그래피</th><th class="num">Point Shower</th><th></th></tr></thead>
         <tbody>${pending.map(o => `<tr>
           <td class="mono"><a onclick="openOrder('${o.id}')" style="cursor:pointer;color:var(--accent);">${o.id}</a></td>
           <td>${clinicName(o.clinicId)}</td>
           <td class="num">${fmtKRW(o.pricing.base)}</td>
           <td class="num" style="color:var(--purple);">${fmtKRW(o.pricing.lab_share)}</td>
           <td class="num" style="color:var(--green);">${fmtKRW(o.pricing.graphy_share)}</td>
-          <td class="num" style="color:var(--accent);"><strong>${fmtKRW(o.pricing.fixon_fee)}</strong></td>
-          <td><button class="btn btn-primary btn-sm" onclick="advanceOrder('${o.id}','settled','fixon')">정산</button></td>
+          <td class="num" style="color:var(--accent);"><strong>${fmtKRW(o.pricing.pointshower_fee)}</strong></td>
+          <td><button class="btn btn-primary btn-sm" onclick="advanceOrder('${o.id}','settled','pointshower')">정산</button></td>
         </tr>`).join('') || `<tr><td colspan="7" class="empty">정산 대기 항목이 없습니다.</td></tr>`}</tbody>
       </table>
     </div>
@@ -3758,7 +3758,7 @@ PAGES['fixon:settlement'] = () => {
   `;
 };
 
-PAGES['fixon:pricing-policy'] = () => {
+PAGES['pointshower:pricing-policy'] = () => {
   const p = state.pricing;
   return `
     <div class="split-2">
@@ -3767,7 +3767,7 @@ PAGES['fixon:pricing-policy'] = () => {
         <div class="field"><label>치과 청구 기본단가</label><input type="number" id="pp-base" value="${p.base}"></div>
         <div class="field"><label>기공소 분배</label><input type="number" id="pp-lab" value="${p.lab_share}"></div>
         <div class="field"><label>그래피 분배</label><input type="number" id="pp-graphy" value="${p.graphy_share}"></div>
-        <div class="field"><label>FixOn 수수료</label><input type="number" id="pp-fixon" value="${p.fixon_fee}"></div>
+        <div class="field"><label>Point Shower 수수료</label><input type="number" id="pp-pointshower" value="${p.pointshower_fee}"></div>
         <button class="btn btn-primary btn-block" onclick="savePricing()">저장</button>
       </div>
       <div class="card">
@@ -3777,9 +3777,9 @@ PAGES['fixon:pricing-policy'] = () => {
           <div class="divider"></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--purple);">↳ 기공소</span><strong>${fmtKRW(p.lab_share)} (${Math.round(p.lab_share/p.base*100)}%)</strong></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--green);">↳ 그래피</span><strong>${fmtKRW(p.graphy_share)} (${Math.round(p.graphy_share/p.base*100)}%)</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--accent);">↳ FixOn</span><strong>${fmtKRW(p.fixon_fee)} (${Math.round(p.fixon_fee/p.base*100)}%)</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--accent);">↳ Point Shower</span><strong>${fmtKRW(p.pointshower_fee)} (${Math.round(p.pointshower_fee/p.base*100)}%)</strong></div>
           <div class="divider"></div>
-          <div style="font-size:11px;color:var(--dim);">합계: ${fmtKRW(p.lab_share+p.graphy_share+p.fixon_fee)} ${p.lab_share+p.graphy_share+p.fixon_fee !== p.base ? '<span style="color:var(--red);">⚠️ 청구액과 불일치</span>' : ''}</div>
+          <div style="font-size:11px;color:var(--dim);">합계: ${fmtKRW(p.lab_share+p.graphy_share+p.pointshower_fee)} ${p.lab_share+p.graphy_share+p.pointshower_fee !== p.base ? '<span style="color:var(--red);">⚠️ 청구액과 불일치</span>' : ''}</div>
         </div>
       </div>
     </div>
@@ -3790,13 +3790,13 @@ window.savePricing = function() {
   state.pricing.base = +document.getElementById('pp-base').value;
   state.pricing.lab_share = +document.getElementById('pp-lab').value;
   state.pricing.graphy_share = +document.getElementById('pp-graphy').value;
-  state.pricing.fixon_fee = +document.getElementById('pp-fixon').value;
+  state.pricing.pointshower_fee = +document.getElementById('pp-pointshower').value;
   saveState();
   renderAll();
   toast('단가 정책이 저장되었습니다.', 'success');
 };
 
-PAGES['fixon:quality'] = () => {
+PAGES['pointshower:quality'] = () => {
   const all = state.orders;
   const reachedQc = all.filter(o => STATUS_FLOW.indexOf(o.status) >= STATUS_FLOW.indexOf('qc'));
   const passed = reachedQc.filter(o => o.qcResult === 'pass').length;
@@ -3821,10 +3821,10 @@ PAGES['fixon:quality'] = () => {
   `;
 };
 
-PAGES['fixon:community'] = () => {
+PAGES['pointshower:community'] = () => {
   return `
     <div class="card">
-      <h3>FixOn Community → ERP 거래처 전환</h3>
+      <h3>Point Shower Community → ERP 거래처 전환</h3>
       <div style="font-size:12px;color:var(--dim);margin-bottom:16px;">
         Founding Member로 가입한 치과의사를 ERP 거래처로 등록할 수 있습니다.
       </div>
@@ -3851,7 +3851,7 @@ PAGES['fixon:community'] = () => {
         </div>
       </div>
       <div style="margin-top:14px;font-size:11px;color:var(--muted);">
-        💡 <a href="fixon-community/index.html" target="_blank" style="color:var(--accent);">FixOn Community 페이지</a>에서 전체 회원 명단을 확인할 수 있습니다.
+        💡 <a href="point-shower-community/index.html" target="_blank" style="color:var(--accent);">Point Shower Community 페이지</a>에서 전체 회원 명단을 확인할 수 있습니다.
       </div>
     </div>
   `;
@@ -3889,10 +3889,10 @@ window.addEventListener('storage', e => {
    ============================================================ */
 const TOUR_STEPS = [
   { title: '환영합니다 👋',
-    body: 'FixOn ERP의 핵심 흐름을 7단계로 안내합니다. 각 단계마다 실제 화면이 자동으로 전환되니, 흐름만 따라가시면 됩니다.',
-    role: 'fixon', nav: 'dashboard' },
+    body: 'Point Shower ERP의 핵심 흐름을 7단계로 안내합니다. 각 단계마다 실제 화면이 자동으로 전환되니, 흐름만 따라가시면 됩니다.',
+    role: 'pointshower', nav: 'dashboard' },
   { title: '역할 전환',
-    body: '우상단 드롭다운에서 4개 stakeholder(치과 / 기공소 / 그래피 / FixOn) 모두 시뮬레이션 가능합니다. 지금은 <b>치과</b> 역할로 자동 전환됩니다.',
+    body: '우상단 드롭다운에서 4개 stakeholder(치과 / 기공소 / 그래피 / Point Shower) 모두 시뮬레이션 가능합니다. 지금은 <b>치과</b> 역할로 자동 전환됩니다.',
     role: 'clinic', nav: 'dashboard',
     selector: '.role-switch', position: 'bottom' },
   { title: '사이드바 메뉴',
@@ -3913,11 +3913,11 @@ const TOUR_STEPS = [
     selector: '#content', position: 'top' },
   { title: '알림 & 확장 모듈',
     body: '🔔 알림으로 새 작업이 표시됩니다. 사이드바 하단의 <b>분석/검색/QC/메시지/리포트</b> 등 확장 모듈도 모두 활성화되어 있습니다.',
-    role: 'fixon', nav: 'dashboard',
+    role: 'pointshower', nav: 'dashboard',
     selector: '.notif-btn', position: 'bottom' },
   { title: '튜토리얼 완료 🎉',
-    body: '이제 FixOn ERP를 자유롭게 둘러보세요. 추가 도움말은 사이드바 하단 <b>도움말 / 가이드</b>에서 확인할 수 있습니다.',
-    role: 'fixon', nav: 'dashboard' }
+    body: '이제 Point Shower ERP를 자유롭게 둘러보세요. 추가 도움말은 사이드바 하단 <b>도움말 / 가이드</b>에서 확인할 수 있습니다.',
+    role: 'pointshower', nav: 'dashboard' }
 ];
 
 let _tourIdx = 0;

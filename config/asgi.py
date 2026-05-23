@@ -1,4 +1,4 @@
-"""ASGI config for FixOn."""
+"""ASGI config for Point Shower."""
 
 import os
 from django.core.asgi import get_asgi_application

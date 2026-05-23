@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FixOn 메시지 hub</title>
+<title>Point Shower 메시지 hub</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 메시지 hub">
+<meta property="og:title" content="Point Shower 메시지 hub">
 <meta property="og:description" content="역할 간 실시간 커뮤니케이션.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-messages.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 메시지 hub">
+<meta name="twitter:title" content="Point Shower 메시지 hub">
 <meta name="twitter:description" content="역할 간 실시간 커뮤니케이션.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -30,12 +30,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="역할 간 실시간 커뮤니케이션.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-messages.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -91,7 +91,7 @@ header .back{color:var(--accent);font-size:14px;font-weight:600;}
 .role-clinic{background:var(--blue-dim);}
 .role-lab{background:var(--purple-dim);}
 .role-graphy{background:var(--green-dim);}
-.role-fixon{background:var(--accent-soft);}
+.role-pointshower{background:var(--accent-soft);}
 @media (max-width:780px){.conv-pane{width:100%;position:absolute;z-index:10;}.thread-pane{width:100%;}}
 </style>
 </head>
@@ -100,10 +100,10 @@ header .back{color:var(--accent);font-size:14px;font-weight:600;}
 <header>
   <div class="left">
     <a href="erp.html" class="back">← ERP</a>
-    <h1>💬 FixOn 메시지</h1>
+    <h1>💬 Point Shower 메시지</h1>
   </div>
   <div class="role-pill" id="rolepill" onclick="cycleRole()">
-    <span class="dot"></span><span id="role-name">FixOn</span>
+    <span class="dot"></span><span id="role-name">Point Shower</span>
   </div>
 </header>
 
@@ -115,7 +115,7 @@ header .back{color:var(--accent);font-size:14px;font-weight:600;}
     <button data-rf="clinic" onclick="setRoleFilter('clinic',this)">치과</button>
     <button data-rf="lab" onclick="setRoleFilter('lab',this)">기공소</button>
     <button data-rf="graphy" onclick="setRoleFilter('graphy',this)">그래피</button>
-    <button data-rf="fixon" onclick="setRoleFilter('fixon',this)">FixOn</button>
+    <button data-rf="pointshower" onclick="setRoleFilter('pointshower',this)">Point Shower</button>
   </div>
   <div class="conv-list" id="conv-list"></div>
 </aside>
@@ -129,11 +129,11 @@ header .back{color:var(--accent);font-size:14px;font-weight:600;}
 </div>
 
 <script>
-const KEY='fixon-messages-v1';
-const ROLE_LABEL={clinic:'치과',lab:'기공소',graphy:'그래피',fixon:'FixOn'};
-const ROLE_ICON={clinic:'🦷',lab:'🔧',graphy:'🖨️',fixon:'⚙️'};
-const ROLES=['clinic','lab','graphy','fixon'];
-let currentRole='fixon',roleFilter='all',activeId=null,convs=[],searchQ='';
+const KEY='pointshower-messages-v1';
+const ROLE_LABEL={clinic:'치과',lab:'기공소',graphy:'그래피',pointshower:'Point Shower'};
+const ROLE_ICON={clinic:'🦷',lab:'🔧',graphy:'🖨️',pointshower:'⚙️'};
+const ROLES=['clinic','lab','graphy','pointshower'];
+let currentRole='pointshower',roleFilter='all',activeId=null,convs=[],searchQ='';
 
 function seed(){
   const now=Date.now();
@@ -149,26 +149,26 @@ function seed(){
       {id:'m5',from:'graphy',text:'수령했습니다. 인쇄 시작하겠습니다.',at:h(17.8),read:true},
       {id:'m6',from:'graphy',text:'인쇄 완료, 조립 단계로 이동합니다.',at:h(2),read:true}
     ]},
-    {id:'c3',participants:['fixon','clinic'],orderId:null,messages:[
-      {id:'m7',from:'fixon',text:'4월 정산 명세서 보내드립니다. 확인 부탁드립니다.',at:h(48),read:true},
+    {id:'c3',participants:['pointshower','clinic'],orderId:null,messages:[
+      {id:'m7',from:'pointshower',text:'4월 정산 명세서 보내드립니다. 확인 부탁드립니다.',at:h(48),read:true},
       {id:'m8',from:'clinic',text:'확인했습니다. 감사합니다.',at:h(47),read:true}
     ]},
     {id:'c4',participants:['clinic','graphy'],orderId:'ORD-2026-0003',messages:[
       {id:'m9',from:'graphy',text:'배송 완료되었습니다. 송장: TRK384729',at:h(120),read:true},
       {id:'m10',from:'clinic',text:'수령 확인했습니다. 환자에게 적용 진행하겠습니다.',at:h(118),read:true}
     ]},
-    {id:'c5',participants:['fixon','lab'],orderId:null,messages:[
-      {id:'m11',from:'fixon',text:'4월 작업량 통계 공유드립니다. 평균 처리시간 24시간으로 우수합니다.',at:h(72),read:true},
+    {id:'c5',participants:['pointshower','lab'],orderId:null,messages:[
+      {id:'m11',from:'pointshower',text:'4월 작업량 통계 공유드립니다. 평균 처리시간 24시간으로 우수합니다.',at:h(72),read:true},
       {id:'m12',from:'lab',text:'감사합니다. 다음 달도 잘 부탁드립니다.',at:h(70),read:true}
     ]},
-    {id:'c6',participants:['fixon','graphy'],orderId:null,messages:[
-      {id:'m13',from:'fixon',text:'TC-85 재고 확인 부탁드립니다. 곧 재주문 시점입니다.',at:h(24),read:false},
+    {id:'c6',participants:['pointshower','graphy'],orderId:null,messages:[
+      {id:'m13',from:'pointshower',text:'TC-85 재고 확인 부탁드립니다. 곧 재주문 시점입니다.',at:h(24),read:false},
       {id:'m14',from:'graphy',text:'현재 1240g 남았습니다. 다음 주 발주 예정입니다.',at:h(23),read:true}
     ]},
-    {id:'c7',participants:['clinic','lab','fixon'],orderId:'ORD-2026-0005',messages:[
+    {id:'c7',participants:['clinic','lab','pointshower'],orderId:'ORD-2026-0005',messages:[
       {id:'m15',from:'clinic',text:'급한 케이스입니다. 임플란트 환자라 가능한 빨리 부탁드립니다.',at:h(60),read:true},
       {id:'m16',from:'lab',text:'우선순위 상향 조정했습니다. 12시간 내 완료 가능합니다.',at:h(59),read:true},
-      {id:'m17',from:'fixon',text:'특급 처리 승인했습니다. 추가 비용 없이 진행 부탁드립니다.',at:h(58),read:true}
+      {id:'m17',from:'pointshower',text:'특급 처리 승인했습니다. 추가 비용 없이 진행 부탁드립니다.',at:h(58),read:true}
     ]}
   ];
 }

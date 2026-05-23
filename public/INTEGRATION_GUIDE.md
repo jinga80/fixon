@@ -1,4 +1,4 @@
-# FixOn × Graphy 시스템 연동 가이드
+# Point Shower × Graphy 시스템 연동 가이드
 
 > 그래피 측 의사결정자/엔지니어가 30분 안에 read하고 통합 가능 여부 판단
 > 본 문서는 PoC 데모 → 실 운영 환경 이관을 위한 인터페이스 명세
@@ -9,7 +9,7 @@
 
 ```
 ┌──────────────┐  ① 신규 주문   ┌────────────┐  ② STL 인계   ┌────────────┐
-│  FixOn ERP   │  POST /orders  │ Graphy MES │ ⬇ pull/push  │ Graphy 프린터│
+│  Point Shower ERP   │  POST /orders  │ Graphy MES │ ⬇ pull/push  │ Graphy 프린터│
 │ (web/SaaS)   │ ──────────────▶│ (생산관리) │ ────────────▶│  (Tera Harz)│
 └──────────────┘                └────────────┘               └────────────┘
        ▲                              │                            │
@@ -17,7 +17,7 @@
        └──────────────────────────────┴────────────────────────────┘
 ```
 
-| 단계 | FixOn → Graphy | Graphy → FixOn |
+| 단계 | Point Shower → Graphy | Graphy → Point Shower |
 |---|---|---|
 | ① | 주문 발생 (JSON) | — |
 | ② | STL Binary (per-order) | — |
@@ -27,12 +27,12 @@
 
 ---
 
-## 2. REST API 명세 (FixOn 측 제공)
+## 2. REST API 명세 (Point Shower 측 제공)
 
-베이스 URL: `https://api.fixon.example/v1` (예시)
+베이스 URL: `https://api.pointshower.example/v1` (예시)
 
-### `POST /orders` — 신규 주문 푸시 (FixOn → Graphy)
-주문 등록 시 Graphy 측 endpoint로 호출. Graphy가 자체 API endpoint를 제공하면 FixOn이 webhook으로 push.
+### `POST /orders` — 신규 주문 푸시 (Point Shower → Graphy)
+주문 등록 시 Graphy 측 endpoint로 호출. Graphy가 자체 API endpoint를 제공하면 Point Shower이 webhook으로 push.
 
 **Request body**:
 ```json
@@ -63,7 +63,7 @@
   "design": {
     "nozzleLayout": "standard",
     "nozzleTeeth": [46, 36, 45, 35],
-    "stlUrl": "https://api.fixon.example/v1/orders/ORD-2026-0011/stl",
+    "stlUrl": "https://api.pointshower.example/v1/orders/ORD-2026-0011/stl",
     "stlSize": 750000,
     "stlChecksum": "sha256:..."
   },
@@ -87,9 +87,9 @@
 ### `GET /orders/{orderId}/stl` — 출력용 STL 다운로드
 - Auth: Bearer token
 - Returns: `application/octet-stream` (binary STL)
-- Headers: `X-FixOn-UDI`, `X-FixOn-LotNo`, `X-FixOn-Checksum`
+- Headers: `X-Point Shower-UDI`, `X-Point Shower-LotNo`, `X-Point Shower-Checksum`
 
-### `POST /orders/{orderId}/status` — 상태 업데이트 (Graphy → FixOn webhook)
+### `POST /orders/{orderId}/status` — 상태 업데이트 (Graphy → Point Shower webhook)
 Graphy 측에서 인쇄/조립/QC/배송 단계마다 호출.
 
 **Request**:
@@ -108,7 +108,7 @@ Graphy 측에서 인쇄/조립/QC/배송 단계마다 호출.
 ```
 
 ### `POST /orders/{orderId}/complete` — 완료 + UDI 확정
-Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 FixOn에 회신.
+Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 Point Shower에 회신.
 
 ```json
 {
@@ -137,13 +137,13 @@ Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 FixOn에 
 
 ## 4. 데이터 모델 매핑
 
-현재 FixOn ERP의 `localStorage` 스키마 → 향후 RDB 매핑
+현재 Point Shower ERP의 `localStorage` 스키마 → 향후 RDB 매핑
 
 | Local 객체 | RDB 테이블 | 주요 컬럼 |
 |---|---|---|
 | `state.orders[]` | `orders` | id, clinic_id, patient_id, status, udi, lot_no, mfg_date, expiry_date, created_at |
 | `state.orders[].timeline[]` | `order_events` | id, order_id, status, actor, note, at |
-| `state.orders[].pricing` | `order_pricing` | order_id, base, lab_share, graphy_share, fixon_fee |
+| `state.orders[].pricing` | `order_pricing` | order_id, base, lab_share, graphy_share, pointshower_fee |
 | `state.orders[].customNozzles[]` | `nozzle_placements` | order_id, fdi, pos_x/y/z, normal_x/y/z |
 | `state.orders[].designSTL` | object storage (S3) | URL referenced from orders.design_stl_url |
 | `state.patients[]` | `patients` | id, clinic_id, name (encrypted), age, sex, note (encrypted), consent_version, consent_at |
@@ -164,7 +164,7 @@ Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 FixOn에 
 - mTLS 인증서 교환
 
 ### D+1 ~ D+30
-- FixOn 백엔드 (Node.js/Postgres) 1차 구축
+- Point Shower 백엔드 (Node.js/Postgres) 1차 구축
 - localStorage → DB 마이그레이션 스크립트
 - 핵심 endpoint 3개 우선 (POST /orders, GET /stl, POST /status)
 - staging에서 양사 통합 테스트
@@ -197,7 +197,7 @@ Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 FixOn에 
 ## 7. 비통합 운영 폴백
 
 만약 실시간 연동이 어려운 경우:
-- **반자동 모드**: FixOn에서 STL+JSON 수동 다운로드 → 그래피 시스템에 수동 import
+- **반자동 모드**: Point Shower에서 STL+JSON 수동 다운로드 → 그래피 시스템에 수동 import
 - **이메일 모드**: 주문 발생 시 자동 이메일 (.zip 첨부) → 그래피 담당자 수동 처리
 - 두 모드 모두 현재 시스템에서 즉시 가능 (별도 개발 불요)
 
@@ -205,7 +205,7 @@ Graphy가 배송을 완료하면 호출. 실제 측정된 데이터를 FixOn에 
 
 ## 8. 연락 / 후속 일정
 
-- 본 문서 작성: FixOn × 이중우
+- 본 문서 작성: Point Shower × 이중우
 - 그래피 답변 요청 항목:
   1. API 수신 endpoint 제공 가능 여부
   2. mTLS 인증서 교환 가능 여부

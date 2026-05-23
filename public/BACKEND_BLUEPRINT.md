@@ -1,4 +1,4 @@
-# FixOn ERP — 백엔드 이관 청사진
+# Point Shower ERP — 백엔드 이관 청사진
 
 > 현재 localStorage 기반 단일 페이지 데모 → 본 운영 가능한 multi-tenant SaaS로 이관하는 90일 청사진
 > 본 문서는 그래피 의사결정자에게 "이미 구체적이다"를 보여주는 자료
@@ -127,7 +127,7 @@ CREATE TABLE order_events (
   id          BIGSERIAL PRIMARY KEY,
   order_id    TEXT NOT NULL REFERENCES orders(id),
   status      TEXT NOT NULL,
-  actor_role  TEXT NOT NULL,               -- clinic/lab/graphy/fixon
+  actor_role  TEXT NOT NULL,               -- clinic/lab/graphy/pointshower
   actor_id    UUID,                        -- user
   note        TEXT,
   metadata    JSONB,
@@ -244,10 +244,10 @@ async function migrate(stateJson: string) {
 ```js
 // Before (localStorage)
 function loadState() {
-  return JSON.parse(localStorage.getItem('fixon-erp-state-v6'));
+  return JSON.parse(localStorage.getItem('pointshower-erp-state-v6'));
 }
 function saveState() {
-  localStorage.setItem('fixon-erp-state-v6', JSON.stringify(state));
+  localStorage.setItem('pointshower-erp-state-v6', JSON.stringify(state));
 }
 
 // After (REST API)
@@ -272,7 +272,7 @@ async function saveState(patch) {
 | PII 컬럼 암호화 | 의무 (개인정보보호법 시행령 Art. 30) | AES-256-GCM, AWS KMS / Naver Cloud KMS |
 | 접속 로그 1년 보관 | 의무 | access_logs 테이블 + S3 cold |
 | 의료기록 10년 보관 | 의무 (의료법 Art. 22) | orders + order_events 영구 보관 + S3 archive |
-| 위탁계약 (FixOn↔치과/기공소) | 의무 (개인정보보호법 Art. 26) | 표준 위탁계약서 템플릿 |
+| 위탁계약 (Point Shower↔치과/기공소) | 의무 (개인정보보호법 Art. 26) | 표준 위탁계약서 템플릿 |
 | ISMS-P 인증 | 권장 | launch 후 6개월 내 |
 | 의료기기 SW 인허가 | 본 ERP는 SW로 분류 안 됨 | 의료기기 자체(스플린트)는 제조 인허가 필요 |
 | UDI 등록 (식약처) | 의무 (Class 2, 2024+) | 자체 UDI 발행 + 식약처 등록 |

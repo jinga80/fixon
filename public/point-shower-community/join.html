@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>FixOn Community 가입</title>
+<title>Point Shower Community 가입</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn Community 가입">
-<meta property="og:description" content="FixOn 의료진 커뮤니티에 합류하세요.">
+<meta property="og:title" content="Point Shower Community 가입">
+<meta property="og:description" content="Point Shower 의료진 커뮤니티에 합류하세요.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
-<meta property="og:url" content="https://fixon-production.up.railway.app/fixon-community/join.html">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:url" content="https://fixon-production.up.railway.app/point-shower-community/join.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn Community 가입">
-<meta name="twitter:description" content="FixOn 의료진 커뮤니티에 합류하세요.">
+<meta name="twitter:title" content="Point Shower Community 가입">
+<meta name="twitter:description" content="Point Shower 의료진 커뮤니티에 합류하세요.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
 <!-- ===== Favicon / PWA ===== -->
@@ -30,13 +30,13 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
-<meta name="description" content="FixOn 의료진 커뮤니티에 합류하세요.">
-<meta name="author" content="FixOn × Graphy">
-<link rel="canonical" href="https://fixon-production.up.railway.app/fixon-community/join.html">
+<meta name="description" content="Point Shower 의료진 커뮤니티에 합류하세요.">
+<meta name="author" content="Point Shower × Graphy">
+<link rel="canonical" href="https://fixon-production.up.railway.app/point-shower-community/join.html">
 
 <link rel="stylesheet" href="../assets/design-system.css">
 <style>
@@ -107,7 +107,7 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);}
   <div class="hook">
     <div class="hook-badge">SIDEX 2026 &middot; Graphy Booth</div>
     <h1>방금 보신 그 제품,<br><span>함께 만들어가실</span><br>선생님을 찾습니다</h1>
-    <p>FixOn Washer는 아직 초기 단계입니다.<br>선생님의 임상 경험이 제품의 방향을 바꿀 수 있습니다.</p>
+    <p>Point Shower는 아직 초기 단계입니다.<br>선생님의 임상 경험이 제품의 방향을 바꿀 수 있습니다.</p>
 
     <div class="hook-benefits">
       <div class="hb-item">
@@ -149,7 +149,7 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);}
     </div>
 
     <button class="submit-btn" id="submit-btn" onclick="submitForm()">Founding Member로 가입</button>
-    <div class="form-note">입력하신 정보는 FixOn Community 내에서만 사용됩니다.<br>언제든 탈퇴할 수 있습니다.</div>
+    <div class="form-note">입력하신 정보는 Point Shower Community 내에서만 사용됩니다.<br>언제든 탈퇴할 수 있습니다.</div>
   </div>
 </div>
 
@@ -176,7 +176,7 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);}
 </div>
 
 <div class="brand-footer">
-  <strong>FixOn</strong> Community &middot; Powered by Graphy
+  <strong>Point Shower</strong> Community &middot; Powered by Graphy
 </div>
 
 </div>
@@ -199,9 +199,9 @@ function submitForm() {
 
   // Save to localStorage (shared with community index.html)
   const user = { name, clinic, email };
-  localStorage.setItem('fixon-user', JSON.stringify(user));
+  localStorage.setItem('pointshower-user', JSON.stringify(user));
 
-  const members = JSON.parse(localStorage.getItem('fixon-members') || '[]');
+  const members = JSON.parse(localStorage.getItem('pointshower-members') || '[]');
   if (!members.find(m => m.name === name && m.clinic === clinic)) {
     members.push({
       ...user,
@@ -209,7 +209,7 @@ function submitForm() {
       badges: ['founding'],
       contributions: 0
     });
-    localStorage.setItem('fixon-members', JSON.stringify(members));
+    localStorage.setItem('pointshower-members', JSON.stringify(members));
   }
 
   document.getElementById('w-name').textContent = name + ' 선생님';

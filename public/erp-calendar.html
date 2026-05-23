@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>FixOn 일정 / 스케줄</title>
+<title>Point Shower 일정 / 스케줄</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 일정 / 스케줄">
+<meta property="og:title" content="Point Shower 일정 / 스케줄">
 <meta property="og:description" content="생산 라인 스케줄 통합 보기.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-calendar.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 일정 / 스케줄">
+<meta name="twitter:title" content="Point Shower 일정 / 스케줄">
 <meta name="twitter:description" content="생산 라인 스케줄 통합 보기.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="생산 라인 스케줄 통합 보기.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-calendar.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -104,7 +104,7 @@ header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;margin-top:6px;
 </div>
 
 <script>
-const KEY='fixon-erp-state-v6';
+const KEY='pointshower-erp-state-v6';
 const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령',applied:'적용',settled:'정산',rescan_requested:'재스캔 요청'};
 let state=null,viewYear,viewMonth;
 function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}
@@ -131,10 +131,10 @@ window.navM=function(d){viewMonth+=d;if(viewMonth<0){viewMonth=11;viewYear--;}el
 window.goToday=function(){const n=new Date();viewYear=n.getFullYear();viewMonth=n.getMonth();render();};
 window.showDay=function(iso){const d=new Date(iso);const evs=getDayEvents(d);const dt=document.getElementById('day-detail');if(evs.length){dt.classList.add('show');dt.innerHTML=`<h3>${d.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})} — ${evs.length}건</h3><div class="day-evlist">${evs.map(e=>{const c=state.clinics.find(x=>x.id===e.clinic);return `<div class="ev-row" onclick="location.href='erp.html?order=${e.orderId}'"><div><strong style="font-family:var(--fm);">${e.orderId}</strong> · ${c?.name||e.clinic}</div><span class="ev ${evClass(e.status)}">${STATUS_LABEL[e.status]||e.status}</span></div>`;}).join('')}</div>`;}else{dt.classList.remove('show');}};
 window.exportICS=function(){
-  if(!state)return;const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FixOn//ERP//KR'];
-  state.orders.forEach(o=>{o.timeline.forEach(t=>{const d=new Date(t.at);const dt=d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';lines.push('BEGIN:VEVENT',`UID:${o.id}-${t.status}@fixon`,`DTSTAMP:${dt}`,`DTSTART:${dt}`,`SUMMARY:${o.id} ${STATUS_LABEL[t.status]||t.status}`,`DESCRIPTION:${o.id}`,'END:VEVENT');});});
+  if(!state)return;const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Point Shower//ERP//KR'];
+  state.orders.forEach(o=>{o.timeline.forEach(t=>{const d=new Date(t.at);const dt=d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';lines.push('BEGIN:VEVENT',`UID:${o.id}-${t.status}@pointshower`,`DTSTAMP:${dt}`,`DTSTART:${dt}`,`SUMMARY:${o.id} ${STATUS_LABEL[t.status]||t.status}`,`DESCRIPTION:${o.id}`,'END:VEVENT');});});
   lines.push('END:VCALENDAR');
-  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='fixon-calendar.ics';a.click();URL.revokeObjectURL(u);
+  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='pointshower-calendar.ics';a.click();URL.revokeObjectURL(u);
 };
 const n=new Date();viewYear=n.getFullYear();viewMonth=n.getMonth();
 document.getElementById('now').textContent=n.toLocaleString('ko-KR');

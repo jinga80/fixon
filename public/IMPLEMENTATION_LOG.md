@@ -1,4 +1,4 @@
-# FixOn ERP — 시연 준비 구현 로그
+# Point Shower ERP — 시연 준비 구현 로그
 
 > 기준 문서: `GRAPHY_DEMO_PLAN.md`
 > 시작: 2026-04-27
@@ -46,7 +46,7 @@
 **0-④** — 시드 정비:
 - 12개 주문이 12개 linear status에 1:1 분포 (이미 정렬됨)
 - `ORD-2026-0013` 추가 → `rescan_requested` 상태 시연용
-- `STORAGE_KEY 'fixon-erp-state-v6'`로 bump (모든 sub-page에 sed로 일괄 적용)
+- `STORAGE_KEY 'pointshower-erp-state-v6'`로 bump (모든 sub-page에 sed로 일괄 적용)
 
 **4-A** — PII 마스킹:
 - `maskName(name)`: 한글/영문 첫 글자만 남기고 나머지 `*` 변환 (`김OO` → `김**`)
@@ -105,7 +105,7 @@
 | `erp-search.html` | 9.5KB | 통합 검색 |
 | `erp-workflow.html` | 11KB | 자동화 규칙 |
 | `DEMO_CHECKLIST.html` | 11KB | **시연 전 자동 점검 (신규)** |
-| `fixon-patient.html` | ~30KB | **환자용 제품 브로셔 — STL 3D 렌더 + SVG 도식 + 새 카테고리 정의** |
+| `point-shower-patient.html` | ~30KB | **환자용 제품 브로셔 — STL 3D 렌더 + SVG 도식 + 새 카테고리 정의** |
 | `BRAND_DEFINITION.md` | ~6KB | **제품 정의 / 브랜딩 워킹 도큐먼트 (살아있는 문서)** |
 | `GRAPHY_DEMO_PLAN.md` | 10KB | 시연 준비 마스터 문서 |
 | `INTEGRATION_GUIDE.md` | 7.4KB | **그래피 연동 명세 (신규)** |
@@ -139,19 +139,19 @@ T+30분  →  마무리 → BACKEND_BLUEPRINT.md 후속 자료로 전달
 ## 2026-04-28 갱신 — 제품 카테고리 재정의
 
 **핵심 인사이트** (사용자 제공):
-- FixOn ≠ 워터픽 (수동 분사기) ≠ 일반 마우스피스 (정적 보호)
-- FixOn = "맞춤 트레이 + 카트리지 + 정밀 도포" 의 새로운 카테고리
+- Point Shower ≠ 워터픽 (수동 분사기) ≠ 일반 마우스피스 (정적 보호)
+- Point Shower = "맞춤 트레이 + 카트리지 + 정밀 도포" 의 새로운 카테고리
 - 3-tier 모드: Daily(세척) / Wellness(잇몸 케어) / Medical(약제 처방)
 
 **새로 만들/갱신된 자료**:
 - `BRAND_DEFINITION.md` — 제품 정의/포지셔닝/브랜드 톤/3-tier 모드/열린 질문 정리. 살아있는 문서로 계속 갱신.
-- `fixon-patient.html` 전면 재작성:
+- `point-shower-patient.html` 전면 재작성:
   - Hero 섹션에 실제 STL(splint_base) **Three.js 3D 렌더링** (자동 회전)
-  - Definition 섹션 (다크) — 워터픽 vs 마우스피스 vs FixOn 3카드
+  - Definition 섹션 (다크) — 워터픽 vs 마우스피스 vs Point Shower 3카드
   - 작동 원리 섹션 — SVG 치아+노즐 도식 (FDI 표기) + 4단계
   - 3-tier 모드 카드 (Daily/Wellness/Medical) — 카트리지/처방/분류/시간 비교
   - **STL 갤러리** — 8종 splint variants (실제 환자 데이터 기반) 모두 인라인 3D 렌더
-  - 4-way 비교표 (워터픽 / 마우스피스 / FixOn)
+  - 4-way 비교표 (워터픽 / 마우스피스 / Point Shower)
   - 안전 정보를 모드별 분류 (Medical만 Class 2)
 - 기존 file:// 환경 호환 — `samples/stl-data.js` 사전 로드로 fetch 없이 STL 렌더 가능
 

@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FixOn 도움말 · 가이드</title>
+<title>Point Shower 도움말 · 가이드</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 도움말 · 가이드">
+<meta property="og:title" content="Point Shower 도움말 · 가이드">
 <meta property="og:description" content="역할별 매뉴얼·단축키·FAQ. 처음 쓰는 직원도 5분이면 흐름 익힘.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-help.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 도움말 · 가이드">
+<meta name="twitter:title" content="Point Shower 도움말 · 가이드">
 <meta name="twitter:description" content="역할별 매뉴얼·단축키·FAQ. 처음 쓰는 직원도 5분이면 흐름 익힘.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="역할별 매뉴얼·단축키·FAQ. 처음 쓰는 직원도 5분이면 흐름 익힘.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-help.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -98,7 +98,7 @@ article tr:last-child td{border-bottom:none;}
   <a class="nav-item" data-id="clinic" onclick="showArticle('clinic',this)">치과 (Clinic)</a>
   <a class="nav-item" data-id="lab" onclick="showArticle('lab',this)">기공소 (Lab)</a>
   <a class="nav-item" data-id="graphy" onclick="showArticle('graphy',this)">그래피 (Graphy)</a>
-  <a class="nav-item" data-id="fixon" onclick="showArticle('fixon',this)">FixOn 관리자</a>
+  <a class="nav-item" data-id="pointshower" onclick="showArticle('pointshower',this)">Point Shower 관리자</a>
 
   <div class="cat">기능</div>
   <a class="nav-item" data-id="designer" onclick="showArticle('designer',this)">3D 디자이너</a>
@@ -118,7 +118,7 @@ article tr:last-child td{border-bottom:none;}
 </header>
 
 <article data-id="start" class="active">
-<p>FixOn ERP는 치과의 디지털 스플린트 디자인 → 기공소 디자인 작업 → 그래피 3D 인쇄/조립 → 환자 적용까지 전체 워크플로우를 관리하는 운영 시스템입니다.</p>
+<p>Point Shower ERP는 치과의 디지털 스플린트 디자인 → 기공소 디자인 작업 → 그래피 3D 인쇄/조립 → 환자 적용까지 전체 워크플로우를 관리하는 운영 시스템입니다.</p>
 <div class="info"><strong>💡 5분 안에 시작하기</strong><br>1. ERP 접속 → 우상단 역할 전환 → 본인 역할 선택<br>2. 사이드바에서 메뉴 탐색<br>3. 본 가이드의 역할별 가이드 참고</div>
 <h3>전체 워크플로우</h3>
 <svg viewBox="0 0 700 80" style="width:100%;height:auto;margin:14px 0;">
@@ -141,12 +141,12 @@ article tr:last-child td{border-bottom:none;}
 
 <article data-id="overview">
 <h2>시스템 구조</h2>
-<p>FixOn ERP는 단일 HTML 파일로 동작하며 4개 stakeholder가 각자의 역할로 관리합니다.</p>
+<p>Point Shower ERP는 단일 HTML 파일로 동작하며 4개 stakeholder가 각자의 역할로 관리합니다.</p>
 <table><thead><tr><th>역할</th><th>주요 화면</th><th>핵심 기능</th></tr></thead><tbody>
 <tr><td>🦷 치과</td><td>대시보드 / 신규 주문 / 환자 관리 / 결제</td><td>주문 등록, 환자 데이터 관리, 적용 완료, 결제</td></tr>
-<tr><td>🔧 기공소</td><td>작업 큐 / 완료 목록 / 통계</td><td>스캔 검토, FixOn 디자인 SW 작업, 디자인 완료</td></tr>
+<tr><td>🔧 기공소</td><td>작업 큐 / 완료 목록 / 통계</td><td>스캔 검토, Point Shower 디자인 SW 작업, 디자인 완료</td></tr>
 <tr><td>🖨️ 그래피</td><td>생산 큐 / 조립 / QC / 배송 / 재고</td><td>3D 프린팅, 조립, 품질 검수, 배송 등록</td></tr>
-<tr><td>⚙️ FixOn</td><td>전체 대시보드 / 정산 / 거래처 / 품질</td><td>운영 총괄, 매출 분배, 거래처 관리</td></tr>
+<tr><td>⚙️ Point Shower</td><td>전체 대시보드 / 정산 / 거래처 / 품질</td><td>운영 총괄, 매출 분배, 거래처 관리</td></tr>
 </tbody></table>
 </article>
 
@@ -181,7 +181,7 @@ article tr:last-child td{border-bottom:none;}
 <li>품질 부족 → "재스캔 요청" 클릭 → 사유 입력 → 치과로 반려</li>
 </ul>
 <h3>✏️ 디자인 작업</h3>
-<p>FixOn 디자인 SW (또는 3D 디자이너)로 스플린트 설계 → "디자인 완료" → 자동으로 그래피 생산 큐로 인계.</p>
+<p>Point Shower 디자인 SW (또는 3D 디자이너)로 스플린트 설계 → "디자인 완료" → 자동으로 그래피 생산 큐로 인계.</p>
 </article>
 
 <article data-id="graphy">
@@ -196,14 +196,14 @@ article tr:last-child td{border-bottom:none;}
 <ul><li>통과 → 송장 자동 생성 → 배송</li><li>실패 → 재생산 큐로 회귀</li></ul>
 </article>
 
-<article data-id="fixon">
-<h2>FixOn 관리자 가이드</h2>
+<article data-id="pointshower">
+<h2>Point Shower 관리자 가이드</h2>
 <h3>📊 전체 대시보드</h3>
 <p>모든 주문, 매출, stakeholder별 처리 현황을 한 화면에 모니터링.</p>
 <h3>🏢 거래처 관리</h3>
 <p>치과/기공소/그래피의 신규 등록 및 계약 관리.</p>
 <h3>💰 정산</h3>
-<p>환자 적용 완료된 주문에 대해 매출을 자동 분배: 기공소 / 그래피 / FixOn 수수료.</p>
+<p>환자 적용 완료된 주문에 대해 매출을 자동 분배: 기공소 / 그래피 / Point Shower 수수료.</p>
 <h3>💲 단가 정책</h3>
 <p>주문 1건당 분배율 설정. 합계 검증 자동.</p>
 </article>
@@ -271,9 +271,9 @@ article tr:last-child td{border-bottom:none;}
 <div class="faq-q">Q3. QC 실패 시 어떻게 처리되나요?</div>
 <p>A. 자동으로 print_queued 상태로 회귀하고, 재작업 큐에 등록됩니다. 사유는 타임라인에 기록됩니다.</p>
 <div class="faq-q">Q4. 주문 상태를 되돌릴 수 있나요?</div>
-<p>A. QC 실패 외에는 일반적으로 되돌리지 않습니다. 잘못된 진행은 FixOn 관리자에게 문의하세요.</p>
+<p>A. QC 실패 외에는 일반적으로 되돌리지 않습니다. 잘못된 진행은 Point Shower 관리자에게 문의하세요.</p>
 <div class="faq-q">Q5. 결제는 어떻게 처리되나요?</div>
-<p>A. 환자 적용 완료 시점에 정산 대기로 전환되며 FixOn 관리자가 정산을 진행합니다.</p>
+<p>A. 환자 적용 완료 시점에 정산 대기로 전환되며 Point Shower 관리자가 정산을 진행합니다.</p>
 <div class="faq-q">Q6. 모바일에서도 사용 가능한가요?</div>
 <p>A. 네, <a href="erp-mobile.html" style="color:var(--accent);">모바일 ERP</a>를 별도로 제공합니다.</p>
 <div class="faq-q">Q7. 분석 리포트는 어디서 보나요?</div>
@@ -281,13 +281,13 @@ article tr:last-child td{border-bottom:none;}
 <div class="faq-q">Q8. 데이터는 어디에 저장되나요?</div>
 <p>A. 브라우저의 localStorage에 저장됩니다 (현재 데모 단계). 향후 백엔드 연동 예정.</p>
 <div class="faq-q">Q9. 다른 환자의 정보를 볼 수 있나요?</div>
-<p>A. 본인 거래처(치과/기공소)의 환자만 보입니다. FixOn 관리자는 전체를 볼 수 있습니다.</p>
+<p>A. 본인 거래처(치과/기공소)의 환자만 보입니다. Point Shower 관리자는 전체를 볼 수 있습니다.</p>
 <div class="faq-q">Q10. 3D 디자이너에서 splint 모양이 환자마다 다른가요?</div>
 <p>A. 네, 각 환자의 스캔에 맞춰 splint0306 template를 affine fit하여 환자별로 다른 형태가 생성됩니다.</p>
 <div class="faq-q">Q11. 재스캔이 필요한 경우는?</div>
 <p>A. 기공소가 스캔 품질 부족 판단 시 "재스캔 요청"을 보냅니다. 치과 대시보드에 알림이 표시됩니다.</p>
 <div class="faq-q">Q12. 단가 정책은 누가 변경하나요?</div>
-<p>A. FixOn 관리자만 변경 가능합니다. (단가 정책 메뉴)</p>
+<p>A. Point Shower 관리자만 변경 가능합니다. (단가 정책 메뉴)</p>
 <div class="faq-q">Q13. STL 파일이 file://에서 로드 안 됩니다.</div>
 <p>A. 샘플 STL은 인라인되어 있어 file://에서도 동작합니다. 사용자 STL 업로드는 FileReader로 처리됩니다.</p>
 <div class="faq-q">Q14. 어댑터/튜브팁 위치는 어디서 지정하나요?</div>
@@ -310,13 +310,13 @@ article tr:last-child td{border-bottom:none;}
 <h2>비디오 가이드</h2>
 <p style="color:var(--dim);font-size:13px;margin-bottom:14px;">아래 비디오들은 향후 제작 예정입니다.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-${[['치과 신규 주문 5분 안내','3:42'],['기공소 디자인 워크플로우','5:20'],['그래피 인쇄/조립/QC','7:15'],['FixOn 정산 가이드','4:08'],['3D 디자이너 마스터하기','10:30']].map(([t,d])=>`<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;"><div style="aspect-ratio:16/9;background:var(--bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:32px;opacity:0.4;margin-bottom:8px;">▶</div><div style="font-weight:600;font-size:13px;">${t}</div><div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono';margin-top:3px;">${d} · 준비 중</div></div>`).join('')}
+${[['치과 신규 주문 5분 안내','3:42'],['기공소 디자인 워크플로우','5:20'],['그래피 인쇄/조립/QC','7:15'],['Point Shower 정산 가이드','4:08'],['3D 디자이너 마스터하기','10:30']].map(([t,d])=>`<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;"><div style="aspect-ratio:16/9;background:var(--bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:32px;opacity:0.4;margin-bottom:8px;">▶</div><div style="font-weight:600;font-size:13px;">${t}</div><div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono';margin-top:3px;">${d} · 준비 중</div></div>`).join('')}
 </div>
 </article>
 
 <article data-id="support">
 <h2>고객 지원</h2>
-<div class="info"><strong>📞 연락처</strong><br>이메일: support@fixon.example<br>전화: 02-1234-5678 (평일 09:00-18:00)<br>긴급: 010-XXXX-XXXX</div>
+<div class="info"><strong>📞 연락처</strong><br>이메일: support@pointshower.example<br>전화: 02-1234-5678 (평일 09:00-18:00)<br>긴급: 010-XXXX-XXXX</div>
 <h3>🐛 버그 리포트</h3>
 <p style="font-size:13px;color:var(--dim);margin-bottom:10px;">발견하신 버그를 알려주세요.</p>
 <form onsubmit="event.preventDefault();alert('✅ 접수되었습니다 (데모)');this.reset();" style="display:flex;flex-direction:column;gap:10px;">
@@ -348,14 +348,14 @@ ${[['치과 신규 주문 5분 안내','3:42'],['기공소 디자인 워크플�
 
 <script>
 const TUT=[
-  {t:'1. 환영합니다 👋',b:'FixOn ERP 8단계 튜토리얼을 시작합니다. 5분이면 끝납니다.'},
+  {t:'1. 환영합니다 👋',b:'Point Shower ERP 8단계 튜토리얼을 시작합니다. 5분이면 끝납니다.'},
   {t:'2. 역할 전환',b:'우상단 드롭다운에서 본인 역할을 선택하세요. 4개 stakeholder 모두 시뮬레이션 가능합니다.'},
   {t:'3. 사이드바 메뉴',b:'역할마다 다른 메뉴가 표시됩니다. 클릭해서 화면을 전환하세요.'},
   {t:'4. 신규 주문',b:'치과 역할 → "신규 주문" → 환자 선택 → 스캔 업로드 → 주문 등록.'},
   {t:'5. 알림 확인',b:'우상단 🔔 아이콘에 새 작업이 표시됩니다.'},
   {t:'6. 3D 디자이너',b:'주문 모달의 "🎨 3D 디자이너" 버튼으로 노즐 위치 직접 배치 가능.'},
   {t:'7. 부가 도구',b:'분석 대시보드, 메시지, 리포트, QC 센터, 모바일 뷰 모두 사용 가능.'},
-  {t:'8. 완료 🎉',b:'이제 FixOn ERP를 자유롭게 사용하실 수 있습니다. 추가 도움이 필요하면 도움말 페이지를 참고하세요.'}
+  {t:'8. 완료 🎉',b:'이제 Point Shower ERP를 자유롭게 사용하실 수 있습니다. 추가 도움이 필요하면 도움말 페이지를 참고하세요.'}
 ];
 let tutI=0;
 function showArticle(id,el){
@@ -363,7 +363,7 @@ function showArticle(id,el){
   document.querySelector(`article[data-id="${id}"]`)?.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   el?.classList.add('active');
-  const titles={start:'시작하기',overview:'시스템 구조',clinic:'치과',lab:'기공소',graphy:'그래피',fixon:'FixOn 관리자',designer:'3D 디자이너',shortcuts:'단축키',glossary:'용어 사전',faq:'FAQ',videos:'비디오 가이드',support:'고객 지원'};
+  const titles={start:'시작하기',overview:'시스템 구조',clinic:'치과',lab:'기공소',graphy:'그래피',pointshower:'Point Shower 관리자',designer:'3D 디자이너',shortcuts:'단축키',glossary:'용어 사전',faq:'FAQ',videos:'비디오 가이드',support:'고객 지원'};
   document.getElementById('page-title').textContent=titles[id];
   document.getElementById('crumb').textContent=titles[id];
   location.hash=id;

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""FixOn — Django management entrypoint."""
+"""Point Shower — Django management entrypoint."""
 import os
 import sys
 

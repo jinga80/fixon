@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>FixOn 재고 관리</title>
+<title>Point Shower 재고 관리</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 재고 관리">
+<meta property="og:title" content="Point Shower 재고 관리">
 <meta property="og:description" content="TC-85·노즐·어댑터·튜브팁 재고 추적.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-inventory.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 재고 관리">
+<meta name="twitter:title" content="Point Shower 재고 관리">
 <meta name="twitter:description" content="TC-85·노즐·어댑터·튜브팁 재고 추적.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="TC-85·노즐·어댑터·튜브팁 재고 추적.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-inventory.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -87,7 +87,7 @@ header h1{font-size:28px;font-weight:800;letter-spacing:-0.025em;margin-top:6px;
 </div>
 
 <script>
-const KEY='fixon-erp-state-v6',IKEY='fixon-inventory-v1';
+const KEY='pointshower-erp-state-v6',IKEY='pointshower-inventory-v1';
 let state=null,invd=null;
 function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}try{invd=JSON.parse(localStorage.getItem(IKEY));}catch(e){}if(!invd){invd=seed();saveI();}return state;}
 function saveI(){localStorage.setItem(IKEY,JSON.stringify(invd));}
@@ -95,8 +95,8 @@ function seed(){
   const now=Date.now();const h=n=>new Date(now-n*3600000).toISOString();
   return {rules:{
     'TC-85 Resin':{minOrder:5000,supplier:'Graphy Korea',leadDays:7,active:true},
-    'Nozzle (분사형)':{minOrder:200,supplier:'FixOn 자체',leadDays:14,active:true},
-    'Adapter':{minOrder:100,supplier:'FixOn 자체',leadDays:21,active:true},
+    'Nozzle (분사형)':{minOrder:200,supplier:'Point Shower 자체',leadDays:14,active:true},
+    'Adapter':{minOrder:100,supplier:'Point Shower 자체',leadDays:21,active:true},
     'Tube Tip':{minOrder:100,supplier:'외주 협력사',leadDays:10,active:true}
   },movements:[
     {at:h(2),item:'TC-85 Resin',type:'out',qty:32,reason:'ORD-2026-0006 인쇄'},

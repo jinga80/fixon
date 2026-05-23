@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FixOn 통합 검색</title>
+<title>Point Shower 통합 검색</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 통합 검색">
+<meta property="og:title" content="Point Shower 통합 검색">
 <meta property="og:description" content="주문·환자·거래처·알림을 한 번에 검색.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-search.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 통합 검색">
+<meta name="twitter:title" content="Point Shower 통합 검색">
 <meta name="twitter:description" content="주문·환자·거래처·알림을 한 번에 검색.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="주문·환자·거래처·알림을 한 번에 검색.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-search.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -103,7 +103,7 @@
 </div>
 
 <script>
-const KEY='fixon-erp-state-v6';
+const KEY='pointshower-erp-state-v6';
 const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령',applied:'적용',settled:'정산',rescan_requested:'재스캔 요청'};
 let state=null,filter='all';
 function load(){try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){}return state;}

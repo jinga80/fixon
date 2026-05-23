@@ -1,4 +1,4 @@
-# FixOn — Operations Platform
+# Point Shower — Operations Platform
 
 > 환자 맞춤 구강 케어 트레이의 디자인부터 생산·정산까지 전체 운영을 통합한 플랫폼.
 
@@ -6,12 +6,12 @@
 
 - **랜딩 / 운영 허브** — `/`
 - **ERP 콘솔** — `/erp.html` (4-역할: 치과 / 기공소 / 그래피 / 관리자)
-- **환자용 브로셔** — `/fixon-patient.html`
+- **환자용 브로셔** — `/point-shower-patient.html`
 - **환자 포털** — `/erp-portal.html`
-- **3D 조립 모드 (STL Viewer)** — `/fixon-washer/stl_viewer.html`
+- **3D 조립 모드 (STL Viewer)** — `/point-shower/stl_viewer.html`
 - **시연 점검** — `/DEMO_CHECKLIST.html`
 - **운영 문서 뷰어** — `/docs.html`
-- **커뮤니티** — `/fixon-community/`
+- **커뮤니티** — `/point-shower-community/`
 
 ## 기술 스택
 
@@ -75,7 +75,7 @@ railway up
 ## 디렉토리 구조
 
 ```
-fixon/
+pointshower/
 ├── manage.py
 ├── config/                # Django 프로젝트
 │   ├── settings.py        # WhiteNoise + 보안 헤더 + Railway 호환
@@ -85,13 +85,13 @@ fixon/
 ├── public/                # 정적 자산 (WhiteNoise 가 root 에서 서빙)
 │   ├── index.html
 │   ├── erp.html           # 메인 ERP (203KB)
-│   ├── fixon-patient.html
+│   ├── point-shower-patient.html
 │   ├── ... (16+ HTML)
 │   ├── assets/
 │   │   └── design-system.css
 │   ├── samples/           # STL 샘플 8종 + 인라인 데이터
-│   ├── fixon-community/
-│   └── fixon-washer/      # 3D 조립 viewer
+│   ├── point-shower-community/
+│   └── point-shower/      # 3D 조립 viewer
 ├── requirements.txt
 ├── Procfile
 ├── railway.json
@@ -101,8 +101,8 @@ fixon/
 
 ## 헬스체크
 
-Railway 가 사용하는 endpoint: `GET /healthz` → `{"status":"ok","service":"fixon"}`
+Railway 가 사용하는 endpoint: `GET /healthz` → `{"status":"ok","service":"pointshower"}`
 
 ## 라이선스
 
-© 2026 FixOn × Graphy. All rights reserved.
+© 2026 Point Shower × Graphy. All rights reserved.

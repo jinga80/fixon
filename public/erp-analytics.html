@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FixOn 분석 대시보드</title>
+<title>Point Shower 분석 대시보드</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 분석 대시보드">
+<meta property="og:title" content="Point Shower 분석 대시보드">
 <meta property="og:description" content="주문 추이·거래처별 통계·정산 KPI 시각화.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/erp-analytics.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 분석 대시보드">
+<meta name="twitter:title" content="Point Shower 분석 대시보드">
 <meta name="twitter:description" content="주문 추이·거래처별 통계·정산 KPI 시각화.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -30,12 +30,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="주문 추이·거래처별 통계·정산 KPI 시각화.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/erp-analytics.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -81,7 +81,7 @@ header .meta{font-family:var(--fm);font-size:13px;color:var(--muted);}
 <header>
   <div>
     <a href="erp.html" class="back">← ERP로 돌아가기</a>
-    <h1 style="margin-top:4px;">📊 FixOn 분석 대시보드</h1>
+    <h1 style="margin-top:4px;">📊 Point Shower 분석 대시보드</h1>
   </div>
   <div class="meta" id="now"></div>
 </header>
@@ -109,7 +109,7 @@ header .meta{font-family:var(--fm);font-size:13px;color:var(--muted);}
 </div>
 
 <script>
-const STORAGE_KEY='fixon-erp-state-v6';
+const STORAGE_KEY='pointshower-erp-state-v6';
 const STATUS_LABEL={received:'접수',design_queued:'디자인 대기',designing:'디자인 중',design_done:'디자인 완료',print_queued:'생산 대기',printing:'인쇄 중',assembling:'조립 중',qc:'품질검수',shipping:'배송 중',delivered:'수령 완료',applied:'환자 적용',settled:'정산 완료',rescan_requested:'재스캔 요청'};
 const STATUS_FLOW=Object.keys(STATUS_LABEL);
 const STATUS_COLOR={received:'#60a5fa',design_queued:'#fbbf24',designing:'#a78bfa',design_done:'#34d399',print_queued:'#fbbf24',printing:'#a78bfa',assembling:'#a78bfa',qc:'#a78bfa',shipping:'#60a5fa',delivered:'#34d399',applied:'#ff6b2b',settled:'#8a88a0'};
@@ -154,7 +154,7 @@ function render(){
   const today=new Date().toDateString();
   const todayOrders=orders.filter(o=>new Date(o.createdAt).toDateString()===today).length;
   const settled=orders.filter(o=>['applied','settled'].includes(o.status));
-  const revenue=settled.reduce((s,o)=>s+(o.pricing.fixon_fee||0),0);
+  const revenue=settled.reduce((s,o)=>s+(o.pricing.pointshower_fee||0),0);
   const totalRevenue=settled.reduce((s,o)=>s+(o.pricing.clinic_pays||o.pricing.base||0),0);
   const reachedQC=orders.filter(o=>STATUS_FLOW.indexOf(o.status)>=STATUS_FLOW.indexOf('qc'));
   const passed=reachedQC.filter(o=>o.qcResult==='pass').length;
@@ -169,7 +169,7 @@ function render(){
     <div class="kpi-grid">
       <div class="kpi accent"><div class="lab">전체 주문</div><div class="val">${orders.length}</div><div class="delta up">기간: ${period}</div></div>
       <div class="kpi"><div class="lab">오늘 주문</div><div class="val" style="color:var(--blue);">${todayOrders}</div></div>
-      <div class="kpi"><div class="lab">FixOn 수수료</div><div class="val" style="color:var(--green);font-size:18px;">${fmtKRW(revenue)}</div></div>
+      <div class="kpi"><div class="lab">Point Shower 수수료</div><div class="val" style="color:var(--green);font-size:18px;">${fmtKRW(revenue)}</div></div>
       <div class="kpi"><div class="lab">평균 처리</div><div class="val" style="color:var(--purple);">${avgHrs}<span style="font-size:13px;color:var(--dim);">h</span></div></div>
       <div class="kpi"><div class="lab">QC 통과율</div><div class="val" style="color:var(--green);">${passRate}<span style="font-size:13px;color:var(--dim);">%</span></div></div>
       <div class="kpi"><div class="lab">활성 거래처</div><div class="val">${partners}</div></div>
@@ -228,7 +228,7 @@ function render(){
   // Revenue stacked area (4 weeks)
   const weeks=[];const w0=new Date();w0.setHours(0,0,0,0);w0.setDate(w0.getDate()-w0.getDay());
   for(let i=3;i>=0;i--){const wd=new Date(w0);wd.setDate(wd.getDate()-i*7);weeks.push({label:`${wd.getMonth()+1}/${wd.getDate()}`,d:wd,fee:0,split:0});}
-  state.orders.forEach(o=>{if(!['applied','settled'].includes(o.status))return;const d=new Date(o.createdAt);weeks.forEach((w,i)=>{const ws=w.d,we=new Date(w.d);we.setDate(we.getDate()+7);if(d>=ws&&d<we){w.fee+=o.pricing.fixon_fee||0;w.split+=(o.pricing.lab_share||0)+(o.pricing.graphy_share||0);}});});
+  state.orders.forEach(o=>{if(!['applied','settled'].includes(o.status))return;const d=new Date(o.createdAt);weeks.forEach((w,i)=>{const ws=w.d,we=new Date(w.d);we.setDate(we.getDate()+7);if(d>=ws&&d<we){w.fee+=o.pricing.pointshower_fee||0;w.split+=(o.pricing.lab_share||0)+(o.pricing.graphy_share||0);}});});
   const maxR=Math.max(1,...weeks.map(w=>w.fee+w.split));
   let revSvg=`<svg viewBox="0 0 400 200">`;
   weeks.forEach((w,i)=>{const x=40+(320/3)*i;const totalH=140*(w.fee+w.split)/maxR;const splitH=140*w.split/maxR;revSvg+=`<rect x="${x-25}" y="${170-totalH}" width="50" height="${totalH-splitH}" fill="#34d399"/>`;revSvg+=`<rect x="${x-25}" y="${170-splitH}" width="50" height="${splitH}" fill="#a78bfa"/>`;revSvg+=`<text x="${x}" y="190" text-anchor="middle" font-size="10" fill="#8a88a0" font-family="JetBrains Mono">${w.label}</text>`;revSvg+=`<text x="${x}" y="${170-totalH-4}" text-anchor="middle" font-size="9" fill="#fbbf24" font-family="JetBrains Mono">₩${Math.round((w.fee+w.split)/1000)}k</text>`;});
@@ -250,7 +250,7 @@ function render(){
       <div class="chart"><h3>🍩 상태별 분포</h3>${donutSvg}<div class="legend">${STATUS_FLOW.filter(s=>statusCounts[s]).map(s=>`<span><span class="dot" style="background:${STATUS_COLOR[s]};"></span>${STATUS_LABEL[s]} ${statusCounts[s]}</span>`).join('')}</div></div>
       <div class="chart"><h3>🏥 거래처별 주문 (Top 5)</h3>${clinicBarSvg}</div>
       <div class="chart"><h3>⏱️ 기공소 처리 시간</h3>${labSvg}</div>
-      <div class="chart"><h3>💰 주간 매출 (Stacked: 분배 + FixOn 수수료)</h3>${revSvg}<div class="legend"><span><span class="dot" style="background:#a78bfa;"></span>분배 (기공/그래피)</span><span><span class="dot" style="background:#34d399;"></span>FixOn 수수료</span></div></div>
+      <div class="chart"><h3>💰 주간 매출 (Stacked: 분배 + Point Shower 수수료)</h3>${revSvg}<div class="legend"><span><span class="dot" style="background:#a78bfa;"></span>분배 (기공/그래피)</span><span><span class="dot" style="background:#34d399;"></span>Point Shower 수수료</span></div></div>
       <div class="chart"><h3>✅ QC 통과율 추이</h3>${qcSvg}</div>
     </div>`;
 }
@@ -260,7 +260,7 @@ document.querySelectorAll('.chip[data-role]').forEach(b=>b.onclick=()=>{document
 
 window.exportSummary=function(){
   const orders=filterOrders();
-  const text=`FixOn ERP 분석 리포트\n생성: ${new Date().toLocaleString('ko-KR')}\n기간: ${period}\n역할: ${roleFilter}\n\n전체 주문: ${orders.length}\n진행 중: ${orders.filter(o=>!['settled'].includes(o.status)).length}\n완료(정산): ${orders.filter(o=>o.status==='settled').length}\n`;
+  const text=`Point Shower ERP 분석 리포트\n생성: ${new Date().toLocaleString('ko-KR')}\n기간: ${period}\n역할: ${roleFilter}\n\n전체 주문: ${orders.length}\n진행 중: ${orders.filter(o=>!['settled'].includes(o.status)).length}\n완료(정산): ${orders.filter(o=>o.status==='settled').length}\n`;
   navigator.clipboard.writeText(text).then(()=>alert('✅ 클립보드에 복사됨'));
 };
 document.getElementById('now').textContent=new Date().toLocaleString('ko-KR');

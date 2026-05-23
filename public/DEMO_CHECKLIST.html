@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FixOn 시연 점검 — 자동 검증 도구</title>
+<title>Point Shower 시연 점검 — 자동 검증 도구</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 시연 점검 — 자동 검증 도구">
+<meta property="og:title" content="Point Shower 시연 점검 — 자동 검증 도구">
 <meta property="og:description" content="시연 30분 전 시스템 상태 자동 확인. 데이터·파일·STL·브라우저까지 20개 항목 검증.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/DEMO_CHECKLIST.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 시연 점검 — 자동 검증 도구">
+<meta name="twitter:title" content="Point Shower 시연 점검 — 자동 검증 도구">
 <meta name="twitter:description" content="시연 30분 전 시스템 상태 자동 확인. 데이터·파일·STL·브라우저까지 20개 항목 검증.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -29,12 +29,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="시연 30분 전 시스템 상태 자동 확인. 데이터·파일·STL·브라우저까지 20개 항목 검증.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/DEMO_CHECKLIST.html">
 
 <!-- STL inline data — required for designer; load early so __SAMPLE_STL is available -->
@@ -119,7 +119,7 @@ header .back{color:var(--accent);font-size:14px;font-weight:600;}
 </div>
 
 <script>
-const KEY='fixon-erp-state-v6';
+const KEY='pointshower-erp-state-v6';
 const SUB_PAGES=['erp.html','erp-analytics.html','erp-messages.html','erp-reports.html','erp-quality.html','erp-mobile.html','erp-help.html','erp-inventory.html','erp-calendar.html','erp-portal.html','erp-search.html','erp-workflow.html'];
 const REQUIRED_STATUSES=['received','design_queued','designing','design_done','print_queued','printing','assembling','qc','shipping','delivered','applied','settled'];
 
@@ -241,7 +241,7 @@ function render(){
 function resetAndOpenERP(){
   if(!confirm('ERP 데이터를 초기화하고 erp.html을 새 탭에서 엽니다.\n\n진행 흐름:\n1) localStorage 초기화\n2) erp.html 자동 오픈 → 시드 데이터 자동 생성\n3) 이 페이지에서 자동 재점검\n\n계속할까요?'))return;
   localStorage.removeItem(KEY);
-  ['fixon-messages-v1','fixon-qc-data-v1','fixon-inventory-v1','fixon-workflow-v1'].forEach(k=>localStorage.removeItem(k));
+  ['pointshower-messages-v1','pointshower-qc-data-v1','pointshower-inventory-v1','pointshower-workflow-v1'].forEach(k=>localStorage.removeItem(k));
   const w=window.open('erp.html','_blank');
   if(!w){alert('⚠️ 팝업이 차단되었습니다. erp.html을 직접 새 탭에서 연 뒤 이 페이지로 돌아오세요.');return;}
   // multi-tab storage event listener — when erp.html writes seed, re-run checks

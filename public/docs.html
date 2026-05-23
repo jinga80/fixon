@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FixOn 운영 문서</title>
+<title>Point Shower 운영 문서</title>
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FixOn">
+<meta property="og:site_name" content="Point Shower">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FixOn 운영 문서">
+<meta property="og:title" content="Point Shower 운영 문서">
 <meta property="og:description" content="시연·협상·제품·기술 자료를 한 곳에 정리한 문서 뷰어.">
 <meta property="og:image" content="https://fixon-production.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FixOn — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="Point Shower — 맞춤형 구강 케어 운영 플랫폼">
 <meta property="og:url" content="https://fixon-production.up.railway.app/docs.html">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FixOn 운영 문서">
+<meta name="twitter:title" content="Point Shower 운영 문서">
 <meta name="twitter:description" content="시연·협상·제품·기술 자료를 한 곳에 정리한 문서 뷰어.">
 <meta name="twitter:image" content="https://fixon-production.up.railway.app/og-image.png">
 
@@ -30,12 +30,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="FixOn">
-<meta name="application-name" content="FixOn">
+<meta name="apple-mobile-web-app-title" content="Point Shower">
+<meta name="application-name" content="Point Shower">
 
 <!-- ===== SEO ===== -->
 <meta name="description" content="시연·협상·제품·기술 자료를 한 곳에 정리한 문서 뷰어.">
-<meta name="author" content="FixOn × Graphy">
+<meta name="author" content="Point Shower × Graphy">
 <link rel="canonical" href="https://fixon-production.up.railway.app/docs.html">
 
 <link rel="stylesheet" href="assets/design-system.css">
@@ -203,7 +203,7 @@ async function loadDoc(name) {
   if (!DOCS[name]) return;
   document.querySelectorAll('.doc-link').forEach(a => a.classList.toggle('active', a.dataset.doc === name));
   document.getElementById('crumb').textContent = `${DOCS[name]} · ${name}.md`;
-  document.title = `FixOn — ${DOCS[name]}`;
+  document.title = `Point Shower — ${DOCS[name]}`;
   history.replaceState(null, '', `?doc=${name}`);
 
   const content = document.getElementById('content');
