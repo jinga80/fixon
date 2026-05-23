@@ -580,7 +580,7 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
       </p>
       <div class="cards" style="margin-top:40px;flex:1;grid-template-columns:repeat(2,1fr);gap:24px;align-items:stretch;">
         <div class="card-tile" style="padding:0;overflow:hidden;">
-          <div style="background:var(--green-dim);color:var(--green);padding:12px 24px;font-size:15px;font-weight:700;">✅ 출시 완료</div>
+          <div style="background:var(--green-dim);color:var(--green);padding:12px 24px;font-size:15px;font-weight:700;">✅ 개발 완료</div>
           <div style="padding:36px;flex:1;display:flex;flex-direction:column;">
             <h4 style="font-size:34px;">Point Shower</h4><p style="font-size:19px;margin-top:8px;">치아 세정기</p>
             <div style="font-family:var(--fm);font-size:72px;font-weight:800;color:var(--green-dim);text-align:right;margin-top:auto;">01</div>
@@ -589,7 +589,7 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
         <div class="card-tile" style="padding:0;overflow:hidden;">
           <div style="background:var(--purple-dim);color:var(--purple);padding:12px 24px;font-size:15px;font-weight:700;">💡 아이디어</div>
           <div style="padding:36px;flex:1;display:flex;flex-direction:column;">
-            <h4 style="font-size:34px;">아이디어 단계</h4><p style="font-size:19px;margin-top:8px;color:var(--muted);">발표 시 멘트로 소개</p>
+            <h4 style="font-size:34px;">아이디어 단계</h4><p style="font-size:19px;margin-top:8px;color:var(--muted);"></p>
             <div style="font-family:var(--fm);font-size:72px;font-weight:800;color:var(--purple-dim);text-align:right;margin-top:auto;">02</div>
           </div>
         </div>
@@ -1219,7 +1219,7 @@ function doExport(){
   txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Shower 는 시작입니다.', { fontSize: 46, bold: true });
   txt(s, 0.7, 2.4, 11.5, 1.0, 'Graphy Style 의 형상기억 + 3D 프린팅 + 개인 맞춤 컨셉으로\n다양한 구강·잇몸 케어 디바이스를 개발하고 있습니다.', { fontSize: 20, color: PPTX_COLORS.DIM });
   const devices = [
-    ['Point Shower', '치아 세정기', '✅ 출시 완료', PPTX_COLORS.GREEN, PPTX_COLORS.GREEN_DIM],
+    ['Point Shower', '치아 세정기', '✅ 개발 완료', PPTX_COLORS.GREEN, PPTX_COLORS.GREEN_DIM],
     ['Point Infuser', '약물 정밀 도포', '🚧 개발 중', PPTX_COLORS.ACCENT, PPTX_COLORS.ACCENT_SOFT],
     ['Night Pack Splint', '야간 잇몸 마스크팩', '🚧 개발 중', PPTX_COLORS.BLUE, PPTX_COLORS.BLUE_DIM],
     ['Perio Touch / MTS', '잇몸 저주파 / MTS', '💡 아이디어', PPTX_COLORS.PURPLE, PPTX_COLORS.PURPLE_DIM],
