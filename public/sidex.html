@@ -634,9 +634,8 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
     <!-- ============ 9. NIGHT PACK ============ -->
     <section class="slide" data-slide="9" data-time="60"
       data-notes="앞 장에서 설명드린 Point Infuser의 실제 시제품입니다. 보시는 것처럼 환자 맞춤 트레이에 도포 펜을 결합하는 구조입니다. 펜을 끼우면 액상이나 연고형 약제가 트레이 안내를 따라 필요한 부위로 정확히 전달됩니다. 처방만으로는 환자가 정확한 위치에 바르기 어렵지만, 이렇게 맞춤 트레이가 위치를 잡아주면 누구나 정확하게 적용할 수 있습니다.">
-      <div class="eyebrow">§ 02 · DEVICE 02 · 실물</div>
-      <h1 class="small" style="color:var(--accent);font-size:72px;">Point Infuser — 실물</h1>
-      <p class="lead">앞서 보신 약물 전달 기구의 실제 시제품 — 맞춤 트레이 + 도포 펜</p>
+      <div class="eyebrow">§ 02 · DEVICE 02</div>
+      <h1 class="small" style="color:var(--accent);font-size:72px;">Point Infuser</h1>
       <div style="display:flex;gap:32px;justify-content:center;align-items:center;flex:1;margin-top:20px;">
         <figure style="margin:0;text-align:center;">
           <img src="/video/night-pack-1.jpg" alt="Point Infuser 맞춤 트레이와 도포 펜"
@@ -1259,9 +1258,8 @@ function doExport(){
 
   // ---------- 9. Night Pack ----------
   s = pptx.addSlide();
-  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 02 · 실물', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
-  txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Infuser — 실물', { fontSize: 52, bold: true, color: PPTX_COLORS.ACCENT });
-  txt(s, 0.7, 2.4, 11.5, 0.6, '앞서 보신 약물 전달 기구의 실제 시제품 — 맞춤 트레이 + 도포 펜', { fontSize: 20, color: PPTX_COLORS.DIM });
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 02', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Infuser', { fontSize: 52, bold: true, color: PPTX_COLORS.ACCENT });
   s.addImage({ data: IMG_NIGHTPACK1, x: 3.67, y: 3.15, w: 2.7, h: 3.6 });
   s.addImage({ data: IMG_NIGHTPACK2, x: 6.97, y: 3.15, w: 2.7, h: 3.6 });
   txt(s, 3.67, 6.82, 2.7, 0.3, '맞춤 스플린트 + 제제 도포 펜', { fontSize: 11, color: PPTX_COLORS.MUTED, align: 'center', fontFace: 'JetBrains Mono' });
