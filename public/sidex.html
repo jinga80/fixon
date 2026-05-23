@@ -633,13 +633,13 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
 
     <!-- ============ 9. NIGHT PACK ============ -->
     <section class="slide" data-slide="9" data-time="60"
-      data-notes="세 번째는 Night Pack Splint입니다. 콘셉트는 직관적입니다. 피부 관리를 위해 자기 전에 마스크팩을 하잖아요. 그것처럼 잠자기 전 잇몸에 '팩'을 해주는 겁니다. 구강 유산균, 프로폴리스, 자일리톨, 비타민 C처럼 잇몸 건강에 도움이 되는 제제를 잇몸 라인을 따라 균일하게 도포합니다. 맞춤 스플린트 형태라 자는 동안 제제가 흘러내리지 않고 잇몸에 밀착되어 충분히 작용합니다. 데일리 홈케어의 새로운 카테고리가 될 수 있다고 봅니다.">
-      <div class="eyebrow">§ 02 · DEVICE 03</div>
-      <h1 class="small" style="color:var(--blue);font-size:80px;">Night Pack Splint</h1>
-      <p class="lead">잠자기 전, 잇몸을 위한 마스크팩</p>
+      data-notes="앞 장에서 설명드린 Point Infuser의 실제 시제품입니다. 보시는 것처럼 환자 맞춤 트레이에 도포 펜을 결합하는 구조입니다. 펜을 끼우면 액상이나 연고형 약제가 트레이 안내를 따라 필요한 부위로 정확히 전달됩니다. 처방만으로는 환자가 정확한 위치에 바르기 어렵지만, 이렇게 맞춤 트레이가 위치를 잡아주면 누구나 정확하게 적용할 수 있습니다.">
+      <div class="eyebrow">§ 02 · DEVICE 02 · 실물</div>
+      <h1 class="small" style="color:var(--accent);font-size:72px;">Point Infuser — 실물</h1>
+      <p class="lead">앞서 보신 약물 전달 기구의 실제 시제품 — 맞춤 트레이 + 도포 펜</p>
       <div style="display:flex;gap:32px;justify-content:center;align-items:center;flex:1;margin-top:20px;">
         <figure style="margin:0;text-align:center;">
-          <img src="/video/night-pack-1.jpg" alt="Night Pack Splint 스플린트와 제제 도포 펜"
+          <img src="/video/night-pack-1.jpg" alt="Point Infuser 맞춤 트레이와 도포 펜"
             style="height:360px;max-width:100%;border-radius:14px;border:1px solid var(--border);display:block;">
           <figcaption style="font-family:var(--fm);font-size:13px;color:var(--muted);margin-top:10px;">맞춤 스플린트 + 제제 도포 펜</figcaption>
         </figure>
@@ -766,16 +766,7 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
       <div class="accent-strip"></div>
       <h1>감사합니다.</h1>
       <p class="sub">함께 만들어 가는 Graphy Style.</p>
-      <div class="foot-grid">
-        <div>
-          <div style="font-family:var(--fm);font-size:18px;font-weight:700;color:var(--accent);">graphystyle.com</div>
-          <div style="font-size:14px;color:#94a3b8;margin-top:6px;">이중우 원장</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:18px;font-weight:700;color:#fff;font-family:var(--fm);">SIDEX 2026</div>
-          <div style="font-size:14px;color:#94a3b8;margin-top:6px;">올리브서울치과</div>
-        </div>
-      </div>
+      <div style="margin-top:40px;font-family:var(--fm);font-size:22px;font-weight:800;color:var(--accent);">graphystyle.com</div>
     </section>
 
   </div>
@@ -1268,14 +1259,14 @@ function doExport(){
 
   // ---------- 9. Night Pack ----------
   s = pptx.addSlide();
-  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 03', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
-  txt(s, 0.7, 1.1, 11.5, 1.2, 'Night Pack Splint', { fontSize: 58, bold: true, color: PPTX_COLORS.BLUE });
-  txt(s, 0.7, 2.4, 11.5, 0.6, '잠자기 전, 잇몸을 위한 마스크팩', { fontSize: 20, color: PPTX_COLORS.DIM });
+  txt(s, 0.7, 0.7, 8, 0.4, '§ 02 · DEVICE 02 · 실물', { fontSize: 12, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 1.1, 11.5, 1.2, 'Point Infuser — 실물', { fontSize: 52, bold: true, color: PPTX_COLORS.ACCENT });
+  txt(s, 0.7, 2.4, 11.5, 0.6, '앞서 보신 약물 전달 기구의 실제 시제품 — 맞춤 트레이 + 도포 펜', { fontSize: 20, color: PPTX_COLORS.DIM });
   s.addImage({ data: IMG_NIGHTPACK1, x: 3.67, y: 3.15, w: 2.7, h: 3.6 });
   s.addImage({ data: IMG_NIGHTPACK2, x: 6.97, y: 3.15, w: 2.7, h: 3.6 });
   txt(s, 3.67, 6.82, 2.7, 0.3, '맞춤 스플린트 + 제제 도포 펜', { fontSize: 11, color: PPTX_COLORS.MUTED, align: 'center', fontFace: 'JetBrains Mono' });
   txt(s, 6.97, 6.82, 2.7, 0.3, '펜을 결합해 잇몸 라인에 도포', { fontSize: 11, color: PPTX_COLORS.MUTED, align: 'center', fontFace: 'JetBrains Mono' });
-  note(s, `[8:15–9:15 · 60초] 세 번째는 Night Pack Splint입니다. 콘셉트는 직관적입니다. 피부 관리를 위해 자기 전에 마스크팩을 하잖아요. 그것처럼 잠자기 전 잇몸에 '팩'을 해주는 겁니다. 구강 유산균, 프로폴리스, 자일리톨, 비타민 C처럼 잇몸 건강에 도움이 되는 제제를 잇몸 라인을 따라 균일하게 도포합니다. 맞춤 스플린트 형태라 자는 동안 제제가 흘러내리지 않고 잇몸에 밀착되어 충분히 작용합니다. 데일리 홈케어의 새로운 카테고리가 될 수 있다고 봅니다.`);
+  note(s, `[8:15–9:15 · 60초] 앞 장에서 설명드린 Point Infuser의 실제 시제품입니다. 환자 맞춤 트레이에 도포 펜을 결합하는 구조로, 펜을 끼우면 액상이나 연고형 약제가 트레이 안내를 따라 필요한 부위로 정확히 전달됩니다. 처방만으로는 환자가 정확한 위치에 바르기 어렵지만, 맞춤 트레이가 위치를 잡아주면 누구나 정확하게 적용할 수 있습니다.`);
 
   // ---------- 10. Perio ----------
   s = pptx.addSlide();
@@ -1361,10 +1352,7 @@ function doExport(){
   rect(s, 0, 0, 13.333, 0.18, PPTX_COLORS.ACCENT);
   txt(s, 0.7, 2.0, 11.5, 2.4, '감사합니다.', { fontSize: 120, bold: true, color: 'FFFFFF', align: 'center' });
   txt(s, 0.7, 4.5, 11.5, 0.7, '함께 만들어 가는 Graphy Style.', { fontSize: 24, color: 'CBD5E1', align: 'center' });
-  txt(s, 0.7, 6.4, 5, 0.4, 'graphystyle.com', { fontSize: 14, bold: true, color: PPTX_COLORS.ACCENT, fontFace: 'JetBrains Mono' });
-  txt(s, 0.7, 6.75, 5, 0.4, '이중우 원장', { fontSize: 12, color: '94A3B8' });
-  txt(s, 7.2, 6.4, 5, 0.4, '올리브서울치과', { fontSize: 12, color: '94A3B8', align: 'right' });
-  txt(s, 7.2, 6.75, 5, 0.4, 'SIDEX 2026', { fontSize: 14, bold: true, color: 'FFFFFF', fontFace: 'JetBrains Mono', align: 'right' });
+  txt(s, 0.7, 6.5, 11.9, 0.5, 'graphystyle.com', { fontSize: 18, bold: true, color: PPTX_COLORS.ACCENT, fontFace: 'JetBrains Mono', align: 'center' });
   note(s, `[13:30–14:00 · 30초] 이상으로 발표를 마치겠습니다. 다시 강조드리면, 그래피 스타일은 완성해서 보여드리는 제품이 아니라 원장님들과 함께 만들어 가는 과정입니다. 함께해 주시길 부탁드립니다. 경청해 주셔서 감사합니다. 질문 있으시면 받겠습니다.`);
 
   // Save

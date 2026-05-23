@@ -5,9 +5,9 @@
     "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
   },
   "deploy": {
-    "startCommand": "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 60 --log-file -",
+    "startCommand": "python manage.py migrate --noinput && (python manage.py createsuperuser --noinput || true) && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 60 --log-file -",
     "healthcheckPath": "/healthz",
-    "healthcheckTimeout": 30,
+    "healthcheckTimeout": 60,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }

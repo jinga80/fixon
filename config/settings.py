@@ -1,12 +1,14 @@
 """
-Point Shower — Django settings (production-ready static site).
+Point Shower — Django settings.
 
-이 프로젝트는 정적 HTML/CSS/JS/STL 자산을 Django + WhiteNoise 로 서빙합니다.
-DB / admin / auth 등은 사용하지 않습니다.
+정적 자산(public/)은 WhiteNoise 로 서빙하고,
+회원/설문(리드) 수집을 위해 DB · admin · 간단한 API 를 함께 사용합니다.
 """
 
 import os
 from pathlib import Path
+
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +29,8 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "https://*.up.railway.app",
     "https://*.railway.app",
+    "https://graphystyle.com",
+    "https://www.graphystyle.com",
 ]
 _extra_origin = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
 if _extra_origin:
@@ -36,25 +40,51 @@ if _extra_origin:
 # Apps & Middleware
 # ============================================================
 INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "leads",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # WhiteNoise 는 SecurityMiddleware 바로 다음에 위치해야 합니다
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
+
+# ============================================================
+# Database — Railway 의 DATABASE_URL (Postgres), 로컬은 sqlite 폴백
+# ============================================================
+DATABASES = {
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        ssl_require=os.environ.get("DATABASE_URL", "").startswith("postgres"),
+    )
+}
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],
         "APP_DIRS": True,
-        "OPTIONS": {"context_processors": []},
+        "OPTIONS": {"context_processors": [
+            "django.template.context_processors.request",
+            "django.contrib.auth.context_processors.auth",
+            "django.contrib.messages.context_processors.messages",
+        ]},
     },
 ]
 
@@ -100,6 +130,9 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "SAMEORIGIN"
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # Logging — Railway 콘솔로 stdout
 LOGGING = {

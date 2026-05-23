@@ -1,12 +1,15 @@
 """
 Point Shower — URL routing.
 
-WhiteNoise 가 `public/` 의 모든 파일을 루트 URL 로 자동 서빙하므로
-별도 view 가 필요 없습니다. 헬스체크 endpoint 만 추가합니다.
+WhiteNoise 가 `public/` 의 모든 정적 파일을 루트 URL 로 서빙하고,
+Django 는 헬스체크 · 설문 수집 API · 관리자(admin) 만 처리합니다.
 """
 
+from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import path
+
+from leads.views import signup
 
 
 def healthz(_request):
@@ -15,4 +18,6 @@ def healthz(_request):
 
 urlpatterns = [
     path("healthz", healthz, name="healthz"),
+    path("api/signup", signup, name="signup"),
+    path("admin/", admin.site.urls),
 ]
