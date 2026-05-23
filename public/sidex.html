@@ -139,6 +139,26 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
 }
 .video-frame .label{font-family:var(--fm);font-size:14px;font-weight:600;}
 
+/* Poster placeholder (영상 자산 확보 전 임시 이미지) */
+.video-frame.has-poster{
+  background-size:cover;background-position:center;
+  border:1px solid var(--border);position:relative;overflow:hidden;
+  flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:0;
+}
+.video-frame.has-poster::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,12,24,0.82),rgba(8,12,24,0.05) 60%);
+}
+.video-frame.has-poster .label{
+  position:relative;z-index:1;color:#fff;margin:0;padding:16px 18px;font-weight:700;
+}
+.video-frame .pending-badge{
+  position:absolute;top:14px;right:14px;z-index:1;
+  background:rgba(255,255,255,0.92);color:var(--accent-deep);
+  font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:0.04em;
+  padding:5px 12px;border-radius:100px;
+}
+
 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
 .flow-step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;}
 .flow-step .circle{
@@ -473,10 +493,9 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
           <div class="spec-row"><div class="badge">♨</div><div class="text"><h4>열 소독 가능</h4><p>끓는 물에서 멸균 — 위생 관리 간단</p></div></div>
           <div class="spec-row"><div class="badge">◐</div><div class="text"><h4>형상 기억</h4><p>37℃ 복원 — 변형 후에도 원형 유지</p></div></div>
         </div>
-        <div class="video-frame">
-          <div class="play">▶</div>
+        <div class="video-frame has-poster" style="background-image:url('/video/tera-harz-poster.jpg');">
+          <span class="pending-badge">🎞 영상 준비 중</span>
           <div class="label">Tera Harz Clear · 형상기억 시연 영상</div>
-          <div style="font-size:12px;color:var(--subtle);margin-top:8px;">(발표 시 영상 삽입 위치)</div>
         </div>
       </div>
       <div class="slide-num">04 / 14</div>
@@ -1151,7 +1170,7 @@ function doExport(){
     fill: { color: PPTX_COLORS.ACCENT }, line: { type: 'none' } });
   txt(s, 9.2, 4.3, 0.8, 0.85, '▶', { fontSize: 22, color: 'FFFFFF', align: 'center', valign: 'middle', bold: true });
   txt(s, 7.0, 5.3, 5.2, 0.4, 'Tera Harz Clear · 형상기억 시연 영상', { fontSize: 12, color: PPTX_COLORS.MUTED, align: 'center', fontFace: 'JetBrains Mono' });
-  txt(s, 7.0, 5.7, 5.2, 0.4, '(발표 시 영상 삽입 위치)', { fontSize: 10, color: PPTX_COLORS.SUBTLE, align: 'center' });
+  txt(s, 7.0, 5.7, 5.2, 0.4, '(형상기억 시연 영상 — 준비 중)', { fontSize: 10, color: PPTX_COLORS.SUBTLE, align: 'center' });
   note(s, `[2:15–3:30 · 75초] 그래피 스타일의 출발점은 소재입니다. Tera Harz Clear는 세 가지 강점이 있습니다. 첫째, FDA 승인을 받은 안전성이 확보된 의료용 레진입니다. 환자 구강에 직접 들어가는 만큼 안전성은 타협할 수 없죠. 둘째, 끓는 물에서 열소독이 가능합니다. 별도 장비 없이 가정에서 위생 관리를 간단히 할 수 있습니다. 셋째, 가장 흥미로운 형상기억 기능입니다. 끓는 물에서는 말랑하게 변형됐다가, 체온 37도가 되면 설계된 형태로 정확히 복원됩니다. 지금 이 영상으로 그 과정을 직접 보시겠습니다. 보시는 것처럼 변형됐다가 다시 제 모습을 찾아갑니다. 덕분에 열소독을 반복해도 맞춤 형태가 그대로 유지됩니다.`);
 
   // ---------- 5. Point Shower ----------
