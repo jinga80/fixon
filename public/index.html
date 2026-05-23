@@ -604,6 +604,73 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .footer .footer-grid{grid-template-columns:1fr;gap:26px;}
   .footer-bottom{flex-direction:column;gap:8px;align-items:flex-start;}
 }
+
+/* ============================================================
+   부스 배포용 A4 인쇄물 (커뮤니티 전환 퍼널)
+   ============================================================ */
+.handout-section{background:var(--bg-section);padding:72px 0 80px;border-top:1px solid var(--border);overflow-x:hidden;}
+.handout-wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+.handout-head{text-align:center;max-width:660px;margin:0 auto 26px;}
+.handout-head .eyebrow2{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand);text-transform:uppercase;}
+.handout-head h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin:10px 0 8px;color:var(--text);}
+.handout-head p{font-size:16px;color:var(--text-secondary);line-height:1.6;}
+.handout-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
+.handout-preview{display:flex;justify-content:center;}
+.a4-scaler{position:relative;width:100%;overflow:hidden;}
+
+/* === A4 sheet (210 x 297 mm) === */
+.a4-sheet{
+  width:210mm;height:297mm;margin:0 auto;
+  background:#fff;color:#0f172a;overflow:hidden;position:relative;
+  transform-origin:top center;
+  box-shadow:0 24px 70px rgba(15,23,42,.22);
+  font-family:var(--font-sans);line-height:1.5;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.a4-pad{padding:17mm 16mm 15mm;height:100%;display:flex;flex-direction:column;box-sizing:border-box;}
+.a4-brandbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:8mm;border-bottom:2px solid #ff6b2b;}
+.a4-brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:-0.02em;color:#0f172a;}
+.a4-brand .mk{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ff6b2b,#c84a14);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;}
+.a4-brand b span{color:#ff6b2b;}
+.a4-event{font-family:var(--font-mono);font-size:12px;color:#64748b;text-align:right;font-weight:600;line-height:1.5;}
+.a4-hero{margin-top:12mm;}
+.a4-hero .kicker{font-family:var(--font-mono);font-size:14px;font-weight:700;letter-spacing:.05em;color:#ff6b2b;}
+.a4-hero h1{font-size:42px;font-weight:900;letter-spacing:-0.035em;line-height:1.12;margin:8px 0 12px;color:#0f172a;}
+.a4-hero h1 em{font-style:normal;color:#ff6b2b;}
+.a4-hero .sub{font-size:16px;line-height:1.65;color:#475569;max-width:160mm;}
+.a4-benefits{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:11mm;}
+.a4-bene{background:#fff7f0;border:1px solid #ffd9bf;border-radius:14px;padding:7mm 6mm;}
+.a4-bene .ic{font-size:30px;}
+.a4-bene h3{font-size:16px;font-weight:800;margin:8px 0 5px;color:#0f172a;letter-spacing:-0.01em;}
+.a4-bene p{font-size:12.5px;color:#64748b;line-height:1.55;}
+.a4-qr{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:9mm;align-items:center;background:#0f172a;border-radius:18px;padding:9mm;color:#fff;}
+.a4-qr .qrbox{width:46mm;height:46mm;background:#fff;border-radius:12px;padding:3mm;box-sizing:border-box;}
+.a4-qr .qrbox img{width:100%;height:100%;display:block;}
+.a4-qr .cta .lead{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.08em;color:#f4b888;text-transform:uppercase;}
+.a4-qr .cta .url{font-size:34px;font-weight:900;letter-spacing:-0.02em;color:#fff;margin:7px 0 6px;}
+.a4-qr .cta .hint2{font-size:13px;color:#cbd5e1;line-height:1.5;}
+.a4-qr .steps{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.a4-qr .steps .st{font-size:13px;color:#fff;font-weight:700;background:rgba(255,255,255,.10);padding:6px 12px;border-radius:8px;}
+.a4-foot{margin-top:7mm;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:#64748b;border-top:1px solid #e5e7eb;padding-top:5mm;}
+.a4-foot b{color:#0f172a;}
+@media(max-width:600px){
+  .handout-section{padding:48px 0 56px;}
+  .handout-head h2{font-size:25px;}
+  .handout-actions .btn{flex:1;justify-content:center;}
+}
+
+/* === 인쇄: A4 시트만 출력 === */
+@media print{
+  @page{size:A4;margin:0;}
+  html,body{background:#fff !important;}
+  body>*{display:none !important;}
+  .handout-section{display:block !important;padding:0 !important;margin:0 !important;background:#fff !important;border:0 !important;}
+  .handout-wrap{max-width:none !important;padding:0 !important;margin:0 !important;}
+  .handout-head,.handout-actions{display:none !important;}
+  .handout-preview{display:block !important;}
+  .a4-scaler{overflow:visible !important;height:auto !important;}
+  .a4-sheet{transform:none !important;box-shadow:none !important;margin:0 !important;width:210mm;height:297mm;}
+}
 </style>
 </head>
 <body>
@@ -650,6 +717,66 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
         <p>의료진이 임상 사례와 아이디어를 나누는 공유 플랫폼. 함께 더 나은 디바이스를 만들어 갑니다.</p>
         <span class="launch-go">커뮤니티 가기 <span>→</span></span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 부스 배포용 A4 인쇄물 (커뮤니티 전환 퍼널) ===== -->
+<section class="handout-section">
+  <div class="handout-wrap">
+    <div class="handout-head">
+      <div class="eyebrow2">BOOTH HANDOUT · A4</div>
+      <h2>부스 배포용 인쇄물</h2>
+      <p>발표 후 참석 원장님들께 나눠드리는 커뮤니티 초대장입니다. A4로 인쇄하거나 PDF로 저장하세요.</p>
+    </div>
+    <div class="handout-actions">
+      <button class="btn btn-primary btn-lg" id="handout-print">🖨 인쇄 · PDF로 저장</button>
+      <button class="btn btn-ghost btn-lg" id="handout-pdf">📥 PDF 다운로드</button>
+    </div>
+    <div class="handout-preview">
+      <div class="a4-scaler">
+        <article class="a4-sheet">
+          <div class="a4-pad">
+
+            <div class="a4-brandbar">
+              <div class="a4-brand"><span class="mk">P</span><b>Point <span>Shower</span></b></div>
+              <div class="a4-event">SIDEX 2026 · COEX Hall D<br>그래피 부스</div>
+            </div>
+
+            <div class="a4-hero">
+              <div class="kicker">오늘 발표는 시작일 뿐입니다</div>
+              <h1>Graphy Style,<br>이제 <em>원장님과 함께</em> 만듭니다.</h1>
+              <p class="sub">방금 보신 Point Shower는 첫 번째 제품입니다. 다음 디바이스는 현장 임상의 원장님들이 직접 아이디어를 내고 함께 설계합니다. 지금 커뮤니티에 합류하시면 그 과정을 처음부터 함께하실 수 있습니다.</p>
+            </div>
+
+            <div class="a4-benefits">
+              <div class="a4-bene"><div class="ic">💡</div><h3>아이디어 → 수익</h3><p>제안한 아이디어가 상품화되면 제안자에게 로열티를 분배합니다.</p></div>
+              <div class="a4-bene"><div class="ic">🏆</div><h3>아이디어 공모전</h3><p>정기 공모전으로 우수 아이디어를 시상하고 개발로 연결합니다.</p></div>
+              <div class="a4-bene"><div class="ic">🔬</div><h3>임상 공유·우선 체험</h3><p>임상 사례를 나누고 신제품을 가장 먼저 체험하실 수 있습니다.</p></div>
+            </div>
+
+            <div class="a4-qr">
+              <div class="qrbox"><img src="/qr-community.svg" alt="커뮤니티 가입 QR 코드"></div>
+              <div class="cta">
+                <div class="lead">지금 스캔하고 합류하세요</div>
+                <div class="url">graphystyle.com</div>
+                <div class="hint2">카메라로 QR을 비추면 Point Shower 커뮤니티로 바로 연결됩니다.</div>
+                <div class="steps">
+                  <span class="st">① QR 스캔</span>
+                  <span class="st">② 1분 가입</span>
+                  <span class="st">③ 첫 아이디어 제안</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="a4-foot">
+              <span><b>이중우 원장</b> · 올리브서울치과 &nbsp;|&nbsp; (주)그래피</span>
+              <span>그래피 부스에서 Point Shower 실물을 직접 체험하세요 →</span>
+            </div>
+
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -1051,6 +1178,56 @@ try {
     pillSeed.classList.add('warn');
   }
 } catch(e){}
+
+// ============================================================
+// A4 핸드아웃 — 미리보기 스케일 + 인쇄 + PDF 다운로드
+// ============================================================
+(function(){
+  const PXmm = 96/25.4;
+  const W = 210*PXmm, H = 297*PXmm;
+  function scaleHandout(){
+    const sheet = document.querySelector('.a4-sheet'); if(!sheet) return;
+    const scaler = sheet.closest('.a4-scaler');
+    const scale = Math.min(1, scaler.clientWidth / W);
+    sheet.style.transform = 'scale(' + scale + ')';
+    scaler.style.height = (H * scale) + 'px';
+  }
+  window.addEventListener('resize', scaleHandout);
+  scaleHandout();
+
+  const printBtn = document.getElementById('handout-print');
+  if (printBtn) printBtn.onclick = () => window.print();
+
+  function loadScript(src){
+    return new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = src; s.onload = res; s.onerror = () => rej(new Error('load fail: ' + src));
+      document.head.appendChild(s);
+    });
+  }
+  const pdfBtn = document.getElementById('handout-pdf');
+  if (pdfBtn) pdfBtn.onclick = async () => {
+    const orig = pdfBtn.textContent;
+    pdfBtn.textContent = 'PDF 생성 중…'; pdfBtn.disabled = true;
+    try {
+      if (!window.html2canvas) await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+      if (!(window.jspdf && window.jspdf.jsPDF)) await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js');
+      const sheet = document.querySelector('.a4-sheet');
+      const prev = sheet.style.transform; sheet.style.transform = 'none';
+      const canvas = await html2canvas(sheet, { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: W, height: H, windowWidth: W });
+      sheet.style.transform = prev; scaleHandout();
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
+      pdf.save('PointShower_커뮤니티_안내.pdf');
+    } catch(e) {
+      console.error(e);
+      alert('PDF 생성에 실패했습니다. "인쇄 · PDF로 저장" 버튼으로 PDF를 만들어 주세요.');
+    } finally {
+      pdfBtn.textContent = orig; pdfBtn.disabled = false;
+    }
+  };
+})();
 </script>
 
 </body>
