@@ -627,7 +627,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-family:var(--font-sans);line-height:1.5;
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.a4-pad{padding:17mm 16mm 15mm;height:100%;display:flex;flex-direction:column;box-sizing:border-box;}
+.a4-sheet::before{content:'';position:absolute;top:-110px;right:-110px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.13),transparent 70%);pointer-events:none;}
+.a4-sheet::after{content:'';position:absolute;bottom:-120px;left:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.06),transparent 70%);pointer-events:none;}
+.a4-pad{position:relative;z-index:1;padding:17mm 16mm 15mm;height:100%;display:flex;flex-direction:column;box-sizing:border-box;}
 .a4-brandbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:8mm;border-bottom:2px solid #ff6b2b;}
 .a4-brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:-0.02em;color:#0f172a;}
 .a4-brand .mk{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ff6b2b,#c84a14);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;}
@@ -638,40 +640,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .a4-hero h1{font-size:42px;font-weight:900;letter-spacing:-0.035em;line-height:1.12;margin:8px 0 12px;color:#0f172a;}
 .a4-hero h1 em{font-style:normal;color:#ff6b2b;background:linear-gradient(transparent 60%,#fef0e6 60%);}
 .a4-hero .sub{font-size:16px;line-height:1.65;color:#475569;max-width:160mm;}
-.a4-benefits{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:9mm;}
-.a4-bene{position:relative;background:#fff7f0;border:1px solid #ffd9bf;border-radius:14px;padding:7mm 6mm;}
-.a4-bene .no{position:absolute;top:6mm;right:6mm;font-family:var(--font-mono);font-size:12px;font-weight:700;color:#ffb38a;letter-spacing:.05em;}
-.a4-bene .ic{display:grid;place-items:center;width:12mm;height:12mm;border-radius:50%;background:#ffe7d6;font-size:22px;}
-.a4-bene h3{font-size:16px;font-weight:800;margin:9px 0 5px;color:#0f172a;letter-spacing:-0.01em;}
-.a4-bene p{font-size:12.5px;color:#64748b;line-height:1.55;}
-.a4-qr{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:9mm;align-items:center;background:#0f172a;border-radius:18px;padding:9mm;color:#fff;}
-.a4-qr .qrbox{width:52mm;height:52mm;background:#fff;border-radius:12px;padding:3mm;box-sizing:border-box;}
+/* === 제품 라인업 === */
+.a4-lineup-label{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;margin:9mm 0 4mm;}
+.a4-benefits{display:grid;grid-template-columns:1fr 1fr;gap:6mm;}
+.a4-bene{position:relative;background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:7mm;box-shadow:0 6px 20px rgba(15,23,42,.05);}
+.a4-bene .a4-ico{display:grid;place-items:center;width:13mm;height:13mm;border-radius:12px;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
+.a4-bene .a4-ico svg{width:7mm;height:7mm;display:block;}
+.a4-bene h3{font-size:17px;font-weight:800;margin:13px 0 5px;color:#0f172a;letter-spacing:-0.015em;}
+.a4-bene p{font-size:12.5px;color:#64748b;line-height:1.55;margin:0;}
+.a4-badge{position:absolute;top:6mm;right:6mm;font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:4px 10px;border-radius:100px;}
+.a4-badge.done{background:#ecfdf5;color:#059669;}
+.a4-badge.dev{background:#fff1e8;color:#c84a14;}
+
+/* === QR CTA === */
+.a4-qr{margin-top:auto;display:grid;grid-template-columns:auto 1fr;gap:9mm;align-items:center;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:20px;padding:9mm;color:#fff;}
+.a4-qr .qrbox{width:50mm;height:50mm;background:#fff;border-radius:14px;padding:3mm;box-sizing:border-box;box-shadow:0 0 0 1px rgba(255,255,255,.10);}
 .a4-qr .qrbox img{width:100%;height:100%;display:block;}
-.a4-qr .cta .lead{font-family:var(--font-mono);font-size:15px;font-weight:700;letter-spacing:.08em;color:#f4b888;text-transform:uppercase;}
-.a4-qr .cta .url{font-size:26px;font-weight:900;letter-spacing:-0.02em;color:#fff;margin:5px 0 6px;}
+.a4-qr .cta .lead{font-family:var(--font-mono);font-size:14px;font-weight:700;letter-spacing:.06em;color:#ffb38a;text-transform:uppercase;}
+.a4-qr .cta .url{font-size:27px;font-weight:900;letter-spacing:-0.02em;color:#fff;margin:6px 0 6px;}
 .a4-qr .cta .hint2{font-size:13px;color:#cbd5e1;line-height:1.5;}
-.a4-qr .steps{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
-.a4-qr .steps .st{font-size:13px;color:#fff;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:8px;}
-.a4-foot{margin-top:7mm;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:#64748b;border-top:1px solid #e5e7eb;padding-top:5mm;}
+.a4-qr .steps{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap;}
+.a4-qr .steps .st{font-size:12.5px;color:#fff;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:100px;}
+
+/* === Footer === */
+.a4-foot{margin-top:7mm;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:#64748b;border-top:1px solid #eef0f3;padding-top:5mm;}
 .a4-foot b{color:#0f172a;}
 .a4-foot .a4-foot-brand{display:flex;align-items:center;gap:8px;}
 .a4-foot .a4-foot-brand .mk{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#ff6b2b,#c84a14);color:#fff;display:grid;place-items:center;font-weight:900;font-size:11px;}
 .btn:disabled{opacity:.6;cursor:progress;pointer-events:none;}
-/* 제품 라인업 (요약) — 핸드아웃 */
-.a4-lineup-label{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--text-tertiary);margin:9mm 0 3mm;}
-.a4-benefits{margin-top:3mm;}
-.a4-bene{padding:6mm 6mm;}
-.a4-bene .no{color:var(--brand-deep);font-size:11px;}
-.a4-bene .ic{width:11mm;height:11mm;font-size:20px;}
-.a4-bene h3{font-size:16px;margin:7px 0 4px;}
-.a4-bene p{font-size:12px;}
-/* 환자·병원 win-win 밴드 */
-.a4-winwin{margin-top:8mm;background:#fff7f0;border:1px solid #ffd9bf;border-radius:14px;padding:7mm 8mm;}
-.a4-winwin .ww-head{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6mm;text-align:center;letter-spacing:-0.01em;}
+
+/* === 환자·병원 win-win === */
+.a4-winwin{margin-top:7mm;background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:16px;padding:7mm 8mm;}
+.a4-winwin .ww-head{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6mm;text-align:center;letter-spacing:-0.015em;}
 .a4-winwin .ww-grid{display:grid;grid-template-columns:1fr 1fr;gap:8mm;}
-.a4-winwin .ww-col{display:flex;gap:11px;align-items:flex-start;}
-.a4-winwin .ww-ic{font-size:26px;flex:none;line-height:1.1;}
-.a4-winwin .ww-col b{display:block;font-size:15px;color:#c84a14;margin-bottom:3px;}
+.a4-winwin .ww-col{display:flex;gap:12px;align-items:flex-start;}
+.a4-winwin .ww-ic{flex:none;display:grid;place-items:center;width:12mm;height:12mm;border-radius:11px;background:#fff;box-shadow:0 4px 12px rgba(15,23,42,.07);}
+.a4-winwin .ww-ic svg{width:6.5mm;height:6.5mm;display:block;}
+.a4-winwin .ww-col b{display:block;font-size:14.5px;color:#c84a14;margin-bottom:4px;}
 .a4-winwin .ww-col p{font-size:12.5px;color:#475569;line-height:1.55;margin:0;}
 @media(max-width:600px){
   .handout-section{padding:48px 0 56px;}
@@ -750,8 +755,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
       <p>발표 후 참석 원장님들께 나눠드리는 커뮤니티 초대장입니다. A4로 인쇄하거나 PDF로 저장하세요.</p>
     </div>
     <div class="handout-actions">
-      <button class="btn btn-primary btn-lg" id="handout-print">🖨 인쇄 · PDF로 저장</button>
-      <button class="btn btn-ghost btn-lg" id="handout-pdf">📥 PDF 다운로드</button>
+      <button class="btn btn-primary btn-lg" id="handout-print"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="13" width="12" height="8" rx="1"/></svg>인쇄 · PDF로 저장</button>
+      <button class="btn btn-ghost btn-lg" id="handout-pdf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>PDF 다운로드</button>
     </div>
     <div class="handout-preview">
       <div class="a4-scaler">
@@ -771,15 +776,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
             <div class="a4-lineup-label">제품 라인업</div>
             <div class="a4-benefits" style="grid-template-columns:1fr 1fr;">
-              <div class="a4-bene"><span class="no">개발 완료</span><div class="ic">🚿</div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
-              <div class="a4-bene"><span class="no">개발 중</span><div class="ic">💧</div><h3>Point Infuser</h3><p>맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달.</p></div>
+              <div class="a4-bene"><span class="a4-badge done">개발 완료</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
+              <div class="a4-bene"><span class="a4-badge dev">개발 중</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="1.6" fill="#ff6b2b" stroke="none"/></svg></div><h3>Point Infuser</h3><p>맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달.</p></div>
             </div>
 
             <div class="a4-winwin">
               <div class="ww-head">환자와 병원, 모두에게 좋은 케어</div>
               <div class="ww-grid">
-                <div class="ww-col"><span class="ww-ic">🦷</span><div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리.</p></div></div>
-                <div class="ww-col"><span class="ww-ic">🏥</span><div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div></div>
+                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span><div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리.</p></div></div>
+                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div></div>
               </div>
             </div>
 
