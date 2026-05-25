@@ -85,6 +85,14 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
 .choice{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;padding:11px 12px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
 .choice:hover{border-color:var(--accent);background:var(--accent-soft);}
 .choice input{width:18px;height:18px;accent-color:var(--accent);flex:none;}
+.choice .d{font-size:12px;color:var(--dim);font-weight:500;}
+.optins{margin-bottom:6px;}
+.optin{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;background:#fff;margin-bottom:10px;transition:all .14s;}
+.optin:hover{border-color:var(--accent);}
+.optin:has(input:checked){border-color:var(--accent);background:var(--accent-soft);}
+.optin input{width:18px;height:18px;accent-color:var(--accent);flex:none;margin-top:2px;}
+.optin span{font-size:13.5px;line-height:1.5;color:var(--muted);}
+.optin b{color:var(--text);font-weight:700;}
 .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;}
 .submit-btn{width:100%;padding:18px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--fb);margin-top:10px;transition:all 0.2s;}
 .submit-btn:hover{background:var(--accent-deep);box-shadow:0 8px 20px var(--accent-glow);}
@@ -136,7 +144,7 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
       </div>
       <div class="hb-item">
         <div class="hb-icon">&#127942;</div>
-        <div class="hb-text"><strong>Founding Member</strong><br><span style="font-size:12px;color:var(--dim);">출시·사전예약 우선 안내 + 신제품 우선 체험</span></div>
+        <div class="hb-text"><strong>창립 멤버 혜택</strong><br><span style="font-size:12px;color:var(--dim);">출시 우선 안내 · 신제품 우선 체험 · 의료관광(MediQueen)·경영(KSMED) 파트너 혜택</span></div>
       </div>
     </div>
 
@@ -148,16 +156,14 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
 <!-- ===== STEP 2: Form ===== -->
 <div class="step" id="step-form">
   <div class="form-step">
-    <h2>Founding Member 가입</h2>
-    <div class="fs-sub">관심 제품만 체크하셔도 됩니다.</div>
+    <h2>창립 멤버 등록</h2>
+    <div class="fs-sub">관심 항목만 체크하셔도 등록됩니다.</div>
 
     <div class="field">
-      <label>관심 제품</label>
+      <label>관심 있는 제품</label>
       <div class="choices">
         <label class="choice"><input type="checkbox" name="interest" value="point_shower">Point Shower</label>
         <label class="choice"><input type="checkbox" name="interest" value="point_infuser">Point Infuser</label>
-        <label class="choice"><input type="checkbox" name="interest" value="night_pack">Night Pack</label>
-        <label class="choice"><input type="checkbox" name="interest" value="perio">Perio</label>
       </div>
     </div>
     <div class="field">
@@ -176,10 +182,15 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
       <label>이메일</label>
       <input id="f-email" type="email" placeholder="you@example.com" autocomplete="email" enterkeyhint="done">
     </div>
+    <div class="optins">
+      <label class="optin"><input type="checkbox" id="f-preorder" checked><span><b>출시·사전예약 알림 받기</b> — 관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</span></label>
+      <label class="optin"><input type="checkbox" id="f-mediqueen"><span><b>의료관광 병원 우선 등록 신청</b> — 의료관광 플랫폼 MediQueen과 연계해 해외 환자 유치 채널에 우리 병원을 우선 등록합니다.</span></label>
+      <label class="optin"><input type="checkbox" id="f-consulting"><span><b>병원 경영 컨설팅 우선 상담 신청</b> — KSMED(KS의료경영연구소)와 연계해 세무·수익개선·마케팅 등 경영 컨설팅 상담을 우선 안내합니다.</span></label>
+    </div>
     <input class="hp" id="f-company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Founding Member로 가입</button>
-    <div class="form-note">입력하신 정보는 graphystyle 커뮤니티·출시 안내 목적으로만 사용됩니다.<br>언제든 탈퇴할 수 있습니다.</div>
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">창립 멤버 등록하기 →</button>
+    <div class="form-note">입력하신 연락처는 출시·사전예약 및 선택하신 혜택 안내 목적으로만 사용되며, 언제든 수신을 중단할 수 있습니다.</div>
   </div>
 </div>
 
@@ -229,16 +240,18 @@ async function submitForm() {
   if (!clinic) { document.getElementById('f-clinic').focus(); return; }
 
   const interests = [...document.querySelectorAll('input[name=interest]:checked')].map(c => c.value);
+  if (document.getElementById('f-mediqueen').checked) interests.push('medical_tourism');
+  if (document.getElementById('f-consulting').checked) interests.push('consulting');
   const payload = {
     name, clinic, phone, email,
     interests: interests.length ? interests : ['point_shower'],
-    preorder: true,
-    note: '커뮤니티 Founding Member 가입',
+    preorder: document.getElementById('f-preorder').checked,
+    note: '커뮤니티 창립 멤버 가입',
     company: document.getElementById('f-company').value,
     source: 'community',
   };
 
-  btn.disabled = true; btn.textContent = '가입 중…';
+  btn.disabled = true; btn.textContent = '등록 중…';
   try {
     const res = await fetch('/api/signup', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
@@ -251,7 +264,7 @@ async function submitForm() {
     goStep(3);
   } catch (err) {
     alert('가입 중 문제가 발생했습니다: ' + err.message + '\n잠시 후 다시 시도해 주세요.');
-    btn.disabled = false; btn.textContent = 'Founding Member로 가입';
+    btn.disabled = false; btn.textContent = '창립 멤버 등록하기 →';
   }
 }
 
