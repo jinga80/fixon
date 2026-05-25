@@ -49,6 +49,9 @@ body{min-height:100vh;background:var(--bg-section);margin:0;}
 .gnb-logo{font-size:21px;font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-right:32px;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .gnb-logo::before{content:'G';width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;display:grid;place-items:center;font-weight:900;font-size:16px;flex:none;}
 .gnb-logo .st{color:var(--accent);}
+.gnb-logo::before{display:none;}
+.gnb-logo-img{height:23px;width:auto;}
+.hero-logo-img{height:44px;width:auto;}
 .gnb-tabs{display:flex;gap:6px;}
 .gnb-tab{padding:11px 16px;font-size:15px;font-weight:600;color:var(--dim);border-radius:8px;cursor:pointer;border:none;background:none;font-family:var(--fb);transition:all 0.15s;}
 .gnb-tab:hover{color:var(--text);background:var(--bg-section);}
@@ -114,7 +117,7 @@ body{min-height:100vh;background:var(--bg-section);margin:0;}
 
 /* About page */
 .about-hero{text-align:center;padding:20px 0 32px;}
-.about-hero h1{font-size:46px;font-weight:900;letter-spacing:-0.035em;margin-bottom:10px;color:var(--text);}
+.about-hero h1{font-size:46px;font-weight:900;letter-spacing:-0.035em;margin-bottom:10px;color:var(--text);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
 .about-hero h1 span{color:var(--accent);}
 .about-hero .ah-sub{font-size:18px;color:var(--muted);line-height:1.65;max-width:600px;margin:0 auto;}
 .about-section{margin-bottom:32px;}
@@ -175,7 +178,7 @@ body{min-height:100vh;background:var(--bg-section);margin:0;}
 
 <!-- GNB -->
 <nav class="gnb">
-  <a class="gnb-logo" href="/">graphy<span class="st">style</span> 커뮤니티</a>
+  <a class="gnb-logo" href="/" aria-label="GraphyStyle 홈"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gnb-logo-img"> 커뮤니티</a>
   <div class="gnb-tabs">
     <button class="gnb-tab active" onclick="showPage('about')">소개</button>
     <button class="gnb-tab" onclick="showPage('ideas')">아이디어</button>
@@ -210,7 +213,7 @@ body{min-height:100vh;background:var(--bg-section);margin:0;}
 <!-- ===== ABOUT ===== -->
 <div class="page active" id="page-about">
   <div class="about-hero">
-    <h1>graphy<span>style</span> 커뮤니티</h1>
+    <h1><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="hero-logo-img"> 커뮤니티</h1>
     <div class="ah-sub">원장님과 함께 만드는 3D 프린팅 개인 맞춤 구강 케어</div>
   </div>
 

@@ -1,7 +1,7 @@
 {
-  "name": "Point Shower — 운영 플랫폼",
-  "short_name": "Point Shower",
-  "description": "맞춤형 구강 케어 트레이의 디자인부터 생산·정산까지 통합 운영 플랫폼",
+  "name": "GraphyStyle — 개인 맞춤 구강 케어",
+  "short_name": "GraphyStyle",
+  "description": "3D 프린팅으로 만드는 개인 맞춤 구강 케어. 현장 원장님과 함께 만드는 공유 플랫폼.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -9,8 +9,9 @@
   "theme_color": "#ff6b2b",
   "lang": "ko",
   "icons": [
-    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }
