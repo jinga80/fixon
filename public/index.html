@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>graphystyle — 맞춤형 구강 케어 운영 플랫폼</title>
+<title>GraphyStyle — 개인 맞춤 구강 케어 · 창립 멤버 모집</title>
+
 <!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="graphystyle">
+<meta property="og:site_name" content="GraphyStyle">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="graphystyle — 맞춤형 구강 케어 운영 플랫폼">
-<meta property="og:description" content="환자 맞춤 구강 케어 트레이의 디자인부터 생산·정산까지. 의료진은 환자에 집중하고, 운영은 시스템이 책임집니다.">
+<meta property="og:title" content="환자 맞춤 구강 케어, 원장님과 함께 — GraphyStyle 창립 멤버 모집">
+<meta property="og:description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. 1분 등록으로 출시·사전예약 소식을 가장 먼저 받고, 다음 디바이스 개발에 함께하세요.">
 <meta property="og:image" content="https://graphystyle.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="graphystyle — 맞춤형 구강 케어 운영 플랫폼">
+<meta property="og:image:alt" content="GraphyStyle — 3D 프린팅 개인 맞춤 구강 케어">
 <meta property="og:url" content="https://graphystyle.com/">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="graphystyle — 맞춤형 구강 케어 운영 플랫폼">
-<meta name="twitter:description" content="환자 맞춤 구강 케어 트레이의 디자인부터 생산·정산까지. 의료진은 환자에 집중하고, 운영은 시스템이 책임집니다.">
+<meta name="twitter:title" content="환자 맞춤 구강 케어, 원장님과 함께 — GraphyStyle 창립 멤버 모집">
+<meta name="twitter:description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. 1분 등록으로 함께하세요.">
 <meta name="twitter:image" content="https://graphystyle.com/og-image.png">
 
 <!-- ===== Favicon / PWA ===== -->
@@ -30,1251 +31,475 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#ff6b2b">
-<meta name="apple-mobile-web-app-title" content="graphystyle">
-<meta name="application-name" content="graphystyle">
+<meta name="apple-mobile-web-app-title" content="GraphyStyle">
+<meta name="application-name" content="GraphyStyle">
 
 <!-- ===== SEO ===== -->
-<meta name="description" content="환자 맞춤 구강 케어 트레이의 디자인부터 생산·정산까지. 의료진은 환자에 집중하고, 운영은 시스템이 책임집니다.">
-<meta name="author" content="graphystyle">
+<meta name="description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. SIDEX 2026 현장 창립 멤버 모집 — 1분 등록.">
+<meta name="author" content="GraphyStyle">
 <link rel="canonical" href="https://graphystyle.com/">
-
-<meta name="description" content="환자 맞춤 구강 케어 트레이의 디자인부터 생산·배송까지 — 모든 운영을 하나의 플랫폼에서.">
 
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-
 :root{
-  /* === Surfaces === */
-  --bg:#ffffff;
-  --bg-section:#f7f8fa;
-  --bg-elevated:#ffffff;
-  --bg-soft:#fafbfc;
-
-  /* === Text === */
-  --text:#0f172a;
-  --text-secondary:#475569;
-  --text-tertiary:#64748b;
-  --text-muted:#94a3b8;
-
-  /* === Border === */
-  --border:#e5e7eb;
-  --border-strong:#d1d5db;
-  --border-subtle:#f1f5f9;
-
-  /* === Brand === */
-  --brand:#ff6b2b;
-  --brand-deep:#c84a14;
-  --brand-soft:#fff4ee;
-  --brand-tint:#fef0e6;
-
-  /* === Semantic === */
-  --info:#2563eb;
-  --info-soft:#eff6ff;
-  --success:#059669;
-  --success-soft:#ecfdf5;
-  --warning:#d97706;
-  --warning-soft:#fffbeb;
-  --danger:#dc2626;
-  --danger-soft:#fef2f2;
-
-  /* === Type === */
+  --bg:#ffffff;--bg-section:#f7f8fa;--bg-soft:#fafbfc;
+  --text:#0f172a;--text-secondary:#475569;--text-tertiary:#64748b;--text-muted:#94a3b8;
+  --border:#e5e7eb;--border-strong:#d1d5db;--border-subtle:#f1f5f9;
+  --brand:#ff6b2b;--brand-deep:#c84a14;--brand-soft:#fff4ee;--brand-tint:#fef0e6;
+  --success:#059669;--success-soft:#ecfdf5;
   --font-sans:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Inter','Noto Sans KR',sans-serif;
   --font-mono:'JetBrains Mono','D2Coding','SF Mono',ui-monospace,monospace;
-
-  /* === Shadows === */
-  --shadow-sm:0 1px 2px 0 rgba(15,23,42,0.04);
-  --shadow:0 1px 3px 0 rgba(15,23,42,0.06),0 1px 2px -1px rgba(15,23,42,0.06);
-  --shadow-md:0 4px 6px -1px rgba(15,23,42,0.06),0 2px 4px -2px rgba(15,23,42,0.04);
-  --shadow-lg:0 10px 25px -5px rgba(15,23,42,0.08),0 4px 10px -3px rgba(15,23,42,0.04);
-  --shadow-xl:0 20px 40px -10px rgba(15,23,42,0.12);
-
-  /* === Radius === */
-  --r-sm:6px;
-  --r:8px;
-  --r-md:10px;
-  --r-lg:14px;
-  --r-xl:18px;
-  --r-2xl:24px;
+  --shadow-sm:0 1px 2px 0 rgba(15,23,42,.04);
+  --shadow:0 1px 3px 0 rgba(15,23,42,.06),0 1px 2px -1px rgba(15,23,42,.06);
+  --shadow-md:0 4px 6px -1px rgba(15,23,42,.06),0 2px 4px -2px rgba(15,23,42,.04);
+  --shadow-lg:0 10px 25px -5px rgba(15,23,42,.08),0 4px 10px -3px rgba(15,23,42,.04);
+  --shadow-xl:0 20px 40px -10px rgba(15,23,42,.12);
+  --r:8px;--r-md:10px;--r-lg:14px;--r-xl:18px;--r-2xl:24px;
 }
-
-html,body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-sans);
-  font-size:18px;
-  line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  font-feature-settings:"ss01","ss03";
-  letter-spacing:-0.01em;
-}
+html{scroll-behavior:smooth;}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-0.01em;}
 a{color:inherit;text-decoration:none;}
 img,svg{display:block;max-width:100%;}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
-
+button,input{font-family:inherit;}
+button{cursor:pointer;border:none;background:none;color:inherit;}
 ::selection{background:var(--brand-soft);color:var(--brand-deep);}
 
-/* ============================================================
-   HEADER — sticky, white, generous padding
-   ============================================================ */
-.header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:saturate(180%) blur(12px);
-  border-bottom:1px solid var(--border-subtle);
-}
-.header-inner{
-  max-width:1280px;margin:0 auto;padding:18px 32px;
-  display:flex;align-items:center;justify-content:space-between;gap:32px;
-}
-.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px;letter-spacing:-0.02em;}
-.logo-mark{
-  width:38px;height:38px;border-radius:9px;
-  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-deep) 100%);
-  display:grid;place-items:center;color:#fff;font-weight:900;font-size:17px;
-  letter-spacing:-0.05em;
-}
-.logo-text{color:var(--text);}
-.logo-text span{color:var(--brand);}
-/* GraphyStyle 워드마크 로고 */
-.gs-logo{height:30px;width:auto;display:block;}
-.hero-head .gs-logo{height:auto;width:min(460px,76vw);margin:0 auto;}
-.a4-logo{height:10mm;width:auto;display:block;}
-.a4-foot-logo{height:5.5mm;width:auto;display:block;}
-@media(max-width:600px){.gs-logo{height:26px;}}
-
-.nav{display:flex;gap:4px;}
-.nav a{
-  padding:10px 16px;font-size:17px;color:var(--text-secondary);font-weight:500;
-  border-radius:var(--r);transition:all 0.15s;
-}
-.nav a:hover{color:var(--text);background:var(--bg-section);}
-@media(max-width:880px){.nav{display:none;}}
-
+/* ===== HEADER ===== */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border-subtle);}
+.header-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.gs-logo{height:28px;width:auto;display:block;}
 .header-cta{display:flex;align-items:center;gap:10px;}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 20px;border-radius:var(--r);
-  font-size:16px;font-weight:600;letter-spacing:-0.01em;
-  transition:all 0.15s;cursor:pointer;border:1px solid transparent;
-}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--r);font-size:16px;font-weight:700;letter-spacing:-0.01em;transition:all .15s;cursor:pointer;border:1px solid transparent;white-space:nowrap;}
 .btn-primary{background:var(--brand);color:#fff;}
-.btn-primary:hover{background:var(--brand-deep);box-shadow:0 6px 16px -4px rgba(255,107,43,0.45);}
+.btn-primary:hover{background:var(--brand-deep);box-shadow:0 6px 16px -4px rgba(255,107,43,.45);}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border);}
 .btn-ghost:hover{background:var(--bg-section);border-color:var(--border-strong);}
-.btn-lg{padding:16px 30px;font-size:18px;border-radius:var(--r-md);}
+.btn-lg{padding:16px 28px;font-size:17px;border-radius:var(--r-md);}
+.btn:disabled{opacity:.6;cursor:progress;}
 
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{
-  position:relative;overflow:hidden;
-  padding:88px 0 96px;
-  background:linear-gradient(180deg,#fff 0%,var(--bg-section) 100%);
-}
-.hero::before{
-  content:'';position:absolute;top:-200px;right:-200px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,107,43,0.10),transparent 70%);
-  pointer-events:none;
-}
-.hero-inner{
-  max-width:1280px;margin:0 auto;padding:0 32px;
-  display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;
-  position:relative;
-}
-@media(max-width:980px){.hero-inner{grid-template-columns:1fr;gap:48px;}}
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--bg-section) 100%);padding:72px 0 80px;}
+.hero::before{content:'';position:absolute;top:-220px;right:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.12),transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-200px;left:-180px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.06),transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;max-width:760px;margin:0 auto;padding:0 24px;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:#fff;border:1px solid var(--brand-tint);color:var(--brand-deep);font-size:14px;font-weight:700;box-shadow:var(--shadow-sm);margin-bottom:26px;}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.18);}
+.hero h1{font-size:clamp(34px,6.4vw,58px);font-weight:900;line-height:1.16;letter-spacing:-0.04em;color:var(--text);margin-bottom:22px;}
+.hero h1 em{font-style:normal;color:var(--brand);position:relative;white-space:nowrap;}
+.hero h1 em::after{content:'';position:absolute;left:-2px;right:-2px;bottom:6px;height:11px;background:var(--brand-tint);z-index:-1;border-radius:4px;}
+.hero-sub{font-size:clamp(16px,2.3vw,19px);line-height:1.72;color:var(--text-secondary);max-width:600px;margin:0 auto 34px;}
+.hero-sub b{color:var(--text);font-weight:800;}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:34px;}
+.hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:100px;background:#fff;border:1px solid var(--border);font-size:13.5px;font-weight:600;color:var(--text-secondary);box-shadow:var(--shadow-sm);}
+.chip svg{width:15px;height:15px;color:var(--brand);}
 
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 16px;border-radius:100px;
-  background:var(--brand-soft);color:var(--brand-deep);
-  font-size:15px;font-weight:600;
-  margin-bottom:28px;
-}
-.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);}
+/* ===== SECTION BASE ===== */
+.sec{padding:76px 0;}
+.sec.alt{background:var(--bg-section);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.sec-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+.eyebrow{display:inline-block;font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:12px;}
+.sec-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.035em;line-height:1.25;color:var(--text);margin-bottom:14px;}
+.sec-desc{font-size:17px;line-height:1.7;color:var(--text-secondary);}
 
-.hero h1{
-  font-size:clamp(44px,5.4vw,72px);font-weight:800;
-  line-height:1.15;letter-spacing:-0.035em;
-  color:var(--text);margin-bottom:28px;
-}
-.hero h1 em{font-style:normal;color:var(--brand);position:relative;}
-.hero h1 em::after{
-  content:'';position:absolute;left:0;right:0;bottom:8px;height:10px;
-  background:var(--brand-tint);z-index:-1;border-radius:4px;
-}
+/* ===== PILLARS (about) ===== */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.pillar{background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:30px 26px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s;}
+.pillar:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.pillar .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
+.pillar .ic svg{width:28px;height:28px;color:var(--brand);}
+.pillar h3{font-size:19px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px;}
+.pillar p{font-size:15px;line-height:1.6;color:var(--text-tertiary);}
 
-.hero-sub{
-  font-size:22px;line-height:1.7;color:var(--text-secondary);
-  max-width:620px;margin-bottom:40px;
-}
+/* ===== PRODUCTS ===== */
+.products{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.product{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:32px;box-shadow:var(--shadow-sm);overflow:hidden;}
+.product::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand-deep));}
+.product .badge{position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 11px;border-radius:100px;}
+.product .badge.done{background:var(--success-soft);color:var(--success);}
+.product .badge.dev{background:var(--brand-soft);color:var(--brand-deep);}
+.product .ic{width:60px;height:60px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);margin-bottom:22px;}
+.product .ic svg{width:30px;height:30px;color:var(--brand);}
+.product h3{font-size:23px;font-weight:800;letter-spacing:-0.025em;margin-bottom:10px;}
+.product p{font-size:15.5px;line-height:1.65;color:var(--text-secondary);}
 
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;}
+/* ===== WIN-WIN ===== */
+.winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:40px;}
+.winwin-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.ww{display:flex;gap:16px;align-items:flex-start;}
+.ww .ic{flex:none;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.08);}
+.ww .ic svg{width:26px;height:26px;color:var(--brand);}
+.ww b{display:block;font-size:17px;font-weight:800;color:var(--brand-deep);margin-bottom:6px;}
+.ww p{font-size:15px;line-height:1.6;color:var(--text-secondary);}
 
-.hero-trust{
-  display:flex;gap:24px;flex-wrap:wrap;
-  padding-top:28px;border-top:1px solid var(--border);
-}
-.trust-item{display:flex;align-items:center;gap:10px;}
-.trust-item .ico{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--bg-section);display:grid;place-items:center;
-  color:var(--brand);font-size:16px;
-}
-.trust-item .lbl{font-size:15px;color:var(--text-tertiary);font-weight:500;}
-.trust-item .val{font-size:16px;color:var(--text);font-weight:700;}
+/* ===== WHY / 혜택 ===== */
+.perks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.perk{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:24px;box-shadow:var(--shadow-sm);}
+.perk .n{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--brand);color:#fff;font-weight:900;font-size:17px;}
+.perk h4{font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-bottom:5px;}
+.perk p{font-size:14.5px;line-height:1.6;color:var(--text-tertiary);}
 
-/* Hero visual — clean, polished, no floating elements */
-.hero-visual{
-  position:relative;aspect-ratio:1;max-width:520px;margin:0 auto;
-}
-.hero-frame{
-  position:absolute;inset:0;border-radius:var(--r-2xl);
-  background:
-    radial-gradient(ellipse at 30% 20%,rgba(255,107,43,0.12),transparent 55%),
-    linear-gradient(140deg,#fff 0%,#fff7f0 60%,#ffe7d3 100%);
-  box-shadow:var(--shadow-xl);
-  overflow:hidden;
-  border:1px solid var(--border-subtle);
-}
-.hero-orb{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#fff,#ffd9bf 60%,#ff9d6a 100%);
-  filter:blur(0.4px);
-}
-.hero-orb-1{top:14%;left:10%;width:42%;height:42%;opacity:0.55;animation:orb-drift-1 14s ease-in-out infinite;}
-.hero-orb-2{bottom:14%;right:14%;width:28%;height:28%;opacity:0.45;animation:orb-drift-2 11s ease-in-out infinite;}
-@keyframes orb-drift-1{0%,100%{transform:translate(0,0);}50%{transform:translate(8px,-12px);}}
-@keyframes orb-drift-2{0%,100%{transform:translate(0,0);}50%{transform:translate(-10px,8px);}}
-.hero-tooth{
-  position:absolute;inset:0;display:grid;place-items:center;
-  font-size:200px;line-height:1;
-  filter:drop-shadow(0 20px 40px rgba(200,74,20,0.25));
-  animation:gentle-float 6s ease-in-out infinite;
-  z-index:2;
-}
-@keyframes gentle-float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-.hero-meta{
-  position:absolute;left:24px;right:24px;bottom:24px;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--border-subtle);
-  border-radius:14px;
-  padding:14px 18px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;
-  z-index:3;
-}
-.hero-meta .item{display:flex;align-items:center;gap:10px;min-width:0;}
-.hero-meta .ico{
-  width:34px;height:34px;border-radius:9px;flex-shrink:0;
-  display:grid;place-items:center;font-size:15px;font-weight:700;
-}
-.hero-meta .item.ok .ico{background:var(--success-soft);color:var(--success);}
-.hero-meta .item.box .ico{background:var(--info-soft);color:var(--info);}
-.hero-meta .text{font-size:13.5px;font-weight:700;color:var(--text);white-space:nowrap;}
-.hero-meta .meta{font-size:12px;color:var(--text-tertiary);white-space:nowrap;}
-.hero-meta .divider{width:1px;height:28px;background:var(--border);}
-@media(max-width:560px){
-  .hero-meta{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 14px;}
-  .hero-meta .divider{display:none;}
-}
+/* ===== JOIN (form) ===== */
+.join{background:linear-gradient(180deg,#16203a,#0f172a);color:#fff;}
+.join .sec-inner{max-width:680px;}
+.join .eyebrow{color:#ffb38a;}
+.join .sec-title{color:#fff;}
+.join .sec-desc{color:#cbd5e1;}
+.formcard{background:#fff;color:var(--text);border-radius:var(--r-2xl);padding:34px;box-shadow:var(--shadow-xl);margin-top:8px;}
+.field{margin-bottom:18px;}
+.field>label{display:block;font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:9px;}
+.req{color:var(--brand);}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.choice{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer;transition:all .14s;background:#fff;}
+.choice:hover{border-color:var(--brand);background:var(--brand-soft);}
+.choice input{width:18px;height:18px;accent-color:var(--brand);flex:none;}
+.choice .t{font-size:15px;font-weight:700;display:block;}
+.choice .d{font-size:12.5px;color:var(--text-tertiary);}
+.choice:has(input:checked){border-color:var(--brand);background:var(--brand-soft);box-shadow:0 0 0 3px rgba(255,107,43,.12);}
+.optin{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer;background:var(--bg-soft);}
+.optin input{width:18px;height:18px;accent-color:var(--brand);flex:none;margin-top:2px;}
+.optin span{font-size:14px;line-height:1.55;color:var(--text-secondary);}
+.optin b{color:var(--text);}
+.field input[type=text],.field input[type=tel],.field input[type=email]{width:100%;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 15px;font-size:16px;color:var(--text);transition:border-color .14s,box-shadow .14s;background:#fff;}
+.field input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(255,107,43,.14);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+.submit{width:100%;background:var(--brand);color:#fff;font-size:18px;font-weight:800;padding:17px;border-radius:var(--r-md);margin-top:8px;transition:all .15s;}
+.submit:hover{background:var(--brand-deep);box-shadow:0 10px 24px -8px rgba(255,107,43,.6);}
+.submit:disabled{opacity:.6;cursor:progress;}
+.formnote{font-size:12.5px;color:var(--text-muted);text-align:center;margin-top:14px;line-height:1.5;}
+.done{display:none;background:#fff;color:var(--text);border-radius:var(--r-2xl);padding:44px 34px;text-align:center;box-shadow:var(--shadow-xl);margin-top:8px;}
+.done.show{display:block;}
+.done .ic{width:64px;height:64px;border-radius:50%;background:var(--success-soft);color:var(--success);display:grid;place-items:center;font-size:32px;font-weight:900;margin:0 auto 18px;}
+.done h3{font-size:24px;font-weight:800;margin-bottom:10px;}
+.done p{font-size:15.5px;color:var(--text-secondary);line-height:1.65;max-width:460px;margin:0 auto 22px;}
+.done-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 
-/* ============================================================
-   STATS
-   ============================================================ */
-.stats{
-  background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-}
-.stats-inner{
-  max-width:1280px;margin:0 auto;padding:32px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
-}
-@media(max-width:780px){.stats-inner{grid-template-columns:1fr 1fr;}}
-.stat .num{
-  font-size:48px;font-weight:800;letter-spacing:-0.03em;
-  color:var(--text);font-feature-settings:"tnum";
-  line-height:1;
-}
-.stat .num .unit{font-size:22px;color:var(--text-tertiary);font-weight:600;margin-left:3px;}
-.stat .lbl{font-size:16px;color:var(--text-tertiary);margin-top:10px;font-weight:500;}
+/* ===== SECONDARY (더보기) ===== */
+.more{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.more-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s,border-color .18s;}
+.more-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--brand);}
+.more-card .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:var(--brand-soft);margin-bottom:16px;}
+.more-card .ic svg{width:23px;height:23px;color:var(--brand);}
+.more-card h4{font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;}
+.more-card p{font-size:14px;line-height:1.55;color:var(--text-tertiary);flex:1;margin-bottom:14px;}
+.more-card .go{font-size:14.5px;font-weight:700;color:var(--brand);display:inline-flex;align-items:center;gap:6px;}
+.more-card .go span{transition:transform .16s;}
+.more-card:hover .go span{transform:translateX(5px);}
 
-/* ============================================================
-   SECTION SHELL
-   ============================================================ */
-.section{padding:96px 0;}
-.section.alt{background:var(--bg-section);}
-.section-inner{max-width:1280px;margin:0 auto;padding:0 32px;}
+/* ===== FOOTER ===== */
+.footer{background:#fff;border-top:1px solid var(--border);padding:48px 0 40px;}
+.footer-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap;margin-bottom:28px;}
+.footer .gs-logo{height:28px;}
+.footer-top p{font-size:14.5px;color:var(--text-tertiary);margin-top:14px;max-width:340px;line-height:1.6;}
+.footer-links{display:flex;gap:26px;flex-wrap:wrap;}
+.footer-links a{font-size:14.5px;color:var(--text-secondary);font-weight:600;}
+.footer-links a:hover{color:var(--brand);}
+.footer-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--border-subtle);font-size:13px;color:var(--text-muted);}
 
-.section-header{margin-bottom:48px;max-width:680px;}
-.section-eyebrow{
-  display:inline-block;font-size:15px;font-weight:700;letter-spacing:0.08em;
-  color:var(--brand);text-transform:uppercase;margin-bottom:18px;
-}
-.section-title{
-  font-size:clamp(34px,3.8vw,48px);font-weight:800;
-  line-height:1.25;letter-spacing:-0.025em;
-  color:var(--text);margin-bottom:18px;
-}
-.section-desc{font-size:20px;line-height:1.7;color:var(--text-secondary);}
+/* ===== STICKY MOBILE CTA ===== */
+.mobile-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(15,23,42,.08);}
+.mobile-cta .btn{width:100%;font-size:17px;padding:15px;}
 
-/* ============================================================
-   SERVICE CARD GRID
-   ============================================================ */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-@media(max-width:980px){.cards{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.cards{grid-template-columns:1fr;}}
-
-.card{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
-  padding:32px 28px;display:block;
-  transition:all 0.2s ease;
-  position:relative;overflow:hidden;
+/* ===== RESPONSIVE ===== */
+@media(max-width:820px){
+  .more{grid-template-columns:1fr;}
 }
-.card:hover{
-  border-color:var(--border-strong);
-  box-shadow:var(--shadow-lg);
-  transform:translateY(-2px);
-}
-.card:hover .card-arrow{color:var(--brand);transform:translate(4px,-4px);}
-
-.card-icon{
-  width:60px;height:60px;border-radius:14px;
-  background:var(--brand-soft);color:var(--brand);
-  display:grid;place-items:center;font-size:28px;
-  margin-bottom:22px;
-}
-.card-icon.blue{background:var(--info-soft);color:var(--info);}
-.card-icon.green{background:var(--success-soft);color:var(--success);}
-.card-icon.amber{background:var(--warning-soft);color:var(--warning);}
-.card-icon.violet{background:#f5f3ff;color:#7c3aed;}
-.card-icon.pink{background:#fdf2f8;color:#be185d;}
-
-.card h3{
-  font-size:24px;font-weight:700;letter-spacing:-0.02em;
-  color:var(--text);margin-bottom:12px;
-}
-.card p{
-  font-size:17px;line-height:1.7;color:var(--text-secondary);
-  margin-bottom:22px;
-}
-
-.card-meta{
-  display:flex;gap:8px;flex-wrap:wrap;
-  margin-top:auto;padding-top:18px;border-top:1px solid var(--border-subtle);
-}
-.tag{
-  display:inline-flex;align-items:center;
-  padding:5px 12px;border-radius:100px;
-  font-size:14px;font-weight:600;
-  background:var(--bg-section);color:var(--text-tertiary);
-}
-.tag.brand{background:var(--brand-soft);color:var(--brand-deep);}
-
-.card-arrow{
-  position:absolute;top:32px;right:28px;
-  font-size:26px;font-weight:300;color:var(--text-muted);
-  transition:all 0.2s;
-}
-
-.card.featured{
-  background:linear-gradient(160deg,#fff 0%,#fff8f3 100%);
-  border-color:#ffd9bf;
-}
-
-/* ============================================================
-   PROCESS / FLOW
-   ============================================================ */
-.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
-@media(max-width:880px){.flow{grid-template-columns:1fr 1fr;gap:24px;}}
-@media(max-width:520px){.flow{grid-template-columns:1fr;}}
-
-.flow-step{position:relative;padding:0 24px;}
-.flow-step:not(:last-child)::after{
-  content:'';position:absolute;top:24px;right:-12px;
-  width:24px;height:1px;background:var(--border-strong);
-}
-@media(max-width:880px){.flow-step::after{display:none;}}
-
-.flow-num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:56px;height:56px;border-radius:50%;
-  background:#fff;border:1.5px solid var(--brand);
-  color:var(--brand);font-weight:800;font-size:22px;
-  letter-spacing:-0.02em;margin-bottom:20px;
-  font-feature-settings:"tnum";
-}
-.flow-step h4{
-  font-size:22px;font-weight:700;letter-spacing:-0.02em;
-  color:var(--text);margin-bottom:10px;
-}
-.flow-step p{font-size:16px;color:var(--text-secondary);line-height:1.65;}
-
-/* ============================================================
-   QUICK ACCESS LIST (sub-pages)
-   ============================================================ */
-.quick-list{
-  background:#fff;border:1px solid var(--border);
-  border-radius:var(--r-lg);overflow:hidden;
-}
-.quick-row{
-  display:grid;grid-template-columns:48px 1fr auto 24px;gap:16px;
-  align-items:center;padding:18px 24px;
-  border-bottom:1px solid var(--border-subtle);
-  transition:background 0.15s;
-}
-.quick-row:last-child{border-bottom:none;}
-.quick-row:hover{background:var(--bg-soft);}
-.quick-row .ico{
-  width:48px;height:48px;border-radius:11px;
-  background:var(--bg-section);
-  display:grid;place-items:center;font-size:21px;
-}
-.quick-row .info h5{
-  font-size:17px;font-weight:600;color:var(--text);
-  margin-bottom:3px;letter-spacing:-0.01em;
-}
-.quick-row .info p{font-size:15px;color:var(--text-tertiary);}
-.quick-row .badge{
-  font-family:var(--font-mono);font-size:13px;
-  padding:5px 12px;border-radius:6px;
-  background:var(--bg-section);color:var(--text-tertiary);
-}
-.quick-row .arrow{color:var(--text-muted);font-size:20px;transition:all 0.15s;}
-.quick-row:hover .arrow{color:var(--brand);transform:translateX(2px);}
-
-/* ============================================================
-   DOCUMENT TABLE
-   ============================================================ */
-.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-@media(max-width:760px){.doc-grid{grid-template-columns:1fr;}}
-.doc{
-  display:flex;align-items:center;gap:14px;
-  padding:16px 18px;background:#fff;
-  border:1px solid var(--border);border-radius:var(--r);
-  transition:all 0.15s;
-}
-.doc:hover{border-color:var(--brand);box-shadow:var(--shadow-sm);}
-.doc-ico{
-  width:36px;height:36px;border-radius:8px;
-  background:var(--brand-soft);color:var(--brand);
-  display:grid;place-items:center;font-size:16px;flex-shrink:0;
-}
-.doc-info{flex:1;min-width:0;}
-.doc-info h5{
-  font-size:16px;font-weight:600;color:var(--text);
-  font-family:var(--font-mono);margin-bottom:3px;
-}
-.doc-info p{font-size:14px;color:var(--text-tertiary);line-height:1.55;}
-.doc-size{
-  font-family:var(--font-mono);font-size:13px;
-  color:var(--text-muted);flex-shrink:0;
-}
-
-/* ============================================================
-   SYSTEM STATUS BAR
-   ============================================================ */
-.status-bar{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);
-  padding:18px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;
-  margin-bottom:32px;box-shadow:var(--shadow-sm);
-}
-.status-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 14px;border-radius:100px;
-  font-size:15px;font-weight:500;color:var(--text-secondary);
-  background:var(--bg-section);
-}
-.status-pill .dot{
-  width:6px;height:6px;border-radius:50%;background:var(--success);
-  box-shadow:0 0 0 3px var(--success-soft);
-}
-.status-pill.warn .dot{background:var(--warning);box-shadow:0 0 0 3px var(--warning-soft);}
-.status-pill.idle .dot{background:var(--text-muted);box-shadow:none;}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer{
-  background:#0f172a;color:#cbd5e1;
-  padding:72px 0 36px;font-size:16px;
-}
-.footer-inner{max-width:1280px;margin:0 auto;padding:0 32px;}
-.footer-grid{
-  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;
-  padding-bottom:48px;border-bottom:1px solid #1e293b;
-}
-@media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
-.footer h6{
-  font-size:15px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
-  color:#fff;margin-bottom:18px;
-}
-.footer ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
-.footer ul a{color:#94a3b8;font-size:16px;transition:color 0.15s;}
-.footer ul a:hover{color:#fff;}
-.footer .brand-block .logo-text{color:#fff;}
-.footer .brand-block p{margin-top:16px;font-size:16px;line-height:1.7;color:#94a3b8;max-width:340px;}
-.footer-bottom{
-  padding-top:24px;display:flex;justify-content:space-between;
-  font-size:14px;color:#64748b;flex-wrap:wrap;gap:12px;
-}
-
-/* ============================================================
-   FILE PROTOCOL WARNING
-   ============================================================ */
-.proto-warn{
-  display:none;background:var(--warning-soft);
-  border:1px solid #fde68a;color:#92400e;
-  padding:14px 20px;border-radius:var(--r-md);
-  margin-bottom:24px;font-size:14px;
-}
-.proto-warn code{
-  background:#fff;padding:2px 8px;border-radius:4px;
-  font-family:var(--font-mono);font-size:12px;color:#9a3412;
-}
-.proto-warn a{color:#9a3412;font-weight:600;text-decoration:underline;}
-
-/* === Focused launch landing (발표용 메인) === */
-.hero-inner.hero-focused{display:block;text-align:center;max-width:1080px;}
-.hero-head{max-width:780px;margin:0 auto 56px;}
-.hero-focused .hero-badge{margin-bottom:24px;}
-.hero-focused h1{font-size:clamp(52px,7.5vw,104px);margin-bottom:20px;letter-spacing:-0.045em;}
-.hero-focused .hero-sub{font-size:20px;color:var(--text-secondary);margin:0 auto;}
-.launch-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;text-align:left;}
-@media(max-width:820px){.launch-grid{grid-template-columns:1fr;}}
-.launch-card{
-  display:flex;flex-direction:column;align-items:flex-start;
-  padding:40px;border-radius:var(--r-2xl);background:var(--bg-elevated);
-  border:1px solid var(--border);box-shadow:var(--shadow-lg);
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
-  position:relative;overflow:hidden;
-}
-.launch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand-deep));}
-.launch-card.violet::before{background:linear-gradient(90deg,#7c3aed,#5b21b6);}
-.launch-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl);border-color:var(--brand);}
-.launch-card.violet:hover{border-color:#7c3aed;}
-.launch-ico{width:74px;height:74px;border-radius:18px;display:grid;place-items:center;font-size:36px;background:var(--brand-soft);margin-bottom:26px;}
-.launch-card.violet .launch-ico{background:#f5f3ff;}
-.launch-eyebrow{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand);margin-bottom:10px;}
-.launch-card.violet .launch-eyebrow{color:#7c3aed;}
-.launch-card h3{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;color:var(--text);}
-.launch-card p{font-size:16px;line-height:1.65;color:var(--text-secondary);margin-bottom:30px;}
-.launch-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--brand);}
-.launch-card.violet .launch-go{color:#7c3aed;}
-.launch-go span{transition:transform .18s ease;}
-.launch-card:hover .launch-go span{transform:translateX(6px);}
-
-/* ============================================================
-   UTILS & RESPONSIVE
-   ============================================================ */
-@media(max-width:760px){
-  .header-inner{padding:16px 20px;}
-  .hero{padding:64px 0 72px;}
-  .hero-inner{padding:0 20px;}
-  .stats-inner{padding:24px 20px;}
-  .section{padding:64px 0;}
-  .section-inner{padding:0 20px;}
-  .footer-inner{padding:0 20px;}
-  .hero-tooth{font-size:140px;}
-  .hero-meta{padding:10px 14px;}
-  .hero-meta .text{font-size:12.5px;}
-  .hero-meta .meta{font-size:11px;}
-}
-
-/* === 발표용 랜딩: 푸터 2단(기존 4단 기본값 덮어쓰기) === */
-.footer .footer-grid{grid-template-columns:1.7fr 1fr;gap:32px;}
-
-/* === 모바일 최적화 (포커스 랜딩) === */
-@media(max-width:600px){
-  .header-cta{gap:8px;}
-  .header-cta .btn-ghost{display:none;}        /* 모바일 헤더는 주 CTA만 (커뮤니티는 카드로 노출) */
+@media(max-width:680px){
+  body{font-size:16px;}
+  .sec{padding:54px 0;}
+  .hero{padding:48px 0 56px;}
+  .pillars{grid-template-columns:1fr;gap:12px;}
+  .products{grid-template-columns:1fr;}
+  .winwin{padding:26px 22px;}
+  .winwin-grid{grid-template-columns:1fr;gap:22px;}
+  .perks{grid-template-columns:1fr;}
+  .choices{grid-template-columns:1fr;}
+  .grid2{grid-template-columns:1fr;}
+  .formcard{padding:24px 20px;}
   .header-cta .btn{padding:10px 16px;font-size:15px;}
-  .logo{font-size:20px;}
-  .hero{padding:44px 0 52px;}
-  .hero-head{margin-bottom:34px;}
-  .hero-focused .hero-badge{font-size:13px;margin-bottom:18px;}
-  .hero-focused h1{font-size:clamp(40px,11vw,72px);margin-bottom:16px;}
-  .hero-focused .hero-sub{font-size:16px;line-height:1.6;}
-  .launch-grid{gap:18px;}
-  .launch-card{padding:26px 24px;border-radius:var(--r-xl);}
-  .launch-ico{width:58px;height:58px;font-size:29px;margin-bottom:18px;border-radius:15px;}
-  .launch-card h3{font-size:22px;}
-  .launch-card p{font-size:15px;margin-bottom:22px;}
-  .launch-go{font-size:16px;}
-  .footer .footer-grid{grid-template-columns:1fr;gap:26px;}
-  .footer-bottom{flex-direction:column;gap:8px;align-items:flex-start;}
-}
-
-/* ============================================================
-   부스 배포용 A4 인쇄물 (커뮤니티 전환 퍼널)
-   ============================================================ */
-.handout-section{background:var(--bg-section);padding:72px 0 80px;border-top:1px solid var(--border);overflow-x:hidden;}
-.handout-wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
-.handout-head{text-align:center;max-width:660px;margin:0 auto 26px;}
-.handout-head .eyebrow2{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand);text-transform:uppercase;}
-.handout-head h2{font-size:32px;font-weight:800;letter-spacing:-0.03em;margin:10px 0 8px;color:var(--text);}
-.handout-head p{font-size:16px;color:var(--text-secondary);line-height:1.6;}
-.handout-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
-.handout-preview{display:flex;justify-content:center;}
-.a4-scaler{position:relative;width:100%;overflow:hidden;}
-
-/* === A4 sheet (210 x 297 mm) === */
-.a4-sheet{
-  width:210mm;height:297mm;margin:0 auto;
-  background:#fff;color:#0f172a;overflow:hidden;position:relative;
-  transform-origin:top center;
-  box-shadow:0 24px 70px rgba(15,23,42,.22);
-  font-family:var(--font-sans);line-height:1.5;
-  -webkit-print-color-adjust:exact;print-color-adjust:exact;
-}
-.a4-sheet::before{content:'';position:absolute;top:-110px;right:-110px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.13),transparent 70%);pointer-events:none;}
-.a4-sheet::after{content:'';position:absolute;bottom:-120px;left:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.06),transparent 70%);pointer-events:none;}
-.a4-pad{position:relative;z-index:1;padding:15mm 15mm 13mm;height:100%;display:flex;flex-direction:column;box-sizing:border-box;}
-.a4-brandbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:6mm;border-bottom:2px solid #ff6b2b;}
-.a4-brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:-0.02em;color:#0f172a;}
-.a4-brand .mk{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ff6b2b,#c84a14);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;}
-.a4-brand b span{color:#ff6b2b;}
-.a4-event{font-family:var(--font-mono);font-size:12px;color:#64748b;text-align:right;font-weight:600;line-height:1.5;}
-.a4-hero{margin-top:8mm;}
-.a4-hero .kicker{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.05em;color:#ff6b2b;}
-.a4-hero h1{font-size:37px;font-weight:900;letter-spacing:-0.035em;line-height:1.14;margin:7px 0 9px;color:#0f172a;}
-.a4-hero h1 em{font-style:normal;color:#ff6b2b;background:linear-gradient(transparent 60%,#fef0e6 60%);}
-.a4-hero .sub{font-size:14.5px;line-height:1.6;color:#475569;max-width:160mm;}
-/* === 제품 라인업 === */
-.a4-lineup-label{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;margin:8mm 0 3mm;}
-.a4-benefits{display:grid;grid-template-columns:1fr 1fr;gap:5mm;}
-.a4-bene{position:relative;background:#fff;border:1px solid #edf0f4;border-radius:16px;padding:6mm;box-shadow:0 6px 20px rgba(15,23,42,.05);}
-.a4-bene .a4-ico{display:grid;place-items:center;width:12mm;height:12mm;border-radius:11px;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
-.a4-bene .a4-ico svg{width:6.5mm;height:6.5mm;display:block;}
-.a4-bene h3{font-size:17px;font-weight:800;margin:11px 0 4px;color:#0f172a;letter-spacing:-0.015em;}
-.a4-bene p{font-size:12.5px;color:#64748b;line-height:1.55;margin:0;}
-.a4-badge{position:absolute;top:6mm;right:6mm;font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:4px 10px;border-radius:100px;}
-.a4-badge.done{background:#ecfdf5;color:#059669;}
-.a4-badge.dev{background:#fff1e8;color:#c84a14;}
-
-/* === QR CTA === */
-.a4-qr{margin-top:8mm;display:grid;grid-template-columns:auto 1fr;gap:8mm;align-items:center;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:16px;padding:7mm;color:#fff;}
-.a4-qr .qrbox{width:44mm;height:44mm;background:#fff;border-radius:12px;padding:3mm;box-sizing:border-box;box-shadow:0 0 0 1px rgba(255,255,255,.10);}
-.a4-qr .qrbox img{width:100%;height:100%;display:block;}
-.a4-qr .cta .lead{font-family:var(--font-mono);font-size:14px;font-weight:700;letter-spacing:.06em;color:#ffb38a;text-transform:uppercase;}
-.a4-qr .cta .url{font-size:27px;font-weight:900;letter-spacing:-0.02em;color:#fff;margin:6px 0 6px;}
-.a4-qr .cta .hint2{font-size:13px;color:#cbd5e1;line-height:1.5;}
-.a4-qr .steps{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap;}
-.a4-qr .steps .st{font-size:12.5px;color:#fff;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:100px;}
-
-/* === Footer === */
-.a4-foot{margin-top:8mm;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:#64748b;border-top:1px solid #eef0f3;padding-top:5mm;}
-.a4-foot b{color:#0f172a;}
-.a4-foot .a4-foot-brand{display:flex;align-items:center;gap:8px;}
-.a4-foot .a4-foot-brand .mk{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#ff6b2b,#c84a14);color:#fff;display:grid;place-items:center;font-weight:900;font-size:11px;}
-.btn:disabled{opacity:.6;cursor:progress;pointer-events:none;}
-
-/* === 환자·병원 win-win === */
-.a4-winwin{margin-top:8mm;background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:16px;padding:7mm;}
-.a4-winwin .ww-head{font-size:17px;font-weight:800;color:#0f172a;margin-bottom:5mm;text-align:center;letter-spacing:-0.015em;}
-.a4-winwin .ww-grid{display:grid;grid-template-columns:1fr 1fr;gap:8mm;}
-.a4-winwin .ww-col{display:flex;gap:12px;align-items:flex-start;}
-.a4-winwin .ww-ic{flex:none;display:grid;place-items:center;width:12mm;height:12mm;border-radius:11px;background:#fff;box-shadow:0 4px 12px rgba(15,23,42,.07);}
-.a4-winwin .ww-ic svg{width:6.5mm;height:6.5mm;display:block;}
-.a4-winwin .ww-col b{display:block;font-size:14.5px;color:#c84a14;margin-bottom:4px;}
-.a4-winwin .ww-col p{font-size:12.5px;color:#475569;line-height:1.55;margin:0;}
-@media(max-width:600px){
-  .handout-section{padding:48px 0 56px;}
-  .handout-head h2{font-size:25px;}
-  .handout-actions .btn{flex:1;justify-content:center;}
-}
-
-/* === 인쇄: A4 시트만 출력 === */
-@media print{
-  @page{size:A4;margin:0;}
-  html,body{background:#fff !important;margin:0 !important;padding:0 !important;}
-  body>*{display:none !important;}
-  .handout-section{display:block !important;padding:0 !important;margin:0 !important;background:#fff !important;border:0 !important;page-break-after:avoid !important;break-after:avoid !important;}
-  .handout-wrap{max-width:none !important;padding:0 !important;margin:0 !important;page-break-after:avoid !important;break-after:avoid !important;}
-  .handout-head,.handout-actions{display:none !important;}
-  .handout-preview{display:block !important;page-break-after:avoid !important;break-after:avoid !important;}
-  .a4-scaler{overflow:visible !important;height:auto !important;}
-  .a4-sheet{transform:none !important;box-shadow:none !important;margin:0 !important;width:210mm;height:296mm;overflow:hidden !important;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid;}
+  .mobile-cta{display:block;}
+  body{padding-bottom:78px;}  /* sticky CTA 공간 */
+  .footer-top{flex-direction:column;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== Header ===== -->
+<!-- ===== HEADER ===== -->
 <header class="header">
   <div class="header-inner">
-    <a href="#" class="logo" aria-label="GraphyStyle 홈">
-      <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo">
-    </a>
+    <a href="/" class="logo" aria-label="GraphyStyle 홈"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo"></a>
     <div class="header-cta">
-      <a href="point-shower-community/index.html" class="btn btn-ghost">커뮤니티</a>
-      <a href="sidex.html" class="btn btn-primary">발표 자료 →</a>
+      <a href="#join" class="btn btn-primary">창립 멤버 등록</a>
     </div>
   </div>
 </header>
 
-<!-- ===== Hero ===== -->
+<!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-inner hero-focused">
-    <div class="hero-head">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        SIDEX 2026 · graphystyle
-      </div>
-      <h1><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo"></h1>
-      <p class="hero-sub">3D 프린팅으로 만드는 개인 맞춤 구강 케어.<br>발표 자료와 커뮤니티로 바로 이동하세요.</p>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> SIDEX 2026 · 현장 한정 창립 멤버 초대</div>
+    <h1>환자에게 꼭 맞는 구강 케어,<br><em>원장님과 함께</em> 만듭니다</h1>
+    <p class="hero-sub">그래피의 형상기억소재를 3D 프린터로 출력해 환자 한 분께 꼭 맞게 제작하는 개인 맞춤 구강 케어, <b>GraphyStyle</b>. 지금 창립 멤버로 합류하면 출시·사전예약 소식을 가장 먼저 받고, 다음 디바이스 개발에 직접 참여하실 수 있습니다.</p>
+    <div class="hero-cta">
+      <a href="#join" class="btn btn-primary btn-lg">1분 만에 창립 멤버 되기 →</a>
+      <a href="#product" class="btn btn-ghost btn-lg">제품 먼저 보기</a>
     </div>
-
-    <div class="launch-grid">
-      <a href="sidex.html" class="launch-card">
-        <div class="launch-ico">🎤</div>
-        <div class="launch-eyebrow">KEYNOTE</div>
-        <h3>SIDEX 2026 발표 자료</h3>
-        <p>이중우 원장 키노트 — 웹 프레젠테이션 14장. 키보드 ←→ 로 진행하고, PPTX로도 내려받을 수 있습니다.</p>
-        <span class="launch-go">발표 보기 <span>→</span></span>
-      </a>
-
-      <a href="point-shower-community/index.html" class="launch-card violet">
-        <div class="launch-ico">👥</div>
-        <div class="launch-eyebrow">COMMUNITY</div>
-        <h3>graphystyle 커뮤니티</h3>
-        <p>의료진이 임상 사례와 아이디어를 나누는 공유 플랫폼. 함께 더 나은 디바이스를 만들어 갑니다.</p>
-        <span class="launch-go">커뮤니티 가기 <span>→</span></span>
-      </a>
+    <div class="hero-chips">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> COEX · SIDEX 2026</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M3 21h18M9 21v-6h6v6"/></svg> 그래피 부스 D-601·701</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Point Shower 개발 완료</span>
     </div>
   </div>
 </section>
 
-<!-- ===== 부스 배포용 A4 인쇄물 (커뮤니티 전환 퍼널) ===== -->
-<section class="handout-section">
-  <div class="handout-wrap">
-    <div class="handout-head">
-      <div class="eyebrow2">BOOTH HANDOUT · A4</div>
-      <h2>부스 배포용 인쇄물</h2>
-      <p>발표 후 참석 원장님들께 나눠드리는 커뮤니티 초대장입니다. A4로 인쇄하거나 PDF로 저장하세요.</p>
+<!-- ===== ABOUT ===== -->
+<section class="sec" id="about">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">What is GraphyStyle</span>
+      <h2 class="sec-title">형상기억소재 · 3D 프린팅 · 개인 맞춤</h2>
+      <p class="sec-desc">정해진 규격이 아니라, 환자 한 분 한 분의 구강에 꼭 맞게. GraphyStyle은 이 세 가지를 하나로 묶은 맞춤 구강 케어입니다.</p>
     </div>
-    <div class="handout-actions">
-      <button class="btn btn-primary btn-lg" id="handout-print"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="13" width="12" height="8" rx="1"/></svg>인쇄 · PDF로 저장</button>
-      <button class="btn btn-ghost btn-lg" id="handout-pdf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>PDF 다운로드</button>
-    </div>
-    <div class="handout-preview">
-      <div class="a4-scaler">
-        <article class="a4-sheet">
-          <div class="a4-pad">
-
-            <div class="a4-brandbar">
-              <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="a4-logo">
-              <div class="a4-event">SIDEX 2026 · COEX<br>그래피 부스 D-601 / 701</div>
-            </div>
-
-            <div class="a4-hero">
-              <div class="kicker">오늘 부스에 오신 원장님께 — 창립 멤버 초대</div>
-              <h1>Graphy Style,<br>이제 <em>원장님과 함께</em> 만듭니다.</h1>
-              <p class="sub">그래피의 형상기억소재를 3D 프린터로 출력해, 환자께 꼭 맞게 제작하는 개인 맞춤 구강 케어입니다.</p>
-            </div>
-
-            <div class="a4-lineup-label">제품 라인업</div>
-            <div class="a4-benefits" style="grid-template-columns:1fr 1fr;">
-              <div class="a4-bene"><span class="a4-badge done">개발 완료</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
-              <div class="a4-bene"><span class="a4-badge dev">개발 중</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="1.6" fill="#ff6b2b" stroke="none"/></svg></div><h3>Point Infuser</h3><p>맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달.</p></div>
-            </div>
-
-            <div class="a4-winwin">
-              <div class="ww-head">환자와 병원, 모두에게 좋은 케어</div>
-              <div class="ww-grid">
-                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span><div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리.</p></div></div>
-                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div></div>
-              </div>
-            </div>
-
-            <div class="a4-qr">
-              <div class="qrbox"><img src="/qr-survey.svg" alt="사전등록 설문 QR 코드"></div>
-              <div class="cta">
-                <div class="lead">1분 설문하고 사전예약 알림 받기</div>
-                <div class="url">graphystyle.com</div>
-                <div class="hint2">QR을 비추면 1분 설문으로 연결됩니다. 관심 제품만 체크하셔도 등록됩니다.</div>
-                <div class="steps">
-                  <span class="st">① QR 스캔</span>
-                  <span class="st">② 관심 제품 체크</span>
-                  <span class="st">③ 사전예약 알림 받기</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="a4-foot">
-              <span class="a4-foot-brand"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="a4-foot-logo"><span>발표·자문 <b>이중우 원장</b> (올리브서울치과) &nbsp;|&nbsp; 개발 <b>(주)그래피</b></span></span>
-              <span>그래피 부스 D-601·701 (C·D홀 연결 로비)에서 Point Shower 실물 체험 →</span>
-            </div>
-
-          </div>
-        </article>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <h3>형상기억소재</h3>
+        <p>그래피의 Tera Harz Clear — 체온에서 형태를 기억해 구강에 부드럽게 밀착됩니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div>
+        <h3>3D 프린팅</h3>
+        <p>스캔 데이터로 출력해 빠르게 제작. 기존 제작 기간을 디지털 흐름으로 압축합니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+        <h3>개인 맞춤</h3>
+        <p>환자별 구강 형태에 맞춰 정확한 위치에 작용 — 더 편안하고 효과적인 케어.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 보존: 발표용으로 임시 숨김 (나중에 display 복원) ===== -->
-<div id="archived-sections" style="display:none" aria-hidden="true">
-
-<!-- ===== Stats ===== -->
-<section class="stats">
-  <div class="stats-inner">
-    <div class="stat">
-      <div class="num" id="stat-orders">12<span class="unit">건</span></div>
-      <div class="lbl">진행 중인 주문</div>
+<!-- ===== PRODUCTS ===== -->
+<section class="sec alt" id="product">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">Product Lineup</span>
+      <h2 class="sec-title">지금, 그리고 다음 디바이스</h2>
+      <p class="sec-desc">첫 제품은 개발을 마쳤고, 다음 디바이스는 현장 원장님과 함께 만들어 갑니다.</p>
     </div>
-    <div class="stat">
-      <div class="num">21<span class="unit">+</span></div>
-      <div class="lbl">통합 화면</div>
-    </div>
-    <div class="stat">
-      <div class="num">4<span class="unit">역할</span></div>
-      <div class="lbl">치과·기공소·그래피·관리</div>
-    </div>
-    <div class="stat">
-      <div class="num">3<span class="unit">tier</span></div>
-      <div class="lbl">Daily · Wellness · Medical</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Operations ===== -->
-<section class="section" id="operations">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">§ 01 운영 콘솔</span>
-      <h2 class="section-title">하나의 콘솔에서 모든 워크플로우를.</h2>
-      <p class="section-desc">치과의 신규 주문부터 그래피 생산, 정산까지 — 역할별로 최적화된 화면이 자연스럽게 연결됩니다.</p>
-    </div>
-
-    <div class="status-bar" id="status-bar">
-      <div class="status-pill"><span class="dot"></span>HTTP 서버 가동 (127.0.0.1:8765)</div>
-      <div class="status-pill" id="pill-stl"><span class="dot idle"></span>STL 인라인 데이터 확인 중...</div>
-      <div class="status-pill" id="pill-seed"><span class="dot idle"></span>시드 확인 중...</div>
-    </div>
-
-    <div class="cards">
-      <a href="erp.html" class="card featured">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon">📊</div>
-        <h3>Point Shower ERP</h3>
-        <p>4-역할 통합 콘솔. 주문·디자인·생산·QC·정산이 단일 흐름으로 이어집니다.</p>
-        <div class="card-meta">
-          <span class="tag brand">MAIN</span>
-          <span class="tag">21+ 화면</span>
-          <span class="tag">196KB</span>
-        </div>
-      </a>
-
-      <a href="erp.html?tour=1" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon violet">🚀</div>
-        <h3>인터랙티브 투어</h3>
-        <p>실제 UI 위에서 8단계 가이드. 역할 자동 전환과 요소 하이라이트로 30초 만에 익숙해집니다.</p>
-        <div class="card-meta">
-          <span class="tag">3분</span>
-          <span class="tag">8 STEPS</span>
-        </div>
-      </a>
-
-      <a href="erp-analytics.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon blue">📈</div>
-        <h3>분석 대시보드</h3>
-        <p>주문 추이·거래처별 통계·정산 KPI를 시각화. 의사결정에 필요한 데이터를 한눈에.</p>
-        <div class="card-meta">
-          <span class="tag">analytics</span>
-        </div>
-      </a>
-
-      <a href="erp-quality.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon green">✓</div>
-        <h3>QC 센터</h3>
-        <p>품질 검수 워크플로우와 클레임 추적. 의료기기 안전 기준에 맞춰 검증합니다.</p>
-        <div class="card-meta">
-          <span class="tag">Class 2</span>
-        </div>
-      </a>
-
-      <a href="erp-mobile.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon pink">📱</div>
-        <h3>모바일 컴패니언</h3>
-        <p>현장에서 바로 쓰는 터치 최적화 뷰. 알림·주문 진행·간편 액션 위주로 재구성.</p>
-        <div class="card-meta">
-          <span class="tag">mobile</span>
-        </div>
-      </a>
-
-      <a href="erp-help.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon amber">📖</div>
-        <h3>도움말 · 가이드</h3>
-        <p>역할별 매뉴얼·단축키·FAQ. 처음 쓰는 직원도 5분이면 흐름을 익힐 수 있습니다.</p>
-        <div class="card-meta">
-          <span class="tag">guide</span>
-        </div>
-      </a>
-    </div>
-
-    <div style="margin-top:32px;">
-      <h4 style="font-size:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:14px;">확장 모듈</h4>
-      <div class="quick-list">
-        <a href="erp-messages.html" class="quick-row">
-          <div class="ico">💬</div>
-          <div class="info"><h5>메시지 hub</h5><p>역할 간 실시간 커뮤니케이션</p></div>
-          <div class="badge">erp-messages.html</div>
-          <div class="arrow">→</div>
-        </a>
-        <a href="erp-reports.html" class="quick-row">
-          <div class="ico">📋</div>
-          <div class="info"><h5>리포트 생성기</h5><p>월간 정산·QC·생산 리포트 자동 생성</p></div>
-          <div class="badge">erp-reports.html</div>
-          <div class="arrow">→</div>
-        </a>
-        <a href="erp-inventory.html" class="quick-row">
-          <div class="ico">📦</div>
-          <div class="info"><h5>재고 관리</h5><p>TC-85·노즐·어댑터·튜브팁 재고 추적</p></div>
-          <div class="badge">erp-inventory.html</div>
-          <div class="arrow">→</div>
-        </a>
-        <a href="erp-calendar.html" class="quick-row">
-          <div class="ico">📅</div>
-          <div class="info"><h5>일정 / 스케줄</h5><p>생산 라인 스케줄 통합 보기</p></div>
-          <div class="badge">erp-calendar.html</div>
-          <div class="arrow">→</div>
-        </a>
-        <a href="erp-search.html" class="quick-row">
-          <div class="ico">🔍</div>
-          <div class="info"><h5>통합 검색</h5><p>주문·환자·거래처 통합 검색</p></div>
-          <div class="badge">erp-search.html</div>
-          <div class="arrow">→</div>
-        </a>
-        <a href="erp-workflow.html" class="quick-row">
-          <div class="ico">⚙️</div>
-          <div class="info"><h5>워크플로우 자동화</h5><p>상태 전환 시 알림·과업 자동 생성</p></div>
-          <div class="badge">erp-workflow.html</div>
-          <div class="arrow">→</div>
-        </a>
+    <div class="products">
+      <div class="product">
+        <span class="badge done">개발 완료</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div>
+        <h3>Point Shower</h3>
+        <p>개인 맞춤 치아 세정기. 닦이지 않던 부위까지, 필요한 위치로 정확히 물을 분사합니다.</p>
+      </div>
+      <div class="product">
+        <span class="badge dev">개발 중</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Point Infuser</h3>
+        <p>맞춤 트레이로 약물(액상·연고)을 잇몸의 정확한 부위에 전달하는 차세대 케어 디바이스.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Patient ===== -->
-<section class="section alt" id="patient">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">§ 02 환자 · 마케팅</span>
-      <h2 class="section-title">환자에게 전달하는 모든 자료.</h2>
-      <p class="section-desc">병원이 환자에게 공유하는 브로셔와 주문 조회 포털 — 따뜻한 톤과 명확한 정보 구조로 신뢰감을 만듭니다.</p>
+<!-- ===== WIN-WIN ===== -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">Win-Win Care</span>
+      <h2 class="sec-title">환자와 병원, 모두에게 좋은 케어</h2>
     </div>
-
-    <div class="cards">
-      <a href="point-shower-patient.html" class="card featured">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon">🦷</div>
-        <h3>환자용 제품 브로셔</h3>
-        <p>3D 인터랙티브 STL 갤러리·SVG 노즐 도식·3-tier 모드 비교까지 — 환자가 한 번에 이해하는 페이지.</p>
-        <div class="card-meta">
-          <span class="tag brand">PATIENT</span>
-          <span class="tag">light theme</span>
-          <span class="tag">3D</span>
+    <div class="winwin">
+      <div class="winwin-grid">
+        <div class="ww">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span>
+          <div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리. 집에서도 꾸준히 이어가는 케어.</p></div>
         </div>
-      </a>
-
-      <a href="erp-portal.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon blue">📋</div>
-        <h3>주문 조회 포털</h3>
-        <p>주문번호로 진행 상황 실시간 확인. PIPA 마스킹 적용, 의사 처방 정보까지 안전하게.</p>
-        <div class="card-meta">
-          <span class="tag">PIPA 준수</span>
+        <div class="ww">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span>
+          <div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div>
         </div>
-      </a>
-
-      <a href="point-shower-community/index.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon violet">👥</div>
-        <h3>Point Shower Community</h3>
-        <p>의료진 커뮤니티 랜딩 — 잠재 거래처와 임상 사례 공유 채널.</p>
-        <div class="card-meta">
-          <span class="tag">community</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 3D Tools ===== -->
-<section class="section" id="tools">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">§ 03 3D · 제품 시각화</span>
-      <h2 class="section-title">조립부터 디자인까지, 시각으로 확인.</h2>
-      <p class="section-desc">트레이·노즐·어댑터·튜브팁이 어떻게 결합되는지 4-뷰포트로 시각화하고, 환자별 노즐 위치를 직접 배치합니다.</p>
-    </div>
-
-    <div class="cards">
-      <a href="point-shower/stl_viewer.html" class="card featured">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon">🔧</div>
-        <h3>조립 모드 STL Viewer</h3>
-        <p>4-뷰포트 splint + nozzle + adapter + tubetip 결합 시각화. 조립 애니메이션 + MP4 녹화 지원.</p>
-        <div class="card-meta">
-          <span class="tag brand">3D ASSEMBLY</span>
-          <span class="tag">HTTP 필수</span>
-        </div>
-      </a>
-
-      <a href="sidex.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon amber">🎤</div>
-        <h3>SIDEX 2026 발표 슬라이드</h3>
-        <p>이중우 원장 키노트 — 웹 프레젠테이션 14장. 키보드 ←→ 로 진행, <strong>📥 PPTX 다운로드</strong> 버튼.</p>
-        <div class="card-meta">
-          <span class="tag brand">KEYNOTE</span>
-          <span class="tag">14 slides</span>
-          <span class="tag">PPTX export</span>
-        </div>
-      </a>
-
-      <a href="erp.html#designer" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon violet">🎨</div>
-        <h3>3D 디자이너</h3>
-        <p>치아 위에 노즐을 직접 배치. ERP 주문 모달에서 환자별 맞춤 어셈블리를 즉시 정의합니다.</p>
-        <div class="card-meta">
-          <span class="tag">in-app</span>
-        </div>
-      </a>
-
-      <a href="DEMO_CHECKLIST.html" class="card">
-        <div class="card-arrow">↗</div>
-        <div class="card-icon green">🚦</div>
-        <h3>시연 전 자동 점검</h3>
-        <p>20개 항목 자동 검증 — 데이터·파일·STL·브라우저까지 30초 만에 완료.</p>
-        <div class="card-meta">
-          <span class="tag">T-30분</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Process ===== -->
-<section class="section alt">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">§ 04 워크플로우</span>
-      <h2 class="section-title">스캔에서 수령까지, 평균 3일.</h2>
-      <p class="section-desc">기존 2~3주 걸리던 제작 기간을 디지털 흐름으로 압축. 각 단계는 자동으로 다음 역할에 인계됩니다.</p>
-    </div>
-
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <h4>3D 스캔</h4>
-        <p>병원에서 5분 안에 끝나는 디지털 스캔으로 시작합니다.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <h4>맞춤 디자인</h4>
-        <p>기공소가 환자별 트레이·노즐 위치를 24시간 내 설계합니다.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <h4>출력 + QC</h4>
-        <p>그래피가 의료용 레진으로 출력하고 정밀 검수합니다.</p>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <h4>수령</h4>
-        <p>병원에서 수령하거나 자택 배송. UDI 추적관리.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Documents ===== -->
-<section class="section" id="docs">
-  <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">§ 05 운영 문서</span>
-      <h2 class="section-title">미팅·협상·마이그레이션 자료.</h2>
-      <p class="section-desc">그래피 미팅 시연부터 본 계약, 백엔드 이관까지 — 단계별 핵심 자료를 한 곳에 모았습니다.</p>
+<!-- ===== WHY JOIN ===== -->
+<section class="sec alt" id="why">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">Founding Member</span>
+      <h2 class="sec-title">지금 합류하면, 창립 멤버 혜택</h2>
+      <p class="sec-desc">SIDEX 현장에서 먼저 만난 원장님들께 드리는 초대입니다. 등록은 1분이면 충분합니다.</p>
+    </div>
+    <div class="perks">
+      <div class="perk"><span class="n">1</span><div><h4>출시·사전예약 우선 알림</h4><p>관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</p></div></div>
+      <div class="perk"><span class="n">2</span><div><h4>신제품 우선 체험</h4><p>다음 디바이스의 시제품을 현장 원장님께 먼저 선보입니다.</p></div></div>
+      <div class="perk"><span class="n">3</span><div><h4>공동개발 참여</h4><p>아이디어 제안과 임상 피드백으로 제품 방향에 직접 참여하실 수 있습니다.</p></div></div>
+      <div class="perk"><span class="n">4</span><div><h4>창립 멤버 전용 혜택</h4><p>초기 합류 원장님께만 드리는 한정 혜택으로 함께 시작합니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JOIN (FORM) ===== -->
+<section class="sec join" id="join">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">1분 등록</span>
+      <h2 class="sec-title">창립 멤버 등록</h2>
+      <p class="sec-desc">관심 제품만 체크하셔도 등록됩니다. 출시·사전예약 소식을 가장 먼저 보내드립니다.</p>
     </div>
 
-    <div class="doc-grid">
-      <a href="docs.html?doc=GRAPHY_DEMO_PLAN" class="doc">
-        <div class="doc-ico">🎯</div>
-        <div class="doc-info"><h5>시연 마스터 플랜</h5><p>그래피 미팅 5장면 시나리오 · D-day 체크리스트</p></div>
-        <span class="doc-size">10KB</span>
+    <form class="formcard" id="join-form" autocomplete="on">
+      <div class="field">
+        <label>관심 있는 제품</label>
+        <div class="choices" id="interests">
+          <label class="choice"><input type="checkbox" name="interest" value="point_shower"><span><span class="t">Point Shower</span><span class="d">치아 세정기 · 개발 완료</span></span></label>
+          <label class="choice"><input type="checkbox" name="interest" value="point_infuser"><span><span class="t">Point Infuser</span><span class="d">약물 전달 · 개발 중</span></span></label>
+        </div>
+      </div>
+
+      <div class="field"><label for="f-name">성함 <span class="req">*</span></label><input type="text" id="f-name" name="name" placeholder="홍길동" required></div>
+      <div class="grid2">
+        <div class="field"><label for="f-clinic">병원 / 소속</label><input type="text" id="f-clinic" name="clinic" placeholder="OO치과"></div>
+        <div class="field"><label for="f-phone">휴대폰</label><input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000" inputmode="tel"></div>
+      </div>
+      <div class="field"><label for="f-email">이메일</label><input type="email" id="f-email" name="email" placeholder="you@example.com"></div>
+
+      <div class="field">
+        <label class="optin"><input type="checkbox" id="f-preorder" checked><span><b>출시·사전예약 알림 받기</b> — 관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</span></label>
+      </div>
+
+      <input class="hp" type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <button type="submit" class="submit" id="submit-btn">창립 멤버 등록하기 →</button>
+      <div class="formnote">입력하신 연락처는 출시·사전예약 안내 목적으로만 사용되며, 언제든 수신을 중단할 수 있습니다.</div>
+    </form>
+
+    <div class="done" id="done">
+      <div class="ic">✓</div>
+      <h3>등록되었습니다. 감사합니다!</h3>
+      <p>출시·사전예약 소식을 가장 먼저 보내드리겠습니다. SIDEX 그래피 부스(D-601·701, C·D홀 연결 로비)에서 Point Shower 실물도 만나보세요.</p>
+      <div class="done-links">
+        <a href="point-shower-community/index.html" class="btn btn-primary">커뮤니티 둘러보기 →</a>
+        <a href="sidex.html" class="btn btn-ghost">발표 자료 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MORE (sub-URIs) ===== -->
+<section class="sec" id="more">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">More</span>
+      <h2 class="sec-title">더 알아보기</h2>
+    </div>
+    <div class="more">
+      <a href="sidex.html" class="more-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20v14H2z"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h4>SIDEX 2026 발표 자료</h4>
+        <p>이중우 원장 키노트 — 웹 프레젠테이션. 제품 개념과 비전을 슬라이드로 확인하세요.</p>
+        <span class="go">발표 보기 <span>→</span></span>
       </a>
-      <a href="docs.html?doc=INTEGRATION_GUIDE" class="doc">
-        <div class="doc-ico">🔌</div>
-        <div class="doc-info"><h5>통합 가이드</h5><p>그래피 REST API 명세 · 90일 마이그 일정</p></div>
-        <span class="doc-size">7.4KB</span>
+      <a href="point-shower-community/index.html" class="more-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>원장 커뮤니티</h4>
+        <p>아이디어 제안·임상 피드백을 나누는 공동개발 채널. 함께 더 나은 디바이스를 만듭니다.</p>
+        <span class="go">커뮤니티 가기 <span>→</span></span>
       </a>
-      <a href="docs.html?doc=BACKEND_BLUEPRINT" class="doc">
-        <div class="doc-ico">🏗</div>
-        <div class="doc-info"><h5>백엔드 청사진</h5><p>아키텍처 · Postgres DDL · 12주 일정</p></div>
-        <span class="doc-size">12.8KB</span>
-      </a>
-      <a href="docs.html?doc=BRAND_DEFINITION" class="doc">
-        <div class="doc-ico">✨</div>
-        <div class="doc-info"><h5>브랜드 정의</h5><p>제품 정의 · 3-tier 모드 · 포지셔닝</p></div>
-        <span class="doc-size">6.7KB</span>
-      </a>
-      <a href="docs.html?doc=IMPLEMENTATION_LOG" class="doc">
-        <div class="doc-ico">📓</div>
-        <div class="doc-info"><h5>구현 로그</h5><p>작업 연속성 추적 · 변경 이력</p></div>
-        <span class="doc-size">9.7KB</span>
-      </a>
-      <a href="docs.html?doc=PROJECT" class="doc">
-        <div class="doc-ico">🗂</div>
-        <div class="doc-info"><h5>프로젝트 개요</h5><p>전체 구조 · 파일 인벤토리</p></div>
-        <span class="doc-size">7.8KB</span>
+      <a href="handout.html" class="more-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="13" width="12" height="8" rx="1"/></svg></div>
+        <h4>부스 배포용 인쇄물</h4>
+        <p>현장 배포용 A4 안내문을 인쇄하거나 PDF로 저장합니다. (부스 운영용)</p>
+        <span class="go">인쇄물 열기 <span>→</span></span>
       </a>
     </div>
   </div>
 </section>
 
-</div><!-- /archived-sections -->
-
-<!-- ===== Footer ===== -->
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="brand-block">
-        <div class="logo">
-          <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo">
-        </div>
-        <p>3D 프린팅으로 만드는 개인 맞춤 구강 케어 — graphystyle.</p>
-      </div>
+    <div class="footer-top">
       <div>
-        <h6>바로가기</h6>
-        <ul>
-          <li><a href="sidex.html">SIDEX 2026 발표 자료</a></li>
-          <li><a href="point-shower-community/index.html">커뮤니티</a></li>
-        </ul>
+        <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo">
+        <p>3D 프린팅으로 만드는 개인 맞춤 구강 케어. 현장 원장님과 함께 만들어 갑니다.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#join">창립 멤버 등록</a>
+        <a href="#product">제품</a>
+        <a href="sidex.html">발표 자료</a>
+        <a href="point-shower-community/index.html">커뮤니티</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 graphystyle. All rights reserved.</span>
+      <span>© 2026 GraphyStyle · (주)그래피</span>
       <span>graphystyle.com</span>
     </div>
   </div>
 </footer>
 
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="mobile-cta" id="mobile-cta">
+  <a href="#join" class="btn btn-primary">1분 만에 창립 멤버 되기 →</a>
+</div>
+
 <script>
-// file:// 환경 경고 (필요 시 표시)
-if (location.protocol === 'file:') {
-  const warn = document.createElement('div');
-  warn.className = 'proto-warn';
-  warn.style.display = 'block';
-  warn.innerHTML = `📂 <strong>file:// 감지</strong> — 일부 페이지에서 STL/JSON 로드가 차단될 수 있습니다. 터미널에서 <code>cd /Users/jin/lander && python3 -m http.server 8765</code> 후 <a href="http://127.0.0.1:8765">http://127.0.0.1:8765</a> 로 접속을 권장합니다.`;
-  document.querySelector('.section-inner').prepend(warn);
-}
-
-// STL 인라인 검증
-const pillStl = document.getElementById('pill-stl');
-const s = document.createElement('script');
-s.src = 'samples/stl-data.js';
-s.onload = () => {
-  if (window.__SAMPLE_STL && Object.keys(window.__SAMPLE_STL).length > 0) {
-    pillStl.innerHTML = `<span class="dot"></span>STL 인라인 ${Object.keys(window.__SAMPLE_STL).length}종 OK`;
-  } else {
-    pillStl.innerHTML = `<span class="dot warn"></span>STL 데이터 비어있음`;
-    pillStl.classList.add('warn');
-  }
-};
-s.onerror = () => {
-  pillStl.innerHTML = `<span class="dot warn"></span>STL 인라인 미로드`;
-  pillStl.classList.add('warn');
-};
-document.head.appendChild(s);
-
-// localStorage 시드 표시
-try {
-  const state = JSON.parse(localStorage.getItem('pointshower-erp-state-v6') || 'null');
-  const pillSeed = document.getElementById('pill-seed');
-  const statOrders = document.getElementById('stat-orders');
-  if (state?.orders) {
-    pillSeed.innerHTML = `<span class="dot"></span>ERP 시드 ${state.orders.length}건`;
-    statOrders.innerHTML = `${state.orders.length}<span class="unit">건</span>`;
-  } else {
-    pillSeed.innerHTML = `<span class="dot warn"></span>시드 없음 — <a href="erp.html" style="color:inherit;text-decoration:underline;">ERP 한 번 열기</a>`;
-    pillSeed.classList.add('warn');
-  }
-} catch(e){}
-
-// ============================================================
-// A4 핸드아웃 — 미리보기 스케일 + 인쇄 + PDF 다운로드
-// ============================================================
-(function(){
-  const PXmm = 96/25.4;
-  const W = 210*PXmm, H = 297*PXmm;
-  function scaleHandout(){
-    const sheet = document.querySelector('.a4-sheet'); if(!sheet) return;
-    const scaler = sheet.closest('.a4-scaler');
-    const scale = Math.min(1, scaler.clientWidth / W);
-    sheet.style.transform = 'scale(' + scale + ')';
-    scaler.style.height = (H * scale) + 'px';
-  }
-  window.addEventListener('resize', scaleHandout);
-  window.addEventListener('load', scaleHandout);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(scaleHandout);
-  scaleHandout();
-
-  const printBtn = document.getElementById('handout-print');
-  if (printBtn) printBtn.onclick = () => window.print();
-
-  function loadScript(src){
-    return new Promise((res, rej) => {
-      const s = document.createElement('script');
-      s.src = src; s.onload = res; s.onerror = () => rej(new Error('load fail: ' + src));
-      document.head.appendChild(s);
-    });
-  }
-  const pdfBtn = document.getElementById('handout-pdf');
-  if (pdfBtn) pdfBtn.onclick = async () => {
-    const orig = pdfBtn.textContent;
-    pdfBtn.textContent = 'PDF 생성 중…'; pdfBtn.disabled = true;
-    const sheet = document.querySelector('.a4-sheet');
-    const scaler = sheet.closest('.a4-scaler');
-    const prevT = sheet.style.transform, prevOv = scaler.style.overflow, prevH = scaler.style.height;
-    try {
-      if (!window.html2canvas) await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
-      if (!(window.jspdf && window.jspdf.jsPDF)) await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js');
-      sheet.style.transform = 'none';
-      scaler.style.overflow = 'visible'; scaler.style.height = 'auto';
-      if (document.fonts) { try { await document.fonts.load('900 42px "Pretendard Variable"'); } catch(_){} await document.fonts.ready; }
-      const qr = sheet.querySelector('.qrbox img');
-      if (qr && !qr.complete) { try { await qr.decode(); } catch(_){} }
-      const canvas = await html2canvas(sheet, { scale: 3, useCORS: true, backgroundColor: '#ffffff', width: Math.ceil(W), height: Math.ceil(H), windowWidth: Math.ceil(W) });
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
-      pdf.save('PointShower_커뮤니티_안내.pdf');
-    } catch(e) {
-      console.error(e);
-      alert('PDF 생성에 실패했습니다. "인쇄 · PDF로 저장" 버튼으로 PDF를 만들어 주세요.');
-    } finally {
-      sheet.style.transform = prevT; scaler.style.overflow = prevOv; scaler.style.height = prevH;
-      scaleHandout();
-      pdfBtn.textContent = orig; pdfBtn.disabled = false;
-    }
+const form = document.getElementById('join-form');
+const btn = document.getElementById('submit-btn');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const interests = [...document.querySelectorAll('input[name=interest]:checked')].map(c => c.value);
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { document.getElementById('f-name').focus(); return; }
+  if (interests.length === 0 && !confirm('관심 제품을 선택하지 않으셨습니다. 그래도 등록할까요?')) return;
+  const payload = {
+    name,
+    clinic: document.getElementById('f-clinic').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    interests,
+    preorder: document.getElementById('f-preorder').checked,
+    company: document.getElementById('f-company').value,
+    source: 'landing',
   };
-})();
-</script>
+  btn.disabled = true; btn.textContent = '등록 중…';
+  try {
+    const res = await fetch('/api/signup', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || '등록 실패');
+    form.style.display = 'none';
+    const done = document.getElementById('done');
+    done.classList.add('show');
+    const mc = document.getElementById('mobile-cta'); if (mc) mc.style.display = 'none';
+    done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    alert('등록 중 문제가 발생했습니다: ' + err.message + '\n잠시 후 다시 시도해 주세요.');
+    btn.disabled = false; btn.textContent = '창립 멤버 등록하기 →';
+  }
+});
 
+// 폼이 화면에 보이면 모바일 하단 CTA 숨김 (중복 방지)
+const joinSec = document.getElementById('join');
+if ('IntersectionObserver' in window && joinSec) {
+  const mc = document.getElementById('mobile-cta');
+  new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (mc) mc.style.visibility = en.isIntersecting ? 'hidden' : 'visible'; });
+  }, { threshold: 0.2 }).observe(joinSec);
+}
+</script>
 </body>
 </html>
