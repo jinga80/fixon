@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 
 from .models import Lead
 
-ALLOWED_INTERESTS = {"point_shower", "point_infuser", "night_pack", "perio"}
+ALLOWED_INTERESTS = {"point_shower", "point_infuser", "night_pack", "perio", "medical_tourism"}
 
 
 @csrf_exempt
