@@ -101,6 +101,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .a4-winwin .ww-ic svg{width:6.5mm;height:6.5mm;display:block;}
 .a4-winwin .ww-col b{display:block;font-size:14.5px;color:#c84a14;margin-bottom:4px;}
 .a4-winwin .ww-col p{font-size:12.5px;color:#475569;line-height:1.55;margin:0;}
+/* 제품 슬림 스트립 */
+.a4-strip{display:grid;grid-template-columns:1fr 1fr;gap:5mm;}
+.a4-si{position:relative;display:flex;gap:3.5mm;align-items:center;background:#fff;border:1px solid #edf0f4;border-radius:13px;padding:4.5mm;box-shadow:0 5px 16px rgba(15,23,42,.05);}
+.a4-si .ic{flex:none;width:12mm;height:12mm;border-radius:10px;background:linear-gradient(135deg,#fff1e8,#ffe1cd);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
+.a4-si .ic svg{width:6.5mm;height:6.5mm;display:block;}
+.a4-si h4{font-size:14.5px;font-weight:800;color:#0f172a;letter-spacing:-0.015em;margin:0 0 1mm;display:flex;align-items:center;gap:2mm;flex-wrap:wrap;}
+.a4-si .bg{font-family:var(--font-mono);font-size:8px;font-weight:700;padding:2px 6px;border-radius:100px;}
+.a4-si .bg.done{background:#ecfdf5;color:#059669;}
+.a4-si .bg.dev{background:#fff1e8;color:#c84a14;}
+.a4-si p{font-size:10.5px;color:#64748b;line-height:1.45;margin:0;}
+/* 창립멤버 3가지 가치 */
+.a4-v3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm;}
+.a4-vc{position:relative;background:#fff;border:1px solid #edf0f4;border-radius:14px;padding:5mm;box-shadow:0 6px 18px rgba(15,23,42,.05);overflow:hidden;}
+.a4-vc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#ff6b2b,#c84a14);}
+.a4-vc .ic{width:11mm;height:11mm;border-radius:10px;background:linear-gradient(135deg,#fff1e8,#ffe1cd);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);margin-bottom:3mm;}
+.a4-vc .ic svg{width:6mm;height:6mm;display:block;}
+.a4-vc .k{font-family:var(--font-mono);font-size:8.5px;font-weight:700;letter-spacing:.04em;color:#ff6b2b;text-transform:uppercase;}
+.a4-vc h4{font-size:13.5px;font-weight:800;color:#0f172a;letter-spacing:-0.01em;margin:1mm 0 2mm;}
+.a4-vc p{font-size:10.5px;color:#64748b;line-height:1.45;margin:0;}
+/* 해외 호평 */
+.a4-praise{margin-top:7mm;display:flex;gap:4mm;align-items:center;background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:14px;padding:5mm 6mm;}
+.a4-praise .ic{flex:none;width:11mm;height:11mm;border-radius:10px;background:#fff;color:#ff6b2b;display:grid;place-items:center;box-shadow:0 4px 12px rgba(15,23,42,.07);}
+.a4-praise .ic svg{width:6mm;height:6mm;}
+.a4-praise .h{font-size:13px;font-weight:800;color:#0f172a;letter-spacing:-0.01em;margin-bottom:1mm;}
+.a4-praise p{font-size:11px;color:#475569;line-height:1.45;margin:0;}
+.a4-praise b{color:#c84a14;font-weight:800;}
 @media(max-width:600px){
   .handout-section{padding:32px 0 56px;}
   .handout-head h2{font-size:25px;}
@@ -154,41 +180,45 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
             <div class="a4-hero">
               <div class="kicker">오늘 부스에 오신 원장님께 — 창립 멤버 초대</div>
-              <h1>Graphy Style,<br>이제 <em>원장님과 함께</em> 만듭니다.</h1>
-              <p class="sub">그래피의 형상기억소재를 3D 프린터로 출력해, 환자께 꼭 맞게 제작하는 개인 맞춤 구강 케어입니다.</p>
+              <h1>환자 맞춤 케어부터<br><em>병원 성장</em>까지, 함께</h1>
+              <p class="sub">형상기억소재 + 3D 프린팅 개인 맞춤 구강 케어 GraphyStyle. 제품을 넘어 병원 경영과 해외 환자 유치까지, 창립 멤버 원장님과 함께합니다.</p>
             </div>
 
             <div class="a4-lineup-label">제품 라인업</div>
-            <div class="a4-benefits" style="grid-template-columns:1fr 1fr;">
-              <div class="a4-bene"><span class="a4-badge done">개발 완료</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
-              <div class="a4-bene"><span class="a4-badge dev">개발 중</span><div class="a4-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="1.6" fill="#ff6b2b" stroke="none"/></svg></div><h3>Point Infuser</h3><p>맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달.</p></div>
+            <div class="a4-strip">
+              <div class="a4-si"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></span><div><h4>Point Shower <span class="bg done">개발 완료</span></h4><p>개인 맞춤 치아 세정기 — 정확한 위치로 물 분사.</p></div></div>
+              <div class="a4-si"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="1.6" fill="#ff6b2b" stroke="none"/></svg></span><div><h4>Point Infuser <span class="bg dev">개발 중</span></h4><p>맞춤 트레이로 약물을 정확한 부위에 전달.</p></div></div>
             </div>
 
-            <div class="a4-winwin">
-              <div class="ww-head">환자와 병원, 모두에게 좋은 케어</div>
-              <div class="ww-grid">
-                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span><div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리.</p></div></div>
-                <div class="ww-col"><span class="ww-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div></div>
-              </div>
+            <div class="a4-lineup-label">창립 멤버가 받는 3가지</div>
+            <div class="a4-v3">
+              <div class="a4-vc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span><div class="k">차별화 진료</div><h4>맞춤 구강 케어</h4><p>환자 개인 맞춤 디바이스로 우리 병원만의 진료 경쟁력.</p></div>
+              <div class="a4-vc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span><div class="k">병원 성장</div><h4>경영 무료 상담권</h4><p>KSMED 무료 상담권 제공 — 세무·수익개선·마케팅 컨설팅.</p></div>
+              <div class="a4-vc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span><div class="k">새로운 환자</div><h4>해외 환자 유치</h4><p>의료관광 MediQueen에 우리 병원 우선 등록.</p></div>
+            </div>
+
+            <div class="a4-praise">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
+              <div><div class="h">해외 환자들이 먼저 주목</div><p>의료관광 플랫폼 <b>MediQueen</b>에서 <b>Point Shower·Point Infuser</b> 두 제품 모두 호평 — 해외 환자 반응도 뜨거웠습니다.</p></div>
             </div>
 
             <div class="a4-qr">
               <div class="qrbox"><img src="/qr-survey.svg" alt="창립 멤버 등록 QR 코드"></div>
               <div class="cta">
-                <div class="lead">1분 등록하고 창립 멤버 되기</div>
+                <div class="lead">1분 무료 등록 · 창립 멤버</div>
                 <div class="url">graphystyle.com</div>
-                <div class="hint2">QR을 비추면 1분 등록 페이지로 연결됩니다. 관심 제품만 체크하셔도 등록됩니다.</div>
+                <div class="hint2">QR을 비추면 1분 등록 페이지로 연결됩니다. 관심 항목만 체크하셔도 됩니다.</div>
                 <div class="steps">
                   <span class="st">① QR 스캔</span>
-                  <span class="st">② 관심 제품 체크</span>
-                  <span class="st">③ 사전예약 알림 받기</span>
+                  <span class="st">② 관심·혜택 체크</span>
+                  <span class="st">③ 혜택 시작</span>
                 </div>
               </div>
             </div>
 
             <div class="a4-foot">
-              <span class="a4-foot-brand"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="a4-foot-logo"><span>발표·자문 <b>이중우 원장</b> (올리브서울치과) &nbsp;|&nbsp; 개발 <b>(주)그래피</b></span></span>
-              <span>그래피 부스 D-601·701 (C·D홀 연결 로비)에서 Point Shower 실물 체험 →</span>
+              <span class="a4-foot-brand"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="a4-foot-logo"><span>발표·자문 <b>이중우 원장</b> (올리브서울치과) · 개발 <b>(주)그래피</b></span></span>
+              <span>파트너 · <b>KSMED</b> 경영 · <b>MediQueen</b> 의료관광</span>
             </div>
 
           </div>

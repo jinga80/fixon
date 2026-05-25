@@ -56,7 +56,7 @@
   --r:8px;--r-md:10px;--r-lg:14px;--r-xl:18px;--r-2xl:24px;
 }
 html{scroll-behavior:smooth;}
-html,body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-0.01em;}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-0.01em;overflow-x:hidden;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 img,svg{display:block;max-width:100%;}
 button,input{font-family:inherit;}
@@ -344,6 +344,60 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   .mobile-cta{display:block;}
   body{padding-bottom:78px;}
   .footer-top{flex-direction:column;}
+  /* mobile vertical rhythm + touch targets */
+  .sec-head{margin-bottom:32px;}
+  .sec-inner,.hero-inner,.footer-inner{padding-left:20px;padding-right:20px;}
+  .value3{gap:14px;}
+  .v3{padding:26px 22px;}
+  .perks{gap:12px;}
+  .partner-head{margin:24px 0 14px;}
+  .partner-card{padding:20px;}
+  .steps3{gap:12px;}
+  .more{gap:12px;}
+  .endorse-tags span{font-size:12.5px;}
+  /* ensure all primary tap targets are comfortable */
+  .btn{min-height:44px;}
+  .faq summary{padding:16px 0;min-height:44px;}
+  .choice,.optin{padding:15px 14px;}
+  .footer-links a{padding:4px 0;}
+}
+/* CTAs comfortable on narrow phones: full-width stacked */
+@media(max-width:480px){
+  .hero-cta{flex-direction:column;gap:10px;}
+  .hero-cta .btn{width:100%;}
+  .urgency .btn-lg{display:flex;width:100%;}
+  .done-links{flex-direction:column;}
+  .done-links .btn{width:100%;}
+}
+/* finest tier — small phones (360 / 320) */
+@media(max-width:400px){
+  body{font-size:15.5px;}
+  .sec{padding:44px 0;}
+  .hero{padding:36px 0 44px;}
+  .sec-inner,.hero-inner,.footer-inner{padding-left:16px;padding-right:16px;}
+  .hero h1{font-size:clamp(27px,8.4vw,33px);line-height:1.22;}
+  .hero h1 em{white-space:normal;}
+  .sec-title{font-size:clamp(22px,6.4vw,26px);word-break:keep-all;}
+  .hero-badge{font-size:13px;padding:7px 13px;}
+  .hero-sub{font-size:15px;}
+  .hero-chips{gap:8px;}
+  .chip{font-size:12.5px;padding:6px 11px;}
+  .header-inner{padding:12px 16px;gap:12px;}
+  .gs-logo{height:24px;}
+  .header-cta .btn{padding:9px 13px;font-size:14px;}
+  .formcard{padding:20px 16px;}
+  .v3{padding:22px 18px;}
+  .pillar{padding:22px 18px;}
+  .perk{padding:20px 18px;}
+  .partner-card{padding:18px 16px;}
+  .endorse-card{padding:22px 18px;}
+  .ub{padding:20px 18px;}
+  .step{padding:24px 20px;}
+  .winwin{padding:22px 16px;}
+  .more-card{padding:22px 18px;}
+  /* keep long words / urls from forcing overflow */
+  .endorse-by,.partner-card .pn{overflow-wrap:anywhere;}
+  .footer-bottom{font-size:12px;}
 }
 </style>
 </head>
@@ -393,16 +447,16 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
         <p>3D 프린팅 개인 맞춤 디바이스로, 우리 병원만의 차별화된 케어를 제공합니다.</p>
       </div>
       <div class="v3">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <div class="k">병원 성장</div>
+        <h3>경영 무료 상담권</h3>
+        <p>KSMED 무료 상담권 제공 — 세무·수익개선·마케팅까지 병원 경영을 우선 상담합니다.</p>
+      </div>
+      <div class="v3">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></div>
         <div class="k">새로운 환자</div>
         <h3>해외 환자 유치</h3>
         <p>해외에서 호평받은 제품 — 의료관광 플랫폼 MediQueen과 연계해 해외 환자에게 우리 병원을 노출합니다.</p>
-      </div>
-      <div class="v3">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-        <div class="k">병원 성장</div>
-        <h3>경영 컨설팅</h3>
-        <p>KSMED와 연계해 세무·수익개선·마케팅까지, 병원 경영을 우선 상담합니다.</p>
       </div>
     </div>
   </div>
@@ -544,6 +598,17 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
     <div class="partner-head">함께하는 파트너 혜택 — 원장님의 병원 성장까지</div>
     <div class="partners">
       <div class="partner-card">
+        <span class="ptag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> 병원 경영 컨설팅 · KSMED</span>
+        <div class="prow">
+          <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+          <div>
+            <h4>병원 경영 무료 상담권 제공 <span class="new">NEW</span></h4>
+            <p><b>KS의료경영연구소(KSMED)</b>와 협력해, 창립 멤버 원장님께 <b>병원 경영 무료 상담권</b>을 드립니다 — 세무·MSO·수익개선·마케팅·자산 승계까지 우선 상담받으실 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="pn">2005년부터 1,000회+ 컨설팅 · 병의원 100곳+ 관리. <a href="https://ksmed.kr" target="_blank" rel="noopener">ksmed.kr ↗</a></div>
+      </div>
+      <div class="partner-card">
         <span class="ptag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg> 의료관광 플랫폼 · MediQueen</span>
         <div class="prow">
           <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
@@ -553,17 +618,6 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
           </div>
         </div>
         <div class="pn">다수의 해외 환자가 한국 병원·치과를 찾는 플랫폼. <a href="https://mediqueen.net" target="_blank" rel="noopener">mediqueen.net ↗</a></div>
-      </div>
-      <div class="partner-card">
-        <span class="ptag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> 병원 경영 컨설팅 · KSMED</span>
-        <div class="prow">
-          <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
-          <div>
-            <h4>병·의원 경영 컨설팅 우선 상담 <span class="new">NEW</span></h4>
-            <p><b>KS의료경영연구소(KSMED)</b>와 협력해, 창립 멤버 원장님께 <b>세무·MSO·수익개선·마케팅·자산 승계</b>까지 병원 경영 컨설팅 우선 상담을 제공합니다.</p>
-          </div>
-        </div>
-        <div class="pn">2005년부터 1,000회+ 컨설팅 · 병의원 100곳+ 관리. <a href="https://ksmed.kr" target="_blank" rel="noopener">ksmed.kr ↗</a></div>
       </div>
     </div>
   </div>
@@ -655,10 +709,10 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
         <label class="optin"><input type="checkbox" id="f-preorder" checked><span><b>출시·사전예약 알림 받기</b> — 관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</span></label>
       </div>
       <div class="field">
-        <label class="optin"><input type="checkbox" id="f-mediqueen" checked><span><b>의료관광 병원 우선 등록 신청</b> — 의료관광 플랫폼 MediQueen과 연계해 해외 환자 유치 채널에 우리 병원을 우선 등록합니다.</span></label>
+        <label class="optin"><input type="checkbox" id="f-consulting" checked><span><b>병원 경영 무료 상담권 신청</b> — KSMED(KS의료경영연구소) 무료 상담권 + 세무·수익개선·마케팅 등 경영 컨설팅을 우선 안내합니다.</span></label>
       </div>
       <div class="field">
-        <label class="optin"><input type="checkbox" id="f-consulting" checked><span><b>병원 경영 컨설팅 우선 상담 신청</b> — KSMED(KS의료경영연구소)와 연계해 세무·수익개선·마케팅 등 경영 컨설팅 상담을 우선 안내합니다.</span></label>
+        <label class="optin"><input type="checkbox" id="f-mediqueen" checked><span><b>의료관광 병원 우선 등록 신청</b> — 의료관광 플랫폼 MediQueen과 연계해 해외 환자 유치 채널에 우리 병원을 우선 등록합니다.</span></label>
       </div>
 
       <input class="hp" type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
