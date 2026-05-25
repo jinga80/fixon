@@ -459,8 +459,8 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
       </div>
       <div class="media-list">
         <figure class="media portrait"><span class="mlabel">실물</span><img src="/brand/point-shower-product.jpg" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)"></figure>
-        <figure class="media wide"><span class="mlabel">분사 데모</span><video src="/video/point-shower-spray.mp4" poster="/video/point-shower-spray-poster.jpg" autoplay muted loop playsinline preload="metadata"></video></figure>
-        <figure class="media wide"><span class="mlabel">조립 영상</span><video src="/video/point-shower-assembly.mp4" poster="/video/point-shower-assembly-poster.jpg" controls muted loop playsinline preload="none"></video></figure>
+        <figure class="media wide"><span class="mlabel">분사 데모</span><video src="/video/point-shower-spray.mp4" poster="/video/point-shower-spray-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
+        <figure class="media wide"><span class="mlabel">조립 영상</span><video src="/video/point-shower-assembly-web.mp4" poster="/video/point-shower-assembly-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
       </div>
     </div>
 
@@ -774,6 +774,20 @@ form.addEventListener('submit', async (e) => {
     btn.disabled = false; btn.textContent = '창립 멤버 등록하기 →';
   }
 });
+
+// 제품 영상: 화면에 보일 때만 자동재생(모바일 데이터·성능 고려)
+(function(){
+  const vids = document.querySelectorAll('.media video');
+  if (!vids.length) return;
+  if (!('IntersectionObserver' in window)) { vids.forEach(v => { v.muted = true; v.play().catch(()=>{}); }); return; }
+  const vo = new IntersectionObserver((ents) => {
+    ents.forEach(en => {
+      const v = en.target;
+      if (en.isIntersecting) { v.play().catch(()=>{}); } else { v.pause(); }
+    });
+  }, { threshold: 0.35 });
+  vids.forEach(v => vo.observe(v));
+})();
 
 const joinSec = document.getElementById('join');
 if ('IntersectionObserver' in window && joinSec) {
