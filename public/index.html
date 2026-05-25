@@ -127,9 +127,27 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 
 /* PRODUCTS */
 .product-feature{display:grid;grid-template-columns:0.92fr 1.08fr;gap:28px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:22px;box-shadow:var(--shadow-md);margin-bottom:18px;}
-.product-feature .shot{position:relative;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(135deg,#f3f5f7,#e6ebf0);aspect-ratio:4/5;}
-.product-feature .shot img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
-.product-feature .shot .tag{position:absolute;top:14px;left:14px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 11px;border-radius:100px;background:var(--success-soft);color:var(--success);box-shadow:var(--shadow-sm);}
+.product-feature .pf-visual{position:relative;border-radius:var(--r-xl);overflow:hidden;background:#0a0f1c;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);}
+.pf-stage{position:relative;aspect-ratio:4/5;background:#0a0f1c;}
+.pf-pane{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .4s;pointer-events:none;}
+.pf-pane.is-on{opacity:1;pointer-events:auto;}
+.pf-pane.pane-photo{object-fit:cover;object-position:50% 42%;}
+.pf-pane.pane-video{object-fit:cover;background:#0a0f1c;}
+.pf-visual .tag{position:absolute;top:12px;left:12px;z-index:6;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 11px;border-radius:100px;background:var(--success-soft);color:var(--success);box-shadow:var(--shadow-sm);}
+.pf-tabs{position:absolute;left:0;right:0;bottom:0;z-index:6;display:flex;gap:6px;padding:10px;background:linear-gradient(0deg,rgba(10,15,28,.9),rgba(10,15,28,.35) 70%,transparent);}
+.pf-tabs button{flex:1;font-size:13px;font-weight:700;color:#cbd5e1;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:8px 8px;transition:all .15s;}
+.pf-tabs button:hover{background:rgba(255,255,255,.16);}
+.pf-tabs button.on{background:var(--brand);color:#fff;border-color:var(--brand);}
+/* 분사 데모 모션그래픽 */
+.pane-spray{background:radial-gradient(circle at 50% 34%,#16223c,#0a0f1c);overflow:hidden;}
+.sp-cap{position:absolute;left:0;right:0;top:14px;text-align:center;font-size:12.5px;font-weight:700;color:#9fb4cf;font-family:var(--font-mono);letter-spacing:.02em;}
+.sp-nozzle{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:18%;color:#dbe4ee;filter:drop-shadow(0 4px 10px rgba(0,0,0,.45));}
+.sp-teeth{position:absolute;bottom:16%;left:50%;transform:translateX(-50%);width:54%;color:#eef3f8;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4));}
+.drop{position:absolute;top:30%;left:50%;width:9px;height:13px;border-radius:50% 50% 50% 50% / 62% 62% 40% 40%;background:linear-gradient(180deg,#d3ecff,#5fb0f0);box-shadow:0 0 8px rgba(120,200,255,.6);opacity:0;transform:translate(-50%,0);animation:sp-fall 1.6s linear infinite;animation-delay:var(--d);}
+@keyframes sp-fall{0%{opacity:0;top:30%;transform:translate(-50%,0) scale(.5);}12%{opacity:1;}82%{opacity:1;}100%{opacity:0;top:66%;transform:translate(calc(-50% + var(--x)),0) scale(1.05);}}
+.ripple{position:absolute;bottom:21%;left:50%;width:36px;height:12px;border:2px solid rgba(150,210,255,.55);border-radius:50%;opacity:0;transform:translate(-50%,0) scale(.4);animation:sp-rip 1.6s linear infinite;animation-delay:var(--d);}
+@keyframes sp-rip{0%,58%{opacity:0;transform:translate(-50%,0) scale(.4);}72%{opacity:.7;}100%{opacity:0;transform:translate(-50%,0) scale(1.6);}}
+@media(prefers-reduced-motion:reduce){.drop,.ripple{animation:none;opacity:.5;}}
 .pf-body .pf-eyebrow{font-family:var(--font-mono);font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--brand);text-transform:uppercase;}
 .pf-body h3{font-size:27px;font-weight:800;letter-spacing:-0.025em;margin:7px 0 10px;}
 .pf-body>p{font-size:15.5px;line-height:1.7;color:var(--text-secondary);}
@@ -279,7 +297,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   .hero{padding:44px 0 52px;}
   .pillars{grid-template-columns:1fr;gap:12px;}
   .product-feature{grid-template-columns:1fr;}
-  .product-feature .shot{aspect-ratio:3/3.4;}
+  .pf-stage{aspect-ratio:3/3.4;}
   .winwin{padding:24px 20px;}
   .winwin-grid{grid-template-columns:1fr;gap:20px;}
   .perks{grid-template-columns:1fr;}
@@ -393,9 +411,31 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
     </div>
 
     <div class="product-feature">
-      <div class="shot">
+      <div class="pf-visual">
         <span class="tag">개발 완료</span>
-        <img src="/brand/point-shower-product.png" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)">
+        <div class="pf-stage">
+          <img class="pf-pane pane-photo is-on" data-v="photo" src="/brand/point-shower-product.jpg" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)">
+          <div class="pf-pane pane-spray" data-v="spray" aria-hidden="true">
+            <div class="sp-cap">정확한 위치로 물 분사</div>
+            <svg class="sp-nozzle" viewBox="0 0 60 92" fill="currentColor"><rect x="13" y="4" width="34" height="40" rx="10" opacity=".92"/><rect x="22" y="42" width="16" height="26" rx="6" opacity=".78"/><path d="M26 66h8l-1.6 13a2.4 2.4 0 0 1-4.8 0Z" opacity=".7"/></svg>
+            <span class="drop" style="--x:-48px;--d:0s"></span>
+            <span class="drop" style="--x:-30px;--d:.55s"></span>
+            <span class="drop" style="--x:-14px;--d:.25s"></span>
+            <span class="drop" style="--x:0px;--d:.8s"></span>
+            <span class="drop" style="--x:16px;--d:.4s"></span>
+            <span class="drop" style="--x:32px;--d:1s"></span>
+            <span class="drop" style="--x:48px;--d:.15s"></span>
+            <span class="ripple" style="--d:.2s"></span>
+            <span class="ripple" style="--d:.95s"></span>
+            <svg class="sp-teeth" viewBox="0 0 220 46" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40 Q30 8 52 40 T96 40 T140 40 T184 40 T212 40"/></svg>
+          </div>
+          <video class="pf-pane pane-video" data-v="video" src="/video/point-shower-assembly.mp4" poster="/video/point-shower-assembly-poster.jpg" muted loop playsinline preload="none"></video>
+        </div>
+        <div class="pf-tabs">
+          <button type="button" class="on" data-v="photo">실물</button>
+          <button type="button" data-v="spray">분사 데모</button>
+          <button type="button" data-v="video">조립 영상</button>
+        </div>
       </div>
       <div class="pf-body">
         <div class="pf-eyebrow">Point Shower</div>
@@ -570,10 +610,10 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
         <label class="optin"><input type="checkbox" id="f-preorder" checked><span><b>출시·사전예약 알림 받기</b> — 관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</span></label>
       </div>
       <div class="field">
-        <label class="optin"><input type="checkbox" id="f-mediqueen"><span><b>의료관광 병원 우선 등록 신청</b> — 의료관광 플랫폼 MediQueen과 연계해 해외 환자 유치 채널에 우리 병원을 우선 등록합니다.</span></label>
+        <label class="optin"><input type="checkbox" id="f-mediqueen" checked><span><b>의료관광 병원 우선 등록 신청</b> — 의료관광 플랫폼 MediQueen과 연계해 해외 환자 유치 채널에 우리 병원을 우선 등록합니다.</span></label>
       </div>
       <div class="field">
-        <label class="optin"><input type="checkbox" id="f-consulting"><span><b>병원 경영 컨설팅 우선 상담 신청</b> — KSMED(KS의료경영연구소)와 연계해 세무·수익개선·마케팅 등 경영 컨설팅 상담을 우선 안내합니다.</span></label>
+        <label class="optin"><input type="checkbox" id="f-consulting" checked><span><b>병원 경영 컨설팅 우선 상담 신청</b> — KSMED(KS의료경영연구소)와 연계해 세무·수익개선·마케팅 등 경영 컨설팅 상담을 우선 안내합니다.</span></label>
       </div>
 
       <input class="hp" type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -688,6 +728,17 @@ form.addEventListener('submit', async (e) => {
     alert('등록 중 문제가 발생했습니다: ' + err.message + '\n잠시 후 다시 시도해 주세요.');
     btn.disabled = false; btn.textContent = '창립 멤버 등록하기 →';
   }
+});
+
+// 제품 비주얼 탭 전환 (실물 / 분사 데모 / 조립 영상)
+document.querySelectorAll('.pf-tabs button').forEach(b => {
+  b.addEventListener('click', () => {
+    const v = b.dataset.v, vis = b.closest('.pf-visual');
+    vis.querySelectorAll('.pf-tabs button').forEach(x => x.classList.toggle('on', x === b));
+    vis.querySelectorAll('.pf-pane').forEach(p => p.classList.toggle('is-on', p.dataset.v === v));
+    const vid = vis.querySelector('.pane-video');
+    if (vid) { if (v === 'video') { vid.play().catch(() => {}); } else { vid.pause(); } }
+  });
 });
 
 const joinSec = document.getElementById('join');
