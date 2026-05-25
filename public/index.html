@@ -162,6 +162,22 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .product-feature.reverse{grid-template-columns:1.08fr 0.92fr;}
 .pf-visual.single .pf-stage{aspect-ratio:4/5;}
 .pf-visual .tag.dev{background:var(--brand-soft);color:var(--brand-deep);}
+/* MediQueen 해외 호평 엔도스먼트 */
+.endorse{background:linear-gradient(135deg,#16223c,#0f172a);color:#fff;}
+.endorse .sec-inner{max-width:920px;}
+.endorse-card{display:flex;gap:24px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-2xl);padding:34px;}
+.endorse-icon{flex:none;width:60px;height:60px;border-radius:16px;display:grid;place-items:center;background:rgba(255,107,43,.16);color:#ffb38a;}
+.endorse-icon svg{width:30px;height:30px;}
+.eb-eyebrow{font-family:var(--font-mono);font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffb38a;margin-bottom:10px;}
+.endorse-body h2{font-size:clamp(22px,3.2vw,30px);font-weight:800;letter-spacing:-0.03em;line-height:1.3;color:#fff;margin-bottom:12px;}
+.endorse-body>p{font-size:15.5px;line-height:1.72;color:#cbd5e1;margin-bottom:18px;}
+.endorse-body>p b{color:#fff;font-weight:800;}
+.endorse-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.endorse-tags span{font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+.endorse-tags svg{width:14px;height:14px;color:#ffb38a;}
+.endorse-by{font-size:13.5px;color:#94a3b8;}
+.endorse-by a{color:#ffb38a;font-weight:700;}
+@media(max-width:680px){.endorse-card{flex-direction:column;gap:16px;padding:24px 20px;}}
 
 /* WIN-WIN */
 .winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:38px;}
@@ -364,7 +380,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></div>
         <div class="k">새로운 환자</div>
         <h3>해외 환자 유치</h3>
-        <p>의료관광 플랫폼 MediQueen과 연계해, 해외 환자에게 우리 병원을 노출합니다.</p>
+        <p>해외에서 호평받은 제품 — 의료관광 플랫폼 MediQueen과 연계해 해외 환자에게 우리 병원을 노출합니다.</p>
       </div>
       <div class="v3">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
@@ -463,11 +479,36 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
           <span class="spec">액상·연고</span>
         </div>
       </div>
-      <div class="pf-visual single">
+      <div class="pf-visual">
         <span class="tag dev">개발 중</span>
         <div class="pf-stage">
-          <img class="pf-pane pane-photo is-on" src="/brand/point-infuser-product.jpg" alt="Point Infuser — 맞춤 트레이에 도포 펜을 결합한 약물 전달 디바이스">
+          <img class="pf-pane pane-photo is-on" data-v="a" src="/brand/point-infuser-product.jpg" alt="Point Infuser — 맞춤 트레이에 도포 펜을 결합한 모습">
+          <img class="pf-pane pane-photo" data-v="b" src="/brand/point-infuser-product-2.jpg" alt="Point Infuser — 맞춤 트레이와 도포 펜 구성품">
         </div>
+        <div class="pf-tabs">
+          <button type="button" class="on" data-v="a">결합형</button>
+          <button type="button" data-v="b">구성품</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 해외 호평 · MediQueen 엔도스먼트 -->
+<section class="sec endorse" id="global">
+  <div class="sec-inner">
+    <div class="endorse-card">
+      <div class="endorse-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></div>
+      <div class="endorse-body">
+        <div class="eb-eyebrow">해외 환자들의 호응 · MediQueen</div>
+        <h2>해외 환자들이 먼저 주목한 GraphyStyle</h2>
+        <p>의료관광 플랫폼 <b>MediQueen</b>에서 <b>Point Shower</b>와 <b>Point Infuser</b> 두 제품 모두 호평받았습니다. 개인 맞춤 구강 케어라는 컨셉에 <b>해외 환자들의 반응도 뜨거웠고</b>, 한국 치과의 차별화된 경쟁력으로 주목받고 있습니다. 창립 멤버 치과는 이 흐름에 가장 먼저 연결됩니다.</p>
+        <div class="endorse-tags">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 두 제품 모두 호평</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg> 해외 환자 호응</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 의료관광 연계</span>
+        </div>
+        <div class="endorse-by">의료관광 플랫폼 파트너십 · <a href="https://mediqueen.net" target="_blank" rel="noopener">mediqueen.net ↗</a></div>
       </div>
     </div>
   </div>
@@ -518,7 +559,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
           <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
           <div>
             <h4>치과 의료관광 병원 우선 등록 <span class="new">NEW</span></h4>
-            <p>의료관광 플랫폼 <b>MediQueen(메디퀸)</b>과 협력해, 창립 멤버 치과를 <b>해외 환자 유치 의료관광 병원으로 우선 등록</b>해 드립니다. 임플란트·교정·미백 등을 찾는 외국인 환자에게 병원을 노출하는 새 채널입니다.</p>
+            <p><b>Point Shower·Point Infuser가 해외 환자들에게 호평받은</b> 의료관광 플랫폼 <b>MediQueen(메디퀸)</b>과 협력해, 창립 멤버 치과를 <b>해외 환자 유치 의료관광 병원으로 우선 등록</b>해 드립니다. 임플란트·교정·미백 등을 찾는 외국인 환자에게 병원을 노출하는 새 채널입니다.</p>
           </div>
         </div>
         <div class="pn">다수의 해외 환자가 한국 병원·치과를 찾는 플랫폼. <a href="https://mediqueen.net" target="_blank" rel="noopener">mediqueen.net ↗</a></div>
