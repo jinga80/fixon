@@ -3,24 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>GraphyStyle — 개인 맞춤 구강 케어 · 창립 멤버 모집</title>
+<title>GraphyStyle — 환자 맞춤 케어부터 병원 성장까지 · 창립 멤버 모집</title>
 
-<!-- ===== Open Graph / KakaoTalk / SMS / Slack ===== -->
+<!-- ===== Open Graph ===== -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="GraphyStyle">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="환자 맞춤 구강 케어, 원장님과 함께 — GraphyStyle 창립 멤버 모집">
-<meta property="og:description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. 1분 등록으로 출시·사전예약 소식을 가장 먼저 받고, 다음 디바이스 개발에 함께하세요.">
+<meta property="og:title" content="환자 맞춤 케어부터 병원 성장까지 — GraphyStyle 창립 멤버 모집">
+<meta property="og:description" content="맞춤 구강 케어 제품 · 해외 환자 유치(MediQueen) · 병원 경영 컨설팅(KSMED)을 한 번에. SIDEX 2026 현장 창립 멤버를 모집합니다 — 1분 무료 등록.">
 <meta property="og:image" content="https://graphystyle.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="GraphyStyle — 3D 프린팅 개인 맞춤 구강 케어">
 <meta property="og:url" content="https://graphystyle.com/">
-
-<!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="환자 맞춤 구강 케어, 원장님과 함께 — GraphyStyle 창립 멤버 모집">
-<meta name="twitter:description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. 1분 등록으로 함께하세요.">
+<meta name="twitter:title" content="환자 맞춤 케어부터 병원 성장까지 — GraphyStyle 창립 멤버 모집">
+<meta name="twitter:description" content="맞춤 구강 케어 + 해외 환자 유치 + 병원 경영 컨설팅. 1분 무료 등록.">
 <meta name="twitter:image" content="https://graphystyle.com/og-image.png">
 
 <!-- ===== Favicon / PWA ===== -->
@@ -34,8 +32,7 @@
 <meta name="apple-mobile-web-app-title" content="GraphyStyle">
 <meta name="application-name" content="GraphyStyle">
 
-<!-- ===== SEO ===== -->
-<meta name="description" content="형상기억소재 + 3D 프린팅으로 만드는 환자 개인 맞춤 구강 케어. SIDEX 2026 현장 창립 멤버 모집 — 1분 등록.">
+<meta name="description" content="맞춤 구강 케어 제품 · 해외 환자 유치 · 병원 경영 컨설팅을 한 번에. SIDEX 2026 창립 멤버 모집 — 1분 무료 등록.">
 <meta name="author" content="GraphyStyle">
 <link rel="canonical" href="https://graphystyle.com/">
 
@@ -66,7 +63,7 @@ button,input{font-family:inherit;}
 button{cursor:pointer;border:none;background:none;color:inherit;}
 ::selection{background:var(--brand-soft);color:var(--brand-deep);}
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border-subtle);}
 .header-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
 .gs-logo{height:28px;width:auto;display:block;}
@@ -77,72 +74,89 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .btn-primary:hover{background:var(--brand-deep);box-shadow:0 6px 16px -4px rgba(255,107,43,.45);}
 .btn-ghost{background:transparent;color:var(--text);border-color:var(--border);}
 .btn-ghost:hover{background:var(--bg-section);border-color:var(--border-strong);}
+.btn-light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.28);}
+.btn-light:hover{background:rgba(255,255,255,.2);}
 .btn-lg{padding:16px 28px;font-size:17px;border-radius:var(--r-md);}
 .btn:disabled{opacity:.6;cursor:progress;}
 
-/* ===== HERO ===== */
-.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--bg-section) 100%);padding:72px 0 80px;}
+/* HERO */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--bg-section) 100%);padding:64px 0 72px;}
 .hero::before{content:'';position:absolute;top:-220px;right:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.12),transparent 70%);pointer-events:none;}
 .hero::after{content:'';position:absolute;bottom:-200px;left:-180px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,43,.06),transparent 70%);pointer-events:none;}
-.hero-inner{position:relative;max-width:760px;margin:0 auto;padding:0 24px;text-align:center;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:#fff;border:1px solid var(--brand-tint);color:var(--brand-deep);font-size:14px;font-weight:700;box-shadow:var(--shadow-sm);margin-bottom:26px;}
-.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.18);}
-.hero h1{font-size:clamp(34px,6.4vw,58px);font-weight:900;line-height:1.16;letter-spacing:-0.04em;color:var(--text);margin-bottom:22px;}
+.hero-inner{position:relative;max-width:780px;margin:0 auto;padding:0 24px;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:#fff;border:1px solid var(--brand-tint);color:var(--brand-deep);font-size:14px;font-weight:700;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.18);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(255,107,43,.22);}50%{box-shadow:0 0 0 6px rgba(255,107,43,.05);}}
+.hero h1{font-size:clamp(33px,6.2vw,56px);font-weight:900;line-height:1.18;letter-spacing:-0.04em;color:var(--text);margin-bottom:20px;}
 .hero h1 em{font-style:normal;color:var(--brand);position:relative;white-space:nowrap;}
-.hero h1 em::after{content:'';position:absolute;left:-2px;right:-2px;bottom:6px;height:11px;background:var(--brand-tint);z-index:-1;border-radius:4px;}
-.hero-sub{font-size:clamp(16px,2.3vw,19px);line-height:1.72;color:var(--text-secondary);max-width:600px;margin:0 auto 34px;}
+.hero h1 em::after{content:'';position:absolute;left:-2px;right:-2px;bottom:5px;height:11px;background:var(--brand-tint);z-index:-1;border-radius:4px;}
+.hero-sub{font-size:clamp(16px,2.3vw,19px);line-height:1.72;color:var(--text-secondary);max-width:620px;margin:0 auto 30px;}
 .hero-sub b{color:var(--text);font-weight:800;}
-.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:34px;}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;}
 .hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:100px;background:#fff;border:1px solid var(--border);font-size:13.5px;font-weight:600;color:var(--text-secondary);box-shadow:var(--shadow-sm);}
 .chip svg{width:15px;height:15px;color:var(--brand);}
 
-/* ===== SECTION BASE ===== */
-.sec{padding:76px 0;}
+/* SECTION BASE */
+.sec{padding:72px 0;}
 .sec.alt{background:var(--bg-section);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .sec-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
-.sec-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+.sec-head{text-align:center;max-width:660px;margin:0 auto 42px;}
 .eyebrow{display:inline-block;font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:12px;}
 .sec-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.035em;line-height:1.25;color:var(--text);margin-bottom:14px;}
 .sec-desc{font-size:17px;line-height:1.7;color:var(--text-secondary);}
 
-/* ===== PILLARS (about) ===== */
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.pillar{background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:30px 26px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s;}
-.pillar:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
-.pillar .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
-.pillar .ic svg{width:28px;height:28px;color:var(--brand);}
-.pillar h3{font-size:19px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px;}
-.pillar p{font-size:15px;line-height:1.6;color:var(--text-tertiary);}
+/* VALUE 3 (핵심 후킹) */
+.value3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.v3{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:30px 26px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s;overflow:hidden;}
+.v3::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--brand),var(--brand-deep));}
+.v3:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+.v3 .ic{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);margin-bottom:18px;}
+.v3 .ic svg{width:27px;height:27px;color:var(--brand);}
+.v3 .k{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;}
+.v3 h3{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:9px;}
+.v3 p{font-size:14.5px;line-height:1.6;color:var(--text-secondary);}
 
-/* ===== PRODUCTS ===== */
-.products{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.product{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:32px;box-shadow:var(--shadow-sm);overflow:hidden;}
-.product::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand-deep));}
-.product .badge{position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 11px;border-radius:100px;}
-.product .badge.done{background:var(--success-soft);color:var(--success);}
-.product .badge.dev{background:var(--brand-soft);color:var(--brand-deep);}
-.product .ic{width:60px;height:60px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);margin-bottom:22px;}
-.product .ic svg{width:30px;height:30px;color:var(--brand);}
-.product h3{font-size:23px;font-weight:800;letter-spacing:-0.025em;margin-bottom:10px;}
-.product p{font-size:15.5px;line-height:1.65;color:var(--text-secondary);}
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pillar{background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:26px 22px;text-align:center;box-shadow:var(--shadow-sm);}
+.pillar .ic{width:52px;height:52px;margin:0 auto 16px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
+.pillar .ic svg{width:26px;height:26px;color:var(--brand);}
+.pillar h3{font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-bottom:7px;}
+.pillar p{font-size:14.5px;line-height:1.6;color:var(--text-tertiary);}
 
-/* ===== WIN-WIN ===== */
-.winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:40px;}
-.winwin-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+/* PRODUCTS */
+.product-feature{display:grid;grid-template-columns:0.92fr 1.08fr;gap:28px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:var(--r-2xl);padding:22px;box-shadow:var(--shadow-md);margin-bottom:18px;}
+.product-feature .shot{position:relative;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(135deg,#f3f5f7,#e6ebf0);aspect-ratio:4/5;}
+.product-feature .shot img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
+.product-feature .shot .tag{position:absolute;top:14px;left:14px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 11px;border-radius:100px;background:var(--success-soft);color:var(--success);box-shadow:var(--shadow-sm);}
+.pf-body .pf-eyebrow{font-family:var(--font-mono);font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--brand);text-transform:uppercase;}
+.pf-body h3{font-size:27px;font-weight:800;letter-spacing:-0.025em;margin:7px 0 10px;}
+.pf-body>p{font-size:15.5px;line-height:1.7;color:var(--text-secondary);}
+.specs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
+.spec{font-family:var(--font-mono);font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;background:var(--brand-soft);color:var(--brand-deep);border:1px solid var(--brand-tint);}
+.product-mini{background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-sm);display:flex;gap:18px;align-items:flex-start;}
+.product-mini .ic{flex:none;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 1px rgba(255,107,43,.18);}
+.product-mini .ic svg{width:27px;height:27px;color:var(--brand);}
+.product-mini .badge{font-family:var(--font-mono);font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;background:var(--brand-soft);color:var(--brand-deep);margin-left:8px;vertical-align:2px;}
+.product-mini h3{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;}
+.product-mini p{font-size:14.5px;line-height:1.6;color:var(--text-secondary);}
+
+/* WIN-WIN */
+.winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:38px;}
+.winwin-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
 .ww{display:flex;gap:16px;align-items:flex-start;}
 .ww .ic{flex:none;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.08);}
 .ww .ic svg{width:26px;height:26px;color:var(--brand);}
 .ww b{display:block;font-size:17px;font-weight:800;color:var(--brand-deep);margin-bottom:6px;}
 .ww p{font-size:15px;line-height:1.6;color:var(--text-secondary);}
 
-/* ===== WHY / 혜택 ===== */
+/* PERKS + PARTNERS */
 .perks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
 .perk{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:24px;box-shadow:var(--shadow-sm);}
 .perk .n{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--brand);color:#fff;font-weight:900;font-size:17px;}
 .perk h4{font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-bottom:5px;}
 .perk p{font-size:14.5px;line-height:1.6;color:var(--text-tertiary);}
-/* 파트너 혜택 */
 .partner-head{display:flex;align-items:center;gap:14px;margin:30px 0 16px;font-family:var(--font-mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);}
 .partner-head::before,.partner-head::after{content:'';height:1px;background:var(--border);flex:1;}
 .partners{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
@@ -159,7 +173,35 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .partner-card .pn{font-size:12.5px;color:var(--text-muted);margin-top:auto;padding-top:4px;}
 .partner-card .pn a{color:var(--brand);font-weight:700;}
 
-/* ===== JOIN (form) ===== */
+/* URGENCY BAND */
+.urgency{background:linear-gradient(135deg,#16203a,#0f172a);color:#fff;}
+.urgency .sec-inner{text-align:center;}
+.urgency .eyebrow{color:#ffb38a;}
+.urgency h2{font-size:clamp(24px,3.6vw,34px);font-weight:800;letter-spacing:-0.03em;margin-bottom:28px;color:#fff;}
+.urgency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;text-align:left;}
+.ub{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-xl);padding:24px;}
+.ub .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(255,107,43,.16);color:#ffb38a;margin-bottom:14px;}
+.ub .ic svg{width:24px;height:24px;}
+.ub h4{font-size:17px;font-weight:800;margin-bottom:6px;color:#fff;}
+.ub p{font-size:14px;line-height:1.6;color:#cbd5e1;}
+
+/* STEPS */
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:st;}
+.step{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:28px 24px;box-shadow:var(--shadow-sm);}
+.step .sn{font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.06em;margin-bottom:10px;}
+.step h4{font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-bottom:7px;}
+.step p{font-size:14.5px;line-height:1.6;color:var(--text-tertiary);}
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto;}
+.faq details{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:0 20px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
+.faq summary{list-style:none;cursor:pointer;padding:18px 0;font-size:16.5px;font-weight:700;color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:14px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:'+';font-size:22px;font-weight:600;color:var(--brand);transition:transform .2s;}
+.faq details[open] summary::after{transform:rotate(45deg);}
+.faq details p{padding:0 0 18px;font-size:15px;line-height:1.7;color:var(--text-secondary);}
+
+/* JOIN (form) */
 .join{background:linear-gradient(180deg,#16203a,#0f172a);color:#fff;}
 .join .sec-inner{max-width:680px;}
 .join .eyebrow{color:#ffb38a;}
@@ -176,7 +218,9 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .choice .t{font-size:15px;font-weight:700;display:block;}
 .choice .d{font-size:12.5px;color:var(--text-tertiary);}
 .choice:has(input:checked){border-color:var(--brand);background:var(--brand-soft);box-shadow:0 0 0 3px rgba(255,107,43,.12);}
-.optin{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer;background:var(--bg-soft);}
+.optin{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer;background:var(--bg-soft);transition:all .14s;}
+.optin:hover{border-color:var(--brand);}
+.optin:has(input:checked){border-color:var(--brand);background:var(--brand-soft);}
 .optin input{width:18px;height:18px;accent-color:var(--brand);flex:none;margin-top:2px;}
 .optin span{font-size:14px;line-height:1.55;color:var(--text-secondary);}
 .optin b{color:var(--text);}
@@ -192,10 +236,10 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .done.show{display:block;}
 .done .ic{width:64px;height:64px;border-radius:50%;background:var(--success-soft);color:var(--success);display:grid;place-items:center;font-size:32px;font-weight:900;margin:0 auto 18px;}
 .done h3{font-size:24px;font-weight:800;margin-bottom:10px;}
-.done p{font-size:15.5px;color:var(--text-secondary);line-height:1.65;max-width:460px;margin:0 auto 22px;}
+.done p{font-size:15.5px;color:var(--text-secondary);line-height:1.65;max-width:480px;margin:0 auto 22px;}
 .done-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 
-/* ===== SECONDARY (더보기) ===== */
+/* MORE */
 .more{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
 .more-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s,border-color .18s;}
 .more-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--brand);}
@@ -207,33 +251,37 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .more-card .go span{transition:transform .16s;}
 .more-card:hover .go span{transform:translateX(5px);}
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer{background:#fff;border-top:1px solid var(--border);padding:48px 0 40px;}
 .footer-inner{max-width:1000px;margin:0 auto;padding:0 24px;}
 .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap;margin-bottom:28px;}
 .footer .gs-logo{height:28px;}
-.footer-top p{font-size:14.5px;color:var(--text-tertiary);margin-top:14px;max-width:340px;line-height:1.6;}
+.footer-top p{font-size:14.5px;color:var(--text-tertiary);margin-top:14px;max-width:360px;line-height:1.6;}
 .footer-links{display:flex;gap:26px;flex-wrap:wrap;}
 .footer-links a{font-size:14.5px;color:var(--text-secondary);font-weight:600;}
 .footer-links a:hover{color:var(--brand);}
 .footer-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--border-subtle);font-size:13px;color:var(--text-muted);}
 
-/* ===== STICKY MOBILE CTA ===== */
+/* STICKY MOBILE CTA */
 .mobile-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(15,23,42,.08);}
 .mobile-cta .btn{width:100%;font-size:17px;padding:15px;}
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:820px){
+/* RESPONSIVE */
+@media(max-width:880px){
+  .value3{grid-template-columns:1fr;}
+  .urgency-grid{grid-template-columns:1fr;}
+  .steps3{grid-template-columns:1fr;}
   .more{grid-template-columns:1fr;}
 }
 @media(max-width:680px){
   body{font-size:16px;}
-  .sec{padding:54px 0;}
-  .hero{padding:48px 0 56px;}
+  .sec{padding:52px 0;}
+  .hero{padding:44px 0 52px;}
   .pillars{grid-template-columns:1fr;gap:12px;}
-  .products{grid-template-columns:1fr;}
-  .winwin{padding:26px 22px;}
-  .winwin-grid{grid-template-columns:1fr;gap:22px;}
+  .product-feature{grid-template-columns:1fr;}
+  .product-feature .shot{aspect-ratio:3/3.4;}
+  .winwin{padding:24px 20px;}
+  .winwin-grid{grid-template-columns:1fr;gap:20px;}
   .perks{grid-template-columns:1fr;}
   .partners{grid-template-columns:1fr;}
   .choices{grid-template-columns:1fr;}
@@ -241,14 +289,14 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   .formcard{padding:24px 20px;}
   .header-cta .btn{padding:10px 16px;font-size:15px;}
   .mobile-cta{display:block;}
-  body{padding-bottom:78px;}  /* sticky CTA 공간 */
+  body{padding-bottom:78px;}
   .footer-top{flex-direction:column;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a href="/" class="logo" aria-label="GraphyStyle 홈"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo"></a>
@@ -258,26 +306,57 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge"><span class="dot"></span> SIDEX 2026 · 현장 한정 창립 멤버 초대</div>
-    <h1>환자에게 꼭 맞는 구강 케어,<br><em>원장님과 함께</em> 만듭니다</h1>
-    <p class="hero-sub">그래피의 형상기억소재를 3D 프린터로 출력해 환자 한 분께 꼭 맞게 제작하는 개인 맞춤 구강 케어, <b>GraphyStyle</b>. 지금 창립 멤버로 합류하면 출시·사전예약 소식을 가장 먼저 받고, 다음 디바이스 개발에 직접 참여하실 수 있습니다.</p>
+    <div class="hero-badge"><span class="dot"></span> SIDEX 2026 · 선착순 창립 멤버 모집</div>
+    <h1>환자 맞춤 케어부터<br>병원 성장까지, <em>원장님과 함께</em></h1>
+    <p class="hero-sub">GraphyStyle 창립 멤버가 되면 <b>차별화된 맞춤 구강 케어 제품</b>, <b>해외 환자 유치 채널</b>, <b>병원 경영 컨설팅</b>까지 한 번에 시작합니다. SIDEX 현장에서 만난 원장님께 드리는 초대 — 등록은 1분, 무료입니다.</p>
     <div class="hero-cta">
       <a href="#join" class="btn btn-primary btn-lg">1분 만에 창립 멤버 되기 →</a>
-      <a href="#product" class="btn btn-ghost btn-lg">제품 먼저 보기</a>
+      <a href="#value" class="btn btn-ghost btn-lg">혜택 먼저 보기</a>
     </div>
     <div class="hero-chips">
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> COEX · SIDEX 2026</span>
       <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M3 21h18M9 21v-6h6v6"/></svg> 그래피 부스 D-601·701</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Point Shower 개발 완료</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 무료 등록 · 부담 없음</span>
     </div>
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
-<section class="sec" id="about">
+<!-- VALUE 3 (핵심 후킹) -->
+<section class="sec" id="value">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">3-in-1 Founding Member</span>
+      <h2 class="sec-title">한 번의 등록으로, 원장님이 얻는 3가지</h2>
+      <p class="sec-desc">GraphyStyle 창립 멤버는 제품을 넘어 <b>병원의 성장</b>까지 함께합니다.</p>
+    </div>
+    <div class="value3">
+      <div class="v3">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div>
+        <div class="k">차별화 진료</div>
+        <h3>환자 맞춤 구강 케어</h3>
+        <p>3D 프린팅 개인 맞춤 디바이스로, 우리 병원만의 차별화된 케어를 제공합니다.</p>
+      </div>
+      <div class="v3">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></div>
+        <div class="k">새로운 환자</div>
+        <h3>해외 환자 유치</h3>
+        <p>의료관광 플랫폼 MediQueen과 연계해, 해외 환자에게 우리 병원을 노출합니다.</p>
+      </div>
+      <div class="v3">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <div class="k">병원 성장</div>
+        <h3>경영 컨설팅</h3>
+        <p>KSMED와 연계해 세무·수익개선·마케팅까지, 병원 경영을 우선 상담합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec alt" id="about">
   <div class="sec-inner">
     <div class="sec-head">
       <span class="eyebrow">What is GraphyStyle</span>
@@ -304,33 +383,44 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ===== PRODUCTS ===== -->
-<section class="sec alt" id="product">
+<!-- PRODUCTS -->
+<section class="sec" id="product">
   <div class="sec-inner">
     <div class="sec-head">
       <span class="eyebrow">Product Lineup</span>
       <h2 class="sec-title">지금, 그리고 다음 디바이스</h2>
       <p class="sec-desc">첫 제품은 개발을 마쳤고, 다음 디바이스는 현장 원장님과 함께 만들어 갑니다.</p>
     </div>
-    <div class="products">
-      <div class="product">
-        <span class="badge done">개발 완료</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></div>
-        <h3>Point Shower</h3>
-        <p>개인 맞춤 치아 세정기. 닦이지 않던 부위까지, 필요한 위치로 정확히 물을 분사합니다.</p>
+
+    <div class="product-feature">
+      <div class="shot">
+        <span class="tag">개발 완료</span>
+        <img src="/brand/point-shower-product.png" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)">
       </div>
-      <div class="product">
-        <span class="badge dev">개발 중</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
-        <h3>Point Infuser</h3>
-        <p>맞춤 트레이로 약물(액상·연고)을 잇몸의 정확한 부위에 전달하는 차세대 케어 디바이스.</p>
+      <div class="pf-body">
+        <div class="pf-eyebrow">Point Shower</div>
+        <h3>개인 맞춤 치아 세정기</h3>
+        <p>환자의 구강에 꼭 맞게 출력한 투명 트레이에 분사 노즐을 결합 — 칫솔이 닿지 않던 부위까지, 필요한 위치로 정확히 물을 분사합니다. 형상기억소재로 착용감은 부드럽게, 세정은 정밀하게.</p>
+        <div class="specs">
+          <span class="spec">형상기억소재</span>
+          <span class="spec">3D 프린팅</span>
+          <span class="spec">개인 맞춤</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-mini">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
+      <div>
+        <h3>Point Infuser <span class="badge">개발 중</span></h3>
+        <p>맞춤 트레이로 약물(액상·연고)을 잇몸의 정확한 부위에 전달하는 차세대 케어 디바이스. 창립 멤버 원장님과 함께 완성해 갑니다.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== WIN-WIN ===== -->
-<section class="sec">
+<!-- WIN-WIN -->
+<section class="sec alt">
   <div class="sec-inner">
     <div class="sec-head">
       <span class="eyebrow">Win-Win Care</span>
@@ -351,20 +441,19 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ===== WHY JOIN ===== -->
-<section class="sec alt" id="why">
+<!-- PERKS + PARTNERS -->
+<section class="sec" id="why">
   <div class="sec-inner">
     <div class="sec-head">
       <span class="eyebrow">Founding Member</span>
-      <h2 class="sec-title">지금 합류하면, 창립 멤버 혜택</h2>
-      <p class="sec-desc">SIDEX 현장에서 먼저 만난 원장님들께 드리는 초대입니다. 등록은 1분이면 충분합니다.</p>
+      <h2 class="sec-title">창립 멤버가 받는 혜택</h2>
+      <p class="sec-desc">SIDEX 현장에서 먼저 만난 원장님들께 드리는 초대입니다. 제품을 넘어, 병원의 성장까지 함께합니다.</p>
     </div>
     <div class="perks">
       <div class="perk"><span class="n">1</span><div><h4>출시·사전예약 우선 알림</h4><p>관심 제품이 출시·사전예약을 시작하면 가장 먼저 안내받습니다.</p></div></div>
       <div class="perk"><span class="n">2</span><div><h4>신제품 우선 체험</h4><p>다음 디바이스의 시제품을 현장 원장님께 먼저 선보입니다.</p></div></div>
       <div class="perk"><span class="n">3</span><div><h4>공동개발 참여</h4><p>아이디어 제안과 임상 피드백으로 제품 방향에 직접 참여하실 수 있습니다.</p></div></div>
       <div class="perk"><span class="n">4</span><div><h4>창립 멤버 전용 혜택</h4><p>초기 합류 원장님께만 드리는 한정 혜택으로 함께 시작합니다.</p></div></div>
-
     </div>
 
     <div class="partner-head">함께하는 파트너 혜택 — 원장님의 병원 성장까지</div>
@@ -395,13 +484,70 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ===== JOIN (FORM) ===== -->
+<!-- URGENCY -->
+<section class="sec urgency">
+  <div class="sec-inner">
+    <span class="eyebrow">Why now</span>
+    <h2>왜 지금, SIDEX에서 등록해야 할까요?</h2>
+    <div class="urgency-grid">
+      <div class="ub">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h4>현장 한정 초대</h4>
+        <p>창립 멤버 혜택은 SIDEX 현장에서 만난 원장님께 우선 드립니다.</p>
+      </div>
+      <div class="ub">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h4>선착순 마감</h4>
+        <p>초기 합류 인원에 한해 전용 혜택과 우선 연결을 제공합니다.</p>
+      </div>
+      <div class="ub">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h4>무료 · 부담 없음</h4>
+        <p>등록은 1분, 비용도 의무 구매도 없습니다. 정보·혜택 안내만 드립니다.</p>
+      </div>
+    </div>
+    <a href="#join" class="btn btn-primary btn-lg">지금 창립 멤버로 등록하기 →</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="how">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="sec-title">참여는 이렇게, 단 3단계</h2>
+    </div>
+    <div class="steps3">
+      <div class="step"><div class="sn">STEP 01</div><h4>1분 등록</h4><p>성함과 관심만 남기면 끝. 부스 QR 또는 이 페이지에서 바로 등록합니다.</p></div>
+      <div class="step"><div class="sn">STEP 02</div><h4>맞춤 안내</h4><p>관심 제품·혜택(의료관광·경영 컨설팅)에 맞춰 개별 안내를 드립니다.</p></div>
+      <div class="step"><div class="sn">STEP 03</div><h4>혜택 시작</h4><p>출시·사전예약 우선 알림과 파트너 혜택 연결이 바로 시작됩니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec alt" id="faq">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>등록에 비용이 드나요?</summary><p>아니요. 창립 멤버 등록은 <b>무료</b>이며, 의무 구매도 없습니다. 출시·혜택 안내를 우선 받으시는 초대입니다.</p></details>
+      <details><summary>의료관광·경영 컨설팅 혜택은 어떻게 받나요?</summary><p>가입 시 원하시는 혜택을 체크하시면, MediQueen(의료관광 병원 등록)·KSMED(경영 컨설팅 상담)와 <b>우선 연결</b>해 드립니다. 강제 사항은 없으며 원하시는 항목만 진행됩니다.</p></details>
+      <details><summary>제 정보는 안전하게 관리되나요?</summary><p>입력하신 연락처는 <b>출시·혜택 안내 목적으로만</b> 사용되며, 언제든 수신을 중단하실 수 있습니다.</p></details>
+      <details><summary>아직 제품을 안 써봤는데 등록해도 되나요?</summary><p>물론입니다. 관심만 있으셔도 됩니다. 그래피 부스(D-601·701)에서 <b>Point Shower 실물</b>을 직접 만져보고 등록하셔도 좋습니다.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN (FORM) -->
 <section class="sec join" id="join">
   <div class="sec-inner">
     <div class="sec-head">
-      <span class="eyebrow">1분 등록</span>
-      <h2 class="sec-title">창립 멤버 등록</h2>
-      <p class="sec-desc">관심 제품만 체크하셔도 등록됩니다. 출시·사전예약 소식을 가장 먼저 보내드립니다.</p>
+      <span class="eyebrow">1분 · 무료 등록</span>
+      <h2 class="sec-title">지금, 창립 멤버 등록</h2>
+      <p class="sec-desc">관심 항목만 체크하셔도 등록됩니다. 출시·사전예약 소식과 파트너 혜택을 가장 먼저 보내드립니다.</p>
     </div>
 
     <form class="formcard" id="join-form" autocomplete="on">
@@ -433,13 +579,13 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
       <input class="hp" type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <button type="submit" class="submit" id="submit-btn">창립 멤버 등록하기 →</button>
-      <div class="formnote">입력하신 연락처는 출시·사전예약 안내 목적으로만 사용되며, 언제든 수신을 중단할 수 있습니다.</div>
+      <div class="formnote">입력하신 연락처는 출시·사전예약 및 선택하신 혜택 안내 목적으로만 사용되며, 언제든 수신을 중단할 수 있습니다.</div>
     </form>
 
     <div class="done" id="done">
       <div class="ic">✓</div>
       <h3>등록되었습니다. 감사합니다!</h3>
-      <p>출시·사전예약 소식을 가장 먼저 보내드리겠습니다. SIDEX 그래피 부스(D-601·701, C·D홀 연결 로비)에서 Point Shower 실물도 만나보세요.</p>
+      <p>출시·사전예약 소식과 선택하신 혜택을 가장 먼저 안내드리겠습니다. SIDEX 그래피 부스(D-601·701, C·D홀 연결 로비)에서 Point Shower 실물도 만나보세요.</p>
       <div class="done-links">
         <a href="point-shower-community/index.html" class="btn btn-primary">커뮤니티 둘러보기 →</a>
         <a href="sidex.html" class="btn btn-ghost">발표 자료 보기</a>
@@ -448,7 +594,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ===== MORE (sub-URIs) ===== -->
+<!-- MORE -->
 <section class="sec" id="more">
   <div class="sec-inner">
     <div class="sec-head">
@@ -478,7 +624,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -500,7 +646,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </footer>
 
-<!-- ===== STICKY MOBILE CTA ===== -->
+<!-- STICKY MOBILE CTA -->
 <div class="mobile-cta" id="mobile-cta">
   <a href="#join" class="btn btn-primary">1분 만에 창립 멤버 되기 →</a>
 </div>
@@ -544,7 +690,6 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// 폼이 화면에 보이면 모바일 하단 CTA 숨김 (중복 방지)
 const joinSec = document.getElementById('join');
 if ('IntersectionObserver' in window && joinSec) {
   const mc = document.getElementById('mobile-cta');
