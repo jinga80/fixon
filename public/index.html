@@ -665,6 +665,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .a4-bene .ic{width:11mm;height:11mm;font-size:20px;}
 .a4-bene h3{font-size:16px;margin:7px 0 4px;}
 .a4-bene p{font-size:12px;}
+/* 환자·병원 win-win 밴드 */
+.a4-winwin{margin-top:8mm;background:#fff7f0;border:1px solid #ffd9bf;border-radius:14px;padding:7mm 8mm;}
+.a4-winwin .ww-head{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6mm;text-align:center;letter-spacing:-0.01em;}
+.a4-winwin .ww-grid{display:grid;grid-template-columns:1fr 1fr;gap:8mm;}
+.a4-winwin .ww-col{display:flex;gap:11px;align-items:flex-start;}
+.a4-winwin .ww-ic{font-size:26px;flex:none;line-height:1.1;}
+.a4-winwin .ww-col b{display:block;font-size:15px;color:#c84a14;margin-bottom:3px;}
+.a4-winwin .ww-col p{font-size:12.5px;color:#475569;line-height:1.55;margin:0;}
 @media(max-width:600px){
   .handout-section{padding:48px 0 56px;}
   .handout-head h2{font-size:25px;}
@@ -761,12 +769,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
               <p class="sub">Graphy Style은 그래피의 형상기억소재(Tera Harz Clear)를 3D 프린터로 출력해 환자께 꼭 맞게 제작하는 개인 맞춤 구강 케어입니다. 첫 제품 Point Shower에 이어, 다음 디바이스는 현장 원장님과 함께 만들어 갑니다.</p>
             </div>
 
-            <div class="a4-lineup-label">제품 라인업 — 한눈에</div>
+            <div class="a4-lineup-label">제품 라인업</div>
             <div class="a4-benefits" style="grid-template-columns:1fr 1fr;">
-              <div class="a4-bene"><span class="no">출시</span><div class="ic">🚿</div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
+              <div class="a4-bene"><span class="no">개발 완료</span><div class="ic">🚿</div><h3>Point Shower</h3><p>개인 맞춤 치아 세정기 — 필요한 위치로 정확히 물 분사.</p></div>
               <div class="a4-bene"><span class="no">개발 중</span><div class="ic">💧</div><h3>Point Infuser</h3><p>맞춤 트레이로 약물(액상·연고)을 정확한 부위에 전달.</p></div>
-              <div class="a4-bene"><span class="no">개발 중</span><div class="ic">🌙</div><h3>Night Pack Splint</h3><p>잠자기 전 잇몸을 위한 맞춤 마스크팩.</p></div>
-              <div class="a4-bene"><span class="no">아이디어</span><div class="ic">✨</div><h3>Perio Touch / MTS</h3><p>잇몸 저주파·재생 케어 — 함께 구상 중.</p></div>
+            </div>
+
+            <div class="a4-winwin">
+              <div class="ww-head">환자와 병원, 모두에게 좋은 케어</div>
+              <div class="ww-grid">
+                <div class="ww-col"><span class="ww-ic">🦷</span><div><b>환자에게</b><p>개인 맞춤으로 더 정확하고 편안한 구강 건강 관리.</p></div></div>
+                <div class="ww-col"><span class="ww-ic">🏥</span><div><b>병원에게</b><p>차별화된 맞춤 진료 — 환자 만족과 꾸준한 재방문으로 이어지는 새로운 케어 영역.</p></div></div>
+              </div>
             </div>
 
             <div class="a4-qr">
