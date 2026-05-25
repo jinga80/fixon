@@ -159,6 +159,9 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .product-mini .badge{font-family:var(--font-mono);font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;background:var(--brand-soft);color:var(--brand-deep);margin-left:8px;vertical-align:2px;}
 .product-mini h3{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;}
 .product-mini p{font-size:14.5px;line-height:1.6;color:var(--text-secondary);}
+.product-feature.reverse{grid-template-columns:1.08fr 0.92fr;}
+.pf-visual.single .pf-stage{aspect-ratio:4/5;}
+.pf-visual .tag.dev{background:var(--brand-soft);color:var(--brand-deep);}
 
 /* WIN-WIN */
 .winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:38px;}
@@ -296,7 +299,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   .sec{padding:52px 0;}
   .hero{padding:44px 0 52px;}
   .pillars{grid-template-columns:1fr;gap:12px;}
-  .product-feature{grid-template-columns:1fr;}
+  .product-feature,.product-feature.reverse{grid-template-columns:1fr;}
   .pf-stage{aspect-ratio:3/3.4;}
   .winwin{padding:24px 20px;}
   .winwin-grid{grid-template-columns:1fr;gap:20px;}
@@ -449,11 +452,22 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
       </div>
     </div>
 
-    <div class="product-mini">
-      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
-      <div>
-        <h3>Point Infuser <span class="badge">개발 중</span></h3>
-        <p>맞춤 트레이로 약물(액상·연고)을 잇몸의 정확한 부위에 전달하는 차세대 케어 디바이스. 창립 멤버 원장님과 함께 완성해 갑니다.</p>
+    <div class="product-feature reverse">
+      <div class="pf-body">
+        <div class="pf-eyebrow">Point Infuser</div>
+        <h3>약물 정밀 전달 디바이스</h3>
+        <p>환자 맞춤 트레이에 도포 펜을 결합 — 액상·연고형 약제를 잇몸의 정확한 부위로 안내합니다. 처방만으로는 어려운 정밀 도포를, 맞춤 트레이가 위치를 잡아줍니다. 창립 멤버 원장님과 함께 완성해 갑니다.</p>
+        <div class="specs">
+          <span class="spec">맞춤 트레이</span>
+          <span class="spec">도포 펜 결합</span>
+          <span class="spec">액상·연고</span>
+        </div>
+      </div>
+      <div class="pf-visual single">
+        <span class="tag dev">개발 중</span>
+        <div class="pf-stage">
+          <img class="pf-pane pane-photo is-on" src="/brand/point-infuser-product.jpg" alt="Point Infuser — 맞춤 트레이에 도포 펜을 결합한 약물 전달 디바이스">
+        </div>
       </div>
     </div>
   </div>
