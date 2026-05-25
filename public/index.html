@@ -178,6 +178,22 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .endorse-by{font-size:13.5px;color:#94a3b8;}
 .endorse-by a{color:#ffb38a;font-weight:700;}
 @media(max-width:680px){.endorse-card{flex-direction:column;gap:16px;padding:24px 20px;}}
+/* === 제품 블록(나열형: 실물·영상·조립을 스크롤로) === */
+.product-block{text-align:center;}
+.product-block + .product-block{border-top:1px solid var(--border);margin-top:40px;padding-top:40px;}
+.pb-head{max-width:620px;margin:0 auto 26px;}
+.pb-head .status{display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.03em;padding:5px 12px;border-radius:100px;margin-bottom:12px;}
+.pb-head .status.done{background:var(--success-soft);color:var(--success);}
+.pb-head .status.dev{background:var(--brand-soft);color:var(--brand-deep);}
+.pb-head h3{font-size:26px;font-weight:800;letter-spacing:-0.025em;margin:6px 0 10px;}
+.pb-head>p{font-size:15.5px;line-height:1.7;color:var(--text-secondary);}
+.pb-head .specs{justify-content:center;margin-top:16px;}
+.media-list{display:flex;flex-direction:column;align-items:center;gap:18px;}
+.media{position:relative;width:100%;border-radius:var(--r-xl);overflow:hidden;background:#0a0f1c;box-shadow:var(--shadow-md);}
+.media.portrait{max-width:400px;aspect-ratio:4/5;}
+.media.wide{max-width:760px;aspect-ratio:16/9;}
+.media img,.media video{width:100%;height:100%;object-fit:cover;display:block;background:#0a0f1c;}
+.media .mlabel{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--font-mono);font-size:11px;font-weight:700;color:#fff;background:rgba(15,23,42,.62);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.18);padding:5px 11px;border-radius:100px;}
 
 /* WIN-WIN */
 .winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:1px solid #ffe1cd;border-radius:var(--r-2xl);padding:38px;}
@@ -429,34 +445,9 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
       <p class="sec-desc">첫 제품은 개발을 마쳤고, 다음 디바이스는 현장 원장님과 함께 만들어 갑니다.</p>
     </div>
 
-    <div class="product-feature">
-      <div class="pf-visual">
-        <span class="tag">개발 완료</span>
-        <div class="pf-stage">
-          <img class="pf-pane pane-photo is-on" data-v="photo" src="/brand/point-shower-product.jpg" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)">
-          <div class="pf-pane pane-spray" data-v="spray" aria-hidden="true">
-            <div class="sp-cap">정확한 위치로 물 분사</div>
-            <svg class="sp-nozzle" viewBox="0 0 60 92" fill="currentColor"><rect x="13" y="4" width="34" height="40" rx="10" opacity=".92"/><rect x="22" y="42" width="16" height="26" rx="6" opacity=".78"/><path d="M26 66h8l-1.6 13a2.4 2.4 0 0 1-4.8 0Z" opacity=".7"/></svg>
-            <span class="drop" style="--x:-48px;--d:0s"></span>
-            <span class="drop" style="--x:-30px;--d:.55s"></span>
-            <span class="drop" style="--x:-14px;--d:.25s"></span>
-            <span class="drop" style="--x:0px;--d:.8s"></span>
-            <span class="drop" style="--x:16px;--d:.4s"></span>
-            <span class="drop" style="--x:32px;--d:1s"></span>
-            <span class="drop" style="--x:48px;--d:.15s"></span>
-            <span class="ripple" style="--d:.2s"></span>
-            <span class="ripple" style="--d:.95s"></span>
-            <svg class="sp-teeth" viewBox="0 0 220 46" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40 Q30 8 52 40 T96 40 T140 40 T184 40 T212 40"/></svg>
-          </div>
-          <video class="pf-pane pane-video" data-v="video" src="/video/point-shower-assembly.mp4" poster="/video/point-shower-assembly-poster.jpg" muted loop playsinline preload="none"></video>
-        </div>
-        <div class="pf-tabs">
-          <button type="button" class="on" data-v="photo">실물</button>
-          <button type="button" data-v="spray">분사 데모</button>
-          <button type="button" data-v="video">조립 영상</button>
-        </div>
-      </div>
-      <div class="pf-body">
+    <div class="product-block">
+      <div class="pb-head">
+        <span class="status done">개발 완료</span>
         <div class="pf-eyebrow">Point Shower</div>
         <h3>개인 맞춤 치아 세정기</h3>
         <p>환자의 구강에 꼭 맞게 출력한 투명 트레이에 분사 노즐을 결합 — 칫솔이 닿지 않던 부위까지, 필요한 위치로 정확히 물을 분사합니다. 형상기억소재로 착용감은 부드럽게, 세정은 정밀하게.</p>
@@ -466,10 +457,16 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
           <span class="spec">개인 맞춤</span>
         </div>
       </div>
+      <div class="media-list">
+        <figure class="media portrait"><span class="mlabel">실물</span><img src="/brand/point-shower-product.jpg" alt="Point Shower — 개인 맞춤 치아 세정기 (투명 트레이 + 분사 노즐)"></figure>
+        <figure class="media wide"><span class="mlabel">분사 데모</span><video src="/video/point-shower-spray.mp4" poster="/video/point-shower-spray-poster.jpg" autoplay muted loop playsinline preload="metadata"></video></figure>
+        <figure class="media wide"><span class="mlabel">조립 영상</span><video src="/video/point-shower-assembly.mp4" poster="/video/point-shower-assembly-poster.jpg" controls muted loop playsinline preload="none"></video></figure>
+      </div>
     </div>
 
-    <div class="product-feature reverse">
-      <div class="pf-body">
+    <div class="product-block">
+      <div class="pb-head">
+        <span class="status dev">개발 중</span>
         <div class="pf-eyebrow">Point Infuser</div>
         <h3>약물 정밀 전달 디바이스</h3>
         <p>환자 맞춤 트레이에 도포 펜을 결합 — 액상·연고형 약제를 잇몸의 정확한 부위로 안내합니다. 처방만으로는 어려운 정밀 도포를, 맞춤 트레이가 위치를 잡아줍니다. 창립 멤버 원장님과 함께 완성해 갑니다.</p>
@@ -479,16 +476,9 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
           <span class="spec">액상·연고</span>
         </div>
       </div>
-      <div class="pf-visual">
-        <span class="tag dev">개발 중</span>
-        <div class="pf-stage">
-          <img class="pf-pane pane-photo is-on" data-v="a" src="/brand/point-infuser-product.jpg" alt="Point Infuser — 맞춤 트레이에 도포 펜을 결합한 모습">
-          <img class="pf-pane pane-photo" data-v="b" src="/brand/point-infuser-product-2.jpg" alt="Point Infuser — 맞춤 트레이와 도포 펜 구성품">
-        </div>
-        <div class="pf-tabs">
-          <button type="button" class="on" data-v="a">결합형</button>
-          <button type="button" data-v="b">구성품</button>
-        </div>
+      <div class="media-list">
+        <figure class="media portrait"><span class="mlabel">결합형</span><img src="/brand/point-infuser-product.jpg" alt="Point Infuser — 맞춤 트레이에 도포 펜을 결합한 모습"></figure>
+        <figure class="media portrait"><span class="mlabel">구성품</span><img src="/brand/point-infuser-product-2.jpg" alt="Point Infuser — 맞춤 트레이와 도포 펜 구성품"></figure>
       </div>
     </div>
   </div>
@@ -783,17 +773,6 @@ form.addEventListener('submit', async (e) => {
     alert('등록 중 문제가 발생했습니다: ' + err.message + '\n잠시 후 다시 시도해 주세요.');
     btn.disabled = false; btn.textContent = '창립 멤버 등록하기 →';
   }
-});
-
-// 제품 비주얼 탭 전환 (실물 / 분사 데모 / 조립 영상)
-document.querySelectorAll('.pf-tabs button').forEach(b => {
-  b.addEventListener('click', () => {
-    const v = b.dataset.v, vis = b.closest('.pf-visual');
-    vis.querySelectorAll('.pf-tabs button').forEach(x => x.classList.toggle('on', x === b));
-    vis.querySelectorAll('.pf-pane').forEach(p => p.classList.toggle('is-on', p.dataset.v === v));
-    const vid = vis.querySelector('.pane-video');
-    if (vid) { if (v === 'video') { vid.play().catch(() => {}); } else { vid.pause(); } }
-  });
 });
 
 const joinSec = document.getElementById('join');
