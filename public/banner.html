@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>부스 설치용 배너 (60×180cm) — GraphyStyle</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ff6b2b">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --brand:#ff6b2b;--brand-deep:#c84a14;--brand-soft:#fff4ee;
+  --text:#0f172a;--text-secondary:#475569;--text-tertiary:#64748b;
+  --bg-section:#f7f8fa;--border:#e5e7eb;--border-subtle:#f1f5f9;
+  --font-sans:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Inter','Noto Sans KR',sans-serif;
+  --font-mono:'JetBrains Mono','D2Coding','SF Mono',ui-monospace,monospace;
+  --r:8px;--r-md:10px;
+}
+html,body{background:var(--bg-section);color:var(--text);font-family:var(--font-sans);line-height:1.7;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+.mini-head{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-subtle);}
+.mini-head .in{max-width:1000px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.mini-head .gs-logo{height:26px;width:auto;}
+.mini-head .links{display:flex;gap:18px;}
+.mini-head a.nav{font-size:14px;color:var(--text-tertiary);font-weight:600;}
+.mini-head a.nav:hover{color:var(--brand);}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--r);font-size:16px;font-weight:600;letter-spacing:-0.01em;transition:all .15s;cursor:pointer;border:1px solid transparent;}
+.btn-primary{background:var(--brand);color:#fff;}
+.btn-primary:hover{background:var(--brand-deep);box-shadow:0 6px 16px -4px rgba(255,107,43,.45);}
+.btn-ghost{background:#fff;color:var(--text);border-color:var(--border);}
+.btn-ghost:hover{background:var(--bg-section);}
+.btn-lg{padding:16px 30px;font-size:18px;border-radius:var(--r-md);}
+.btn:disabled{opacity:.6;cursor:progress;pointer-events:none;}
+
+.bn-section{background:var(--bg-section);padding:40px 0 72px;overflow-x:hidden;}
+.bn-wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+.bn-head{text-align:center;max-width:680px;margin:0 auto 22px;}
+.bn-head .eyebrow2{font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--brand);text-transform:uppercase;}
+.bn-head h2{font-size:30px;font-weight:800;letter-spacing:-0.03em;margin:10px 0 8px;color:var(--text);}
+.bn-head p{font-size:15px;color:var(--text-secondary);line-height:1.6;}
+.bn-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;}
+.bn-preview{display:flex;justify-content:center;}
+.bn-scaler{position:relative;width:100%;overflow:hidden;}
+
+/* === 배너 (600 x 1800 mm, 1:3) === */
+.banner-sheet{
+  width:600mm;height:1800mm;margin:0 auto;
+  background:
+    radial-gradient(circle at 80% 6%,rgba(255,107,43,.16),transparent 42%),
+    radial-gradient(circle at 10% 96%,rgba(255,107,43,.10),transparent 45%),
+    linear-gradient(180deg,#ffffff,#fff7f0);
+  color:#0f172a;overflow:hidden;position:relative;
+  transform-origin:top center;
+  box-shadow:0 30px 90px rgba(15,23,42,.25);
+  font-family:var(--font-sans);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.banner-pad{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding:90px 80px 80px;box-sizing:border-box;}
+.bn-top{flex:0 0 auto;}
+.bn-bottom{margin-top:auto;}
+
+.banner-sheet .logo{height:170px;width:auto;display:block;margin:0 auto 60px;}
+.bn-kicker{font-family:var(--font-mono);font-size:42px;font-weight:700;letter-spacing:.02em;color:var(--brand-deep);text-align:center;margin-bottom:34px;}
+.bn-h1{font-size:140px;font-weight:900;letter-spacing:-0.04em;line-height:1.12;text-align:center;color:#0f172a;}
+.bn-h1 em{font-style:normal;color:var(--brand);}
+.bn-sub{font-size:58px;line-height:1.45;color:var(--text-secondary);text-align:center;margin:44px auto 60px;max-width:440mm;font-weight:600;}
+.bn-sub b{color:#0f172a;font-weight:800;}
+
+.bn-shot{width:100%;height:560mm;border-radius:40px;overflow:hidden;background:#0a0f1c;box-shadow:0 30px 70px rgba(15,23,42,.22);position:relative;}
+.bn-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
+.bn-shot .tag{position:absolute;top:40px;left:40px;font-family:var(--font-mono);font-size:34px;font-weight:700;padding:14px 30px;border-radius:100px;background:#ecfdf5;color:#059669;}
+
+.bn-benefits{display:flex;flex-direction:column;gap:34px;margin-top:64px;}
+.bn-bene{display:flex;align-items:center;gap:44px;background:#fff;border:2px solid #ffe1cd;border-radius:36px;padding:48px 54px;box-shadow:0 16px 44px rgba(15,23,42,.07);}
+.bn-bene .ic{flex:none;width:150px;height:150px;border-radius:34px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 3px rgba(255,107,43,.2);}
+.bn-bene .ic svg{width:80px;height:80px;color:var(--brand);}
+.bn-bene .k{font-family:var(--font-mono);font-size:34px;font-weight:700;color:var(--brand);letter-spacing:.02em;}
+.bn-bene h3{font-size:64px;font-weight:900;letter-spacing:-0.02em;margin:6px 0 8px;color:#0f172a;}
+.bn-bene p{font-size:40px;line-height:1.4;color:var(--text-secondary);}
+
+/* 하단 QR */
+.bn-qr{display:flex;align-items:center;gap:64px;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:44px;padding:70px;color:#fff;}
+.bn-qr .qrbox{flex:none;width:440px;height:440px;background:#fff;border-radius:34px;padding:26px;box-sizing:border-box;}
+.bn-qr .qrbox img{width:100%;height:100%;display:block;}
+.bn-qr .lead{font-family:var(--font-mono);font-size:42px;font-weight:700;letter-spacing:.04em;color:#ffb38a;text-transform:uppercase;}
+.bn-qr .url{font-size:96px;font-weight:900;letter-spacing:-0.02em;margin:14px 0 20px;}
+.bn-qr .hint{font-size:42px;color:#cbd5e1;line-height:1.4;}
+.bn-foot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:44px;border-top:3px solid #ffe1cd;font-size:40px;color:var(--text-tertiary);font-weight:600;}
+.bn-foot b{color:#0f172a;}
+.bn-foot .ev{font-family:var(--font-mono);font-size:34px;color:var(--brand-deep);}
+
+@media(max-width:600px){
+  .bn-section{padding:24px 0 48px;}
+  .bn-wrap{padding:0 14px;}
+  .mini-head .in{padding:12px 16px;}
+  .mini-head .links{gap:14px;}
+  .bn-head h2{font-size:22px;}
+  .bn-head p{font-size:14px;}
+  .bn-actions{flex-direction:column;gap:10px;margin-bottom:22px;}
+  .bn-actions .btn{width:100%;justify-content:center;font-size:16px;padding:14px 18px;}
+}
+
+/* === 인쇄: 배너 시트만 (600x1800mm) === */
+@media print{
+  @page{size:600mm 1800mm;margin:0;}
+  html,body{background:#fff !important;margin:0 !important;padding:0 !important;}
+  body>*{display:none !important;}
+  .bn-section{display:block !important;padding:0 !important;margin:0 !important;background:#fff !important;}
+  .bn-wrap{max-width:none !important;padding:0 !important;margin:0 !important;}
+  .bn-head,.bn-actions,.mini-head{display:none !important;}
+  .bn-preview{display:block !important;}
+  .bn-scaler{overflow:visible !important;height:auto !important;}
+  .banner-sheet{transform:none !important;box-shadow:none !important;margin:0 !important;width:600mm;height:1800mm;break-inside:avoid;page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<div class="mini-head">
+  <div class="in">
+    <a href="/" aria-label="GraphyStyle 홈"><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="gs-logo"></a>
+    <div class="links">
+      <a class="nav" href="/handout.html">A4 인쇄물</a>
+      <a class="nav" href="/">← 홈으로</a>
+    </div>
+  </div>
+</div>
+
+<section class="bn-section">
+  <div class="bn-wrap">
+    <div class="bn-head">
+      <div class="eyebrow2">BOOTH BANNER · 60 × 180 cm</div>
+      <h2>부스 설치용 배너</h2>
+      <p>가로 60cm × 세로 180cm 롤업 배너. 아래 버튼으로 <b>실측 PDF</b>를 저장해 인쇄팀에 그대로 전달하세요.</p>
+    </div>
+    <div class="bn-actions">
+      <button class="btn btn-primary btn-lg" id="bn-print"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="13" width="12" height="8" rx="1"/></svg>인쇄 · PDF로 저장 (실측 벡터)</button>
+      <button class="btn btn-ghost btn-lg" id="bn-pdf"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;margin-right:7px;"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>이미지 PDF 다운로드</button>
+    </div>
+    <div class="bn-preview">
+      <div class="bn-scaler">
+        <article class="banner-sheet">
+          <div class="banner-pad">
+
+            <div class="bn-top">
+              <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="logo">
+              <div class="bn-kicker">SIDEX 2026 · 그래피 부스 D-601 / 701</div>
+              <h1 class="bn-h1">환자 맞춤 케어부터<br><em>병원 성장</em>까지</h1>
+              <p class="bn-sub">형상기억소재 + 3D 프린팅으로 만드는<br><b>개인 맞춤 구강 케어</b>, GraphyStyle</p>
+
+              <div class="bn-shot">
+                <span class="tag">개발 완료 · Point Shower</span>
+                <img src="/brand/point-shower-product.jpg" alt="Point Shower 개인 맞춤 치아 세정기">
+              </div>
+
+              <div class="bn-benefits">
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></span>
+                  <div><div class="k">차별화 진료</div><h3>맞춤 구강 케어</h3><p>우리 병원만의 개인 맞춤 디바이스</p></div>
+                </div>
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+                  <div><div class="k">병원 성장</div><h3>경영 무료 상담권</h3><p>KSMED 세무·수익·마케팅 컨설팅</p></div>
+                </div>
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
+                  <div><div class="k">새로운 환자</div><h3>해외 환자 유치</h3><p>의료관광 MediQueen 우선 등록</p></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bn-bottom">
+              <div class="bn-qr">
+                <div class="qrbox"><img src="/qr-survey.svg" alt="창립 멤버 등록 QR"></div>
+                <div class="cta">
+                  <div class="lead">1분 무료 등록 · 창립 멤버</div>
+                  <div class="url">graphystyle.com</div>
+                  <div class="hint">QR을 비추면 1분 등록 페이지로 연결됩니다.</div>
+                </div>
+              </div>
+              <div class="bn-foot">
+                <span>문의 : <b>010-8773-1750</b></span>
+                <span class="ev">graphystyle.com</span>
+              </div>
+            </div>
+
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// 배너(600x1800mm) — 미리보기 스케일 + 인쇄 + PDF 다운로드
+(function(){
+  const PXmm = 96/25.4;
+  const W = 600*PXmm, H = 1800*PXmm;
+  function scaleBanner(){
+    const sheet = document.querySelector('.banner-sheet'); if(!sheet) return;
+    const scaler = sheet.closest('.bn-scaler');
+    const scale = Math.min(1, scaler.clientWidth / W);
+    sheet.style.transform = 'scale(' + scale + ')';
+    scaler.style.height = (H * scale) + 'px';
+  }
+  window.addEventListener('resize', scaleBanner);
+  window.addEventListener('load', scaleBanner);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(scaleBanner);
+  scaleBanner();
+
+  const printBtn = document.getElementById('bn-print');
+  if (printBtn) printBtn.onclick = () => window.print();
+
+  function loadScript(src){
+    return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('load fail: ' + src)); document.head.appendChild(s); });
+  }
+  const pdfBtn = document.getElementById('bn-pdf');
+  if (pdfBtn) pdfBtn.onclick = async () => {
+    const orig = pdfBtn.textContent;
+    pdfBtn.textContent = 'PDF 생성 중… (잠시만요)'; pdfBtn.disabled = true;
+    const sheet = document.querySelector('.banner-sheet');
+    const scaler = sheet.closest('.bn-scaler');
+    const prevT = sheet.style.transform, prevOv = scaler.style.overflow, prevH = scaler.style.height;
+    try {
+      if (!window.html2canvas) await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+      if (!(window.jspdf && window.jspdf.jsPDF)) await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js');
+      sheet.style.transform = 'none';
+      scaler.style.overflow = 'visible'; scaler.style.height = 'auto';
+      if (document.fonts) { try { await document.fonts.ready; } catch(_){} }
+      const imgs = [...sheet.querySelectorAll('img')];
+      await Promise.all(imgs.map(im => im.complete ? 0 : im.decode().catch(()=>{})));
+      const canvas = await html2canvas(sheet, { scale: 1.5, useCORS: true, backgroundColor: '#ffffff', width: Math.ceil(W), height: Math.ceil(H), windowWidth: Math.ceil(W) });
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [600, 1800] });
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, 600, 1800);
+      pdf.save('GraphyStyle_부스배너_60x180cm.pdf');
+    } catch(e) {
+      console.error(e);
+      alert('이미지 PDF 생성에 실패했습니다(배너가 커서 메모리 한계일 수 있습니다).\n"인쇄 · PDF로 저장 (실측 벡터)" 버튼을 사용하면 더 깔끔한 실측 PDF가 만들어집니다.');
+    } finally {
+      sheet.style.transform = prevT; scaler.style.overflow = prevOv; scaler.style.height = prevH;
+      scaleBanner();
+      pdfBtn.textContent = orig; pdfBtn.disabled = false;
+    }
+  };
+})();
+</script>
+</body>
+</html>
