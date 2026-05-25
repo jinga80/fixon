@@ -53,48 +53,87 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .banner-sheet{
   width:600mm;height:1800mm;margin:0 auto;
   background:
-    radial-gradient(circle at 80% 6%,rgba(255,107,43,.16),transparent 42%),
-    radial-gradient(circle at 10% 96%,rgba(255,107,43,.10),transparent 45%),
-    linear-gradient(180deg,#ffffff,#fff7f0);
+    radial-gradient(circle at 82% 4%,rgba(255,107,43,.16),transparent 40%),
+    radial-gradient(circle at 8% 70%,rgba(255,107,43,.08),transparent 42%),
+    linear-gradient(180deg,#ffffff 0%,#fff7f0 100%);
   color:#0f172a;overflow:hidden;position:relative;
   transform-origin:top center;
   box-shadow:0 30px 90px rgba(15,23,42,.25);
   font-family:var(--font-sans);
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.banner-pad{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding:90px 80px 80px;box-sizing:border-box;}
-.bn-top{flex:0 0 auto;}
-.bn-bottom{margin-top:auto;}
+.banner-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:26px;background:linear-gradient(90deg,#ff6b2b,#c84a14);z-index:2;}
+.banner-pad{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:96px 76px 76px;box-sizing:border-box;}
 
-.banner-sheet .logo{height:170px;width:auto;display:block;margin:0 auto 60px;}
-.bn-kicker{font-family:var(--font-mono);font-size:42px;font-weight:700;letter-spacing:.02em;color:var(--brand-deep);text-align:center;margin-bottom:34px;}
-.bn-h1{font-size:140px;font-weight:900;letter-spacing:-0.04em;line-height:1.12;text-align:center;color:#0f172a;}
+/* 헤더 */
+.bn-header{text-align:center;}
+.bn-header .logo{height:160px;width:auto;display:block;margin:0 auto 26px;}
+.bn-header .ev{display:inline-block;font-family:var(--font-mono);font-size:40px;font-weight:700;color:var(--brand-deep);background:var(--brand-soft);border:2px solid #ffd9bf;border-radius:100px;padding:16px 38px;letter-spacing:.01em;}
+
+/* 히어로 */
+.bn-hero{text-align:center;}
+.bn-hero .kicker{font-family:var(--font-mono);font-size:42px;font-weight:700;color:var(--brand);letter-spacing:.02em;margin-bottom:30px;}
+.bn-h1{font-size:170px;font-weight:900;letter-spacing:-0.045em;line-height:1.08;color:#0f172a;}
 .bn-h1 em{font-style:normal;color:var(--brand);}
-.bn-sub{font-size:58px;line-height:1.45;color:var(--text-secondary);text-align:center;margin:44px auto 60px;max-width:440mm;font-weight:600;}
+.bn-sub{font-size:58px;line-height:1.4;color:var(--text-secondary);margin:40px auto 44px;max-width:440mm;font-weight:600;}
 .bn-sub b{color:#0f172a;font-weight:800;}
+.bn-chips{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.bn-chip{font-size:42px;font-weight:800;color:var(--brand-deep);background:#fff;border:3px solid #ffe1cd;border-radius:100px;padding:18px 40px;box-shadow:0 10px 26px rgba(15,23,42,.06);}
 
-.bn-shot{width:100%;height:560mm;border-radius:40px;overflow:hidden;background:#0a0f1c;box-shadow:0 30px 70px rgba(15,23,42,.22);position:relative;}
-.bn-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
-.bn-shot .tag{position:absolute;top:40px;left:40px;font-family:var(--font-mono);font-size:34px;font-weight:700;padding:14px 30px;border-radius:100px;background:#ecfdf5;color:#059669;}
+/* 제품 쇼케이스 */
+.bn-label{font-family:var(--font-mono);font-size:40px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;text-align:center;margin-bottom:34px;}
+.bn-products{display:flex;flex-direction:column;gap:36px;}
+.bn-prod{display:flex;align-items:center;gap:50px;background:#fff;border:3px solid #ffe1cd;border-radius:44px;padding:44px;box-shadow:0 20px 50px rgba(15,23,42,.08);}
+.bn-prod .pic{flex:none;width:620px;height:900px;border-radius:32px;overflow:hidden;background:#0a0f1c;}
+.bn-prod .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
+.bn-prod .info{flex:1;}
+.bn-prod .badge{display:inline-block;font-family:var(--font-mono);font-size:34px;font-weight:700;padding:12px 28px;border-radius:100px;margin-bottom:22px;}
+.bn-prod .badge.done{background:#ecfdf5;color:#059669;}
+.bn-prod .badge.dev{background:var(--brand-soft);color:var(--brand-deep);}
+.bn-prod h3{font-size:78px;font-weight:900;letter-spacing:-0.025em;color:#0f172a;margin-bottom:18px;}
+.bn-prod p{font-size:46px;line-height:1.4;color:var(--text-secondary);}
 
-.bn-benefits{display:flex;flex-direction:column;gap:34px;margin-top:64px;}
-.bn-bene{display:flex;align-items:center;gap:44px;background:#fff;border:2px solid #ffe1cd;border-radius:36px;padding:48px 54px;box-shadow:0 16px 44px rgba(15,23,42,.07);}
-.bn-bene .ic{flex:none;width:150px;height:150px;border-radius:34px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 3px rgba(255,107,43,.2);}
-.bn-bene .ic svg{width:80px;height:80px;color:var(--brand);}
-.bn-bene .k{font-family:var(--font-mono);font-size:34px;font-weight:700;color:var(--brand);letter-spacing:.02em;}
-.bn-bene h3{font-size:64px;font-weight:900;letter-spacing:-0.02em;margin:6px 0 8px;color:#0f172a;}
-.bn-bene p{font-size:40px;line-height:1.4;color:var(--text-secondary);}
+/* 해외 호평 */
+.bn-praise{display:flex;align-items:center;gap:48px;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:44px;padding:60px 64px;color:#fff;}
+.bn-praise .ic{flex:none;width:160px;height:160px;border-radius:36px;display:grid;place-items:center;background:rgba(255,107,43,.18);color:#ffb38a;}
+.bn-praise .ic svg{width:92px;height:92px;}
+.bn-praise .h{font-size:68px;font-weight:900;letter-spacing:-0.02em;margin-bottom:14px;}
+.bn-praise p{font-size:44px;line-height:1.4;color:#cbd5e1;}
+.bn-praise b{color:#fff;font-weight:800;}
 
-/* 하단 QR */
-.bn-qr{display:flex;align-items:center;gap:64px;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:44px;padding:70px;color:#fff;}
-.bn-qr .qrbox{flex:none;width:440px;height:440px;background:#fff;border-radius:34px;padding:26px;box-sizing:border-box;}
+/* 환자·병원 win-win */
+.bn-winwin{background:linear-gradient(135deg,#fff7f0,#ffefe3);border:3px solid #ffe1cd;border-radius:44px;padding:60px 64px;}
+.bn-winwin .ww-head{font-size:64px;font-weight:900;letter-spacing:-0.02em;text-align:center;margin-bottom:40px;color:#0f172a;}
+.bn-ww-grid{display:flex;gap:48px;}
+.bn-ww{flex:1;display:flex;gap:32px;align-items:flex-start;}
+.bn-ww .ic{flex:none;width:136px;height:136px;border-radius:32px;display:grid;place-items:center;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.08);}
+.bn-ww .ic svg{width:78px;height:78px;color:var(--brand);}
+.bn-ww b{display:block;font-size:54px;font-weight:900;color:var(--brand-deep);margin-bottom:12px;}
+.bn-ww p{font-size:42px;line-height:1.36;color:var(--text-secondary);}
+
+/* 창립 멤버 3가지 */
+.bn-benefits{display:flex;gap:30px;}
+.bn-bene{flex:1;background:#fff;border:3px solid #ffe1cd;border-radius:40px;padding:50px 40px;text-align:center;box-shadow:0 16px 44px rgba(15,23,42,.07);position:relative;overflow:hidden;}
+.bn-bene::before{content:'';position:absolute;top:0;left:0;right:0;height:12px;background:linear-gradient(90deg,#ff6b2b,#c84a14);}
+.bn-bene .ic{width:160px;height:160px;margin:6px auto 26px;border-radius:38px;display:grid;place-items:center;background:linear-gradient(135deg,#fff1e8,#ffe1cd);box-shadow:inset 0 0 0 3px rgba(255,107,43,.2);}
+.bn-bene .ic svg{width:88px;height:88px;color:var(--brand);}
+.bn-bene .k{font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--brand);letter-spacing:.02em;}
+.bn-bene h4{font-size:58px;font-weight:900;letter-spacing:-0.02em;margin:8px 0 14px;color:#0f172a;}
+.bn-bene p{font-size:38px;line-height:1.38;color:var(--text-secondary);}
+
+/* CTA / QR */
+.bn-cta{}
+.bn-qr{display:flex;align-items:center;gap:60px;background:linear-gradient(135deg,#16203a,#0f172a);border-radius:48px;padding:72px;color:#fff;}
+.bn-qr .qrbox{flex:none;width:480px;height:480px;background:#fff;border-radius:36px;padding:28px;box-sizing:border-box;}
 .bn-qr .qrbox img{width:100%;height:100%;display:block;}
-.bn-qr .lead{font-family:var(--font-mono);font-size:42px;font-weight:700;letter-spacing:.04em;color:#ffb38a;text-transform:uppercase;}
-.bn-qr .url{font-size:96px;font-weight:900;letter-spacing:-0.02em;margin:14px 0 20px;}
-.bn-qr .hint{font-size:42px;color:#cbd5e1;line-height:1.4;}
-.bn-foot{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:44px;border-top:3px solid #ffe1cd;font-size:40px;color:var(--text-tertiary);font-weight:600;}
-.bn-foot b{color:#0f172a;}
-.bn-foot .ev{font-family:var(--font-mono);font-size:34px;color:var(--brand-deep);}
+.bn-qr .lead{font-family:var(--font-mono);font-size:46px;font-weight:700;letter-spacing:.03em;color:#ffb38a;text-transform:uppercase;}
+.bn-qr .url{font-size:104px;font-weight:900;letter-spacing:-0.02em;margin:14px 0 26px;}
+.bn-steps{display:flex;flex-direction:column;gap:16px;}
+.bn-steps span{font-size:42px;font-weight:700;color:#e2e8f0;}
+.bn-steps b{color:#ffb38a;}
+.bn-foot{display:flex;justify-content:space-between;align-items:center;margin-top:46px;padding-top:40px;border-top:4px solid #ffe1cd;font-size:46px;color:var(--text-secondary);font-weight:700;}
+.bn-foot b{color:var(--brand-deep);}
+.bn-foot .pt{font-size:36px;color:var(--text-tertiary);font-weight:600;}
 
 @media(max-width:600px){
   .bn-section{padding:24px 0 48px;}
@@ -149,45 +188,91 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
         <article class="banner-sheet">
           <div class="banner-pad">
 
-            <div class="bn-top">
+            <div class="bn-header">
               <img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="logo">
-              <div class="bn-kicker">SIDEX 2026 · 그래피 부스 D-601 / 701</div>
+              <span class="ev">SIDEX 2026 · 그래피 부스 D-601 / 701</span>
+            </div>
+
+            <div class="bn-hero">
+              <div class="kicker">3D 프린팅 개인 맞춤 구강 케어</div>
               <h1 class="bn-h1">환자 맞춤 케어부터<br><em>병원 성장</em>까지</h1>
-              <p class="bn-sub">형상기억소재 + 3D 프린팅으로 만드는<br><b>개인 맞춤 구강 케어</b>, GraphyStyle</p>
-
-              <div class="bn-shot">
-                <span class="tag">개발 완료 · Point Shower</span>
-                <img src="/brand/point-shower-product.jpg" alt="Point Shower 개인 맞춤 치아 세정기">
+              <p class="bn-sub">제품을 넘어 <b>병원 경영</b>과 <b>해외 환자 유치</b>까지 — <b>창립 멤버</b> 원장님과 함께합니다</p>
+              <div class="bn-chips">
+                <span class="bn-chip">형상기억소재</span>
+                <span class="bn-chip">3D 프린팅</span>
+                <span class="bn-chip">개인 맞춤</span>
               </div>
+            </div>
 
-              <div class="bn-benefits">
-                <div class="bn-bene">
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></span>
-                  <div><div class="k">차별화 진료</div><h3>맞춤 구강 케어</h3><p>우리 병원만의 개인 맞춤 디바이스</p></div>
+            <div>
+              <div class="bn-label">제품 라인업</div>
+              <div class="bn-products">
+                <div class="bn-prod">
+                  <div class="pic"><img src="/brand/point-shower-product.jpg" alt="Point Shower"></div>
+                  <div class="info">
+                    <span class="badge done">개발 완료</span>
+                    <h3>Point Shower</h3>
+                    <p>개인 맞춤 치아 세정기 — 닿지 않던 부위까지 정확한 위치로 물 분사</p>
+                  </div>
                 </div>
-                <div class="bn-bene">
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
-                  <div><div class="k">병원 성장</div><h3>경영 무료 상담권</h3><p>KSMED 세무·수익·마케팅 컨설팅</p></div>
-                </div>
-                <div class="bn-bene">
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
-                  <div><div class="k">새로운 환자</div><h3>해외 환자 유치</h3><p>의료관광 MediQueen 우선 등록</p></div>
+                <div class="bn-prod">
+                  <div class="pic"><img src="/brand/point-infuser-product.jpg" alt="Point Infuser"></div>
+                  <div class="info">
+                    <span class="badge dev">개발 중</span>
+                    <h3>Point Infuser</h3>
+                    <p>맞춤 트레이로 약물(액상·연고)을 잇몸의 정확한 부위에 전달</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="bn-bottom">
+            <div class="bn-winwin">
+              <div class="ww-head">환자와 병원, 모두에게 좋은 케어</div>
+              <div class="bn-ww-grid">
+                <div class="bn-ww"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.6C5.1 3.6 3.6 5.1 3.6 7.3c0 1.4.3 2.8.7 4.6.5 2.2.7 3.4 1 5 .3 1.5.5 2.9 1.6 2.9s1.1-1.2 1.4-2.6c.3-1.3.6-2.3 1.4-2.3s1.1 1 1.4 2.3c.3 1.4.4 2.6 1.5 2.6s1.3-1.4 1.6-2.9c.3-1.6.5-2.8 1-5 .4-1.8.7-3.2.7-4.6 0-2.2-1.5-3.7-3.4-3.7-1.5 0-2.6 1-3.4 1S8.5 3.6 7 3.6Z"/></svg></span><div><b>환자에게</b><p>더 정확하고 편안한 개인 맞춤 구강 건강 관리</p></div></div>
+                <div class="bn-ww"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div><b>병원에게</b><p>차별화 진료 — 환자 만족과 재방문으로 이어지는 케어</p></div></div>
+              </div>
+            </div>
+
+            <div class="bn-praise">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
+              <div><div class="h">해외 환자들이 먼저 주목</div><p>의료관광 플랫폼 <b>MediQueen</b>에서 두 제품 모두 <b>호평</b> — 해외 환자 반응도 뜨거웠습니다</p></div>
+            </div>
+
+            <div>
+              <div class="bn-label">창립 멤버가 받는 3가지</div>
+              <div class="bn-benefits">
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2.5-6 6-10Z"/></svg></span>
+                  <div class="k">차별화 진료</div><h4>맞춤 구강 케어</h4><p>우리 병원만의 개인 맞춤 디바이스</p>
+                </div>
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+                  <div class="k">병원 성장</div><h4>경영 무료 상담권</h4><p>KSMED 세무·수익·마케팅 컨설팅</p>
+                </div>
+                <div class="bn-bene">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
+                  <div class="k">새로운 환자</div><h4>해외 환자 유치</h4><p>의료관광 MediQueen 우선 등록</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bn-cta">
               <div class="bn-qr">
                 <div class="qrbox"><img src="/qr-survey.svg" alt="창립 멤버 등록 QR"></div>
-                <div class="cta">
-                  <div class="lead">1분 무료 등록 · 창립 멤버</div>
+                <div class="info">
+                  <div class="lead">지금 1분 무료 등록 · 창립 멤버</div>
                   <div class="url">graphystyle.com</div>
-                  <div class="hint">QR을 비추면 1분 등록 페이지로 연결됩니다.</div>
+                  <div class="bn-steps">
+                    <span><b>①</b> QR 스캔</span>
+                    <span><b>②</b> 관심·혜택 체크</span>
+                    <span><b>③</b> 혜택 시작</span>
+                  </div>
                 </div>
               </div>
               <div class="bn-foot">
                 <span>문의 : <b>010-8773-1750</b></span>
-                <span class="ev">graphystyle.com</span>
+                <span class="pt">파트너 · KSMED 경영 · MediQueen 의료관광</span>
               </div>
             </div>
 
