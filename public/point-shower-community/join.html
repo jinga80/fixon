@@ -162,8 +162,8 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
     <div class="field">
       <label>관심 있는 제품</label>
       <div class="choices">
-        <label class="choice"><input type="checkbox" name="interest" value="point_shower">Point Shower</label>
-        <label class="choice"><input type="checkbox" name="interest" value="point_infuser">Point Infuser</label>
+        <label class="choice"><input type="checkbox" name="interest" value="point_shower" checked>Point Shower</label>
+        <label class="choice"><input type="checkbox" name="interest" value="point_infuser" checked>Point Infuser</label>
       </div>
     </div>
     <div class="field">
@@ -171,11 +171,11 @@ body{min-height:100vh;min-height:100dvh;background:var(--bg-section);display:fle
       <input id="f-name" type="text" placeholder="홍길동" autocomplete="name" enterkeyhint="next">
     </div>
     <div class="field">
-      <label>병원명 <span class="req">*</span></label>
+      <label>병원명</label>
       <input id="f-clinic" type="text" placeholder="OO치과" enterkeyhint="next">
     </div>
     <div class="field">
-      <label>휴대폰</label>
+      <label>휴대폰 <span class="req">*</span></label>
       <input id="f-phone" type="tel" placeholder="010-0000-0000" inputmode="tel" autocomplete="tel" enterkeyhint="next">
     </div>
     <div class="field">
@@ -237,7 +237,7 @@ async function submitForm() {
   const email = document.getElementById('f-email').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   if (!name) { document.getElementById('f-name').focus(); return; }
-  if (!clinic) { document.getElementById('f-clinic').focus(); return; }
+  if (!phone) { document.getElementById('f-phone').focus(); return; }
 
   const interests = [...document.querySelectorAll('input[name=interest]:checked')].map(c => c.value);
   if (document.getElementById('f-mediqueen').checked) interests.push('medical_tourism');

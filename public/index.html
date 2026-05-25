@@ -319,6 +319,32 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 .mobile-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(15,23,42,.08);}
 .mobile-cta .btn{width:100%;font-size:17px;padding:15px;}
 
+/* === 바로가기(지하철 노선도식 사이트맵 + 스크롤 위치) === */
+.qn-fab{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:58;display:inline-flex;align-items:center;gap:7px;max-width:46vw;padding:9px 14px 9px 11px;border-radius:100px;background:rgba(15,23,42,.9);backdrop-filter:blur(8px);color:#fff;font-size:13px;font-weight:700;letter-spacing:-0.01em;box-shadow:0 8px 22px rgba(15,23,42,.3);border:1px solid rgba(255,255,255,.16);cursor:pointer;transition:opacity .2s,transform .2s;}
+.qn-fab svg{width:16px;height:16px;flex:none;color:#ffb38a;}
+.qn-fab .cur{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:32vw;}
+.qn-fab.hide{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(24px);}
+.qn-backdrop{position:fixed;inset:0;z-index:70;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s;}
+.qn-backdrop.open{opacity:1;pointer-events:auto;}
+.qn-panel{position:fixed;right:0;top:0;bottom:0;z-index:71;width:min(290px,84vw);background:#0f172a;color:#fff;box-shadow:-12px 0 44px rgba(0,0,0,.45);transform:translateX(105%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:20px 0 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.qn-panel.open{transform:translateX(0);}
+.qn-phead{display:flex;align-items:center;justify-content:space-between;padding:0 22px 14px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:6px;}
+.qn-phead .t{font-size:13px;font-weight:800;letter-spacing:.06em;color:#ffb38a;font-family:var(--font-mono);}
+.qn-phead .x{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;}
+.qn-line{position:relative;padding:8px 22px;}
+.qn-line::before{content:'';position:absolute;left:30px;top:22px;bottom:22px;width:3px;background:rgba(255,255,255,.16);border-radius:3px;}
+.qn-stop{position:relative;display:flex;align-items:center;gap:15px;padding:12px 0;color:#cbd5e1;cursor:pointer;}
+.qn-stop .d{flex:none;width:17px;height:17px;border-radius:50%;background:#0f172a;border:3px solid rgba(255,255,255,.32);z-index:1;transition:all .2s;}
+.qn-stop .l{font-size:15.5px;font-weight:700;}
+.qn-stop:hover{color:#fff;}
+.qn-stop.active{color:#fff;}
+.qn-stop.active .d{background:var(--brand);border-color:#fff;box-shadow:0 0 0 4px rgba(255,107,43,.28);transform:scale(1.18);}
+.qn-stop.end .d{border-color:var(--brand);}
+.qn-stop.end .l{color:#ffb38a;}
+.qn-stop.active.end .l{color:#fff;}
+@media(max-width:680px){.qn-fab{font-size:12.5px;padding:9px 13px;right:10px;}}
+@media print{.qn-fab,.qn-backdrop,.qn-panel,.mobile-cta{display:none !important;}}
+
 /* RESPONSIVE */
 @media(max-width:880px){
   .value3{grid-template-columns:1fr;}
@@ -414,7 +440,7 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
 </header>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-badge"><span class="dot"></span> SIDEX 2026 · 선착순 창립 멤버 모집</div>
     <h1>환자 맞춤 케어부터<br>병원 성장까지, <em>원장님과 함께</em></h1>
@@ -693,15 +719,15 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
       <div class="field">
         <label>관심 있는 제품</label>
         <div class="choices" id="interests">
-          <label class="choice"><input type="checkbox" name="interest" value="point_shower"><span><span class="t">Point Shower</span><span class="d">치아 세정기 · 개발 완료</span></span></label>
-          <label class="choice"><input type="checkbox" name="interest" value="point_infuser"><span><span class="t">Point Infuser</span><span class="d">약물 전달 · 개발 중</span></span></label>
+          <label class="choice"><input type="checkbox" name="interest" value="point_shower" checked><span><span class="t">Point Shower</span><span class="d">치아 세정기 · 개발 완료</span></span></label>
+          <label class="choice"><input type="checkbox" name="interest" value="point_infuser" checked><span><span class="t">Point Infuser</span><span class="d">약물 전달 · 개발 중</span></span></label>
         </div>
       </div>
 
       <div class="field"><label for="f-name">성함 <span class="req">*</span></label><input type="text" id="f-name" name="name" placeholder="홍길동" required></div>
       <div class="grid2">
         <div class="field"><label for="f-clinic">병원 / 소속</label><input type="text" id="f-clinic" name="clinic" placeholder="OO치과"></div>
-        <div class="field"><label for="f-phone">휴대폰</label><input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000" inputmode="tel"></div>
+        <div class="field"><label for="f-phone">휴대폰 <span class="req">*</span></label><input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000" inputmode="tel" required></div>
       </div>
       <div class="field"><label for="f-email">이메일</label><input type="email" id="f-email" name="email" placeholder="you@example.com"></div>
 
@@ -790,6 +816,26 @@ button{cursor:pointer;border:none;background:none;color:inherit;}
   <a href="#join" class="btn btn-primary">1분 만에 창립 멤버 되기 →</a>
 </div>
 
+<!-- 바로가기 (지하철 노선도식 사이트맵 + 스크롤 위치) -->
+<button class="qn-fab" id="qn-fab" aria-label="바로가기 메뉴 열기">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><path d="M6 8v8"/><path d="M11 6h9M11 12h9M11 18h6"/></svg>
+  <span class="cur">바로가기</span>
+</button>
+<div class="qn-backdrop" id="qn-backdrop"></div>
+<nav class="qn-panel" id="qn-panel" aria-label="사이트맵 바로가기">
+  <div class="qn-phead"><span class="t">GRAPHYSTYLE · MAP</span><button class="x" id="qn-close" aria-label="닫기">×</button></div>
+  <div class="qn-line">
+    <a class="qn-stop" data-sec="top" href="#top"><span class="d"></span><span class="l">홈</span></a>
+    <a class="qn-stop" data-sec="value" href="#value"><span class="d"></span><span class="l">받는 혜택 3가지</span></a>
+    <a class="qn-stop" data-sec="product" href="#product"><span class="d"></span><span class="l">제품</span></a>
+    <a class="qn-stop" data-sec="global" href="#global"><span class="d"></span><span class="l">해외 후기</span></a>
+    <a class="qn-stop" data-sec="why" href="#why"><span class="d"></span><span class="l">창립 멤버 혜택</span></a>
+    <a class="qn-stop" data-sec="how" href="#how"><span class="d"></span><span class="l">참여 방법</span></a>
+    <a class="qn-stop" data-sec="faq" href="#faq"><span class="d"></span><span class="l">자주 묻는 질문</span></a>
+    <a class="qn-stop end" data-sec="join" href="#join"><span class="d"></span><span class="l">창립 멤버 등록</span></a>
+  </div>
+</nav>
+
 <script>
 const form = document.getElementById('join-form');
 const btn = document.getElementById('submit-btn');
@@ -800,7 +846,7 @@ form.addEventListener('submit', async (e) => {
   if (document.getElementById('f-consulting').checked) interests.push('consulting');
   const name = document.getElementById('f-name').value.trim();
   if (!name) { document.getElementById('f-name').focus(); return; }
-  if (interests.length === 0 && !confirm('관심 항목을 선택하지 않으셨습니다. 그래도 등록할까요?')) return;
+  if (!document.getElementById('f-phone').value.trim()) { alert('휴대폰 번호를 입력해 주세요.'); document.getElementById('f-phone').focus(); return; }
   const payload = {
     name,
     clinic: document.getElementById('f-clinic').value.trim(),
@@ -850,6 +896,26 @@ if ('IntersectionObserver' in window && joinSec) {
     entries.forEach(en => { if (mc) mc.style.visibility = en.isIntersecting ? 'hidden' : 'visible'; });
   }, { threshold: 0.2 }).observe(joinSec);
 }
+
+// 바로가기 + 스크롤 위치(지하철 노선도식 사이트맵)
+(function(){
+  const fab = document.getElementById('qn-fab'), panel = document.getElementById('qn-panel'), bd = document.getElementById('qn-backdrop');
+  if (!fab || !panel) return;
+  const stops = [...panel.querySelectorAll('.qn-stop')];
+  const cur = fab.querySelector('.cur');
+  const secEls = stops.map(s => document.getElementById(s.dataset.sec)).filter(Boolean);
+  function setActive(id){ stops.forEach(s => s.classList.toggle('active', s.dataset.sec === id)); const a = stops.find(s => s.dataset.sec === id); if (a) cur.textContent = a.querySelector('.l').textContent; }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }); }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    secEls.forEach(s => io.observe(s));
+  }
+  function open(){ panel.classList.add('open'); bd.classList.add('open'); fab.classList.add('hide'); }
+  function close(){ panel.classList.remove('open'); bd.classList.remove('open'); fab.classList.remove('hide'); }
+  fab.addEventListener('click', open);
+  bd.addEventListener('click', close);
+  document.getElementById('qn-close').addEventListener('click', close);
+  stops.forEach(s => s.addEventListener('click', ev => { ev.preventDefault(); const t = document.getElementById(s.dataset.sec); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); close(); }));
+})();
 </script>
 </body>
 </html>
