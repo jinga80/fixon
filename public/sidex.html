@@ -100,6 +100,7 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
 .brand-sub{font-size:14px;color:var(--muted);font-family:var(--fm);margin-top:2px;}
 .brand-mark-img{width:54px;height:54px;border-radius:13px;display:block;}
 .cover-logo-img{width:min(760px,86%);height:auto;display:block;}
+.cover-logo-svg{width:min(820px,88%);height:auto;display:block;margin:0 auto;}
 
 .cards{display:grid;gap:16px;}
 .cards.cols-3{grid-template-columns:repeat(3,1fr);}
@@ -414,7 +415,22 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
         <img src="/favicon-512.png" alt="GraphyStyle" class="brand-mark-img">
       </div>
       <div class="eyebrow" style="margin-top:48px;">SIDEX 2026 · KEYNOTE</div>
-      <h1><img src="/brand/graphystyle-logo.png" alt="GraphyStyle" class="cover-logo-img"></h1>
+      <h1><svg class="cover-logo-svg" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GraphyStyle">
+        <defs>
+          <linearGradient id="gsOrange" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#e8591e"/>
+            <stop offset="1" stop-color="#ff7a1a"/>
+          </linearGradient>
+          <linearGradient id="gsRainbow" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#f15a24"/>
+            <stop offset="0.25" stop-color="#ffc20e"/>
+            <stop offset="0.5" stop-color="#39b54a"/>
+            <stop offset="0.78" stop-color="#1b75bc"/>
+            <stop offset="1" stop-color="#662d91"/>
+          </linearGradient>
+        </defs>
+        <text x="450" y="116" text-anchor="middle" font-family="'Pretendard Variable',Pretendard,system-ui,-apple-system,sans-serif" font-weight="900" font-style="italic" font-size="138" textLength="820" lengthAdjust="spacingAndGlyphs" letter-spacing="-4"><tspan fill="url(#gsOrange)">Graphy</tspan><tspan fill="url(#gsRainbow)">Style</tspan></text>
+      </svg></h1>
       <h2 style="color:var(--accent);font-weight:800;font-size:44px;margin-top:8px;">
         3D 프린팅으로 만드는 개인 맞춤 구강 케어
       </h2>
