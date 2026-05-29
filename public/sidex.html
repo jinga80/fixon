@@ -380,13 +380,70 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
 }
 .lb-close:hover{background:rgba(255,255,255,0.22);}
 
-/* ===== Mobile ===== */
+/* ===== Mobile =====
+   ⚠ 주의: .deck 은 1280×720 고정 + JS transform:scale 로 폰에 맞춰 축소된다.
+   따라서 .slide 내부 요소(.video-trigger / .pill / .url-card / .slide-num / 카드 등)는
+   이미 시각적으로 함께 축소된다 → 모바일에서 별도 폰트축소를 해선 안 된다(이중 축소되어 깨알이 됨).
+   여기서는 deck 바깥의 fixed UI(컨트롤·라이트박스·노트·힌트·토스트)만 모바일에 맞게 보정한다. */
+
+/* ----- 가로 스크롤 가드 (980px 이하부터 폭 좁아질 가능성) ----- */
+@media(max-width:980px){
+  html,body{overflow-x:hidden;max-width:100vw;}
+}
+
+/* ----- 태블릿 폭 진입부터 컨트롤 패딩/여백을 줄여 화면 가림 최소화 ----- */
+@media(max-width:780px){
+  .controls{bottom:18px;gap:6px;padding:7px;max-width:calc(100vw - 16px);}
+  .notes-panel{padding:20px 24px 78px;max-height:50vh;}
+}
+
 @media(max-width:600px){
-  .controls{bottom:14px;gap:4px;padding:6px;}
-  #overview-btn,#timer-btn,#export-btn{display:none;}   /* 발표자/데스크톱 전용은 모바일 숨김 */
+  .stage{padding:0;}
+
+  /* ----- Controls: 데스크톱 전용 버튼 숨기고, 모바일 핵심 버튼은 44px 터치 타겟 ----- */
+  .controls{bottom:14px;gap:4px;padding:6px;max-width:calc(100vw - 16px);}
   .controls .divider{display:none;}
+  #overview-btn,#timer-btn,#export-btn{display:none;}   /* 발표자/데스크톱 전용은 모바일 숨김 */
+  .ctrl-btn{width:44px;height:44px;min-width:44px;font-size:22px;}
+  .ctrl-btn.primary{height:44px;font-size:14px;padding:0 16px;}
+  .counter{min-width:54px;font-size:12px;padding:0 8px;}
+
+  /* ----- Hint / Notes / Progress ----- */
   .hint{display:none;}                                   /* 키보드 힌트 불필요 (터치는 스와이프) */
-  .notes-panel{padding:18px 20px 70px;font-size:15px;}
+  .notes-panel{padding:18px 20px 78px;font-size:15px;max-height:55vh;}
+  .progress-bar{height:4px;}                              /* 모바일에서 좀 더 잘 보이게 */
+
+  /* ----- Lightbox: 폰 화면 폭 거의 가득, 닫기 버튼 48px + 노치 회피 ----- */
+  .lightbox video{
+    max-width:calc(100vw - 16px);
+    max-height:calc(100vh - 120px);   /* 닫기 버튼 + 상단 인셋 회피 */
+    width:100%;border-radius:10px;
+  }
+  .lb-close{
+    top:max(14px, env(safe-area-inset-top));
+    right:max(14px, env(safe-area-inset-right));
+    width:48px;height:48px;font-size:22px;
+    background:rgba(255,255,255,0.18);
+  }
+
+  /* ----- Toast: 컨트롤(bottom 14+44+10여백) 위로 살짝 끌어올림 ----- */
+  .toast{bottom:80px;font-size:13px;padding:12px 18px;max-width:calc(100vw - 32px);}
+
+  /* ----- Overview 모바일 그리드 (혹시 키보드/외장 디바이스로 열렸을 때) ----- */
+  .overview{padding:24px 16px;}
+  .overview h2{font-size:22px;margin-bottom:16px;}
+  .overview-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+}
+
+/* ----- 극소 폰 (≤400px): 컨트롤 더 컴팩트 + 노트 더 짧게 ----- */
+@media(max-width:400px){
+  .controls{bottom:10px;padding:5px;gap:3px;}
+  .ctrl-btn{width:44px;height:44px;font-size:20px;}
+  .ctrl-btn.primary{padding:0 12px;font-size:13px;}
+  .counter{min-width:48px;font-size:11px;padding:0 6px;}
+  .lb-close{width:44px;height:44px;font-size:20px;top:max(10px, env(safe-area-inset-top));right:max(10px, env(safe-area-inset-right));}
+  .notes-panel{padding:14px 16px 70px;font-size:14px;}
+  .toast{bottom:70px;padding:10px 14px;font-size:12px;}
 }
 
 @media print{

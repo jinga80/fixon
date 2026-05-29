@@ -127,15 +127,27 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .a4-praise .h{font-size:13px;font-weight:800;color:#0f172a;letter-spacing:-0.01em;margin-bottom:1mm;}
 .a4-praise p{font-size:11px;color:#475569;line-height:1.45;margin:0;}
 .a4-praise b{color:#c84a14;font-weight:800;}
-@media(max-width:600px){
-  .handout-section{padding:24px 0 48px;}
+@media(max-width:768px){
+  .handout-section{padding:20px 0 40px;}
   .handout-wrap{padding:0 14px;}
-  .mini-head .in{padding:12px 16px;}
-  .handout-head{margin-bottom:18px;}
-  .handout-head h2{font-size:23px;}
-  .handout-head p{font-size:14px;}
-  .handout-actions{flex-direction:column;gap:10px;margin-bottom:24px;}
-  .handout-actions .btn{width:100%;justify-content:center;font-size:16px;padding:14px 18px;}
+  .mini-head .in{padding:10px 14px;gap:10px;}
+  .mini-head .gs-logo{height:22px;}
+  .mini-head a.back{font-size:13px;min-height:44px;display:inline-flex;align-items:center;padding:0 6px;margin:-10px -6px;}
+  .handout-head{margin:0 auto 18px;}
+  .handout-head .eyebrow2{font-size:12px;}
+  .handout-head h2{font-size:clamp(20px,5.6vw,26px);margin:8px 0 6px;}
+  .handout-head p{font-size:clamp(13px,3.6vw,15px);line-height:1.55;}
+  .handout-actions{flex-direction:column;gap:10px;margin-bottom:22px;}
+  .handout-actions .btn{width:100%;justify-content:center;font-size:16px;padding:14px 18px;min-height:48px;}
+  .handout-actions .btn-lg{font-size:16px;padding:14px 18px;}
+}
+@media(max-width:380px){
+  .handout-section{padding:16px 0 32px;}
+  .handout-wrap{padding:0 10px;}
+  .mini-head .in{padding:8px 12px;}
+  .handout-head h2{font-size:clamp(18px,5.4vw,22px);}
+  .handout-head p{font-size:13px;}
+  .handout-actions .btn{font-size:15px;padding:13px 14px;}
 }
 
 /* === 인쇄: A4 시트만 출력 === */
