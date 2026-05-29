@@ -543,7 +543,7 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
           </div>
         </div>
       </div>
-      <button class="video-trigger" data-video="/video/point-shower-booth-loop.mp4" style="margin-top:auto;">
+      <button class="video-trigger" data-video="/video/point-shower-booth-loop.mp4" data-poster="/video/point-shower-booth-loop-poster.jpg" style="margin-top:auto;">
         <span class="vt-play">▶</span>
         <span class="vt-text">Point Shower — 분사 데모 + 조립·작동 원리</span>
         <span class="vt-hint">클릭하여 재생</span>
@@ -704,6 +704,11 @@ html,body{margin:0;padding:0;background:#0f172a;color:var(--text);font-family:va
         <span class="pill">공모전</span>
         <span class="pill">수익 분배</span>
       </div>
+      <button class="video-trigger" data-video="/video/point-shower-clinical.mp4" data-poster="/video/point-shower-clinical-poster.jpg" style="margin:28px auto 0;max-width:560px;">
+        <span class="vt-play">▶</span>
+        <span class="vt-text">관련 영상 — 임상 시연</span>
+        <span class="vt-hint">29초 · 클릭하여 재생</span>
+      </button>
       <div class="slide-num">11 / 14</div>
     </section>
 
@@ -877,8 +882,9 @@ renderTimer();
 // ============================================================
 const lightbox = document.getElementById('lightbox');
 const lbVideo = document.getElementById('lb-video');
-function openVideo(src){
+function openVideo(src, poster){
   if (lbVideo.getAttribute('src') !== src) lbVideo.src = src;
+  if (poster) lbVideo.poster = poster;
   lightbox.classList.add('open');
   lbVideo.currentTime = 0;
   lbVideo.play().catch(() => {});
@@ -888,7 +894,7 @@ function closeVideo(){
   lightbox.classList.remove('open');
 }
 document.querySelectorAll('.video-trigger').forEach(btn => {
-  btn.addEventListener('click', () => openVideo(btn.dataset.video));
+  btn.addEventListener('click', () => openVideo(btn.dataset.video, btn.dataset.poster));
 });
 document.getElementById('lb-close').onclick = closeVideo;
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeVideo(); });
