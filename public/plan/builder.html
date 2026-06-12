@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>GraphyStyle · 의사결정 빌더 → 사업계획서</title>
+<meta name="theme-color" content="#14110f" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#14110f; --bg2:#1b1714; --card:#211b17; --card2:#272019;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+    --ink:#f4ece3; --muted:#b6a899; --dim:#8a7d70;
+    --brand:#ff6b2b; --brand2:#ff8a4c; --gold:#e0a458; --green:#5fbf8f; --red:#ff7a6b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,system-ui,-apple-system,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{margin:0;line-height:1.25;letter-spacing:-.01em}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:60;background:rgba(20,17,15,.9);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px}
+  .top .l{display:flex;align-items:center;gap:10px;min-width:0}
+  .top .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15);flex:none}
+  .top .ttl{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top .acts{display:flex;gap:8px;flex:none}
+  .tbtn{font-size:13px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid var(--line2);
+    background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+  .tbtn.primary{background:linear-gradient(135deg,#ff7a35,#ff5e1a);border:0;color:#fff}
+  .tbtn:active{transform:translateY(1px)}
+
+  .layout{max-width:1240px;margin:0 auto;padding:20px 16px 90px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:980px){.layout{grid-template-columns:1fr}}
+
+  /* panel */
+  .panel h2{font-size:20px;font-weight:800;margin-bottom:4px}
+  .panel .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+
+  .dgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px}
+  .dgroup .qh{display:flex;align-items:baseline;gap:9px;margin-bottom:3px}
+  .dgroup .qno{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.06em;flex:none}
+  .dgroup .q{font-size:15.5px;font-weight:700}
+  .dgroup .qd{font-size:13px;color:var(--dim);margin:2px 0 12px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line);border-radius:11px;
+    cursor:pointer;transition:border-color .15s,background .15s}
+  .opt:hover{border-color:var(--line2)}
+  .opt.sel{border-color:var(--brand);background:rgba(255,107,43,.07)}
+  .opt input{margin:3px 0 0;accent-color:var(--brand);flex:none;width:16px;height:16px}
+  .opt .ol{font-size:14px;font-weight:600}
+  .opt .od{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .rec{font-size:10px;font-weight:800;letter-spacing:.04em;color:#bff0d4;background:rgba(95,191,143,.16);
+    border:1px solid rgba(95,191,143,.3);border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:middle}
+
+  /* numeric */
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+  .field label{font-size:13px;color:var(--muted);font-weight:600}
+  .field input,.field textarea{width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--line2);
+    background:rgba(255,255,255,.03);color:var(--ink);font-size:14px;font-family:inherit;outline:none}
+  .field input:focus,.field textarea:focus{border-color:var(--brand)}
+  .field textarea{resize:vertical;min-height:64px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .calc{background:linear-gradient(160deg,#2a201a,#211b17);border:1px solid rgba(255,107,43,.28);border-radius:12px;
+    padding:14px 16px;margin-top:4px}
+  .calc .v{font-size:24px;font-weight:800;color:var(--brand2)}
+  .calc .l{font-size:12.5px;color:var(--muted)}
+  .rng{width:100%;accent-color:var(--brand)}
+  .rngrow{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-top:2px}
+
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:520px){.checks{grid-template-columns:1fr}}
+  .chk{display:flex;gap:9px;align-items:center;padding:9px 11px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:13.5px}
+  .chk.sel{border-color:var(--green);background:rgba(95,191,143,.08)}
+  .chk input{accent-color:var(--green);width:16px;height:16px}
+
+  /* preview document */
+  .docwrap{position:sticky;top:64px;align-self:start}
+  @media(max-width:980px){.docwrap{position:static}}
+  .doctoolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .doctoolbar .t{font-size:13px;color:var(--dim);letter-spacing:.04em}
+  #doc{background:#fbf7f1;color:#1d1a16;border-radius:14px;padding:38px 40px;font-size:14px;line-height:1.75;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);max-height:78vh;overflow:auto}
+  @media(max-width:560px){#doc{padding:26px 22px}}
+  #doc h1{font-size:24px;font-weight:800;color:#16130f;letter-spacing:-.02em}
+  #doc .docmeta{color:#8a7f70;font-size:12.5px;margin:6px 0 0}
+  #doc .conf{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.1em;color:#b5491f;
+    border:1px solid #e2b9a6;background:#fbe9e1;border-radius:999px;padding:3px 9px;margin-bottom:14px}
+  #doc h2{font-size:15px;font-weight:800;color:#0f0d0a;margin:24px 0 8px;padding-bottom:6px;border-bottom:2px solid #ece2d4}
+  #doc h2 .n{color:#ff5e1a}
+  #doc p{margin:7px 0;color:#33302a}
+  #doc ul{margin:7px 0;padding-left:20px;color:#33302a}
+  #doc li{margin:4px 0}
+  #doc .kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;margin:8px 0;font-size:13.5px}
+  #doc .kv .k{color:#8a7f70;font-weight:600}
+  #doc .summary{background:#f2ebe0;border-left:3px solid #ff5e1a;padding:12px 16px;border-radius:0 10px 10px 0;margin:10px 0}
+  #doc .big{font-size:20px;font-weight:800;color:#16130f}
+  #doc table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+  #doc th,#doc td{border:1px solid #e2d8c8;padding:7px 10px;text-align:left}
+  #doc th{background:#efe6d8;font-weight:700}
+  #doc .foot{margin-top:26px;padding-top:12px;border-top:1px solid #e2d8c8;color:#9a8f7e;font-size:11.5px}
+
+  .float{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:8px;padding:10px 14px;
+    background:rgba(20,17,15,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  @media(max-width:980px){.float{display:flex}}
+  .float .tbtn{flex:1;text-align:center;padding:13px}
+
+  /* print */
+  @media print{
+    body{background:#fff}
+    .top,.panel,.float,.doctoolbar{display:none!important}
+    .layout{display:block;max-width:none;padding:0}
+    .docwrap{position:static}
+    #doc{box-shadow:none;border-radius:0;max-height:none;overflow:visible;padding:0;font-size:12pt;background:#fff}
+    #doc h1{font-size:22pt}
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="l"><span class="dot"></span><span class="ttl">의사결정 빌더 · 사업계획서 생성</span></div>
+  <div class="acts">
+    <a class="tbtn" href="index.html">← 전략 메모</a>
+    <button class="tbtn" id="resetBtn">초기화</button>
+    <button class="tbtn primary" id="printBtn">인쇄 / PDF</button>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- ===== DECISION PANEL ===== -->
+  <div class="panel">
+    <div class="eyebrow">오늘 회의에서 결정합니다</div>
+    <h2>항목을 고르면, 오른쪽 사업계획서가 채워집니다</h2>
+    <p class="sub">각 항목엔 <span class="rec">추천</span> 기본값이 미리 선택돼 있습니다. 회의에서 함께 보며 바꾸세요. 선택은 자동 저장됩니다.</p>
+
+    <!-- company info -->
+    <div class="dgroup">
+      <div class="qh"><span class="qno">00</span><span class="q">문서 기본 정보</span></div>
+      <div class="row2">
+        <div class="field"><label>회사/사업체명</label><input id="f_company" placeholder="GraphyStyle (가칭)" /></div>
+        <div class="field"><label>대표/작성자</label><input id="f_author" placeholder="대표 성명" /></div>
+      </div>
+      <div class="field"><label>한 줄 비전</label><input id="f_vision" placeholder="내 입 모양에 꼭 맞춘 케어 — 손 대신 트레이가 합니다" /></div>
+    </div>
+
+    <div id="decisionRoot"></div>
+
+    <!-- funding calculator -->
+    <div class="dgroup">
+      <div class="qh"><span class="qno">F</span><span class="q">목표 모집액 계산</span></div>
+      <div class="qd">파운딩 닥터 1차 라운드 규모를 잡아봅니다. (의료모드는 허가 후 결제 — 여기 금액은 지분+공산품 기준)</div>
+      <div class="field">
+        <label>참여 의사 수 · <span id="docCountLbl">18</span>명</label>
+        <input class="rng" type="range" id="r_docs" min="5" max="60" value="18" step="1" />
+        <div class="rngrow"><span>5명</span><span>60명</span></div>
+      </div>
+      <div class="field">
+        <label>1인 평균 출자/패키지 · <span id="ticketLbl">3,000</span>만원</label>
+        <input class="rng" type="range" id="r_ticket" min="300" max="10000" value="3000" step="100" />
+        <div class="rngrow"><span>300만</span><span>1억</span></div>
+      </div>
+      <div class="calc">
+        <div class="v" id="totalCalc">5.4억원</div>
+        <div class="l">1차 목표 모집액 (참여 의사 수 × 1인 평균)</div>
+      </div>
+    </div>
+
+    <!-- funding stack multi -->
+    <div class="dgroup">
+      <div class="qh"><span class="qno">S</span><span class="q">병행할 자금 스택 (복수 선택)</span></div>
+      <div class="qd">비희석(매출·보증·정부지원)부터 깔고, 그 위에 펀딩·VC를 얹습니다.</div>
+      <div class="checks" id="stackRoot"></div>
+    </div>
+
+    <!-- free note -->
+    <div class="dgroup">
+      <div class="qh"><span class="qno">N</span><span class="q">회의 메모 / 추가 결정사항</span></div>
+      <div class="field"><textarea id="f_note" placeholder="예: 그래피 단가 협상 담당 지정, RA 변호사 선임, 2차 라운드 시점 등"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ===== PREVIEW DOC ===== -->
+  <div class="docwrap">
+    <div class="doctoolbar">
+      <span class="t">실시간 미리보기 · 사업계획서</span>
+      <span class="t" id="savedAt">자동 저장됨</span>
+    </div>
+    <div id="doc"></div>
+  </div>
+</div>
+
+<div class="float">
+  <a class="tbtn" href="#doc">미리보기 ↓</a>
+  <button class="tbtn primary" id="printBtn2">인쇄 / PDF 내보내기</button>
+</div>
+
+<script>
+/* ============================================================
+   의사결정 데이터 모델
+   ============================================================ */
+const DECISIONS = [
+  {
+    id:"graphy", no:"01", q:"그래피(Graphy)와의 관계 구조",
+    d:"그래피의 사업 의지가 약한 상황 — 관계를 어떻게 정의할 것인가",
+    opts:[
+      {v:"a", label:"모델 A · 소재 공급계약", rec:true,
+        desc:"그래피는 원료만 공급, 사업·이익·리스크 100% 우리",
+        plan:"그래피(Graphy)는 형상기억 레진 및 카트리지 원료 등 <b>소재 공급사</b>로 역할을 한정한다. 제품 설계·인허가·브랜드·영업·CS 등 사업 전반과 이익·리스크는 사업주체(당사)가 100% 보유한다. 지분 희석이 없는 가장 단순·명확한 구조다. 공급 안정성 확보를 위해 <b>독점/우선 공급, 단가·MOQ 보장, 브랜드·IP 당사 귀속</b>을 계약에 명문화한다."},
+      {v:"b", label:"모델 B · 라이선스 + 로열티",
+        desc:"그래피 소재 IP 라이선스, 매출 로열티 지급",
+        plan:"그래피의 소재 특허/IP를 라이선스 받아 사용하고 매출의 일정 비율을 로열티로 지급한다. 소재 외 핵심 기술 의존이 큰 경우의 대안이며, 로열티 부담을 감안해 가격·마진 설계가 필요하다."},
+      {v:"c", label:"모델 C · 소수지분 합작",
+        desc:"그래피 소액 지분(10~20%) 보유, 경영은 우리",
+        plan:"그래피가 소수 지분(예: 10~20%)만 보유하고 경영권은 당사가 단독으로 행사한다. 공급 안정성과 협력 관계를 유지하면서도 사업 주도권을 확보하는 절충안이다. 지분율·이사회 구성·소재 공급 조건을 동시에 협상한다."}
+    ]
+  },
+  {
+    id:"launch", no:"02", q:"제품 출시 범위·순서",
+    d:"의료기기 허가는 시간이 걸린다. 무엇을 먼저 내보낼 것인가",
+    opts:[
+      {v:"daily", label:"Daily(공산품) 모드 먼저", rec:true,
+        desc:"허가 불필요 → 즉시 매출·런웨이, 의료모드는 병행 추진",
+        plan:"의료기기 허가가 필요 없는 <b>Daily/Wellness(공산품) 모드를 우선 출시</b>해 매출과 자체 런웨이를 확보한다. 동시에 Medical(의료) 모드의 인허가 트랙을 병행 추진한다. 가장 빠르고 희석이 없는 진입 경로다."},
+      {v:"medical", label:"Medical(의료기기) 모드 집중",
+        desc:"허가 후 고부가 의료시장 직행 (시간·자본 더 필요)",
+        plan:"처음부터 Medical(의료기기) 모드 허가에 집중해 고부가 의료시장에 진입한다. 진입 장벽은 높지만 차별성·단가가 크다. 허가 기간 동안의 자금·런웨이 확보가 관건이다."},
+      {v:"both", label:"동시 추진 (Daily 매출 + Medical 허가)",
+        desc:"공산품 매출로 버티며 의료 허가를 동시에",
+        plan:"Daily 모드 매출로 런웨이를 만들면서 Medical 모드 허가를 동시 추진하는 투트랙 전략. 자원 분산 리스크가 있으나 시장 선점과 고부가 진입을 모두 노린다."}
+    ]
+  },
+  {
+    id:"reg", no:"03", q:"의료기기 인허가 전략",
+    d:"Medical 모드를 어떻게 허가까지 끌고 갈 것인가",
+    opts:[
+      {v:"outsource", label:"인증대행·위탁개발(RA 파트너) 활용", rec:true,
+        desc:"전문 RA/위탁기관과 협업해 허가 리스크·시간 단축",
+        plan:"전문 인허가(RA) 컨설팅 및 위탁개발·시험기관과 협업해 품목 분류·기술문서·시험을 진행한다. 내부 역량이 부족한 초기에 <b>허가 실패 리스크와 소요 시간을 줄이는</b> 가장 현실적인 경로다. KHIDI 사업화 지원으로 시험·인허가 비용을 분담한다."},
+      {v:"inhouse", label:"자체 RA 인력 확보 후 직접 허가",
+        desc:"장기적으로 내재화, 초기 채용 비용 발생",
+        plan:"자체 RA(규제) 인력을 확보해 인허가를 직접 수행한다. 장기적으로 역량이 내재화되지만 초기 채용·셋업 비용과 시간이 든다."},
+      {v:"defer", label:"우선 공산품으로, 의료허가는 후속 결정",
+        desc:"Daily 모드로 시장 검증 후 의료 트랙 재판단",
+        plan:"먼저 공산품(Daily) 모드로 시장을 검증하고, 매출·데이터가 쌓인 뒤 Medical 허가 진입 여부와 방식을 재결정한다. 자본 효율이 가장 높은 보수적 접근이다."}
+    ]
+  },
+  {
+    id:"fundstruct", no:"04", q:"의사 펀딩 구조",
+    d:"파운딩 닥터에게서 자금을 어떤 형태로 받을 것인가",
+    opts:[
+      {v:"hybrid", label:"하이브리드 3-트랙 (지분+선주문+KOL)", rec:true,
+        desc:"지분투자·공산품 선주문·임상 파트너를 의사별로 선택",
+        plan:"의사 성향에 따라 <b>① 지분투자(SAFE/주식) ② 공산품 모드 얼리 액세스 선주문 ③ 임상 KOL 파트너</b> 중 선택하게 하는 3-트랙 구조. 자금 규모·확산 채널·임상 신뢰를 동시에 확보한다. 의료기기 모드는 결제 없는 '우선공급 예약권'으로만 운영해 규제를 준수한다."},
+      {v:"equity", label:"지분형 중심 (엔젤투자)",
+        desc:"SAFE/비상장주식으로 명확하게, 소득공제 소구",
+        plan:"파운딩 닥터를 엔젤 투자자로 영입해 SAFE 또는 비상장주식으로 자금을 받는다. 엔젤투자 소득공제 등 세제 혜택을 핵심 소구점으로 한다. 가장 깨끗하고 규제 안전한 구조다."},
+      {v:"preorder", label:"선주문형 중심 (공산품)",
+        desc:"Daily 모드 패키지 선판매로 운전자금",
+        plan:"의료기기가 아닌 Daily(공산품) 모드 패키지를 선판매(얼리 액세스)해 운전자금을 마련한다. 창립가 평생 고정 등 리워드를 제공한다. 의료모드 결제는 허가 이후로 한정한다."}
+    ]
+  },
+  {
+    id:"clinical", no:"05", q:"임상 레퍼런스(대학병원 데모) 활용 수위",
+    d:"확보한 데모·세팅 라인을 어디까지 노출할 것인가",
+    opts:[
+      {v:"reserved", label:"절제 — '임상 현장 검증' 수준", rec:true,
+        desc:"기관명 과대광고 없이 사실 기반으로만",
+        plan:"확보한 대학병원 데모·세팅 라인은 <b>제품을 다듬는 임상 피드백 루프</b>와 파운딩 닥터 모집의 신뢰 근거로 활용한다. 다만 해당 병원은 치과대학이 없는 점, 의료기기 광고 규정·기관 정책을 고려해 <b>기관명을 과대 포장하지 않고 '임상 현장에서 검증 중' 수준으로 절제</b>하여 표현한다."},
+      {v:"active", label:"적극 — 케이스 중심 홍보",
+        desc:"임상 케이스를 전면에 (규정 검토 필수)",
+        plan:"임상 케이스를 마케팅 전면에 배치해 신뢰를 적극 소구한다. 단, 의료기기 광고 사전심의·체험담 규정과 기관 동의 범위를 반드시 사전 검토한다."}
+    ]
+  },
+  {
+    id:"price", no:"06", q:"가격 정책",
+    d:"3-tier(Daily/Wellness/Medical) 가격을 어떻게 포지셔닝할 것인가",
+    opts:[
+      {v:"tiered", label:"모드별 차등 (대중~프리미엄)", rec:true,
+        desc:"Daily는 대중가, Medical은 프리미엄 의료가",
+        plan:"하나의 트레이로 카트리지만 교체하는 3-tier 구조를 가격에 반영한다. <b>Daily는 대중 접근가(구독형), Medical은 프리미엄 의료가</b>로 차등한다. 카트리지 정기배송으로 반복 매출(LTV)을 극대화한다."},
+      {v:"premium", label:"프리미엄 단일 포지션",
+        desc:"의료 신뢰 중심 고가 전략",
+        plan:"의료적 신뢰와 맞춤성을 강조해 프리미엄 단일 가격으로 포지셔닝한다. 브랜드 가치를 높게 유지하되 초기 침투 속도는 보수적이다."},
+      {v:"penetration", label:"침투가 (대중 우선 확산)",
+        desc:"Daily 저가로 빠른 사용자 확보",
+        plan:"Daily 모드를 낮은 침투가로 빠르게 확산시켜 사용자 기반을 먼저 확보하고, 카트리지·상위 모드로 수익화한다."}
+    ]
+  },
+  {
+    id:"channel", no:"07", q:"마케팅 채널 우선순위",
+    d:"한정된 자원을 어디에 먼저 쓸 것인가",
+    opts:[
+      {v:"b2b", label:"의사 B2B 우선", rec:true,
+        desc:"창립 닥터 커뮤니티·임상 케이스·학회 시연",
+        plan:"초기에는 <b>의사 대상 B2B</b>에 집중한다. 폐쇄형 창립 닥터 커뮤니티, 임상 케이스 콘텐츠, 학회·세미나 시연을 통해 동료 추천 기반으로 확산한다. 이는 곧 펀딩 전환 채널이기도 하다."},
+      {v:"d2c", label:"환자 D2C 우선",
+        desc:"공산품 모드 숏폼·구독 중심",
+        plan:"공산품(Daily) 모드를 중심으로 환자 D2C에 집중한다. 스토리형 숏폼과 카트리지 구독 모델로 반복 매출을 키운다. (의료모드 광고 규제 준수 필수)"},
+      {v:"both", label:"B2B→D2C 단계 병행",
+        desc:"의사로 신뢰 쌓고 환자로 확산",
+        plan:"먼저 B2B로 임상 신뢰와 레퍼런스를 쌓고, 그 신뢰를 바탕으로 병원 채널을 통해 환자 D2C로 단계적으로 확산한다."}
+    ]
+  },
+  {
+    id:"timeline", no:"08", q:"실행 속도",
+    d:"오늘 회의 이후의 추진 템포",
+    opts:[
+      {v:"fast", label:"공격적 90일 스프린트", rec:true,
+        desc:"소재계약·비공개 라운드·정책자금 동시 가속",
+        plan:"오늘 방향 확정 → 2주 내 그래피 소재계약·의사 명단 → 4~6주 파운딩 닥터 1차 모집 → 6~10주 정책자금(기보·KHIDI·TIPS) 병행 → 12주 초도생산·Daily 매출 개시의 <b>90일 스프린트</b>로 추진한다."},
+      {v:"steady", label:"안정 6개월 단계 추진",
+        desc:"리스크 관리 우선, 단계별 검증",
+        plan:"각 단계를 충분히 검증하며 약 6개월에 걸쳐 단계적으로 추진한다. 속도보다 리스크 관리를 우선한다."}
+    ]
+  }
+];
+
+const STACK = [
+  {v:"sales", label:"Daily 매출(비희석)", rec:true, plan:"공산품 Daily 모드 매출로 자체 런웨이를 만든다(희석 0)."},
+  {v:"kibo", label:"기술보증기금 보증", rec:true, plan:"기보 Tech-바이오/사업화 보증(각 최대 10억, 85% 부분보증)으로 비희석 운전자금을 확보한다."},
+  {v:"khidi", label:"KHIDI 의료기기 사업화 지원", rec:true, plan:"KHIDI 사업화 촉진사업으로 신뢰성·성능 평가, 인허가, 해외진출 비용을 정부가 분담한다."},
+  {v:"tips", label:"TIPS (정부 R&D)", rec:true, plan:"TIPS로 정부 R&D 자금(2026년 일반형 최대 8억)을 확보한다. 운영사 선투자 연결이 관문이다."},
+  {v:"crowd", label:"증권형 크라우드펀딩", plan:"와디즈·펀딩포유 등 증권형 크라우드펀딩으로 대중 인지도와 소액 자금을 동시에 확보한다(한도 규정 확인)."},
+  {v:"si", label:"전략적 투자자(제약/플랫폼)", plan:"약제·카트리지 협업이 가능한 제약사 또는 디지털 치과 플랫폼을 전략적 투자자로 유치한다."},
+  {v:"vc", label:"VC (가치 상승 후)", plan:"매출·임상·허가로 기업가치가 오른 뒤 마지막 단계에서 VC 투자를 유치해 희석을 최소화한다."}
+];
+
+const RISKS = [
+  "의료기기 모드는 <b>품목허가 전 판매·광고·예약결제가 의료기기법 위반</b> — 결제·인도는 허가 이후로 한정한다.",
+  "허가 전 제품 광고·체험담·서포터즈 홍보 금지 — 공산품 모드 또는 회사 비전 콘텐츠로 대체한다.",
+  "의사 보상(KOL)은 리베이트 오인 방지를 위해 정당한 자문·연구 계약으로 문서화한다.",
+  "판매 단계 전 의료기기 판매업 신고·UDI 체계를 준비한다.",
+  "증권(SAFE/주식) 모집은 자본시장법상 모집 한도·절차를 준수하고 변호사 검토를 거친다."
+];
+
+/* ============================================================
+   상태 & 렌더링
+   ============================================================ */
+const LS_KEY = "gs_builder_state_v1";
+let state = loadState();
+
+function defaultState(){
+  const s = {choices:{}, stack:{}, docs:18, ticket:3000, company:"", author:"", vision:"", note:""};
+  DECISIONS.forEach(d=>{ const r=d.opts.find(o=>o.rec)||d.opts[0]; s.choices[d.id]=r.v; });
+  STACK.forEach(t=>{ s.stack[t.v]= !!t.rec; });
+  return s;
+}
+function loadState(){
+  try{ const raw=localStorage.getItem(LS_KEY); if(raw){ const p=JSON.parse(raw); const d=defaultState(); return Object.assign(d,p,{choices:Object.assign(d.choices,p.choices||{}),stack:Object.assign(d.stack,p.stack||{})}); } }catch(e){}
+  return defaultState();
+}
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+
+function renderDecisions(){
+  const root = document.getElementById("decisionRoot");
+  root.innerHTML = DECISIONS.map(d=>{
+    const opts = d.opts.map(o=>{
+      const sel = state.choices[d.id]===o.v;
+      return `<label class="opt ${sel?'sel':''}" data-d="${d.id}" data-v="${o.v}">
+        <input type="radio" name="${d.id}" ${sel?'checked':''}/>
+        <span><span class="ol">${o.label}${o.rec?'<span class="rec">추천</span>':''}</span><span class="od">${o.desc}</span></span>
+      </label>`;
+    }).join("");
+    return `<div class="dgroup">
+      <div class="qh"><span class="qno">${d.no}</span><span class="q">${d.q}</span></div>
+      <div class="qd">${d.d}</div>
+      <div class="opts">${opts}</div>
+    </div>`;
+  }).join("");
+  root.querySelectorAll(".opt").forEach(el=>{
+    el.addEventListener("click",()=>{ state.choices[el.dataset.d]=el.dataset.v; save(); renderDecisions(); renderDoc(); });
+  });
+}
+
+function renderStack(){
+  const root=document.getElementById("stackRoot");
+  root.innerHTML = STACK.map(t=>{
+    const sel=!!state.stack[t.v];
+    return `<label class="chk ${sel?'sel':''}" data-v="${t.v}"><input type="checkbox" ${sel?'checked':''}/> ${t.label}${t.rec?'':''}</label>`;
+  }).join("");
+  root.querySelectorAll(".chk").forEach(el=>{
+    el.addEventListener("click",(e)=>{ if(e.target.tagName!=='INPUT'){const i=el.querySelector('input');i.checked=!i.checked;} state.stack[el.dataset.v]=el.querySelector('input').checked; save(); renderStack(); renderDoc(); });
+  });
+}
+
+function fmtWon(manwon){
+  // manwon = 금액(만원)
+  if(manwon>=10000){ const eok=manwon/10000; return (Math.round(eok*10)/10).toLocaleString()+"억원"; }
+  return Math.round(manwon).toLocaleString()+"만원";
+}
+
+function bindInputs(){
+  const map={f_company:"company",f_author:"author",f_vision:"vision",f_note:"note"};
+  Object.keys(map).forEach(id=>{
+    const el=document.getElementById(id); el.value=state[map[id]]||"";
+    el.addEventListener("input",()=>{ state[map[id]]=el.value; save(); renderDoc(); });
+  });
+  const rd=document.getElementById("r_docs"), rt=document.getElementById("r_ticket");
+  rd.value=state.docs; rt.value=state.ticket;
+  function upd(){ state.docs=+rd.value; state.ticket=+rt.value;
+    document.getElementById("docCountLbl").textContent=state.docs;
+    document.getElementById("ticketLbl").textContent=(+rt.value).toLocaleString();
+    document.getElementById("totalCalc").textContent=fmtWon(state.docs*state.ticket);
+    save(); renderDoc(); }
+  rd.addEventListener("input",upd); rt.addEventListener("input",upd); upd();
+}
+
+function today(){ const d=new Date(); return d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0"); }
+
+function renderDoc(){
+  const c=state.choices;
+  const get=(id)=>{ const d=DECISIONS.find(x=>x.id===id); const o=d.opts.find(o=>o.v===c[id])||d.opts[0]; return o; };
+  const company=state.company||"GraphyStyle (가칭)";
+  const author=state.author||"—";
+  const vision=state.vision||"내 입 모양에 꼭 맞춘 케어 — 손 대신 트레이가 합니다";
+  const total=fmtWon(state.docs*state.ticket);
+
+  const stackList=STACK.filter(t=>state.stack[t.v]);
+  const stackHtml = stackList.length
+    ? "<ul>"+stackList.map(t=>`<li>${t.plan}</li>`).join("")+"</ul>"
+    : "<p>선택된 병행 자금 스택이 없습니다.</p>";
+
+  const note=(state.note||"").trim();
+
+  document.getElementById("doc").innerHTML = `
+    <span class="conf">CONFIDENTIAL · 핵심 관계자 한정</span>
+    <h1>${company} 사업계획서</h1>
+    <div class="docmeta">작성: ${author} · 작성일 ${today()} · 비전 “${vision}”</div>
+
+    <div class="summary">
+      <div class="big">핵심 요약</div>
+      <p>그래피는 <b>소재 공급사</b>로, 당사는 <b>사업 주체</b>로 역할을 재편한다.
+      자본금 공백은 <b>파운딩 닥터 펀딩(1차 목표 ${total})</b>과 비희석 정책자금으로 메운다.
+      ${get("launch").label.replace(/<[^>]+>/g,"")}을 출시 우선순위로 하여 ${get("timeline").label.replace(/<[^>]+>/g,"")}로 추진한다.</p>
+    </div>
+
+    <h2><span class="n">1.</span> 사업 개요 · 관계 구조</h2>
+    <div class="kv">
+      <div class="k">제품</div><div>Fixon → Point Shower / Point Infuser (맞춤형 구강 케어 트레이, 3-tier)</div>
+      <div class="k">소재 공급</div><div>Graphy (형상기억 레진·카트리지 원료)</div>
+      <div class="k">사업 주체</div><div>${company}</div>
+      <div class="k">관계 모델</div><div>${get("graphy").label}</div>
+    </div>
+    <p>${get("graphy").plan}</p>
+
+    <h2><span class="n">2.</span> 제품 출시 전략</h2>
+    <p><b>출시 범위·순서:</b> ${get("launch").plan}</p>
+    <p><b>인허가 전략:</b> ${get("reg").plan}</p>
+    <p><b>가격 정책:</b> ${get("price").plan}</p>
+
+    <h2><span class="n">3.</span> 자금조달 계획</h2>
+    <p><b>의사 직접 펀딩(주 엔진):</b> ${get("fundstruct").plan}</p>
+    <table>
+      <tr><th>구분</th><th>값</th></tr>
+      <tr><td>1차 라운드 목표 참여 의사</td><td>${state.docs}명</td></tr>
+      <tr><td>1인 평균 출자/패키지</td><td>${(+state.ticket).toLocaleString()}만원</td></tr>
+      <tr><td><b>1차 목표 모집액</b></td><td><b>${total}</b></td></tr>
+    </table>
+    <p><b>병행 자금 스택:</b></p>
+    ${stackHtml}
+
+    <h2><span class="n">4.</span> 임상·마케팅</h2>
+    <p><b>임상 레퍼런스:</b> ${get("clinical").plan}</p>
+    <p><b>마케팅 채널:</b> ${get("channel").plan}</p>
+    <p><b>시장 배경:</b> 글로벌 디지털 치과 시장은 2026년 약 USD 5.47B → 2034년 USD 11.1B(CAGR 9.3%)로 성장 중이며, 맞춤·D2C·AI/3D프린팅 트렌드가 당사 전략과 부합한다.</p>
+
+    <h2><span class="n">5.</span> 규제·리스크 체크리스트</h2>
+    <ul>${RISKS.map(r=>`<li>${r}</li>`).join("")}</ul>
+    <p style="color:#9a6a4a">※ 본 계획은 의사결정 보조용 초안이며, 모집·계약 전 변호사·규제(RA) 검토를 거친다.</p>
+
+    <h2><span class="n">6.</span> 실행 로드맵</h2>
+    <p>${get("timeline").plan}</p>
+
+    ${note?`<h2><span class="n">7.</span> 회의 메모 / 추가 결정사항</h2><p>${note.replace(/\n/g,"<br/>")}</p>`:""}
+
+    <div class="foot">© ${new Date().getFullYear()} ${company} · 본 문서는 ${today()} 핵심 관계자 회의에서 의사결정 빌더로 생성되었습니다. 외부 유출 금지.</div>
+  `;
+  const sa=document.getElementById("savedAt"); sa.textContent="자동 저장됨 · "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+}
+
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+document.getElementById("printBtn2").addEventListener("click",()=>window.print());
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(confirm("모든 선택을 추천 기본값으로 되돌릴까요?")){ state=defaultState(); save(); initAll(); }
+});
+
+function initAll(){ renderDecisions(); renderStack(); bindInputs(); renderDoc(); }
+initAll();
+</script>
+<script src="gate.js"></script>
+</body>
+</html>
