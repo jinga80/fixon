@@ -132,6 +132,39 @@
 
   footer{padding:34px 0 64px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
   .note{font-size:12.5px;color:var(--dim);margin-top:10px}
+
+  /* ===== 지하철 노선도 사이드바 ===== */
+  section{scroll-margin-top:56px}
+  @media(min-width:1180px){ body{padding-right:236px} }
+  .metro{position:fixed;top:49px;right:0;width:236px;height:calc(100vh - 49px);z-index:45;
+    background:linear-gradient(180deg,#171310,#13100e);border-left:1px solid var(--line);
+    padding:20px 16px 20px 20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .metro .mh{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700;margin:0 0 16px}
+  .metro .mh b{color:var(--brand2)}
+  .mline{position:relative;padding-left:4px}
+  .mline::before{content:"";position:absolute;left:11px;top:9px;bottom:9px;width:3px;border-radius:3px;
+    background:linear-gradient(180deg,var(--brand),var(--gold) 45%,var(--teal) 75%,var(--green));opacity:.22}
+  .mfill{position:absolute;left:11px;top:9px;width:3px;border-radius:3px;height:0;transition:height .35s ease;
+    background:linear-gradient(180deg,var(--brand),var(--gold),var(--teal),var(--green));box-shadow:0 0 8px rgba(255,107,43,.4)}
+  .station{position:relative;display:flex;align-items:center;gap:11px;padding:8px 0;text-decoration:none;cursor:pointer}
+  .station .stdot{position:relative;z-index:2;width:13px;height:13px;border-radius:50%;flex:none;margin-left:5px;
+    background:#2a221c;border:2px solid #52473d;transition:all .2s}
+  .station .stlbl{font-size:13px;color:var(--dim);font-weight:500;transition:color .2s,font-weight .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .station.done .stdot{background:var(--brand2);border-color:var(--brand2)}
+  .station.done .stlbl{color:var(--muted)}
+  .station.active .stdot{background:var(--brand);border-color:#fff;width:16px;height:16px;margin-left:3.5px;box-shadow:0 0 0 5px rgba(255,107,43,.22)}
+  .station.active .stlbl{color:#fff;font-weight:800}
+  .mtoggle{display:none}
+  @media(max-width:1179px){
+    .metro{transform:translateX(100%);transition:transform .28s ease;width:min(290px,84vw);box-shadow:-20px 0 50px rgba(0,0,0,.5);top:0;height:100vh}
+    body.metro-open .metro{transform:translateX(0)}
+    .mtoggle{display:flex;position:fixed;right:14px;bottom:16px;z-index:48;align-items:center;gap:8px;
+      padding:12px 16px;border-radius:999px;border:0;cursor:pointer;color:#fff;font-weight:700;font-size:13px;
+      background:linear-gradient(135deg,#ff7a35,#ff5e1a);box-shadow:0 10px 28px rgba(255,94,26,.4)}
+    .mtoggle .cur{font-size:12px;opacity:.85;font-weight:600}
+    .mbackdrop{display:none;position:fixed;inset:0;z-index:44;background:rgba(0,0,0,.5)}
+    body.metro-open .mbackdrop{display:block}
+  }
 </style>
 </head>
 <body>
@@ -147,6 +180,23 @@
     <a href="action.html">실행</a>
   </nav>
 </div>
+
+<!-- ===== 지하철 노선도 사이드바 ===== -->
+<aside class="metro" id="metro">
+  <div class="mh">🚇 <b>이 페이지 노선도</b></div>
+  <div class="mline" id="mline">
+    <div class="mfill" id="mfill"></div>
+    <a class="station" data-id="flow"><span class="stdot"></span><span class="stlbl">회의 흐름</span></a>
+    <a class="station" data-id="map"><span class="stdot"></span><span class="stlbl">4개 영역</span></a>
+    <a class="station" data-id="product"><span class="stdot"></span><span class="stlbl">제품 한눈에</span></a>
+    <a class="station" data-id="structure"><span class="stdot"></span><span class="stlbl">사업 구조</span></a>
+    <a class="station" data-id="funding-sum"><span class="stdot"></span><span class="stlbl">자금(선판매)</span></a>
+    <a class="station" data-id="context"><span class="stdot"></span><span class="stlbl">시장·규제·운영</span></a>
+    <a class="station" data-id="reference"><span class="stdot"></span><span class="stlbl">자료실·용어</span></a>
+  </div>
+</aside>
+<div class="mbackdrop" id="mbackdrop"></div>
+<button class="mtoggle" id="mtoggle">🚇 노선도 <span class="cur" id="curName">회의 흐름</span></button>
 
 <header class="hero">
   <div class="wrap">
@@ -165,7 +215,7 @@
 <main class="wrap">
 
 <!-- 회의 흐름 -->
-<section>
+<section id="flow">
   <div class="shead"><div class="k">How to use</div><h2>회의는 이 순서로</h2>
     <p>네 단계만 기억하면 됩니다. 각 단계가 위 메뉴의 한 페이지입니다.</p></div>
   <div class="flow4">
@@ -177,7 +227,7 @@
 </section>
 
 <!-- 4 핵심 영역 -->
-<section>
+<section id="map">
   <div class="shead"><div class="k">Map · 4개 영역</div><h2>어디로 갈지 고르세요</h2>
     <p>이 홈을 제외한 네 개의 페이지. 회의 중 필요한 곳을 바로 여세요.</p></div>
   <div class="pillars">
@@ -209,7 +259,7 @@
 </section>
 
 <!-- 제품 한눈에 -->
-<section>
+<section id="product">
   <div class="shead"><div class="k">Product</div><h2>제품 한눈에 — Fixon</h2>
     <p>현직 치과의사가 개발한 환자 맞춤 잇몸 케어 기기. 자세한 정의·톤은 전략 메모·자료실에.</p></div>
   <div class="prodbox">
@@ -239,7 +289,7 @@
 </section>
 
 <!-- 사업 구조 한눈에 -->
-<section>
+<section id="structure">
   <div class="shead"><div class="k">Structure</div><h2>사업 구조 한눈에</h2>
     <p>그래피는 소재 공급사, 우리는 사업 주체. 제조 방식은 회의에서 결정.</p></div>
   <div class="grid g3">
@@ -259,7 +309,7 @@
 </section>
 
 <!-- 자금(펀딩) 한눈에 -->
-<section>
+<section id="funding-sum">
   <div class="shead"><div class="k">Funding</div><h2>자금은 "선판매"로</h2>
     <p>지분이 아니라 공산품(Daily) 모드를 먼저 판다 — 합법·빠름·무희석. 자세히는 <a href="funding.html" style="color:var(--brand2)">펀딩 페이지</a>.</p></div>
   <div class="grid g3">
@@ -271,7 +321,7 @@
 </section>
 
 <!-- 시장·규제·운영 한눈에 -->
-<section>
+<section id="context">
   <div class="shead"><div class="k">Context</div><h2>시장 · 규제 · 운영</h2>
     <p>근거와 인프라. 깊은 내용은 전략 메모와 자료실에.</p></div>
   <div class="grid g3">
@@ -282,7 +332,7 @@
 </section>
 
 <!-- 자료실 + 용어 (접기) -->
-<section>
+<section id="reference">
   <div class="shead"><div class="k">Reference</div><h2>자료실 · 용어</h2>
     <p>필요할 때만 펼쳐 보세요. 평소엔 접혀 있습니다.</p></div>
 
@@ -369,6 +419,45 @@
   <div class="note">접속 코드는 핵심 관계자에게만 공유됩니다. 화면을 외부에 노출하지 마세요.</div>
 </footer>
 
+<script>
+/* ===== 지하철 노선도 스크롤-스파이 ===== */
+(function(){
+  var sections=Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var stations=Array.prototype.slice.call(document.querySelectorAll('.station'));
+  var fill=document.getElementById('mfill');
+  var curName=document.getElementById('curName');
+  var idIndex={}; stations.forEach(function(s,i){ idIndex[s.dataset.id]=i; });
+
+  function setActive(id){
+    var ai=idIndex[id]; if(ai==null) return;
+    stations.forEach(function(s,i){ s.classList.toggle('active',i===ai); s.classList.toggle('done',i<ai); });
+    var active=stations[ai];
+    var top=active.offsetTop+active.offsetHeight/2-9;
+    fill.style.height=Math.max(0,top)+'px';
+    if(curName) curName.textContent=active.querySelector('.stlbl').textContent;
+  }
+  var visible={};
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible[e.target.id]=e.isIntersecting; });
+    for(var i=0;i<sections.length;i++){ if(visible[sections[i].id]){ setActive(sections[i].id); return; } }
+  },{rootMargin:'-25% 0px -65% 0px',threshold:0});
+  sections.forEach(function(s){ obs.observe(s); });
+
+  stations.forEach(function(s){
+    s.addEventListener('click',function(e){
+      e.preventDefault();
+      var el=document.getElementById(s.dataset.id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      document.body.classList.remove('metro-open');
+    });
+  });
+  setActive('flow');
+
+  var tg=document.getElementById('mtoggle'), bd=document.getElementById('mbackdrop');
+  if(tg) tg.addEventListener('click',function(){ document.body.classList.toggle('metro-open'); });
+  if(bd) bd.addEventListener('click',function(){ document.body.classList.remove('metro-open'); });
+})();
+</script>
 <script src="gate.js"></script>
 </body>
 </html>
