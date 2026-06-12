@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex, nofollow" />
-<title>GraphyStyle · 비공개 사업 전략 2026</title>
+<title>GraphyStyle · 사업 종합 허브 (비공개)</title>
 <meta name="theme-color" content="#14110f" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -13,574 +13,581 @@
     --bg:#14110f; --bg2:#1b1714; --card:#211b17; --card2:#272019;
     --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
     --ink:#f4ece3; --muted:#b6a899; --dim:#8a7d70;
-    --brand:#ff6b2b; --brand2:#ff8a4c; --gold:#e0a458; --green:#5fbf8f; --red:#ff7a6b;
-    --maxw:1080px;
+    --brand:#ff6b2b; --brand2:#ff8a4c; --gold:#e0a458; --teal:#56b9c4; --green:#5fbf8f; --red:#ff7a6b; --violet:#b08ad6;
+    --rail:248px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:Pretendard,system-ui,-apple-system,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden}
+    font-family:Pretendard,system-ui,-apple-system,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit}
   h1,h2,h3,h4{line-height:1.25;letter-spacing:-.015em;margin:0}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
   .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
-  .muted{color:var(--muted)}
-  .dim{color:var(--dim)}
-  .accent{color:var(--brand2)}
+  .muted{color:var(--muted)} .dim{color:var(--dim)} .accent{color:var(--brand2)}
 
-  /* ===== Confidential bar ===== */
-  .confbar{position:sticky;top:0;z-index:50;background:rgba(20,17,15,.82);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
-    padding:10px 18px;font-size:12px}
-  .confbar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);
-    box-shadow:0 0 0 4px rgba(255,107,43,.15);margin-right:8px;vertical-align:middle}
+  /* layout: content + right metro rail */
+  .shell{max-width:1000px;margin:0 auto;padding:0 22px}
+  @media(min-width:1120px){ body{padding-right:var(--rail)} }
+
+  /* confbar */
+  .confbar{position:sticky;top:0;z-index:50;background:rgba(20,17,15,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 18px;font-size:12px}
+  .confbar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15);margin-right:8px;vertical-align:middle}
   .confbar b{font-weight:700;letter-spacing:.04em}
-  .confbar .right{color:var(--dim);letter-spacing:.06em}
+  .confbar .links a{color:var(--muted);text-decoration:none;font-weight:600;margin-left:14px}
+  .confbar .links a:hover{color:var(--ink)}
 
-  /* ===== Section nav ===== */
-  nav.toc{position:sticky;top:39px;z-index:40;background:rgba(20,17,15,.92);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
-  nav.toc ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 14px;white-space:nowrap}
-  nav.toc a{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:500;display:block}
-  nav.toc a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
-
-  /* ===== Hero ===== */
-  .hero{position:relative;padding:78px 0 56px;background:
-    radial-gradient(90% 70% at 80% -10%,rgba(255,107,43,.16),transparent 60%),
-    radial-gradient(70% 60% at 0% 0%,rgba(224,164,88,.10),transparent 55%)}
-  .hero h1{font-size:clamp(32px,6.4vw,58px);font-weight:800;margin:18px 0 0}
-  .hero .lede{font-size:clamp(16px,2.4vw,20px);color:var(--muted);margin-top:20px;max-width:680px}
-  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-  .chip{font-size:13px;color:var(--ink);background:var(--card);border:1px solid var(--line2);
-    border-radius:999px;padding:8px 15px}
+  /* hero */
+  .hero{padding:64px 0 40px;background:radial-gradient(90% 70% at 85% -10%,rgba(255,107,43,.16),transparent 60%),radial-gradient(70% 60% at 0% 0%,rgba(224,164,88,.10),transparent 55%)}
+  .hero h1{font-size:clamp(30px,5.6vw,52px);font-weight:800;margin:14px 0 0}
+  .hero .lede{font-size:clamp(16px,2.3vw,19px);color:var(--muted);margin-top:18px;max-width:660px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+  .chip{font-size:13px;background:var(--card);border:1px solid var(--line2);border-radius:999px;padding:7px 14px}
   .chip b{color:var(--brand2)}
 
-  /* ===== Section ===== */
-  section{padding:54px 0;border-top:1px solid var(--line)}
-  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
-  .sec-no{font-size:13px;font-weight:800;color:var(--brand);letter-spacing:.1em}
-  h2.sec-title{font-size:clamp(24px,4vw,34px);font-weight:800;margin:6px 0 14px}
-  .sec-intro{font-size:16px;color:var(--muted);max-width:760px;margin-bottom:30px}
+  section{padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:58px}
+  .sec-head{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+  .sec-tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+  .tag-prod{color:#ffd0b3;background:rgba(255,107,43,.14);border:1px solid rgba(255,107,43,.3)}
+  .tag-biz{color:#f0dcae;background:rgba(224,164,88,.14);border:1px solid rgba(224,164,88,.3)}
+  .tag-ops{color:#bfeaf0;background:rgba(86,185,196,.14);border:1px solid rgba(86,185,196,.3)}
+  .tag-lib{color:#c7eed8;background:rgba(95,191,143,.14);border:1px solid rgba(95,191,143,.3)}
+  h2.sec-title{font-size:clamp(23px,3.6vw,32px);font-weight:800;margin:8px 0 14px}
+  .sec-intro{font-size:16px;color:var(--muted);max-width:740px;margin-bottom:28px}
 
-  /* ===== Cards / grid ===== */
-  .grid{display:grid;gap:16px}
-  .g2{grid-template-columns:repeat(2,1fr)}
-  .g3{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px}
   .card.hl{background:linear-gradient(160deg,#2a201a,#211b17);border-color:rgba(255,107,43,.3)}
-  .card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:7px}
   .card h3 .k{color:var(--brand2)}
-  .card p{margin:8px 0 0;font-size:14.5px;color:var(--muted)}
-  .card ul{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
-  .card ul li{margin:6px 0}
-  .card ul li b{color:var(--ink);font-weight:600}
+  .card p{margin:7px 0 0;font-size:14px;color:var(--muted)}
+  .card ul{margin:10px 0 0;padding-left:17px;color:var(--muted);font-size:14px}
+  .card ul li{margin:5px 0} .card ul li b{color:var(--ink);font-weight:600}
 
-  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;vertical-align:middle}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;vertical-align:middle}
   .pill.ok{color:#bff0d4;background:rgba(95,191,143,.16);border:1px solid rgba(95,191,143,.3)}
   .pill.warn{color:#ffe0b0;background:rgba(224,164,88,.16);border:1px solid rgba(224,164,88,.32)}
   .pill.no{color:#ffc9c0;background:rgba(255,122,107,.14);border:1px solid rgba(255,122,107,.32)}
 
-  /* ===== Compare table ===== */
   .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch}
-  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
-  th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
-  thead th{background:var(--card2);color:var(--ink);font-weight:700;font-size:13px;letter-spacing:.02em}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--card2);font-weight:700;font-size:13px}
   tbody tr:last-child td{border-bottom:0}
   td b{color:var(--ink)}
-  .num{color:var(--brand2);font-weight:700;white-space:nowrap}
 
-  /* ===== Callout ===== */
-  .callout{border-radius:14px;padding:18px 20px;border:1px solid;display:flex;gap:14px;align-items:flex-start;font-size:14.5px}
-  .callout .ic{flex:none;font-size:18px;line-height:1.4}
-  .callout.danger{background:rgba(255,122,107,.07);border-color:rgba(255,122,107,.3);color:#ffd9d2}
-  .callout.danger b{color:#ffb1a5}
-  .callout.info{background:rgba(224,164,88,.07);border-color:rgba(224,164,88,.28);color:#f0dcc0}
-  .callout.info b{color:var(--gold)}
-  .callout.good{background:rgba(95,191,143,.07);border-color:rgba(95,191,143,.28);color:#cdeedd}
-  .callout.good b{color:var(--green)}
+  .callout{border-radius:14px;padding:16px 18px;border:1px solid;display:flex;gap:13px;align-items:flex-start;font-size:14px}
+  .callout .ic{flex:none;font-size:17px}
+  .callout.danger{background:rgba(255,122,107,.07);border-color:rgba(255,122,107,.3);color:#ffd9d2} .callout.danger b{color:#ffb1a5}
+  .callout.info{background:rgba(224,164,88,.07);border-color:rgba(224,164,88,.28);color:#f0dcc0} .callout.info b{color:var(--gold)}
+  .callout.good{background:rgba(95,191,143,.07);border-color:rgba(95,191,143,.28);color:#cdeedd} .callout.good b{color:var(--green)}
 
-  /* ===== Tier cards (funding) ===== */
-  .tier{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .tier .top{padding:18px 20px;border-bottom:1px solid var(--line)}
-  .tier .badge{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-  .tier.t1 .badge{color:var(--gold)} .tier.t2 .badge{color:var(--brand2)} .tier.t3 .badge{color:var(--green)}
-  .tier h3{font-size:19px;margin:8px 0 0}
-  .tier .amt{font-size:14px;color:var(--muted);margin-top:6px}
-  .tier .amt b{color:var(--ink);font-size:18px}
-  .tier .body{padding:18px 20px}
-  .tier .body ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
-  .tier .body ul li{margin:7px 0}
-  .tier .body ul li b{color:var(--ink)}
+  /* product hero */
+  .prod{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center}
+  @media(max-width:820px){.prod{grid-template-columns:1fr}}
+  .prod img{width:100%;border-radius:14px;border:1px solid var(--line);background:#000}
+  .compose{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:6px}
+  @media(max-width:520px){.compose{grid-template-columns:1fr}}
+  .compose .pc{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:15px}
+  .compose .pc .n{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.08em}
+  .compose .pc h4{font-size:15px;margin:7px 0 5px}
+  .compose .pc p{font-size:13px;color:var(--muted);margin:0}
 
-  /* ===== Timeline ===== */
+  /* journey flow */
+  .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  @media(max-width:900px){.flow{grid-template-columns:1fr 1fr 1fr}}
+  @media(max-width:520px){.flow{grid-template-columns:1fr 1fr}}
+  .flow .n{position:relative;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px}
+  .flow .n .s{font-size:11px;font-weight:800;color:var(--brand);letter-spacing:.08em}
+  .flow .n h4{font-size:14px;margin:7px 0 4px}
+  .flow .n p{font-size:12px;color:var(--muted);margin:0}
+
+  /* timeline */
   .tl{position:relative;margin-left:8px;padding-left:26px}
   .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line2)}
-  .tl .step{position:relative;padding:0 0 26px}
-  .tl .step::before{content:"";position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;
-    background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.14)}
+  .tl .step{position:relative;padding:0 0 22px}
+  .tl .step::before{content:"";position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.14)}
   .tl .step:last-child{padding-bottom:0}
-  .tl .q{font-size:13px;font-weight:800;color:var(--brand2);letter-spacing:.04em}
-  .tl .step h4{font-size:16px;margin:3px 0 5px}
-  .tl .step p{margin:0;color:var(--muted);font-size:14px}
+  .tl .q{font-size:12px;font-weight:800;color:var(--brand2);letter-spacing:.04em}
+  .tl .step h4{font-size:15px;margin:3px 0 4px} .tl .step p{margin:0;color:var(--muted);font-size:13.5px}
 
-  /* ===== Steps (funding mechanism) ===== */
-  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  @media(max-width:760px){.flow{grid-template-columns:1fr 1fr}}
-  .flow .n{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-  .flow .n .s{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.1em}
-  .flow .n h4{font-size:15px;margin:8px 0 6px}
-  .flow .n p{font-size:13px;color:var(--muted);margin:0}
+  /* library link cards */
+  .libcat{margin-top:8px}
+  .libcat h3{font-size:15px;font-weight:800;margin:22px 0 11px;color:var(--ink);display:flex;align-items:center;gap:9px}
+  .libcat h3::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}
+  .libcat.c-biz h3::before{background:var(--gold)} .libcat.c-prod h3::before{background:var(--brand)} .libcat.c-ops h3::before{background:var(--teal)} .libcat.c-demo h3::before{background:var(--violet)}
+  .links{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:680px){.links{grid-template-columns:1fr}}
+  .lk{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-decoration:none;transition:border-color .15s,transform .1s}
+  .lk:hover{border-color:var(--brand);transform:translateY(-1px)}
+  .lk .em{font-size:18px;flex:none;line-height:1.5}
+  .lk .t{font-size:14px;font-weight:700;color:var(--ink)}
+  .lk .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .lk .ext{font-size:10px;color:var(--dim);margin-left:6px;font-weight:600}
 
-  /* ===== CTA ===== */
-  .cta{margin-top:14px;background:linear-gradient(160deg,#2c2119,#1d1814);border:1px solid rgba(255,107,43,.3);
-    border-radius:20px;padding:34px;text-align:center}
-  .cta h2{font-size:clamp(22px,3.4vw,30px);font-weight:800}
-  .cta p{color:var(--muted);margin:12px auto 0;max-width:560px}
-  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:15px 26px;border-radius:12px;
-    font-size:16px;font-weight:700;text-decoration:none;color:#fff;
-    background:linear-gradient(135deg,#ff7a35,#ff5e1a);box-shadow:0 10px 30px rgba(255,94,26,.28)}
-  .btn:active{transform:translateY(1px)}
+  .cta{margin-top:14px;background:linear-gradient(160deg,#2c2119,#1d1814);border:1px solid rgba(255,107,43,.3);border-radius:20px;padding:30px;text-align:center}
+  .cta h2{font-size:clamp(21px,3.2vw,28px);font-weight:800}
+  .cta p{color:var(--muted);margin:11px auto 0;max-width:540px}
+  .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;color:#fff;background:linear-gradient(135deg,#ff7a35,#ff5e1a);box-shadow:0 10px 28px rgba(255,94,26,.26)}
   .btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink);box-shadow:none}
+  .btn:active{transform:translateY(1px)}
 
-  footer{padding:40px 0 70px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
-  .src{font-size:12px;color:var(--dim);margin-top:10px;line-height:1.9}
-  .src a{color:var(--muted)}
+  footer{padding:36px 0 64px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
 
-  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:620px){.kpi{grid-template-columns:1fr}}
-  .kpi .b{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-  .kpi .v{font-size:26px;font-weight:800;color:var(--brand2)}
-  .kpi .l{font-size:13px;color:var(--muted);margin-top:4px}
+  .lead-q{font-size:clamp(17px,2.4vw,22px);font-weight:700;line-height:1.5;color:var(--ink);border-left:3px solid var(--brand);padding-left:18px;margin:20px 0}
+  hr.soft{border:0;border-top:1px solid var(--line);margin:24px 0}
 
-  .note{font-size:13px;color:var(--dim);margin-top:8px}
-  hr.soft{border:0;border-top:1px solid var(--line);margin:26px 0}
-  .lead-q{font-size:clamp(18px,2.6vw,23px);font-weight:700;line-height:1.5;color:var(--ink);
-    border-left:3px solid var(--brand);padding-left:18px;margin:4px 0 26px}
+  /* ===================== METRO RAIL ===================== */
+  .metro{position:fixed;top:0;right:0;width:var(--rail);height:100vh;z-index:45;
+    background:linear-gradient(180deg,#171310,#13100e);border-left:1px solid var(--line);
+    padding:18px 16px 18px 20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .metro .mh{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:700;margin:4px 0 16px}
+  .metro .mh b{color:var(--brand2)}
+  .mline{position:relative;padding-left:4px}
+  .mline::before{content:"";position:absolute;left:11px;top:10px;bottom:10px;width:3px;border-radius:3px;
+    background:linear-gradient(180deg,var(--brand) 0%,var(--gold) 38%,var(--teal) 70%,var(--green) 100%);opacity:.22}
+  .mfill{position:absolute;left:11px;top:10px;width:3px;border-radius:3px;
+    background:linear-gradient(180deg,var(--brand),var(--gold),var(--teal),var(--green));
+    height:0;transition:height .35s ease;box-shadow:0 0 8px rgba(255,107,43,.4)}
+  .station{position:relative;display:flex;align-items:center;gap:11px;padding:7px 0 7px 0;text-decoration:none;cursor:pointer}
+  .station .stdot{position:relative;z-index:2;width:13px;height:13px;border-radius:50%;flex:none;margin-left:5px;
+    background:#2a221c;border:2px solid var(--dimdot,#52473d);transition:all .2s}
+  .station .stlbl{font-size:13px;color:var(--dim);font-weight:500;transition:color .2s,font-weight .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .station[data-cat=prod] .stdot{--c:var(--brand)} .station[data-cat=biz] .stdot{--c:var(--gold)}
+  .station[data-cat=ops] .stdot{--c:var(--teal)} .station[data-cat=lib] .stdot{--c:var(--green)}
+  .station.done .stdot{background:var(--c);border-color:var(--c)}
+  .station.done .stlbl{color:var(--muted)}
+  .station.active .stdot{background:var(--c);border-color:#fff;width:16px;height:16px;margin-left:3.5px;box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 28%,transparent)}
+  .station.active .stlbl{color:#fff;font-weight:800}
+  .mcat{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6f6256;font-weight:700;margin:14px 0 4px;padding-left:5px}
+  .mcat:first-of-type{margin-top:2px}
+  .metro .mfoot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:7px}
+  .metro .mfoot a{font-size:12.5px;color:var(--muted);text-decoration:none;font-weight:600}
+  .metro .mfoot a:hover{color:var(--brand2)}
+
+  /* mobile: hide rail, floating toggle + overlay */
+  .mtoggle{display:none}
+  @media(max-width:1119px){
+    .metro{transform:translateX(100%);transition:transform .28s ease;width:min(300px,86vw);box-shadow:-20px 0 50px rgba(0,0,0,.5)}
+    body.metro-open .metro{transform:translateX(0)}
+    .mtoggle{display:flex;position:fixed;right:14px;bottom:16px;z-index:48;align-items:center;gap:9px;
+      padding:12px 16px;border-radius:999px;border:0;cursor:pointer;color:#fff;font-weight:700;font-size:13px;
+      background:linear-gradient(135deg,#ff7a35,#ff5e1a);box-shadow:0 10px 28px rgba(255,94,26,.4)}
+    .mtoggle .cur{font-size:12px;opacity:.85;font-weight:600}
+    .mbackdrop{display:none;position:fixed;inset:0;z-index:44;background:rgba(0,0,0,.5)}
+    body.metro-open .mbackdrop{display:block}
+  }
 </style>
 </head>
 <body>
 
 <div class="confbar">
-  <div><span class="dot"></span><b>CONFIDENTIAL</b> · 핵심 관계자 한정</div>
-  <div class="right">GraphyStyle 2026</div>
+  <div><span class="dot"></span><b>CONFIDENTIAL</b> · 사업 종합 허브</div>
+  <div class="links"><a href="strategy.html">전략 메모</a><a href="builder.html">의사결정 빌더</a></div>
 </div>
 
-<nav class="toc">
-  <ul>
-    <li><a href="#now">현황</a></li>
-    <li><a href="#restructure">구조 재편</a></li>
-    <li><a href="#doctor-fund">의사 펀딩 설계</a></li>
-    <li><a href="#other-fund">자금조달 옵션</a></li>
-    <li><a href="#clinical">임상 레퍼런스</a></li>
-    <li><a href="#market">시장·마케팅</a></li>
-    <li><a href="#risk">규제 리스크</a></li>
-    <li><a href="#roadmap">로드맵</a></li>
-    <li><a href="builder.html">의사결정 빌더 →</a></li>
-  </ul>
-</nav>
+<!-- ===== METRO RAIL ===== -->
+<aside class="metro" id="metro">
+  <div class="mh">🚇 <b>사업 노선도</b> · 현재 위치</div>
+  <div class="mline" id="mline">
+    <div class="mfill" id="mfill"></div>
+    <div class="mcat">제품 LINE</div>
+    <a class="station" data-cat="prod" data-id="overview"><span class="stdot"></span><span class="stlbl">개요</span></a>
+    <a class="station" data-cat="prod" data-id="product"><span class="stdot"></span><span class="stlbl">제품 — Fixon이란</span></a>
+    <a class="station" data-cat="prod" data-id="journey"><span class="stdot"></span><span class="stlbl">작동 원리 · 환자 여정</span></a>
+    <a class="station" data-cat="prod" data-id="manufacture"><span class="stdot"></span><span class="stlbl">제조 전략 (4안)</span></a>
+    <a class="station" data-cat="prod" data-id="material"><span class="stdot"></span><span class="stlbl">소재 — 그래피</span></a>
+    <div class="mcat">사업 LINE</div>
+    <a class="station" data-cat="biz" data-id="structure"><span class="stdot"></span><span class="stlbl">사업 구조 재편</span></a>
+    <a class="station" data-cat="biz" data-id="funding"><span class="stdot"></span><span class="stlbl">자금조달</span></a>
+    <a class="station" data-cat="biz" data-id="market"><span class="stdot"></span><span class="stlbl">시장 · 마케팅</span></a>
+    <a class="station" data-cat="biz" data-id="risk"><span class="stdot"></span><span class="stlbl">규제 리스크</span></a>
+    <div class="mcat">실행 LINE</div>
+    <a class="station" data-cat="ops" data-id="system"><span class="stdot"></span><span class="stlbl">운영 시스템 (ERP)</span></a>
+    <a class="station" data-cat="ops" data-id="clinical"><span class="stdot"></span><span class="stlbl">임상 · 레퍼런스</span></a>
+    <a class="station" data-cat="ops" data-id="roadmap"><span class="stdot"></span><span class="stlbl">로드맵</span></a>
+    <div class="mcat">자료 LINE</div>
+    <a class="station" data-cat="lib" data-id="library"><span class="stdot"></span><span class="stlbl">자료실 (전체)</span></a>
+  </div>
+  <div class="mfoot">
+    <a href="strategy.html">→ 사업 전략 메모</a>
+    <a href="builder.html">→ 의사결정 빌더 (사업계획서 생성)</a>
+  </div>
+</aside>
+<div class="mbackdrop" id="mbackdrop"></div>
+<button class="mtoggle" id="mtoggle">🚇 노선도 <span class="cur" id="curName">개요</span></button>
 
 <!-- ===== HERO ===== -->
 <header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Business Strategy Memo · 2026.06.12 회의용</div>
-    <h1>그래피가 멈춘 자리에서,<br/>우리가 사업을 시작한다.</h1>
-    <p class="lede">
-      그래피(Graphy)는 적극적 사업 의지를 보이지 않습니다. 그렇다면 우리가 <b style="color:var(--ink)">소재는 그래피에서 받되,
-      사업의 주도권·자금·시장은 직접 가져가는</b> 구조로 전환합니다. 이 문서는 그 전환의 설계도이며,
-      오늘 회의에서 함께 결정할 안건들을 담았습니다.
-    </p>
-    <div class="meta">
-      <span class="chip">제품 <b>Fixon → Point Shower / Point Infuser</b></span>
+  <div class="shell">
+    <div class="eyebrow">사업 종합 허브 · 2026.06.12 회의용 · 핵심 관계자 한정</div>
+    <h1>Fixon 사업, 한 페이지에서<br/>전부 보고 결정한다.</h1>
+    <p class="lede">제품이 무엇인지부터, 그래피와의 관계 재편·자금조달·제조 방식·규제·운영 시스템까지 —
+      흩어져 있던 모든 자료를 이 비공개 허브 하나로 모았습니다. 우측 <b style="color:var(--ink)">노선도</b>로 지금 어느 안건을 보고 있는지 확인하며 진행하세요.</p>
+    <div class="chips">
+      <span class="chip">제품 <b>Point Shower / Point Infuser</b></span>
+      <span class="chip">유형 <b>맞춤형 잇몸 케어 기기</b></span>
+      <span class="chip">소재 <b>Graphy</b></span>
       <span class="chip">브랜드 <b>GraphyStyle</b></span>
-      <span class="chip">소재 공급 <b>Graphy</b></span>
-      <span class="chip">자금 <b>의사 펀딩 + 정책자금</b></span>
     </div>
   </div>
 </header>
 
-<!-- ===== 01 현황 ===== -->
-<section id="now">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">01</span><span class="eyebrow">현재 상황</span></div>
-    <h2 class="sec-title">의지가 있는 쪽이 핸들을 잡는다</h2>
-    <p class="sec-intro">그래피는 소재(특히 형상기억 레진 등)의 강자이지만, Fixon 사업을 직접 끌고 갈 의지는 약합니다.
-      이건 위기가 아니라 <b class="accent">역할을 재정의할 기회</b>입니다. 그래피는 "공급사"로, 우리는 "사업 주체"로.</p>
+<main class="shell">
 
-    <div class="grid g3">
-      <div class="card">
-        <h3><span class="k">①</span> 그래피의 입장</h3>
-        <p>소재(레진/카트리지 원료) <b style="color:var(--ink)">판매</b>에는 적극적, 사업 리스크는 회피.
-          → 우리에게 유리한 <b style="color:var(--ink)">소재 공급 계약</b>으로 묶을 수 있음.</p>
+<!-- 01 개요 -->
+<section id="overview">
+  <div class="sec-head"><span class="sec-tag tag-prod">개요</span></div>
+  <h2 class="sec-title">오늘 회의의 지도</h2>
+  <p class="sec-intro">이 허브는 4개의 라인으로 구성됩니다. <b class="accent">제품</b>(무엇을 파는가) → <b class="accent">사업</b>(어떻게 돈을 버는가) → <b class="accent">실행</b>(어떻게 굴리는가) → <b class="accent">자료</b>(근거는 어디에). 순서대로 보시면 사업 전체가 한 흐름으로 이해됩니다.</p>
+  <div class="grid g4">
+    <div class="card"><h3><span class="k">①</span> 제품</h3><p>Fixon = 환자 맞춤 잇몸 마사지 기기. 스플린트 + 분사 장치. 치과의사 개발.</p></div>
+    <div class="card"><h3><span class="k">②</span> 사업</h3><p>그래피=소재공급, 우리=사업주체. 의사 펀딩 + 정책자금으로 자본 확보.</p></div>
+    <div class="card"><h3><span class="k">③</span> 실행</h3><p>제조 방식 결정 + 이미 구축된 ERP·3D디자이너·환자포털로 운영.</p></div>
+    <div class="card"><h3><span class="k">④</span> 자료</h3><p>랜딩·SIDEX 덱·ERP·시연 도구·내부 문서 전부 자료실에 링크.</p></div>
+  </div>
+  <p class="lead-q">"제품과 시장은 있는데 자본금이 없다 — 그렇다면 우리가 직접 끌고 간다."</p>
+</section>
+
+<!-- 02 제품 -->
+<section id="product">
+  <div class="sec-head"><span class="sec-tag tag-prod">제품</span></div>
+  <h2 class="sec-title">Fixon이란 — 환자 맞춤 잇몸 케어 기기</h2>
+  <p class="sec-intro">한 줄로: <b class="accent">"내 입 모양 그대로 만든 트레이가, 필요한 잇몸 부위에 정확히 약액을 분사한다."</b>
+    워터픽처럼 손으로 들고 쏘는 게 아니라, 장착만 하면 미리 설계된 노즐이 알아서 표적 케어합니다.</p>
+
+  <div class="prod">
+    <div>
+      <div class="compose">
+        <div class="pc">
+          <div class="n">구성 ①</div>
+          <h4>맞춤 스플린트 (마우스피스)</h4>
+          <p>환자 구강을 본떠 제작. 의사가 지정한 위치에 <b style="color:var(--ink)">노즐</b>이 배치되어 약액을 표적 분사.</p>
+        </div>
+        <div class="pc">
+          <div class="n">구성 ②</div>
+          <h4>분사 장치 (아쿠아픽)</h4>
+          <p>현재는 <b style="color:var(--ink)">기성품 활용</b>(원가 ~10만원). 물/세척액/약제를 스플린트로 공급.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3><span class="k">②</span> 우리의 자산</h3>
-        <p>제품 정의·3D 설계·브랜드(GraphyStyle)·SIDEX 노출·임상 데모 라인.
-          <b style="color:var(--ink)">사업화 실행력</b>은 우리에게 있음.</p>
-      </div>
-      <div class="card">
-        <h3><span class="k">③</span> 빠진 한 조각</h3>
-        <p><b style="color:var(--ink)">자본금.</b> VC를 기다리기엔 늦고 지분 희석이 큼.
-          → <b class="accent">의사 직접 펀딩 + 정책자금</b>으로 비희석·빠른 런웨이 확보.</p>
-      </div>
+      <ul class="card" style="margin-top:14px;list-style:none;padding:18px">
+        <li style="margin:4px 0">✅ <b>현직 치과의사가 개발</b> — 실제 임상 니즈에서 출발한 제품</li>
+        <li style="margin:8px 0">✅ <b>환자 개인별 맞춤 제작</b> — 구강스캔/인상 기반, 사람마다 다름</li>
+        <li style="margin:8px 0">✅ <b>치과 진료 중 의사 추천으로 구매</b> — B2B2C, 신뢰 기반 판매</li>
+        <li style="margin:8px 0">✅ <b>의사가 필요 부위에 노즐 설계</b> — 약한 잇몸·시린 부위 표적</li>
+      </ul>
     </div>
+    <div>
+      <img src="/brand/point-shower-product.jpg" alt="Point Shower 제품" onerror="this.style.display='none'"/>
+      <p class="dim" style="font-size:12.5px;margin-top:8px">제품 라인: <b style="color:var(--muted)">Point Shower</b>(케어 트레이) · <b style="color:var(--muted)">Point Infuser</b>(약제 주입형). 자세한 정의·톤은 자료실의 브랜드 정의서 참고.</p>
+    </div>
+  </div>
 
-    <hr class="soft"/>
-    <p class="lead-q">"제품과 시장은 있는데 자본금이 없다."<br/>이 문장 하나가 오늘 모든 결정의 출발점입니다.</p>
+  <div class="callout info" style="margin-top:18px">
+    <span class="ic">◆</span>
+    <div><b>왜 새로운 카테고리인가:</b> 워터픽(수동·비표적)도, 일반 이갈이 스플린트(정적)도 아닙니다.
+      <b>"장착하면 알아서 + 필요한 곳만"</b> 사분면을 단독 점유 — 이것이 가격·마케팅·규제 전략의 출발점입니다.</div>
   </div>
 </section>
 
-<!-- ===== 02 구조 재편 ===== -->
-<section id="restructure">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">02</span><span class="eyebrow">사업 구조 재편</span></div>
-    <h2 class="sec-title">그래피 = 소재 공급사, 우리 = 사업 주체</h2>
-    <p class="sec-intro">관계를 "동업"에서 "공급-사업" 으로 명확히 분리합니다. 책임·이익·의사결정권이 우리에게 모이도록 설계합니다.</p>
-
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>역할</th><th>그래피 (Graphy)</th><th>우리 (GraphyStyle 사업주체)</th></tr></thead>
-        <tbody>
-          <tr><td><b>핵심 기능</b></td><td>형상기억 레진·카트리지 <b>소재 공급</b></td><td>제품 설계·인허가·브랜딩·영업·CS</td></tr>
-          <tr><td><b>투자 부담</b></td><td>없음 (소재 매출만 취함)</td><td>사업 자금 조달 주도</td></tr>
-          <tr><td><b>의사결정권</b></td><td>소재 사양·단가 협의</td><td>제품·가격·시장 전략 <b>단독</b></td></tr>
-          <tr><td><b>브랜드 소유</b></td><td>—</td><td><b>GraphyStyle / 제품 브랜드 우리 소유</b></td></tr>
-          <tr><td><b>업사이드</b></td><td>소재 판매량 × 단가</td><td>제품 마진 + 사업가치 전체</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="callout info" style="margin-top:18px">
-      <span class="ic">◆</span>
-      <div><b>계약으로 묶어야 할 3가지</b> — ① 소재 <b>안정 공급·단가·MOQ</b> 보장, ② <b>독점/우선 공급</b> 조항(경쟁사 차단),
-        ③ 브랜드·IP는 <b>우리 귀속</b> 명문화. 이 3개가 빠지면 그래피가 언제든 사업을 회수할 수 있습니다.</div>
-    </div>
-
-    <div class="grid g3" style="margin-top:18px">
-      <div class="card hl">
-        <h3>모델 A · 소재 공급계약</h3>
-        <p>가장 단순. 그래피는 원료만 판다. 우리가 100% 사업·이익·리스크.
-          <span class="pill ok">희석 0</span> <span class="pill warn">자본 직접 조달</span></p>
-      </div>
-      <div class="card">
-        <h3>모델 B · 라이선스 + 로열티</h3>
-        <p>그래피 IP(소재 특허) 라이선스, 매출 로열티 지급. 소재 외 기술 의존 시.
-          <span class="pill warn">로열티 부담</span></p>
-      </div>
-      <div class="card">
-        <h3>모델 C · 소수지분 합작</h3>
-        <p>그래피가 소액 지분만(예: 10~20%) 보유, 경영은 우리. 관계 유지 + 공급 안정.
-          <span class="pill warn">지분 협상</span></p>
-      </div>
-    </div>
-    <p class="note">→ 권고: <b class="accent">모델 A(소재 공급계약)</b> 를 기본으로, 공급 안정성이 불안하면 모델 C로 보강. 빌더에서 선택·비교하세요.</p>
+<!-- 03 환자 여정 -->
+<section id="journey">
+  <div class="sec-head"><span class="sec-tag tag-prod">작동 원리</span></div>
+  <h2 class="sec-title">환자 한 명이 제품을 받기까지</h2>
+  <p class="sec-intro">스캔에서 제작까지가 곧 우리 사업의 핵심 워크플로입니다. 이 흐름의 ⑤(제작)을 <b class="accent">누가 하느냐</b>가 다음 섹션(제조 전략)의 결정 안건입니다.</p>
+  <div class="flow">
+    <div class="n"><div class="s">STEP 1</div><h4>치과 진료</h4><p>환자가 내원, 의사가 잇몸 상태 진단.</p></div>
+    <div class="n"><div class="s">STEP 2</div><h4>의사 추천</h4><p>맞춤 케어가 필요한 환자에게 제품 제안.</p></div>
+    <div class="n"><div class="s">STEP 3</div><h4>스캔 · 인상</h4><p>구강스캐너 또는 본(인상)으로 구강구조 파악.</p></div>
+    <div class="n"><div class="s">STEP 4</div><h4>노즐 설계</h4><p>의사가 필요 부위에 노즐 위치 지정·설계.</p></div>
+    <div class="n"><div class="s">STEP 5</div><h4>제작</h4><p>설계 기반 출력+경화로 맞춤 스플린트 제작.</p></div>
+    <div class="n"><div class="s">STEP 6</div><h4>수령 · 사용</h4><p>환자가 장착, 표적 부위에 정확히 케어.</p></div>
+  </div>
+  <div class="callout good" style="margin-top:18px">
+    <span class="ic">✓</span>
+    <div>STEP 4의 노즐 설계는 <b>의사가 위치만 지정하면 제작처가 나머지를 완성</b>할 수 있습니다.
+      이 "스캔→디자인→출력 STL"은 이미 우리 <b>3D 디자이너·ERP</b>에 내장돼 있습니다(→ 실행 라인 참고).</div>
   </div>
 </section>
 
-<!-- ===== 03 의사 펀딩 설계 ===== -->
-<section id="doctor-fund">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">03</span><span class="eyebrow">핵심 · 의사 직접 펀딩 설계</span></div>
-    <h2 class="sec-title">"파운딩 닥터" 프로그램</h2>
-    <p class="sec-intro">자본금이 없으니, <b class="accent">제품을 가장 먼저 쓸 의사들에게 직접 자금을 모읍니다.</b>
-      단, 한 가지 결정적 전제가 있습니다 — 의료기기는 <b style="color:var(--ink)">허가 전 선판매가 불법</b>입니다(아래 ⑤ 규제 섹션).
-      그래서 단순 "제품 얼리판매"가 아니라, <b class="accent">합법적인 3-트랙 구조</b>로 설계합니다.</p>
-
-    <div class="callout danger" style="margin-bottom:24px">
-      <span class="ic">⚠</span>
-      <div><b>먼저 알아야 할 것:</b> 의료기기(Medical 모드)는 <b>품목허가 전에 판매·광고·예약결제를 하면 의료기기법 위반</b>입니다.
-        따라서 "선판매"는 ⑴ <b>비(非)의료기기 모드(Daily·공산품)</b> 또는 ⑵ <b>지분 투자</b> 또는 ⑶ <b>결제 없는 우선공급 예약</b>으로만 합법적으로 가능합니다. 아래 구조는 이를 모두 만족하도록 설계했습니다.</div>
-    </div>
-
-    <div class="grid g3">
-      <!-- TIER 1 -->
-      <div class="tier t1">
-        <div class="top">
-          <div class="badge">Track 1 · 지분</div>
-          <h3>파운딩 닥터 (엔젤투자)</h3>
-          <div class="amt">의사 1인 <b>2,000만~5,000만원</b> / 좌</div>
-        </div>
-        <div class="body">
-          <ul>
-            <li><b>형태:</b> SAFE 또는 비상장주식 — 가장 깨끗하고 합법적인 자금</li>
-            <li><b>의사 인센티브:</b> <b>엔젤투자 소득공제</b>(벤처기업 투자 시 일정 구간 100% 공제), 지분 업사이드</li>
-            <li><b>지위:</b> 주주 + 임상 자문(Advisory) + 제품 우선 체험</li>
-            <li><b>안전장치:</b> 마일스톤 트랜치(허가/매출 단계별 분할 집행)</li>
-          </ul>
-        </div>
-      </div>
-      <!-- TIER 2 -->
-      <div class="tier t2">
-        <div class="top">
-          <div class="badge">Track 2 · 선주문</div>
-          <h3>얼리 액세스 (공산품 모드)</h3>
-          <div class="amt">패키지 <b>300만~1,000만원</b></div>
-        </div>
-        <div class="body">
-          <ul>
-            <li><b>대상:</b> <b>Daily/Wellness 모드(공산품)</b> — 의료기기 아님 → <b>선판매 합법</b></li>
-            <li><b>구성:</b> 트레이 제작권 + 카트리지 정기공급 + 병원 비치 키트</li>
-            <li><b>Medical 모드:</b> 결제 없는 <b>"우선공급 예약권"</b>만 부여(허가 후 자동 전환)</li>
-            <li><b>리워드:</b> 창립가(정가 대비 할인) 평생 고정, 신모델 우선권</li>
-          </ul>
-        </div>
-      </div>
-      <!-- TIER 3 -->
-      <div class="tier t3">
-        <div class="top">
-          <div class="badge">Track 3 · 파트너</div>
-          <h3>임상 KOL 파트너</h3>
-          <div class="amt">현금 부담 <b>낮음</b> / 기여 중심</div>
-        </div>
-        <div class="body">
-          <ul>
-            <li><b>역할:</b> 데모·임상 케이스 제공, 학회·동료 추천(레퍼럴)</li>
-            <li><b>보상:</b> 매출 레퍼럴 리워드, 공동연구·논문 저자, 지역 우선권</li>
-            <li><b>효과:</b> 적은 자본으로 <b>신뢰·확산 채널</b> 확보</li>
-            <li><b>주의:</b> 리베이트 오인 방지 — 정당한 자문/연구 계약으로 문서화</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-size:20px;margin:38px 0 16px">모집 메커니즘 — 4단계</h3>
-    <div class="flow">
-      <div class="n"><div class="s">STEP 1</div><h4>비공개 라운드</h4><p>친분 있는 핵심 의사 10~20인에게 1:1 제안(이 문서 + 데모). 목표 좌수 선(先)확정.</p></div>
-      <div class="n"><div class="s">STEP 2</div><h4>에스크로·계약</h4><p>자금은 <b>에스크로/별도 계좌</b>에. SAFE·예약 계약서 표준화. 마일스톤 명시.</p></div>
-      <div class="n"><div class="s">STEP 3</div><h4>마일스톤 집행</h4><p>① 소재계약 ② 시제품 ③ 인허가 ④ 초도생산 — 단계 달성 시마다 트랜치 집행.</p></div>
-      <div class="n"><div class="s">STEP 4</div><h4>전환·정산</h4><p>허가 완료 시 예약권→정식판매 전환, 지분 확정. 미달 시 <b>환불 정책</b> 발동.</p></div>
-    </div>
-
-    <div class="grid g2" style="margin-top:24px">
-      <div class="card hl">
-        <h3>왜 의사가 들어오는가 (셀링 포인트)</h3>
-        <ul>
-          <li><b>세제 혜택</b> — 엔젤투자 소득공제로 실부담 절감</li>
-          <li><b>차별화</b> — 내 병원만의 맞춤 케어 솔루션 선점</li>
-          <li><b>업사이드</b> — 초기 지분/창립가의 가치 상승</li>
-          <li><b>전문성</b> — 임상 자문·공동연구로 학술 자산</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>안전장치 (신뢰 = 모집의 핵심)</h3>
-        <ul>
-          <li><b>에스크로</b> 또는 분리 계좌로 자금 보호</li>
-          <li><b>마일스톤 트랜치</b> — 못 지키면 다음 자금 미집행</li>
-          <li><b>환불 조항</b> — 허가 실패/중단 시 잔여금 반환</li>
-          <li><b>결제 시점 통제</b> — 의료모드 결제는 <b>허가 후</b>로</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="kpi" style="margin-top:24px">
-      <div class="b"><div class="v">15~20인</div><div class="l">1차 비공개 라운드 목표 의사 수</div></div>
-      <div class="b"><div class="v">5~10억</div><div class="l">초기 목표 모집액(좌수×단가, 빌더에서 조정)</div></div>
-      <div class="b"><div class="v">12~18개월</div><div class="l">확보 가능 런웨이 (정책자금 병행 시 ↑)</div></div>
-    </div>
-    <p class="note">위 숫자는 출발점 예시입니다. <a href="builder.html" style="color:var(--brand2)">의사결정 빌더</a>에서 좌수·단가·트랙 비중을 바꾸면 목표액이 자동 계산됩니다.</p>
+<!-- 04 제조 전략 -->
+<section id="manufacture">
+  <div class="sec-head"><span class="sec-tag tag-prod">의사결정 안건</span></div>
+  <h2 class="sec-title">제작을 어디서 할 것인가 — 4가지 안</h2>
+  <p class="sec-intro">"품질·브랜드·마진을 통제할 것인가" vs "자본·설비 부담을 줄일 것인가"의 트레이드오프. 회의에서 결정해야 할 핵심 안건이며, <a href="builder.html" style="color:var(--brand2)">빌더</a>에도 항목으로 들어가 있습니다.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>제작 주체</th><th>장점</th><th>단점 / 리스크</th><th>판단</th></tr></thead>
+      <tbody>
+        <tr><td><b>Fixon 본사 직접 제조</b></td><td>품질·UDI·QC 일원화, 브랜드·마진 통제, 데이터 축적</td><td>초기 설비·인허가·물류 투자(자본 필요)</td><td><span class="pill ok">권고(기본)</span></td></tr>
+        <tr><td><b>그래피 위탁(OEM)</b></td><td>설비투자 0, 그래피 품질·브랜드 신뢰 활용</td><td>마진 분배, 의존도↑, 그래피 사업의지 약함·납기 통제</td><td><span class="pill warn">자본절감 우선 시</span></td></tr>
+        <tr><td><b>치과기공소(장비 공급)</b></td><td>출력 전문성, 다수 치과 커버, 규모의 경제</td><td>기공소별 QC 표준화·교육, 마진 분배</td><td><span class="pill warn">확장 단계</span></td></tr>
+        <tr><td><b>병원 내 직접(장비 구매)</b></td><td>당일 제작, 환자 경험↑, 외주비 0</td><td>병원 설비·인력 부담, 표준화·제조주체 인허가 이슈</td><td><span class="pill warn">얼리어답터 한정</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info" style="margin-top:18px">
+    <span class="ic">◆</span>
+    <div><b>권고(하이브리드):</b> 초기엔 <b>본사 중앙제조</b>로 품질·규제를 잡거나(자본 가능 시), 자본이 빠듯하면 <b>그래피 위탁</b>으로 시작 →
+      수요가 커지면 <b>기공소 네트워크</b>로 확장, <b>병원 내 직접</b>은 얼리어답터 치과 옵션으로. 자본 상황에 따라 빌더에서 결정하세요.</div>
   </div>
 </section>
 
-<!-- ===== 04 자금조달 옵션 ===== -->
-<section id="other-fund">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">04</span><span class="eyebrow">펀딩 외 자금조달</span></div>
-    <h2 class="sec-title">의사 펀딩만으로 가지 않는다 — 비희석부터 쌓는다</h2>
-    <p class="sec-intro">지분을 덜 내주면서 자금을 키우는 순서: <b class="accent">정책자금·보증(비희석) → 의사 펀딩 → VC</b>.
-      2025~26년 한국 의료기기 스타트업이 실제로 쓸 수 있는 카드를 정리했습니다.</p>
-
-    <div class="grid g2">
-      <div class="card hl">
-        <h3>① TIPS (창업기술사업화) <span class="pill ok">비희석성 강함</span></h3>
-        <p><b>2026년 일반형 정부지원 한도 5억 → 8억으로 상향.</b> 딥테크 트랙 최대 15억, 글로벌 12억.
-          운영사로부터 2~5억 선(先)투자 확정이 조건 — 즉 <b>엔젤/액셀러레이터 연결이 관문</b>.</p>
-      </div>
-      <div class="card hl">
-        <h3>② 기술보증기금 (기보) <span class="pill ok">비희석</span></h3>
-        <p>Tech-바이오 R&D 보증·사업화 보증 각 <b>최대 10억</b>(부분보증 85%). 보증서로 은행 대출 → <b>지분 희석 없이</b> 운전자금.
-          <b>보증연계투자</b>로 직접 투자도 가능.</p>
-      </div>
-      <div class="card">
-        <h3>③ KHIDI 의료기기 사업화 촉진</h3>
-        <p>신뢰성평가·성능평가 각 국비 1천만, 해외인허가 2천만, 해외진출 1.5천만 등 <b>인허가·시험 비용을 정부가 분담</b>.
-          현금 아닌 "비용 절감형" 지원.</p>
-      </div>
-      <div class="card">
-        <h3>④ 증권형 크라우드펀딩</h3>
-        <p>와디즈·펀딩포유 등. 자본시장법상 <b>연 모집·투자자 한도</b> 존재, 의료기기 장기 R&D엔 구조적 한계.
-          <b>대중 인지도+소액 자금</b> 동시 확보용으로는 유효.</p>
-      </div>
-      <div class="card">
-        <h3>⑤ 전략적 투자자(SI)</h3>
-        <p>약제·카트리지 협업이 가능한 <b>제약사</b>, 디지털 치과 플랫폼, 구강케어 대기업.
-          자금 + 유통/약제 파트너를 한 번에.</p>
-      </div>
-      <div class="card">
-        <h3>⑥ 매출 기반 런웨이 (Daily 모드)</h3>
-        <p>의료기기 허가가 필요 없는 <b>Daily(공산품) 모드를 먼저 출시</b> → D2C/병원 비치 매출로 자체 런웨이.
-          가장 빠르고 희석 0.</p>
-      </div>
+<!-- 05 소재 -->
+<section id="material">
+  <div class="sec-head"><span class="sec-tag tag-prod">소재</span></div>
+  <h2 class="sec-title">소재는 그래피에서 — 신뢰를 빌려온다</h2>
+  <p class="sec-intro">제작을 어디서 하든 <b class="accent">소재(레진)는 그래피에서 구매</b>합니다. 이유는 두 가지: 품질, 그리고 브랜드.</p>
+  <div class="grid g2">
+    <div class="card hl">
+      <h3>① 소재 품질</h3>
+      <p>형상기억 레진 등 그래피 소재는 출력·경화 품질이 검증돼 있어, 의료용 맞춤 트레이에 적합합니다.</p>
     </div>
-
-    <div class="callout good" style="margin-top:20px">
-      <span class="ic">✓</span>
-      <div><b>권장 자금 스택(예시):</b> 매출(Daily) + 기보 보증 + KHIDI 비용지원 으로 <b>바닥을 깔고</b>,
-        그 위에 <b>의사 펀딩</b>으로 운전자금, TIPS/SI로 <b>스케일업</b>. VC는 가치가 오른 뒤 마지막에.</div>
+    <div class="card hl">
+      <h3>② 브랜드 가치 (냉정한 현실)</h3>
+      <p>치과 업계에서 <b style="color:var(--ink)">그래피의 브랜드 신뢰는 이미 인정받은 상태</b>입니다. 신생 우리 브랜드보다 강력 →
+        "소재: 그래피"라는 표기 자체가 <b style="color:var(--ink)">의사 설득의 신뢰 자산</b>이 됩니다.</p>
     </div>
   </div>
+  <p class="note" style="font-size:13px;color:var(--dim);margin-top:12px">→ 그래피와는 <b>소재 공급</b>으로 관계를 묶되, 단가·MOQ·우선공급·브랜드 표기 권리를 계약에 명문화합니다(→ 사업 구조).</p>
 </section>
 
-<!-- ===== 05 임상 레퍼런스 ===== -->
-<section id="clinical">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">05</span><span class="eyebrow">임상 · 레퍼런스</span></div>
-    <h2 class="sec-title">"실제 병원에서 쓰인다"는 증거를 만든다</h2>
-    <p class="sec-intro">대학병원 데모·세팅 라인을 확보했습니다. 다만 마케팅 메시지는 <b class="accent">기관 이름이 아니라 "임상 현장 검증"</b>에 둡니다.</p>
-
-    <div class="grid g2">
-      <div class="card hl">
-        <h3>확보한 것</h3>
-        <ul>
-          <li><b>대학병원 데모·세팅 라인</b> — 제품을 실제 임상 환경에서 시연·세팅</li>
-          <li>임상 케이스·사용 피드백을 <b>구조화된 데이터</b>로 축적</li>
-          <li>투자/펀딩 자료의 <b>"현장 검증" 근거</b>로 활용</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>표현 원칙 (중요)</h3>
-        <ul>
-          <li>해당 병원은 <b>치과대학이 없는 병원</b> → "치대 권위"로 포장하지 않음</li>
-          <li>기관명 과대광고 금지 — <b>의료기기 광고 규정·기관 정책 위반 소지</b></li>
-          <li>메시지는 <b>"임상 현장에서 검증 중"</b> 수준으로 절제, 사실 그대로</li>
-        </ul>
-      </div>
-    </div>
-    <div class="callout info" style="margin-top:18px">
-      <span class="ic">◆</span>
-      <div>데모 라인의 진짜 가치는 <b>홍보 문구가 아니라 "제품을 진짜로 다듬을 임상 피드백 루프"</b>입니다.
-        같은 라인을 <b>파운딩 닥터 모집의 신뢰 근거</b>로 쓰되, 기관 마케팅은 보수적으로.</div>
-    </div>
+<!-- 06 사업 구조 -->
+<section id="structure">
+  <div class="sec-head"><span class="sec-tag tag-biz">사업 구조</span></div>
+  <h2 class="sec-title">그래피 = 소재 공급사, 우리 = 사업 주체</h2>
+  <p class="sec-intro">그래피가 사업 의지를 안 보이는 지금, 관계를 "동업"에서 "공급-사업"으로 분리합니다. 책임·이익·결정권이 우리에게 모이게.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>역할</th><th>그래피</th><th>우리 (GraphyStyle)</th></tr></thead>
+      <tbody>
+        <tr><td><b>핵심 기능</b></td><td>레진 등 소재 공급</td><td>제품·인허가·제조·브랜딩·영업·CS</td></tr>
+        <tr><td><b>투자 부담</b></td><td>없음 (소재 매출만)</td><td>사업 자금 조달 주도</td></tr>
+        <tr><td><b>의사결정권</b></td><td>소재 사양·단가 협의</td><td>제품·가격·시장 전략 단독</td></tr>
+        <tr><td><b>브랜드/IP</b></td><td>—</td><td><b>우리 소유</b> (소재 신뢰는 활용)</td></tr>
+      </tbody>
+    </table>
   </div>
+  <div class="callout info" style="margin-top:16px"><span class="ic">◆</span><div><b>계약 필수 3조항:</b> ① 소재 안정공급·단가·MOQ ② 독점/우선 공급 ③ 브랜드·IP 우리 귀속.
+    자세한 모델 비교(A 공급계약 / B 라이선스 / C 소수지분)는 <a href="strategy.html#restructure" style="color:var(--brand2)">전략 메모</a>에.</div></div>
 </section>
 
-<!-- ===== 06 시장 마케팅 ===== -->
+<!-- 07 자금조달 -->
+<section id="funding">
+  <div class="sec-head"><span class="sec-tag tag-biz">자금조달</span></div>
+  <h2 class="sec-title">자본금 공백 — 의사 펀딩 + 정책자금</h2>
+  <p class="sec-intro">자본금이 없으니 <b class="accent">제품을 가장 먼저 쓸 의사들에게 직접 모읍니다.</b> 단, 의료기기는 허가 전 선판매가 불법 → 합법 구조로 설계.</p>
+  <div class="grid g3">
+    <div class="card hl"><h3>Track 1 · 지분</h3><p>파운딩 닥터 엔젤투자(SAFE/주식). 엔젤 소득공제 + 지분 업사이드.</p></div>
+    <div class="card hl"><h3>Track 2 · 선주문</h3><p>공산품(Daily) 모드 얼리 액세스. 의료모드는 결제없는 예약권.</p></div>
+    <div class="card hl"><h3>Track 3 · KOL</h3><p>임상 파트너 — 데모·추천. 적은 자본으로 확산 채널 확보.</p></div>
+  </div>
+  <div class="grid g4" style="margin-top:14px">
+    <div class="card"><h3>TIPS</h3><p>2026 일반형 최대 8억. 운영사 선투자가 관문.</p></div>
+    <div class="card"><h3>기술보증기금</h3><p>R&D·사업화 보증 각 10억(비희석).</p></div>
+    <div class="card"><h3>KHIDI</h3><p>인허가·시험 비용 정부 분담.</p></div>
+    <div class="card"><h3>Daily 매출</h3><p>공산품 모드 선판매로 자체 런웨이(희석 0).</p></div>
+  </div>
+  <p class="note" style="font-size:13px;color:var(--dim);margin-top:12px">→ 순서: <b>비희석(매출·보증·정부) → 의사 펀딩 → VC</b>. 상세 설계·금액 시뮬레이션은 <a href="strategy.html#doctor-fund" style="color:var(--brand2)">전략 메모</a>와 <a href="builder.html" style="color:var(--brand2)">빌더</a>에.</p>
+</section>
+
+<!-- 08 시장 마케팅 -->
 <section id="market">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">06</span><span class="eyebrow">시장 흐름 · 마케팅 트렌드 2026</span></div>
-    <h2 class="sec-title">바람의 방향을 등지지 말 것</h2>
-    <p class="sec-intro">디지털 치과·맞춤형 구강케어 시장은 우리에게 유리하게 커지고 있습니다. 이를 우리의 자금·메시지 전략에 직접 반영합니다.</p>
-
-    <div class="kpi">
-      <div class="b"><div class="v">$5.47B→$11.1B</div><div class="l">글로벌 디지털 치과 시장 2026→2034 (CAGR 9.3%)</div></div>
-      <div class="b"><div class="v">42%</div><div class="l">투자자가 디지털 치과 기술을 최우선 투자 분야로 지목</div></div>
-      <div class="b"><div class="v">+38%</div><div class="l">AI·3D프린팅 도입 클리닉이 끌어모은 추가 펀딩</div></div>
-    </div>
-
-    <div class="grid g3" style="margin-top:20px">
-      <div class="card">
-        <h3>트렌드 ① 맞춤·D2C</h3>
-        <p>온라인 임프레션 키트 등 <b>D2C 맞춤 구강케어</b>가 급성장. VC 70%가 투자 확대 의향.
-          → 우리 <b>Daily 모드 D2C</b> 전략과 정확히 일치.</p>
-      </div>
-      <div class="card">
-        <h3>트렌드 ② AI·3D 프린팅</h3>
-        <p>맞춤 트레이 = 3D 스캔·프린팅의 핵심 응용. <b>"AI/디지털 워크플로"</b> 메시지가 펀딩을 끌어옴.</p>
-      </div>
-      <div class="card">
-        <h3>트렌드 ③ 의사 커뮤니티 주도</h3>
-        <p>B2B 의료는 <b>동료 의사의 추천·임상 케이스</b>가 광고보다 강함.
-          → 파운딩 닥터/KOL이 곧 마케팅 채널.</p>
-      </div>
-    </div>
-
-    <h3 style="font-size:20px;margin:32px 0 14px">우리가 쓸 마케팅 기법</h3>
-    <div class="grid g2">
-      <div class="card">
-        <h3>의사 대상 (B2B)</h3>
-        <ul>
-          <li><b>창립 닥터 커뮤니티</b> — 폐쇄형 채널, 케이스 공유, 소속감</li>
-          <li><b>임상 케이스 콘텐츠</b> — 광고 대신 "데이터/증례"로 신뢰</li>
-          <li><b>학회·세미나 시연</b> — SIDEX 같은 노출을 펀딩 전환으로</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>환자 대상 (D2C, 공산품 모드)</h3>
-        <ul>
-          <li><b>스토리형 숏폼</b> — "손 대신 트레이가 케어" 한 문장</li>
-          <li><b>병원 채널 연계</b> — 의사가 환자에게 추천하는 구조</li>
-          <li><b>구독(카트리지 정기배송)</b> — 반복 매출·LTV 극대화</li>
-        </ul>
-      </div>
-    </div>
-    <div class="callout danger" style="margin-top:18px">
-      <span class="ic">⚠</span>
-      <div><b>마케팅 컴플라이언스:</b> 의료기기 모드는 <b>허가 전 광고·체험담·서포터즈 홍보가 모두 불법</b>.
-        허가 전 콘텐츠는 <b>공산품 모드</b> 또는 <b>제품이 아닌 "회사/비전" 스토리</b>로 한정하세요.</div>
-    </div>
+  <div class="sec-head"><span class="sec-tag tag-biz">시장 · 마케팅</span></div>
+  <h2 class="sec-title">바람은 우리 등 뒤에서 분다</h2>
+  <p class="sec-intro">디지털 치과·맞춤 구강케어 시장이 우리에게 유리하게 커지고 있습니다.</p>
+  <div class="grid g3">
+    <div class="card"><h3>시장 성장</h3><p>글로벌 디지털 치과 <b style="color:var(--ink)">$5.47B(2026) → $11.1B(2034)</b>, CAGR 9.3%.</p></div>
+    <div class="card"><h3>맞춤·D2C·AI</h3><p>맞춤 트레이·3D프린팅·D2C가 핵심 트렌드. 투자자 42%가 디지털 치과 최우선.</p></div>
+    <div class="card"><h3>의사 커뮤니티</h3><p>B2B 의료는 동료 의사 추천·임상 케이스가 광고보다 강함 → 파운딩 닥터가 곧 채널.</p></div>
   </div>
 </section>
 
-<!-- ===== 07 규제 리스크 ===== -->
+<!-- 09 규제 -->
 <section id="risk">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">07</span><span class="eyebrow">규제 리스크 & 컴플라이언스</span></div>
-    <h2 class="sec-title">가장 큰 리스크는 "몰라서" 밟는 것</h2>
-    <p class="sec-intro">자금을 모으는 방식 자체가 규제 대상입니다. 회의에서 짚어야 할 레드라인을 정리했습니다.</p>
-
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>사안</th><th>상태</th><th>대응</th></tr></thead>
-        <tbody>
-          <tr><td><b>의료기기 허가 전 선판매</b></td><td><span class="pill no">불법</span></td><td>의료모드는 <b>결제 없는 예약</b>만. 결제·인도는 허가 후.</td></tr>
-          <tr><td><b>허가 전 제품 광고·체험담</b></td><td><span class="pill no">불법</span></td><td>의료모드 광고 금지. 공산품/회사 비전 콘텐츠로 대체.</td></tr>
-          <tr><td><b>공산품(Daily) 모드 판매</b></td><td><span class="pill ok">가능</span></td><td>의료기기 아님 → 선판매·매출 OK. <b>초기 런웨이 엔진.</b></td></tr>
-          <tr><td><b>지분 투자(SAFE/주식)</b></td><td><span class="pill ok">가능</span></td><td>표준 계약·에스크로. 증권 모집 한도 규정 확인.</td></tr>
-          <tr><td><b>의사 리베이트 오인</b></td><td><span class="pill warn">주의</span></td><td>KOL 보상은 <b>정당한 자문/연구 계약</b>으로 문서화.</td></tr>
-          <tr><td><b>의료기기 판매업 신고</b></td><td><span class="pill warn">필요</span></td><td>판매 단계 전 <b>판매업 신고·UDI</b> 체계 준비.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">※ 본 정리는 의사결정 보조용이며, 실제 모집·계약 전 <b>변호사·규제(RA) 검토</b>를 반드시 거치세요.</p>
+  <div class="sec-head"><span class="sec-tag tag-biz">규제</span></div>
+  <h2 class="sec-title">가장 큰 리스크는 몰라서 밟는 것</h2>
+  <div class="callout danger"><span class="ic">⚠</span><div><b>의료기기는 허가 전 선판매·광고·예약결제가 위법</b>(의료기기법 제24조).
+    → 의료모드는 결제없는 예약만, 결제·인도는 허가 후. 공산품(Daily) 모드는 선판매 가능 → 초기 매출 엔진.</div></div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>지켜야 할 것</h3><ul><li>허가 전 제품 광고·체험담·서포터즈 금지</li><li>의사 보상은 정당한 자문/연구 계약으로 문서화(리베이트 오인 방지)</li><li>판매 전 의료기기 판매업 신고·UDI 체계</li></ul></div>
+    <div class="card"><h3>안전한 길</h3><ul><li>공산품 모드 먼저 출시(매출·검증)</li><li>지분 투자(SAFE)로 깨끗한 자금</li><li>모집·계약 전 변호사·RA 검토 필수</li></ul></div>
   </div>
 </section>
 
-<!-- ===== 08 로드맵 ===== -->
+<!-- 10 운영 시스템 -->
+<section id="system">
+  <div class="sec-head"><span class="sec-tag tag-ops">실행</span></div>
+  <h2 class="sec-title">운영 시스템은 이미 만들어져 있다</h2>
+  <p class="sec-intro">"제품만 있고 운영은 막막"이 아닙니다. 치과·기공소·그래피·관리자가 <b class="accent">한 화면에서 돌아가는 ERP</b>와 3D 디자이너가 이미 구축돼 시연 가능합니다.</p>
+  <div class="grid g3">
+    <div class="card"><h3>단일 워크플로</h3><p>주문→디자인→생산→QC→정산→환자안내를 한 시스템에서. 별도 SW·엑셀 불요.</p></div>
+    <div class="card"><h3>3D 디자이너 내장</h3><p>스캔→노즐 배치→출력용 STL까지 5-step. 외부 CAD 의존 0.</p></div>
+    <div class="card"><h3>11개 모듈</h3><p>분석·재고·QC·리포트·캘린더·메시지·검색·자동화·환자포털·도움말·모바일.</p></div>
+  </div>
+  <div class="links" style="margin-top:16px">
+    <a class="lk" href="/erp.html" target="_blank"><span class="em">🖥️</span><span><span class="t">ERP 운영 콘솔 열기 <span class="ext">새 탭</span></span><span class="d">메인 운영 화면 — 시연용</span></span></a>
+    <a class="lk" href="/dashboard.html" target="_blank"><span class="em">📊</span><span><span class="t">프로젝트 대시보드 <span class="ext">새 탭</span></span><span class="d">전체 현황 한눈에</span></span></a>
+  </div>
+</section>
+
+<!-- 11 임상 -->
+<section id="clinical">
+  <div class="sec-head"><span class="sec-tag tag-ops">임상</span></div>
+  <h2 class="sec-title">"실제 병원에서 쓰인다"는 증거</h2>
+  <p class="sec-intro">대학병원 데모·세팅 라인을 확보했습니다. 다만 메시지는 기관명이 아니라 <b class="accent">"임상 현장 검증"</b>에 둡니다.</p>
+  <div class="grid g2">
+    <div class="card hl"><h3>활용</h3><ul><li>제품을 다듬는 <b>임상 피드백 루프</b></li><li>파운딩 닥터 모집의 <b>신뢰 근거</b></li></ul></div>
+    <div class="card"><h3>표현 원칙</h3><ul><li>치대 없는 병원 → 기관 권위로 포장 금지</li><li>"임상 현장에서 검증 중" 수준으로 절제(광고 규정·기관 정책)</li></ul></div>
+  </div>
+</section>
+
+<!-- 12 로드맵 -->
 <section id="roadmap">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-no">08</span><span class="eyebrow">로드맵</span></div>
-    <h2 class="sec-title">오늘부터 90일</h2>
-    <div class="tl">
-      <div class="step"><div class="q">D-Day · 오늘</div><h4>방향 확정 회의</h4><p>이 문서 + 의사결정 빌더로 핵심 안건 결정 → 최종 사업계획서 출력.</p></div>
-      <div class="step"><div class="q">2주</div><h4>그래피 소재 계약 + 비공개 라운드 명단</h4><p>공급·단가·독점 조항 협의. 핵심 의사 15~20인 컨택 리스트 확정.</p></div>
-      <div class="step"><div class="q">4~6주</div><h4>파운딩 닥터 1차 모집</h4><p>SAFE/예약 계약 표준화, 에스크로 세팅, 데모로 좌수 확정.</p></div>
-      <div class="step"><div class="q">6~10주</div><h4>정책자금 병행</h4><p>기보 보증·KHIDI 사업화 신청, TIPS 운영사 컨택, Daily 모드 출시 준비.</p></div>
-      <div class="step"><div class="q">12주</div><h4>초도 생산 + Daily 매출 개시</h4><p>공산품 모드 매출로 런웨이, 의료모드 인허가 트랙 본격화.</p></div>
-    </div>
+  <div class="sec-head"><span class="sec-tag tag-ops">로드맵</span></div>
+  <h2 class="sec-title">오늘부터 90일</h2>
+  <div class="tl">
+    <div class="step"><div class="q">D-Day · 오늘</div><h4>방향 확정</h4><p>이 허브로 브리핑 → 빌더로 안건 결정 → 사업계획서 출력.</p></div>
+    <div class="step"><div class="q">2주</div><h4>그래피 소재계약 + 의사 명단</h4><p>공급·단가·독점 협의. 핵심 의사 15~20인 컨택.</p></div>
+    <div class="step"><div class="q">4~6주</div><h4>파운딩 닥터 1차 모집 + 제조 방식 확정</h4><p>SAFE/예약 표준화, 에스크로. 본사/위탁/기공소 결정.</p></div>
+    <div class="step"><div class="q">6~10주</div><h4>정책자금 병행</h4><p>기보·KHIDI 신청, TIPS 운영사 컨택, Daily 모드 출시 준비.</p></div>
+    <div class="step"><div class="q">12주</div><h4>초도 생산 + Daily 매출 개시</h4><p>공산품 매출로 런웨이, 의료모드 인허가 본격화.</p></div>
+  </div>
+</section>
 
-    <div class="cta">
-      <h2>이제, 하나씩 결정합시다.</h2>
-      <p>의사결정 빌더에서 오늘 회의의 안건을 항목별로 선택하면, 선택값이 모여 <b style="color:var(--ink)">최종 사업계획서</b>가 자동으로 완성됩니다. 화면에 띄워 함께 결정하고, 끝나면 바로 인쇄/PDF로 내보내세요.</p>
+<!-- 13 자료실 -->
+<section id="library">
+  <div class="sec-head"><span class="sec-tag tag-lib">자료실</span></div>
+  <h2 class="sec-title">모든 자료, 여기서 바로 연다</h2>
+  <p class="sec-intro">이 폴더의 제품·사업 관련 페이지·문서를 카테고리별로 모았습니다. 회의 중 필요한 화면을 즉시 띄우세요. (외부 표시 = 공개 사이트 페이지, 새 탭으로 열림)</p>
+
+  <div class="libcat c-biz">
+    <h3>사업 전략 · 의사결정 (비공개)</h3>
+    <div class="links">
+      <a class="lk" href="strategy.html"><span class="em">📑</span><span><span class="t">사업 전략 메모</span><span class="d">그래피 재편·의사펀딩 설계·정책자금·규제·로드맵</span></span></a>
+      <a class="lk" href="builder.html"><span class="em">🛠️</span><span><span class="t">의사결정 빌더</span><span class="d">항목 선택 → 최종 사업계획서 실시간 생성·PDF</span></span></a>
+    </div>
+  </div>
+
+  <div class="libcat c-prod">
+    <h3>제품 · 환자 · 마케팅</h3>
+    <div class="links">
+      <a class="lk" href="/index.html" target="_blank"><span class="em">🌐</span><span><span class="t">공개 랜딩 — 창립 멤버 모집 <span class="ext">외부</span></span><span class="d">의사 대상 메인 랜딩 페이지</span></span></a>
+      <a class="lk" href="/point-shower-patient.html" target="_blank"><span class="em">🦷</span><span><span class="t">환자용 제품 소개 <span class="ext">외부</span></span><span class="d">맞춤형 케어 트레이 환자 설명</span></span></a>
+      <a class="lk" href="/sidex.html" target="_blank"><span class="em">🎤</span><span><span class="t">SIDEX 2026 키노트 덱 <span class="ext">외부</span></span><span class="d">발표 슬라이드</span></span></a>
+      <a class="lk" href="/handout.html" target="_blank"><span class="em">📄</span><span><span class="t">부스 배포 인쇄물 <span class="ext">외부</span></span><span class="d">행사 핸드아웃</span></span></a>
+      <a class="lk" href="/survey.html" target="_blank"><span class="em">📝</span><span><span class="t">원장 사전등록 설문 <span class="ext">외부</span></span><span class="d">관심·니즈 수집</span></span></a>
+      <a class="lk" href="/point-shower-community/index.html" target="_blank"><span class="em">👥</span><span><span class="t">원장 커뮤니티 <span class="ext">외부</span></span><span class="d">창립 닥터 커뮤니티</span></span></a>
+    </div>
+  </div>
+
+  <div class="libcat c-ops">
+    <h3>운영 시스템 (ERP)</h3>
+    <div class="links">
+      <a class="lk" href="/erp.html" target="_blank"><span class="em">🖥️</span><span><span class="t">ERP 운영 콘솔 <span class="ext">외부</span></span><span class="d">메인 — 주문·생산·정산</span></span></a>
+      <a class="lk" href="/dashboard.html" target="_blank"><span class="em">📊</span><span><span class="t">프로젝트 대시보드 <span class="ext">외부</span></span><span class="d">전체 현황</span></span></a>
+      <a class="lk" href="/erp-analytics.html" target="_blank"><span class="em">📈</span><span><span class="t">분석 대시보드 <span class="ext">외부</span></span><span class="d">KPI·차트</span></span></a>
+      <a class="lk" href="/erp-inventory.html" target="_blank"><span class="em">📦</span><span><span class="t">재고 관리 <span class="ext">외부</span></span><span class="d">소재 차감·자동 발주</span></span></a>
+      <a class="lk" href="/erp-quality.html" target="_blank"><span class="em">✅</span><span><span class="t">QC 센터 <span class="ext">외부</span></span><span class="d">품질 검사·인증서</span></span></a>
+      <a class="lk" href="/erp-reports.html" target="_blank"><span class="em">🧾</span><span><span class="t">리포트 생성기 <span class="ext">외부</span></span><span class="d">정산 명세·인쇄</span></span></a>
+      <a class="lk" href="/erp-portal.html" target="_blank"><span class="em">🔎</span><span><span class="t">환자 포털 <span class="ext">외부</span></span><span class="d">주문 진행 조회(PII 마스킹)</span></span></a>
+      <a class="lk" href="/erp-mobile.html" target="_blank"><span class="em">📱</span><span><span class="t">모바일 컴패니언 <span class="ext">외부</span></span><span class="d">현장용 모바일 뷰</span></span></a>
+      <a class="lk" href="/docs.html" target="_blank"><span class="em">📚</span><span><span class="t">운영 문서 <span class="ext">외부</span></span><span class="d">시스템 사용 가이드</span></span></a>
+    </div>
+  </div>
+
+  <div class="libcat c-demo">
+    <h3>시연 · 품질 · 3D</h3>
+    <div class="links">
+      <a class="lk" href="/DEMO_CHECKLIST.html" target="_blank"><span class="em">🧪</span><span><span class="t">시연 점검 도구 <span class="ext">외부</span></span><span class="d">데모 전 자동 검증</span></span></a>
+      <a class="lk" href="/samples/DEMO_GUIDE.html" target="_blank"><span class="em">🎬</span><span><span class="t">데모 가이드 <span class="ext">외부</span></span><span class="d">시연 시나리오</span></span></a>
+      <a class="lk" href="/point-shower/stl_viewer.html" target="_blank"><span class="em">🧩</span><span><span class="t">3D 조립 뷰어 <span class="ext">외부</span></span><span class="d">스플린트·노즐 조립 시각화</span></span></a>
+      <a class="lk" href="/samples/sample_invoice.html" target="_blank"><span class="em">💳</span><span><span class="t">샘플 송장 <span class="ext">외부</span></span><span class="d">정산 양식 예시</span></span></a>
+      <a class="lk" href="/samples/sample_qc_report.html" target="_blank"><span class="em">📋</span><span><span class="t">샘플 QC 리포트 <span class="ext">외부</span></span><span class="d">품질 인증서 예시</span></span></a>
+    </div>
+  </div>
+
+  <div class="libcat">
+    <h3>내부 기획 문서</h3>
+    <div class="links">
+      <a class="lk" href="/BRAND_DEFINITION.md" target="_blank"><span class="em">🎨</span><span><span class="t">브랜드 정의서 <span class="ext">md</span></span><span class="d">제품 카테고리·톤·포지셔닝</span></span></a>
+      <a class="lk" href="/GRAPHY_DEMO_PLAN.md" target="_blank"><span class="em">📐</span><span><span class="t">그래피 시연 기획 <span class="ext">md</span></span><span class="d">미팅 시연 시나리오·차별점</span></span></a>
+      <a class="lk" href="/INTEGRATION_GUIDE.md" target="_blank"><span class="em">🔌</span><span><span class="t">시스템 연동 가이드 <span class="ext">md</span></span><span class="d">API·데이터 모델·마이그레이션</span></span></a>
+      <a class="lk" href="/BACKEND_BLUEPRINT.md" target="_blank"><span class="em">🗄️</span><span><span class="t">백엔드 청사진 <span class="ext">md</span></span><span class="d">서버·DB 설계</span></span></a>
+      <a class="lk" href="/PROJECT.md" target="_blank"><span class="em">📁</span><span><span class="t">프로젝트 현황 <span class="ext">md</span></span><span class="d">전체 작업 이력</span></span></a>
+      <a class="lk" href="/IMPLEMENTATION_LOG.md" target="_blank"><span class="em">🧱</span><span><span class="t">구현 로그 <span class="ext">md</span></span><span class="d">개발 진행 기록</span></span></a>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>안건을 정했다면, 사업계획서로.</h2>
+    <p>빌더에서 항목을 선택하면 오늘 회의의 결정이 모여 최종 사업계획서가 자동 완성됩니다. 끝나면 바로 인쇄/PDF.</p>
+    <div class="btns">
       <a class="btn" href="builder.html">의사결정 빌더 열기 →</a>
+      <a class="btn ghost" href="strategy.html">전략 메모 보기</a>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div><b>GraphyStyle</b> · 비공개 사업 전략 메모 · 2026.06.12 · 핵심 관계자 한정</div>
-    <div class="src">
-      자료 출처(시장·규제·자금) —
-      <a href="https://www.fortunebusinessinsights.com/digital-dentistry-market-110462" target="_blank" rel="noopener">디지털 치과 시장 규모(Fortune Business Insights)</a> ·
-      <a href="https://www.mt.co.kr/future/2025/11/11/2025111014022099783" target="_blank" rel="noopener">TIPS 지원금 8억 상향(머니투데이)</a> ·
-      <a href="https://www.kodit.co.kr/" target="_blank" rel="noopener">기술보증기금</a> ·
-      <a href="https://www.khidi.or.kr/" target="_blank" rel="noopener">KHIDI 의료기기 사업화</a> ·
-      <a href="https://www.doctorsnews.co.kr/news/articleView.html?idxno=111677" target="_blank" rel="noopener">허가 전 의료기기 광고 규제(의협신문)</a> ·
-      <a href="https://www.crowdnet.or.kr/" target="_blank" rel="noopener">증권형 크라우드펀딩(크라우드넷)</a>
-    </div>
-  </div>
+</main>
+
+<footer class="shell">
+  <div><b>GraphyStyle</b> · 사업 종합 허브 · 2026.06.12 · 핵심 관계자 한정 · 외부 유출 금지</div>
 </footer>
 
+<script>
+/* ===== 지하철 노선도 스크롤-스파이 ===== */
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var stations = Array.prototype.slice.call(document.querySelectorAll('.station'));
+  var line = document.getElementById('mline');
+  var fill = document.getElementById('mfill');
+  var curName = document.getElementById('curName');
+  var idIndex = {}; stations.forEach(function(s,i){ idIndex[s.dataset.id]=i; });
+
+  function setActive(id){
+    var ai = idIndex[id]; if(ai==null) return;
+    stations.forEach(function(s,i){
+      s.classList.toggle('active', i===ai);
+      s.classList.toggle('done', i<ai);
+    });
+    // 진행선 채우기 (활성 역 중심까지 — station.offsetTop은 .mline 기준)
+    var active = stations[ai];
+    var top = active.offsetTop + active.offsetHeight/2 - 10; // mfill top:10px 보정
+    fill.style.height = Math.max(0, top) + 'px';
+    if(curName) curName.textContent = active.querySelector('.stlbl').textContent;
+  }
+
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
+    for(var i=0;i<sections.length;i++){ if(visible[sections[i].id]){ setActive(sections[i].id); return; } }
+  }, {rootMargin:'-30% 0px -60% 0px', threshold:0});
+  sections.forEach(function(s){ obs.observe(s); });
+
+  // 클릭 → 스크롤
+  stations.forEach(function(s){
+    s.addEventListener('click', function(e){
+      e.preventDefault();
+      var el = document.getElementById(s.dataset.id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      document.body.classList.remove('metro-open');
+    });
+  });
+
+  // 초기 활성
+  setActive('overview');
+
+  // 모바일 토글
+  var tg = document.getElementById('mtoggle');
+  var bd = document.getElementById('mbackdrop');
+  if(tg) tg.addEventListener('click', function(){ document.body.classList.toggle('metro-open'); });
+  if(bd) bd.addEventListener('click', function(){ document.body.classList.remove('metro-open'); });
+})();
+</script>
 <script src="gate.js"></script>
 </body>
 </html>

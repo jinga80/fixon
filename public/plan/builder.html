@@ -123,7 +123,8 @@
 <div class="top">
   <div class="l"><span class="dot"></span><span class="ttl">의사결정 빌더 · 사업계획서 생성</span></div>
   <div class="acts">
-    <a class="tbtn" href="index.html">← 전략 메모</a>
+    <a class="tbtn" href="index.html">← 허브</a>
+    <a class="tbtn" href="strategy.html">전략 메모</a>
     <button class="tbtn" id="resetBtn">초기화</button>
     <button class="tbtn primary" id="printBtn">인쇄 / PDF</button>
   </div>
@@ -245,6 +246,24 @@ const DECISIONS = [
       {v:"defer", label:"우선 공산품으로, 의료허가는 후속 결정",
         desc:"Daily 모드로 시장 검증 후 의료 트랙 재판단",
         plan:"먼저 공산품(Daily) 모드로 시장을 검증하고, 매출·데이터가 쌓인 뒤 Medical 허가 진입 여부와 방식을 재결정한다. 자본 효율이 가장 높은 보수적 접근이다."}
+    ]
+  },
+  {
+    id:"manufacture", no:"3.5", q:"제작(제조)을 어디서 할 것인가",
+    d:"스플린트를 누가 출력·제작할지 — 품질 통제 vs 자본 부담의 트레이드오프",
+    opts:[
+      {v:"inhouse_hq", label:"Fixon 본사 직접 제조·납품", rec:true,
+        desc:"중앙 제조로 품질·브랜드·UDI·마진 통제",
+        plan:"Fixon 본사가 중앙에서 직접 제조·납품한다. <b>품질 표준화, UDI·QC 일원화, 브랜드·마진 통제, 임상 데이터 축적</b>이 가능한 가장 전략적인 형태다. 초기 설비·인허가·물류 투자가 필요하므로 자금조달 계획과 직결된다. 수요 확대 시 기공소 네트워크로 확장한다."},
+      {v:"graphy_oem", label:"그래피에 제작까지 위탁(OEM)",
+        desc:"소재+제작 일괄 — 설비투자 0, 의존도↑",
+        plan:"소재 공급사인 그래피에 제작까지 위탁한다. 자체 설비 투자가 없고 그래피의 검증된 품질·브랜드 신뢰를 활용하지만, 마진이 분배되고 그래피 의존도·납기 통제 리스크가 있다(그래피의 사업의지가 약한 점 고려). 초기 자본 절감이 최우선일 때의 선택."},
+      {v:"lab", label:"치과기공소에서 제작(장비 공급)",
+        desc:"기공소 인프라 활용 — 규모의 경제",
+        plan:"기공소에 장비를 공급하고 출력을 위탁한다. 기공소의 출력 전문성과 다수 치과 커버리지로 규모의 경제를 얻는다. 다만 기공소별 QC 표준화·교육과 마진 분배가 과제다."},
+      {v:"clinic", label:"병원 내 직접 제작(장비 구매)",
+        desc:"당일 제작·환자경험↑ — 병원 부담·규제 이슈",
+        plan:"치과가 3D 프린터·경화기를 구매해 원내에서 직접 출력한다. 당일 제작 등 환자 경험이 뛰어나지만, 병원의 설비·인력 부담과 품질 표준화·의료기기 제조 주체 인허가 문제가 있다. 얼리어답터 치과에 한정한 옵션으로 운영한다."}
     ]
   },
   {
@@ -449,6 +468,7 @@ function renderDoc(){
     <h2><span class="n">2.</span> 제품 출시 전략</h2>
     <p><b>출시 범위·순서:</b> ${get("launch").plan}</p>
     <p><b>인허가 전략:</b> ${get("reg").plan}</p>
+    <p><b>제조 방식:</b> ${get("manufacture").plan}</p>
     <p><b>가격 정책:</b> ${get("price").plan}</p>
 
     <h2><span class="n">3.</span> 자금조달 계획</h2>
