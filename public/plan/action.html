@@ -24,11 +24,14 @@
   .shell{max-width:1080px;margin:0 auto;padding:0 20px}
 
   .top{position:sticky;top:0;z-index:60;background:rgba(20,17,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
-    display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px}
-  .top .l{display:flex;align-items:center;gap:9px;min-width:0}
+    display:flex;align-items:center;gap:10px;padding:9px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .top .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;flex:none}
   .top .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15);flex:none}
-  .top .ttl{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .top .acts{display:flex;gap:8px;flex:none}
+  .top .gl{display:flex;gap:3px;flex:none}
+  .top .gl a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:9px;white-space:nowrap}
+  .top .gl a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .top .gl a[aria-current]{color:#fff;background:rgba(255,107,43,.16);box-shadow:inset 0 0 0 1px rgba(255,107,43,.3)}
+  .top .acts{display:flex;gap:8px;flex:none;margin-left:auto;padding-left:10px}
   .tbtn{font-size:13px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
   .tbtn.primary{background:linear-gradient(135deg,#ff7a35,#ff5e1a);border:0;color:#fff}
   .tbtn:active{transform:translateY(1px)}
@@ -152,13 +155,18 @@
 <body>
 
 <div class="top">
-  <div class="l"><span class="dot"></span><span class="ttl">실행 워크플로우 & 90일 타임테이블</span></div>
+  <span class="brand"><span class="dot"></span>GraphyStyle</span>
+  <div class="gl">
+    <a href="index.html">홈</a>
+    <a href="strategy.html">전략</a>
+    <a href="funding.html">펀딩</a>
+    <a href="builder.html">빌더</a>
+    <a href="action.html" aria-current="page">실행</a>
+  </div>
   <div class="acts">
-    <button class="tbtn" id="meBtn" title="내 이름 설정">🙋 나: <b id="meName">미설정</b></button>
-    <a class="tbtn" href="index.html">← 허브</a>
-    <a class="tbtn" href="funding.html">펀딩</a>
+    <button class="tbtn" id="meBtn" title="내 이름 설정">🙋 <b id="meName">이름</b></button>
     <button class="tbtn" id="resetBtn">초기화</button>
-    <button class="tbtn primary" id="printBtn">인쇄 / PDF</button>
+    <button class="tbtn primary" id="printBtn">인쇄</button>
   </div>
 </div>
 

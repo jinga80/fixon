@@ -22,11 +22,14 @@
 
   /* top bar */
   .top{position:sticky;top:0;z-index:60;background:rgba(20,17,15,.9);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px}
-  .top .l{display:flex;align-items:center;gap:10px;min-width:0}
+    border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:9px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .top .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;flex:none}
   .top .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15);flex:none}
-  .top .ttl{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .top .acts{display:flex;gap:8px;flex:none}
+  .top .gl{display:flex;gap:3px;flex:none}
+  .top .gl a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:9px;white-space:nowrap}
+  .top .gl a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .top .gl a[aria-current]{color:#fff;background:rgba(255,107,43,.16);box-shadow:inset 0 0 0 1px rgba(255,107,43,.3)}
+  .top .acts{display:flex;gap:8px;flex:none;margin-left:auto;padding-left:10px}
   .tbtn{font-size:13px;font-weight:600;padding:8px 13px;border-radius:9px;border:1px solid var(--line2);
     background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
   .tbtn.primary{background:linear-gradient(135deg,#ff7a35,#ff5e1a);border:0;color:#fff}
@@ -121,11 +124,15 @@
 <body>
 
 <div class="top">
-  <div class="l"><span class="dot"></span><span class="ttl">의사결정 빌더 · 사업계획서 생성</span></div>
+  <span class="brand"><span class="dot"></span>GraphyStyle</span>
+  <div class="gl">
+    <a href="index.html">홈</a>
+    <a href="strategy.html">전략</a>
+    <a href="funding.html">펀딩</a>
+    <a href="builder.html" aria-current="page">빌더</a>
+    <a href="action.html">실행</a>
+  </div>
   <div class="acts">
-    <a class="tbtn" href="index.html">← 허브</a>
-    <a class="tbtn" href="funding.html">펀딩</a>
-    <a class="tbtn" href="action.html">실행 플랜</a>
     <button class="tbtn" id="resetBtn">초기화</button>
     <button class="tbtn primary" id="printBtn">인쇄 / PDF</button>
   </div>
@@ -152,21 +159,26 @@
 
     <!-- funding calculator -->
     <div class="dgroup">
-      <div class="qh"><span class="qno">F</span><span class="q">목표 모집액 계산</span></div>
-      <div class="qd">파운딩 닥터 1차 라운드 규모를 잡아봅니다. (의료모드는 허가 후 결제 — 여기 금액은 지분+공산품 기준)</div>
+      <div class="qh"><span class="qno">F</span><span class="q">선판매 모집액 계산</span></div>
+      <div class="qd">공산품 선판매 1차 라운드 규모. (모집액 = 참여 의사 수 × 1인 평균 대수 × 납품가)</div>
       <div class="field">
-        <label>참여 의사 수 · <span id="docCountLbl">18</span>명</label>
-        <input class="rng" type="range" id="r_docs" min="5" max="60" value="18" step="1" />
-        <div class="rngrow"><span>5명</span><span>60명</span></div>
+        <label>참여 의사 수 · <span id="docCountLbl">30</span>명</label>
+        <input class="rng" type="range" id="r_docs" min="5" max="80" value="30" step="1" />
+        <div class="rngrow"><span>5명</span><span>80명</span></div>
       </div>
       <div class="field">
-        <label>1인 평균 출자/패키지 · <span id="ticketLbl">3,000</span>만원</label>
-        <input class="rng" type="range" id="r_ticket" min="300" max="10000" value="3000" step="100" />
-        <div class="rngrow"><span>300만</span><span>1억</span></div>
+        <label>1인 평균 사전구매 · <span id="unitLbl">20</span>대</label>
+        <input class="rng" type="range" id="r_units" min="5" max="50" value="20" step="1" />
+        <div class="rngrow"><span>5대</span><span>50대</span></div>
+      </div>
+      <div class="field">
+        <label>납품가 / 대 · <span id="ticketLbl">16.5</span>만원</label>
+        <input class="rng" type="range" id="r_ticket" min="14" max="20" value="16.5" step="0.5" />
+        <div class="rngrow"><span>14만</span><span>20만(미만)</span></div>
       </div>
       <div class="calc">
-        <div class="v" id="totalCalc">5.4억원</div>
-        <div class="l">1차 목표 모집액 (참여 의사 수 × 1인 평균)</div>
+        <div class="v" id="totalCalc">약 1.0억원</div>
+        <div class="l"><span id="unitTotal">600</span>대 · 의사 마진 대당 <span id="docMargin">23.5</span>만원</div>
       </div>
     </div>
 
@@ -271,15 +283,15 @@ const DECISIONS = [
     id:"fundstruct", no:"04", q:"의사 펀딩 구조",
     d:"파운딩 닥터에게서 자금을 어떤 형태로 받을 것인가",
     opts:[
-      {v:"hybrid", label:"하이브리드 3-트랙 (지분+선주문+KOL)", rec:true,
-        desc:"지분투자·공산품 선주문·임상 파트너를 의사별로 선택",
-        plan:"의사 성향에 따라 <b>① 지분투자(SAFE/주식) ② 공산품 모드 얼리 액세스 선주문 ③ 임상 KOL 파트너</b> 중 선택하게 하는 3-트랙 구조. 자금 규모·확산 채널·임상 신뢰를 동시에 확보한다. 의료기기 모드는 결제 없는 '우선공급 예약권'으로만 운영해 규제를 준수한다."},
+      {v:"preorder", label:"공산품 선판매 중심 (권장)", rec:true,
+        desc:"Daily 모드를 의사에게 선판매 — 수량별 혜택, 무희석",
+        plan:"의료기기가 아닌 <b>Daily(공산품) 모드를 의사에게 선판매</b>한다. 환자가 40만원 / 병원 납품가 20만원 미만(의사 마진 대당 약 21만원)이며, <b>사전 구매 수량이 많을수록 납품가가 내려가고 창립 혜택이 커지는</b> 티어 구조다. 우리는 제작 전에 선현금(선수금)을 확보하고 지분을 내주지 않는다. 결제는 구매안전(에스크로)로 보호하고, 의료(Medical) 모드는 허가 후 별도로 운영한다."},
+      {v:"hybrid", label:"선판매 + 지분 병행",
+        desc:"선판매를 메인으로, 소수 의사에 지분 옵션",
+        plan:"공산품 선판매를 메인 엔진으로 하되, 더 깊게 베팅하려는 소수 의사에게는 <b>지분 투자(신주발행/개인투자조합, 엔젤 소득공제)</b>를 보조 트랙으로 연다. 청약 권유는 49인 이하 사모로 유지한다."},
       {v:"equity", label:"지분형 중심 (엔젤투자)",
-        desc:"SAFE/비상장주식으로 명확하게, 소득공제 소구",
-        plan:"파운딩 닥터를 엔젤 투자자로 영입해 SAFE 또는 비상장주식으로 자금을 받는다. 엔젤투자 소득공제 등 세제 혜택을 핵심 소구점으로 한다. 가장 깨끗하고 규제 안전한 구조다."},
-      {v:"preorder", label:"선주문형 중심 (공산품)",
-        desc:"Daily 모드 패키지 선판매로 운전자금",
-        plan:"의료기기가 아닌 Daily(공산품) 모드 패키지를 선판매(얼리 액세스)해 운전자금을 마련한다. 창립가 평생 고정 등 리워드를 제공한다. 의료모드 결제는 허가 이후로 한정한다."}
+        desc:"SAFE/신주로 명확하게, 소득공제 소구",
+        plan:"파운딩 닥터를 엔젤 투자자로 영입해 신주발행/개인투자조합으로 자금을 받는다. 엔젤투자 소득공제 등 세제 혜택을 핵심 소구점으로 한다. 49인 이하 사모를 유지한다."}
     ]
   },
   {
@@ -378,11 +390,11 @@ const GLOSSARY = [
 /* ============================================================
    상태 & 렌더링
    ============================================================ */
-const LS_KEY = "gs_builder_state_v1";
+const LS_KEY = "gs_builder_state_v2";
 let state = loadState();
 
 function defaultState(){
-  const s = {choices:{}, stack:{}, docs:18, ticket:3000, company:"", author:"", vision:"", note:""};
+  const s = {choices:{}, stack:{}, docs:30, units:20, ticket:16.5, company:"", author:"", vision:"", note:""};
   DECISIONS.forEach(d=>{ const r=d.opts.find(o=>o.rec)||d.opts[0]; s.choices[d.id]=r.v; });
   STACK.forEach(t=>{ s.stack[t.v]= !!t.rec; });
   return s;
@@ -437,14 +449,18 @@ function bindInputs(){
     const el=document.getElementById(id); el.value=state[map[id]]||"";
     el.addEventListener("input",()=>{ state[map[id]]=el.value; save(); renderDoc(); });
   });
-  const rd=document.getElementById("r_docs"), rt=document.getElementById("r_ticket");
-  rd.value=state.docs; rt.value=state.ticket;
-  function upd(){ state.docs=+rd.value; state.ticket=+rt.value;
+  const rd=document.getElementById("r_docs"), ru=document.getElementById("r_units"), rt=document.getElementById("r_ticket");
+  rd.value=state.docs; ru.value=state.units; rt.value=state.ticket;
+  function upd(){ state.docs=+rd.value; state.units=+ru.value; state.ticket=+rt.value;
+    const totalMan=state.docs*state.units*state.ticket; // 만원
     document.getElementById("docCountLbl").textContent=state.docs;
-    document.getElementById("ticketLbl").textContent=(+rt.value).toLocaleString();
-    document.getElementById("totalCalc").textContent=fmtWon(state.docs*state.ticket);
+    document.getElementById("unitLbl").textContent=state.units;
+    document.getElementById("ticketLbl").textContent=state.ticket;
+    document.getElementById("totalCalc").textContent=fmtWon(totalMan);
+    document.getElementById("unitTotal").textContent=(state.docs*state.units).toLocaleString();
+    document.getElementById("docMargin").textContent=(40-state.ticket);
     save(); renderDoc(); }
-  rd.addEventListener("input",upd); rt.addEventListener("input",upd); upd();
+  rd.addEventListener("input",upd); ru.addEventListener("input",upd); rt.addEventListener("input",upd); upd();
 }
 
 function today(){ const d=new Date(); return d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0"); }
@@ -455,7 +471,7 @@ function renderDoc(){
   const company=state.company||"GraphyStyle (가칭)";
   const author=state.author||"—";
   const vision=state.vision||"내 입 모양에 꼭 맞춘 케어 — 손 대신 트레이가 합니다";
-  const total=fmtWon(state.docs*state.ticket);
+  const total=fmtWon(state.docs*state.units*state.ticket);
 
   const stackList=STACK.filter(t=>state.stack[t.v]);
   const stackHtml = stackList.length
@@ -495,9 +511,10 @@ function renderDoc(){
     <p><b>의사 직접 펀딩(주 엔진):</b> ${get("fundstruct").plan}</p>
     <table>
       <tr><th>구분</th><th>값</th></tr>
-      <tr><td>1차 라운드 목표 참여 의사</td><td>${state.docs}명</td></tr>
-      <tr><td>1인 평균 출자/패키지</td><td>${(+state.ticket).toLocaleString()}만원</td></tr>
-      <tr><td><b>1차 목표 모집액</b></td><td><b>${total}</b></td></tr>
+      <tr><td>참여 의사 수</td><td>${state.docs}명</td></tr>
+      <tr><td>1인 평균 사전구매</td><td>${state.units}대 (총 ${(state.docs*state.units).toLocaleString()}대)</td></tr>
+      <tr><td>납품가 / 대</td><td>${state.ticket}만원 (의사 마진 ${40-state.ticket}만원/대)</td></tr>
+      <tr><td><b>1차 선판매 모집액</b></td><td><b>${total}</b></td></tr>
     </table>
     <p><b>병행 자금 스택:</b></p>
     ${stackHtml}

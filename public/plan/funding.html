@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex, nofollow" />
-<title>GraphyStyle · 펀딩 실행 플레이북 (절차·방법)</title>
+<title>GraphyStyle · 펀딩 실행 플레이북 (선판매 중심)</title>
 <meta name="theme-color" content="#14110f" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -36,8 +36,8 @@
   nav.toc a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
 
   .hero{padding:60px 0 40px;background:radial-gradient(90% 70% at 85% -10%,rgba(255,107,43,.16),transparent 60%),radial-gradient(70% 60% at 0% 0%,rgba(224,164,88,.10),transparent 55%)}
-  .hero h1{font-size:clamp(30px,5.6vw,52px);font-weight:800;margin:14px 0 0}
-  .hero .lede{font-size:clamp(16px,2.3vw,19px);color:var(--muted);margin-top:18px;max-width:680px}
+  .hero h1{font-size:clamp(29px,5.4vw,50px);font-weight:800;margin:14px 0 0}
+  .hero .lede{font-size:clamp(16px,2.3vw,19px);color:var(--muted);margin-top:18px;max-width:700px}
   .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
   .chip{font-size:13px;background:var(--card);border:1px solid var(--line2);border-radius:999px;padding:7px 14px}
   .chip b{color:var(--brand2)}
@@ -64,12 +64,13 @@
   .pill.no{color:#ffc9c0;background:rgba(255,122,107,.14);border:1px solid rgba(255,122,107,.32)}
 
   .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch}
-  table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
   th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   thead th{background:var(--card2);font-weight:700;font-size:13px}
   tbody tr:last-child td{border-bottom:0}
   td b{color:var(--ink)}
   .num{color:var(--brand2);font-weight:700;white-space:nowrap}
+  tr.best td{background:rgba(255,107,43,.06)}
 
   .callout{border-radius:14px;padding:16px 18px;border:1px solid;display:flex;gap:13px;align-items:flex-start;font-size:14px;margin-top:16px}
   .callout .ic{flex:none;font-size:17px}
@@ -77,55 +78,75 @@
   .callout.info{background:rgba(224,164,88,.07);border-color:rgba(224,164,88,.28);color:#f0dcc0}.callout.info b{color:var(--gold)}
   .callout.good{background:rgba(95,191,143,.07);border-color:rgba(95,191,143,.28);color:#cdeedd}.callout.good b{color:var(--green)}
 
-  /* step procedure */
+  /* price headline */
+  .price3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:680px){.price3{grid-template-columns:1fr}}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px;text-align:center}
+  .pcard.hl{background:linear-gradient(160deg,#2a201a,#211b17);border-color:rgba(255,107,43,.3)}
+  .pcard .lbl{font-size:13px;color:var(--muted);font-weight:600}
+  .pcard .v{font-size:30px;font-weight:800;color:var(--brand2);margin-top:4px}
+  .pcard .sub{font-size:12px;color:var(--dim);margin-top:4px}
+
+  /* tier cards */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+  @media(max-width:900px){.tiers{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.tiers{grid-template-columns:1fr}}
+  .tier{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column}
+  .tier.feat{border-color:rgba(255,107,43,.4);box-shadow:0 0 0 1px rgba(255,107,43,.2)}
+  .tier .th{padding:15px 16px 12px;border-bottom:1px solid var(--line)}
+  .tier .bdg{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .tier.feat .bdg{color:var(--brand2)}
+  .tier .nm{font-size:17px;font-weight:800;margin:6px 0 0}
+  .tier .qty{font-size:13px;color:var(--muted);margin-top:3px}
+  .tier .pr{padding:14px 16px;border-bottom:1px solid var(--line)}
+  .tier .pr .big{font-size:24px;font-weight:800;color:var(--brand2)}
+  .tier .pr .small{font-size:12px;color:var(--dim)}
+  .tier .pr .mg{font-size:12.5px;color:var(--green);font-weight:700;margin-top:4px}
+  .tier .bd{padding:14px 16px;flex:1}
+  .tier .bd ul{margin:0;padding-left:16px;font-size:12.5px;color:var(--muted)}
+  .tier .bd ul li{margin:5px 0}.tier .bd ul li b{color:var(--ink)}
+
+  /* scenario */
+  .scen{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  @media(max-width:680px){.scen{grid-template-columns:1fr}}
+  .sc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px;border-top:3px solid var(--brand)}
+  .sc .t{font-size:13px;font-weight:800;color:var(--muted)}
+  .sc .v{font-size:27px;font-weight:800;color:var(--brand2);margin:5px 0}
+  .sc .f{font-size:12.5px;color:var(--dim)}
+
+  /* steps */
   .steps{position:relative;margin-left:8px;padding-left:30px}
   .steps::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:var(--line2)}
-  .step{position:relative;padding:0 0 26px}
+  .step{position:relative;padding:0 0 24px}
   .step::before{content:"";position:absolute;left:-30px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--brand);color:#1a140f;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,107,43,.14)}
-  .step.s0::before{content:"0"}.step.s1::before{content:"1"}.step.s2::before{content:"2"}.step.s3::before{content:"3"}.step.s4::before{content:"4"}.step.s5::before{content:"5"}.step.s6::before{content:"6"}
+  .step.s0::before{content:"0"}.step.s1::before{content:"1"}.step.s2::before{content:"2"}.step.s3::before{content:"3"}.step.s4::before{content:"4"}.step.s5::before{content:"5"}
   .step .when{font-size:12px;font-weight:800;color:var(--brand2);letter-spacing:.04em}
   .step h3{font-size:18px;margin:3px 0 8px}
   .step .body{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
-  .step .body p{margin:0 0 8px;font-size:14px;color:var(--muted)}
-  .step .body p:last-child{margin-bottom:0}
+  .step .body p{margin:0 0 8px;font-size:14px;color:var(--muted)}.step .body p:last-child{margin-bottom:0}
   .step .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
-  .tag{font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--card2);border:1px solid var(--line2);color:var(--muted)}
-  .tag b{color:var(--ink)}
-  .step .out{margin-top:11px;font-size:13px;color:var(--muted)}
-  .step .out b{color:var(--green)}
+  .tag{font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--card2);border:1px solid var(--line2);color:var(--muted)}.tag b{color:var(--ink)}
+  .step .out{margin-top:11px;font-size:13px;color:var(--muted)}.step .out b{color:var(--green)}
 
-  /* money flow */
-  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:4px}
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
   @media(max-width:760px){.flow{grid-template-columns:1fr 1fr}}
-  .fnode{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px;text-align:center;position:relative}
+  .fnode{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px;text-align:center}
   .fnode .ic{font-size:22px}.fnode h4{font-size:14px;margin:7px 0 4px}.fnode p{font-size:12px;color:var(--muted);margin:0}
-  .tranche{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-  @media(max-width:680px){.tranche{grid-template-columns:1fr}}
-  .tr{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;border-top:3px solid var(--brand)}
-  .tr .pct{font-size:26px;font-weight:800;color:var(--brand2)}
-  .tr h4{font-size:14px;margin:4px 0 5px}.tr p{font-size:13px;color:var(--muted);margin:0}
 
-  /* checklist */
   .checks{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
   @media(max-width:680px){.checks{grid-template-columns:1fr}}
   .ck{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.5px;color:var(--muted)}
-  .ck .b{flex:none;width:17px;height:17px;border-radius:5px;border:2px solid var(--line2);margin-top:1px}
-  .ck b{color:var(--ink);font-weight:600}
+  .ck .b{flex:none;width:17px;height:17px;border-radius:5px;border:2px solid var(--line2);margin-top:1px}.ck b{color:var(--ink);font-weight:600}
 
-  /* qa */
   .qa{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:11px}
-  .qa .q{font-size:14.5px;font-weight:700;color:var(--ink)}
-  .qa .a{font-size:14px;color:var(--muted);margin-top:6px}
-  .qa .a b{color:var(--brand2)}
+  .qa .q{font-size:14.5px;font-weight:700;color:var(--ink)}.qa .a{font-size:14px;color:var(--muted);margin-top:6px}.qa .a b{color:var(--brand2)}
 
-  /* timeline weeks */
   .tl{position:relative;margin-left:8px;padding-left:26px}
   .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line2)}
   .tl .t{position:relative;padding:0 0 22px}
   .tl .t::before{content:"";position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.14)}
   .tl .t:last-child{padding-bottom:0}
-  .tl .q{font-size:12px;font-weight:800;color:var(--brand2)}
-  .tl .t h4{font-size:15px;margin:3px 0 4px}.tl .t p{margin:0;color:var(--muted);font-size:13.5px}
+  .tl .q{font-size:12px;font-weight:800;color:var(--brand2)}.tl .t h4{font-size:15px;margin:3px 0 4px}.tl .t p{margin:0;color:var(--muted);font-size:13.5px}
 
   .cta{margin-top:14px;background:linear-gradient(160deg,#2c2119,#1d1814);border:1px solid rgba(255,107,43,.3);border-radius:20px;padding:30px;text-align:center}
   .cta h2{font-size:clamp(21px,3.2vw,28px);font-weight:800}
@@ -138,40 +159,57 @@
   .note{font-size:13px;color:var(--dim);margin-top:10px}
   .lead-q{font-size:clamp(17px,2.4vw,22px);font-weight:700;line-height:1.5;color:var(--ink);border-left:3px solid var(--brand);padding-left:18px;margin:20px 0}
   .src{font-size:12px;color:var(--dim);margin-top:10px;line-height:1.9}.src a{color:var(--muted)}
+  .gnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;padding:9px 16px;background:rgba(20,17,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .gnav .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;flex:none}
+  .gnav .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15)}
+  .gnav .brand small{font-weight:600;color:var(--dim);letter-spacing:.08em;font-size:10px}
+  .gnav nav{display:flex;gap:3px;margin-left:auto;flex:none}
+  .gnav nav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:9px;white-space:nowrap}
+  .gnav nav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .gnav nav a[aria-current]{color:#fff;background:rgba(255,107,43,.16);box-shadow:inset 0 0 0 1px rgba(255,107,43,.3)}
 </style>
 </head>
 <body>
 
-<div class="confbar">
-  <div><span class="dot"></span><b>CONFIDENTIAL</b> · 펀딩 실행 플레이북</div>
-  <div class="links"><a href="index.html">허브</a><a href="strategy.html">전략 메모</a><a href="builder.html">빌더</a><a href="action.html">실행 보드</a></div>
+<div class="gnav">
+  <span class="brand"><span class="dot"></span>GraphyStyle <small>CONFIDENTIAL</small></span>
+  <nav>
+    <a href="index.html">홈</a>
+    <a href="strategy.html">전략</a>
+    <a href="funding.html" aria-current="page">펀딩</a>
+    <a href="builder.html">빌더</a>
+    <a href="action.html">실행</a>
+  </nav>
 </div>
 
 <nav class="toc">
   <ul>
+    <li style="color:var(--dim);padding:6px 4px;font-size:12px">펀딩 ·</li>
     <li><a href="#overview">개요·원칙</a></li>
-    <li><a href="#vehicles">펀딩 수단</a></li>
-    <li><a href="#amount">금액 설계</a></li>
-    <li><a href="#procedure">단계별 절차</a></li>
-    <li><a href="#money">자금 흐름·안전장치</a></li>
-    <li><a href="#docs">필수 서류</a></li>
-    <li><a href="#legal">법률·세무·규제</a></li>
+    <li><a href="#price">가격 구조</a></li>
+    <li><a href="#tiers">선구매 혜택 티어</a></li>
+    <li><a href="#raise">자금 시뮬레이션</a></li>
+    <li><a href="#procedure">캠페인 절차</a></li>
+    <li><a href="#money">자금 흐름·소비자보호</a></li>
+    <li><a href="#legal">법률·서류</a></li>
     <li><a href="#script">모집 스크립트</a></li>
     <li><a href="#timeline">타임라인</a></li>
+    <li><a href="#equity">지분(선택)</a></li>
   </ul>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Funding Playbook · 파운딩 닥터 라운드 실행안</div>
-    <h1>"의사에게 돈을 모은다"를<br/>절차로 바꾸면 이렇게 된다.</h1>
-    <p class="lede">막연한 "펀딩"이 아니라 — <b style="color:var(--ink)">어떤 형태로 받고(수단), 얼마를(금액), 어떤 순서로(절차),
-      어떤 서류로(계약), 무엇을 지켜야 하는지(규제)</b> 까지 실행 가능한 단위로 분해했습니다.</p>
+    <div class="eyebrow">Funding Playbook · 공산품 선판매 중심</div>
+    <h1>지분이 아니라 "제품을 먼저 판다".<br/>합법·빠르고·희석 없다.</h1>
+    <p class="lede">의료기기 허가가 필요 없는 <b style="color:var(--ink)">Daily(공산품) 모드를 선판매</b>합니다.
+      의사가 <b style="color:var(--ink)">미리 재고를 확보(=우리에겐 선현금)</b>하고, 많이 잡을수록 납품가가 내려가고 창립 혜택이 커집니다.
+      환자에게 40만원에 처방하면 대당 약 20만원 이상의 마진이 의사에게 남습니다.</p>
     <div class="chips">
-      <span class="chip">방식 <b>비공개 사모 라운드</b></span>
-      <span class="chip">대상 <b>의사 49인 이하</b></span>
-      <span class="chip">수단 <b>지분 + 선주문 + 예약</b></span>
-      <span class="chip">보호 <b>에스크로 · 마일스톤</b></span>
+      <span class="chip">환자가 <b>40만원</b></span>
+      <span class="chip">병원 납품가 <b>20만원 미만</b></span>
+      <span class="chip">의사 마진 <b>대당 ~21만원</b></span>
+      <span class="chip">수량↑ → <b>납품가↓·혜택↑</b></span>
     </div>
   </div>
 </header>
@@ -180,229 +218,245 @@
 
 <!-- 01 개요 -->
 <section id="overview">
-  <div class="sec-head"><span class="sec-no">01</span><span class="eyebrow">개요 · 5대 원칙</span></div>
-  <h2 class="sec-title">시작 전에 합의할 다섯 가지</h2>
-  <p class="sec-intro">펀딩은 "돈을 받는 행위"가 아니라 "신뢰를 자본으로 바꾸는 절차"입니다. 그래서 첫 단추가 규칙입니다.</p>
+  <div class="sec-head"><span class="sec-no">01</span><span class="eyebrow">개요 · 왜 선판매인가</span></div>
+  <h2 class="sec-title">가장 깨끗한 자금 경로</h2>
+  <p class="sec-intro">지분 투자는 절차·규제·희석이 따릅니다. <b class="accent">공산품 선판매</b>는 제품을 미리 파는 정상 거래라, 빠르고 합법적이며 지분을 내주지 않습니다.</p>
   <div class="grid g3">
-    <div class="card hl"><h3><span class="k">①</span> 사모(私募) 유지</h3><p>청약 권유 대상 <b style="color:var(--ink)">의사 49인 이하</b>로 한정 → 증권신고서 면제. 50인↑ 또는 10억↑ 공모가 되면 절차·비용 급증.</p></div>
-    <div class="card hl"><h3><span class="k">②</span> 합법 구조만</h3><p>의료기기는 <b style="color:var(--ink)">허가 전 판매·예약결제 불법</b>. 의료모드는 결제 없는 예약, 지분은 회사 투자, 선주문은 공산품만.</p></div>
-    <div class="card hl"><h3><span class="k">③</span> 자금 분리·보호</h3><p>의사 자금은 회사 통장이 아니라 <b style="color:var(--ink)">에스크로/분리계좌</b>로. <b style="color:var(--ink)">마일스톤 트랜치</b>로 분할 집행.</p></div>
-    <div class="card"><h3><span class="k">④</span> 세제 혜택 설계</h3><p>의사에게 <b style="color:var(--ink)">엔젤투자 소득공제</b>를 줄 수 있게 신주발행/개인투자조합 구조로. 구주 양수는 공제 불가.</p></div>
-    <div class="card"><h3><span class="k">⑤</span> 투명 보고</h3><p>분기 사용내역·진척을 주주/참여 의사에게 공유. 신뢰가 곧 2차 라운드의 자본이다.</p></div>
+    <div class="card hl"><h3><span class="k">①</span> 합법·단순</h3><p>의료기기가 아닌 <b style="color:var(--ink)">Daily 공산품</b> 선판매 → 품목허가·증권신고 불필요. 전자상거래(통신판매) 규칙만 지키면 됨.</p></div>
+    <div class="card hl"><h3><span class="k">②</span> 즉시 현금·무희석</h3><p>제작 전에 <b style="color:var(--ink)">선수금</b>이 들어와 런웨이 확보. 지분 희석 0. 의사는 재고+마진, 우리는 자본.</p></div>
+    <div class="card hl"><h3><span class="k">③</span> 고객·채널 동시 확보</h3><p>선판매에 참여한 의사가 곧 <b style="color:var(--ink)">판매 채널</b>이자 창립 멤버. 카트리지 구독으로 반복매출까지.</p></div>
   </div>
-  <p class="lead-q">핵심 = 49인 이하 비공개 사모 · 신주(소득공제) 중심 · 에스크로·마일스톤으로 보호 · 의료모드는 예약만.</p>
+  <p class="lead-q">"의사가 미리 사두면, 우리는 자본을 얻고 의사는 마진을 얻는다." — 양쪽이 버는 구조라 설득이 쉽다.</p>
+  <div class="callout danger"><span class="ic">⚠</span><div><b>딱 하나의 레드라인:</b> Daily 모드는 <b>공산품(구강 세정·마사지 보조)</b>으로만 판매·광고합니다. 치료·의료 효능을 표방하면 의료기기 오인·과대광고가 됩니다. <b>의료(Medical) 모드는 허가 후</b> 별도로.</div></div>
 </section>
 
-<!-- 02 펀딩 수단 -->
-<section id="vehicles">
-  <div class="sec-head"><span class="sec-no">02</span><span class="eyebrow">펀딩 수단</span></div>
-  <h2 class="sec-title">어떤 "형태"로 받을 것인가</h2>
-  <p class="sec-intro">의사마다 원하는 게 다릅니다(지분 업사이드 / 제품 우선권 / 안전성). 그래서 한 가지가 아니라 <b class="accent">메뉴</b>로 제시합니다.</p>
-  <div class="tablewrap">
+<!-- 02 가격 구조 -->
+<section id="price">
+  <div class="sec-head"><span class="sec-no">02</span><span class="eyebrow">가격 구조</span></div>
+  <h2 class="sec-title">40만원 → 의사 마진 → 우리 선현금</h2>
+  <p class="sec-intro">기본 경제구조입니다. 환자가에서 납품가를 뺀 차액이 의사 마진, 납품가 × 수량이 우리가 선판매로 확보하는 현금입니다.</p>
+  <div class="price3">
+    <div class="pcard"><div class="lbl">환자 판매가 (소비자가)</div><div class="v">40만원</div><div class="sub">의사가 환자에게 처방·판매</div></div>
+    <div class="pcard hl"><div class="lbl">병원 납품가 (표준)</div><div class="v">19만원</div><div class="sub">20만원 미만 · 선구매 수량따라 ↓</div></div>
+    <div class="pcard"><div class="lbl">의사 마진 / 대</div><div class="v">21만원+</div><div class="sub">환자가 − 납품가</div></div>
+  </div>
+  <div class="callout info"><span class="ic">◆</span><div><b>구성 참고:</b> 제품 1대 = 맞춤 스플린트 + 분사장치(아쿠아픽 기성품, 원가 ~10만원) + 소재(그래피). 납품가는 표준 19만원을 기준으로, 아래 <b>선구매 수량이 많을수록 더 낮은 납품가</b>를 적용합니다. (실제 원가·납품가는 소재계약·생산방식 확정 후 미세조정)</div></div>
+</section>
+
+<!-- 03 선구매 혜택 티어 -->
+<section id="tiers">
+  <div class="sec-head"><span class="sec-no">03</span><span class="eyebrow">선구매 혜택 티어 (핵심)</span></div>
+  <h2 class="sec-title">많이 잡을수록 — 납품가는 내리고, 혜택은 오른다</h2>
+  <p class="sec-intro">사전 구매 <b class="accent">수량(대)</b>에 따라 납품가가 단계적으로 낮아지고 창립 혜택이 커집니다. 의사는 마진이 커지고, 우리는 더 많은 선현금을 확보합니다.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="th"><div class="bdg">Tier 1</div><div class="nm">스타터</div><div class="qty">사전구매 5대</div></div>
+      <div class="pr"><div class="big">185,000원<span class="small">/대</span></div><div class="mg">의사 마진 215,000원/대</div><div class="small">선투자 약 92.5만원</div></div>
+      <div class="bd"><ul><li><b>창립 멤버</b> 등록·넘버링</li><li>환자용 안내 리플릿</li><li>창립 닥터 커뮤니티 초대</li></ul></div>
+    </div>
+    <div class="tier feat">
+      <div class="th"><div class="bdg">Tier 2 · 인기</div><div class="nm">프로</div><div class="qty">사전구매 10대</div></div>
+      <div class="pr"><div class="big">175,000원<span class="small">/대</span></div><div class="mg">의사 마진 225,000원/대</div><div class="small">선투자 약 175만원</div></div>
+      <div class="bd"><ul><li>스타터 혜택 전부 +</li><li><b>데모·세팅 키트</b> 제공</li><li>카트리지 구독 <b>할인</b></li><li>신제품 우선 안내</li></ul></div>
+    </div>
+    <div class="tier feat">
+      <div class="th"><div class="bdg">Tier 3 · 추천</div><div class="nm">파트너</div><div class="qty">사전구매 20대</div></div>
+      <div class="pr"><div class="big">165,000원<span class="small">/대</span></div><div class="mg">의사 마진 235,000원/대</div><div class="small">선투자 약 330만원</div></div>
+      <div class="bd"><ul><li>프로 혜택 전부 +</li><li><b>창립가 평생 고정</b></li><li>신제품·의료모드 <b>우선 공급권</b></li><li>VIP 커뮤니티·공동 마케팅 물료</li></ul></div>
+    </div>
+    <div class="tier">
+      <div class="th"><div class="bdg">Tier 4</div><div class="nm">플래그십</div><div class="qty">사전구매 40대+</div></div>
+      <div class="pr"><div class="big">155,000원<span class="small">/대</span></div><div class="mg">의사 마진 245,000원/대</div><div class="small">선투자 약 620만원+</div></div>
+      <div class="bd"><ul><li>파트너 혜택 전부 +</li><li><b>지역 우선권</b>(라운드 한정)</li><li>공동 임상·케이스 공저</li><li>최우선 공급·전담 지원</li></ul></div>
+    </div>
+  </div>
+
+  <div class="callout good"><span class="ic">✓</span><div><b>추가 혜택(공통):</b> ① <b>카트리지·소모품 구독</b> 선결제 할인(반복매출) ② <b>추천 리워드</b> — 동료 의사 추천 시 크레딧 ③ 미판매 재고 <b>교환·환불 정책</b>으로 부담 완화. 의료(Medical) 모드는 허가 후 파트너·플래그십에 우선 공급.</div></div>
+  <p class="note">※ 위 납품가·혜택은 회의 결정용 설계안입니다. 실제 단가는 소재계약·생산방식(본사/OEM/기공소) 확정 후 빌더에서 확정하세요.</p>
+</section>
+
+<!-- 04 자금 시뮬레이션 -->
+<section id="raise">
+  <div class="sec-head"><span class="sec-no">04</span><span class="eyebrow">자금 시뮬레이션</span></div>
+  <h2 class="sec-title">이렇게 자금이 모인다</h2>
+  <p class="sec-intro">모집액 = <b class="accent">참여 의사 수 × 1인 평균 사전구매 대수 × 납품가</b>. 선판매라 들어온 즉시 현금(선수금)입니다.</p>
+  <div class="scen">
+    <div class="sc"><div class="t">보수적</div><div class="v">약 0.26억</div><div class="f">의사 15명 × 평균 10대 × 17.5만원 = 150대</div></div>
+    <div class="sc"><div class="t">목표</div><div class="v">약 1.0억</div><div class="f">의사 30명 × 평균 20대 × 16.5만원 = 600대</div></div>
+    <div class="sc"><div class="t">공격적</div><div class="v">약 2.4억</div><div class="f">의사 50명 × 평균 30대 × 16.0만원 = 1,500대</div></div>
+  </div>
+  <p class="note">※ 선판매는 대당 단가가 낮아 1차 라운드 규모가 큰 편은 아닙니다. <b>핵심 가치는 "초기 런웨이 + 고객·채널 확보"</b>입니다.
+    더 큰 자본이 필요하면 환자 D2C 얼리버드·카트리지 구독·정책자금(TIPS·기보·KHIDI, 비희석)을 병행하세요.</p>
+  <div class="tablewrap" style="margin-top:18px">
     <table>
-      <thead><tr><th>수단</th><th>성격</th><th>의사 혜택</th><th>세제(소득공제)</th><th>적합 대상</th></tr></thead>
+      <thead><tr><th>관점</th><th>들어오는 것</th><th>나가는 것 / 의무</th></tr></thead>
       <tbody>
-        <tr><td><b>신주발행(유상증자)</b></td><td>자본 · 주식 직접취득</td><td>주주 지위·업사이드</td><td><span class="pill ok">가능</span></td><td>본격 투자 의사</td></tr>
-        <tr><td><b>SAFE(조건부지분인수)</b></td><td>후속 라운드서 주식 전환</td><td>빠른 참여·밸류 캡</td><td><span class="pill warn">사전 확인</span></td><td>초기·빠른 클로징</td></tr>
-        <tr><td><b>개인투자조합</b></td><td>조합 출자→회사 투자</td><td>다수 소액 묶기·공동</td><td><span class="pill ok">가능(조합)</span></td><td>소액 다수 의사</td></tr>
-        <tr><td><b>전환사채(CB)</b></td><td>부채 → 주식 전환</td><td>다운사이드 보호</td><td><span class="pill no">불가</span></td><td>안전 선호 의사</td></tr>
-        <tr><td><b>선주문(공산품)</b></td><td>매출(선수금)</td><td>창립가·우선권</td><td>—</td><td>제품 원하는 의사</td></tr>
-        <tr><td><b>예약(의료모드)</b></td><td>결제없는 우선공급권</td><td>허가 후 우선 공급</td><td>—</td><td>의료모드 관심 의사</td></tr>
+        <tr><td><b>우리(회사)</b></td><td>선판매 현금(납품가×수량) — <b>제작 전 확보</b>, 무희석</td><td>제작·납품 의무, 카트리지 공급, A/S</td></tr>
+        <tr><td><b>의사</b></td><td>낮은 납품가 재고 + 대당 21만원+ 마진 + 창립 혜택</td><td>선투자(재고), 환자 판매</td></tr>
+        <tr><td><b>환자</b></td><td>맞춤 케어 제품(40만원)</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="callout good"><span class="ic">✓</span><div><b>권고 조합:</b> 1차 라운드의 자본은 <b>신주발행(유상증자) 또는 개인투자조합</b>(소득공제 명확)을 기본으로,
-    빠른 초기 확약은 <b>SAFE</b>로 받는다. 제품을 원하는 의사는 <b>공산품 선주문</b>, 의료모드는 <b>예약권</b>만.
-    SAFE의 소득공제 인정 여부는 세무사·중기부에 사전 확인.</div></div>
+  <div class="callout info"><span class="ic">◆</span><div><b>두 채널 병행:</b> 위는 <b>의사 B2B 선판매</b>(큰 티켓·핵심). 여기에 <b>환자 D2C 얼리버드</b>(정가 40만 대비 한정 할인, 창립 넘버링)를 병행하면 인지도와 추가 매출을 동시에. 단 환자 D2C도 공산품 표시·통신판매 규칙 준수.</div></div>
 </section>
 
-<!-- 03 금액 설계 -->
-<section id="amount">
-  <div class="sec-head"><span class="sec-no">03</span><span class="eyebrow">금액 설계</span></div>
-  <h2 class="sec-title">"좌(座)" 단위로 깔끔하게</h2>
-  <p class="sec-intro">금액을 좌 단위로 표준화하면 협상·정산·지분 계산이 단순해집니다. 아래는 출발점 예시이며 <a href="builder.html" style="color:var(--brand2)">빌더</a>에서 실제 숫자로 시뮬레이션됩니다.</p>
-  <div class="grid g3">
-    <div class="card hl"><h3>1좌 단가</h3><p class="num" style="font-size:24px">1,000만원</p><p>최소 단위. 소득공제 3천·5천 구간을 의식해 1·3·5좌 패키지로 안내.</p></div>
-    <div class="card hl"><h3>1인 권장</h3><p class="num" style="font-size:24px">2~5좌</p><p>2,000만~5,000만원. 소득공제 100% 구간(3천)과 70% 구간(5천) 설명과 함께.</p></div>
-    <div class="card hl"><h3>1차 목표</h3><p class="num" style="font-size:24px">5~10억</p><p>50~100좌. 의사 15~25인 × 평균 3~4좌. 49인 이하 사모 유지.</p></div>
-  </div>
-  <div class="callout info"><span class="ic">◆</span><div><b>밸류에이션:</b> 신주는 <b>프리머니 기업가치</b>를, SAFE는 <b>밸류에이션 캡</b>을 정해 의사에게 지분율을 명확히 제시.
-    초기 임상·제품·SIDEX 노출을 근거로 합리적 범위를 변호사·회계사와 확정한다.</div></div>
-</section>
-
-<!-- 04 단계별 절차 -->
+<!-- 05 캠페인 절차 -->
 <section id="procedure">
-  <div class="sec-head"><span class="sec-no">04</span><span class="eyebrow">단계별 절차 (핵심)</span></div>
-  <h2 class="sec-title">준비 → 모집 → 계약·납입 → 클로징, 7단계</h2>
-  <p class="sec-intro">각 단계에 <b class="accent">산출물(문서)·담당·기간</b>을 붙였습니다. 이 절차는 실행 보드(action.html)의 자금 워크스트림과 1:1로 연결됩니다.</p>
-
+  <div class="sec-head"><span class="sec-no">05</span><span class="eyebrow">캠페인 절차</span></div>
+  <h2 class="sec-title">준비 → 오픈 → 마감 → 제작·배송, 6단계</h2>
+  <p class="sec-intro">각 단계에 <b class="accent">산출물·담당·기간</b>. 실행 보드(action.html)의 자금 워크스트림과 연결됩니다.</p>
   <div class="steps">
     <div class="step s0">
-      <div class="when">D-14 ~ D-Day · 준비</div>
-      <h3>판을 깐다 (Foundation)</h3>
-      <div class="body">
-        <p>모집을 시작하기 전에 "받을 그릇"을 먼저 만든다. 이게 없으면 신뢰를 못 준다.</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무 + 사업총괄</b></span><span class="tag">기간 <b>2주</b></span></div>
-        <div class="out">산출물 ▸ <b>벤처기업 인증 추진 · 밸류에이션/좌단가 확정 · 49인 사모 설계 · 표준계약서(텀시트·SAFE·SSA·SHA) 변호사 검토 · 에스크로/분리계좌 개설 · IR자료·사업계획서(빌더)</b></div>
-      </div>
+      <div class="when">D-14 ~ D0 · 준비</div>
+      <h3>판매 채비 (Setup)</h3>
+      <div class="body"><p>선판매를 받을 법적·운영 채비를 갖춘다.</p>
+        <div class="tags"><span class="tag">담당 <b>자금·재무 + 마케팅</b></span><span class="tag">기간 <b>2주</b></span></div>
+        <div class="out">산출물 ▸ <b>통신판매업 신고 · 구매안전(에스크로/PG) 계약 · 가격·티어 확정 · 선판매 약관/청약철회·환불정책 · 표시광고 검수(공산품) · 사전등록 페이지</b></div></div>
     </div>
     <div class="step s1">
-      <div class="when">D0 ~ D+7 · 타겟·티어</div>
-      <h3>누구에게, 얼마를 (Targeting)</h3>
-      <div class="body">
-        <p>친분·신뢰 기반의 핵심 의사 <b style="color:var(--ink)">49인 이하</b> 후보 리스트를 만들고, 티어별 목표 좌수를 배정한다.</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무</b></span><span class="tag">기간 <b>1주</b></span></div>
-        <div class="out">산출물 ▸ <b>후보 리스트(≤49인) · 티어별 목표 좌수 · 1차 소프트커밋 목표액</b></div>
-      </div>
+      <div class="when">W1 · 사전등록</div>
+      <h3>수요 모으기 (Teaser)</h3>
+      <div class="body"><p>관심 의사 사전등록으로 수요를 먼저 확인(기존 설문/랜딩 활용).</p>
+        <div class="tags"><span class="tag">담당 <b>마케팅</b></span><span class="tag">기간 <b>1주</b></span></div>
+        <div class="out">산출물 ▸ <b>사전등록 명단 · 예상 수량 · 티어 안내자료</b></div></div>
     </div>
     <div class="step s2">
-      <div class="when">W1 ~ W2 · 제안</div>
-      <h3>1:1로 제안한다 (Pitch)</h3>
-      <div class="body">
-        <p>공개 광고가 아니라 <b style="color:var(--ink)">개별 제안</b>. 데모 + IR + 사업계획서로 "왜 지금, 왜 당신"을 설득한다.</p>
-        <div class="tags"><span class="tag">담당 <b>사업총괄 + 임상</b></span><span class="tag">기간 <b>2주</b></span></div>
-        <div class="out">산출물 ▸ <b>NDA · 1:1 미팅 · 티저/IR 발송 · 관심·예상 좌수 회수</b></div>
-      </div>
+      <div class="when">W1 ~ W3 · 오픈</div>
+      <h3>선판매 오픈 (Open)</h3>
+      <div class="body"><p>티어 공개, 1:1 제안 + 비공개 라운드. 결제는 <b style="color:var(--ink)">구매안전(에스크로)</b>으로.</p>
+        <div class="tags"><span class="tag">담당 <b>사업총괄 + 자금</b></span><span class="tag">기간 <b>2~3주</b></span></div>
+        <div class="out">산출물 ▸ <b>티어별 주문·결제 · 세금계산서 · 누적 모집액</b></div></div>
     </div>
     <div class="step s3">
-      <div class="when">W2 ~ W4 · 소프트서클</div>
-      <h3>구두 약정을 쌓는다 (Soft-circle)</h3>
-      <div class="body">
-        <p>계약 전, <b style="color:var(--ink)">구두/문자 소프트커밋</b>을 누적해 목표 도달 여부를 먼저 확인한다(헛걸음 방지).</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무</b></span><span class="tag">기간 <b>2~3주</b></span><span class="tag">게이트 <b>목표 좌수 도달?</b></span></div>
-        <div class="out">산출물 ▸ <b>소프트커밋 명단·좌수 누계 · 미달 시 대상 확대/조건 보강 결정</b></div>
-      </div>
+      <div class="when">W3 ~ W4 · 마감·정산</div>
+      <h3>마감하고 확정 (Close)</h3>
+      <div class="body"><p>목표 도달 확인, 주문 확정, 생산 수량 픽스.</p>
+        <div class="tags"><span class="tag">담당 <b>자금·재무</b></span><span class="tag">기간 <b>1주</b></span><span class="tag">게이트 <b>목표 수량 도달?</b></span></div>
+        <div class="out">산출물 ▸ <b>주문 확정서 · 생산 발주 · 미달 시 연장/조건 보강</b></div></div>
     </div>
     <div class="step s4">
-      <div class="when">W4 ~ W6 · 계약·납입</div>
-      <h3>서명하고 입금받는다 (Close)</h3>
-      <div class="body">
-        <p>텀시트 합의 → 계약서 서명 → <b style="color:var(--ink)">에스크로/분리계좌 입금</b> → 마일스톤 1차 트랜치 집행. 신주는 이사회·주총 절차 동반.</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무 + 변호사</b></span><span class="tag">기간 <b>2주</b></span></div>
-        <div class="out">산출물 ▸ <b>SAFE/신주인수계약(SSA)·주주간계약(SHA) 서명 · 청약/투자확약서 · 주금 납입 · 1차 트랜치 집행</b></div>
-      </div>
+      <div class="when">W4 ~ W10 · 제작·배송</div>
+      <h3>약속을 지킨다 (Fulfill)</h3>
+      <div class="body"><p>생산 → 환자 스캔 → 스플린트 제작 → 병원 납품. 진행은 ERP/환자포털로 투명 공유.</p>
+        <div class="tags"><span class="tag">담당 <b>제조·공급 + 운영</b></span><span class="tag">기간 <b>지속</b></span></div>
+        <div class="out">산출물 ▸ <b>생산·납품 · 배송완료 시 에스크로 정산 · 진행 알림</b></div></div>
     </div>
     <div class="step s5">
-      <div class="when">W6 ~ · 클로징·사후</div>
-      <h3>주주로 모신다 (Onboard)</h3>
-      <div class="body">
-        <p>법적 마무리와 함께 의사를 <b style="color:var(--ink)">우군</b>으로 만든다. 세제 서류와 정기 보고가 2차 라운드의 토대.</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무</b></span><span class="tag">기간 <b>상시</b></span></div>
-        <div class="out">산출물 ▸ <b>주주명부/조합원 등록·통지 · 소득공제용 투자확인서 · 분기 IR/사용내역 보고</b></div>
-      </div>
-    </div>
-    <div class="step s6">
-      <div class="when">W6 ~ W12 · 후속</div>
-      <h3>레버리지를 건다 (Scale)</h3>
-      <div class="body">
-        <p>의사 펀딩으로 만든 신뢰·자본 위에 <b style="color:var(--ink)">정책자금·후속 라운드</b>를 얹어 희석을 최소화한다.</p>
-        <div class="tags"><span class="tag">담당 <b>자금·재무 + 사업총괄</b></span><span class="tag">기간 <b>병행</b></span></div>
-        <div class="out">산출물 ▸ <b>2차 라운드 · TIPS/기보/KHIDI 신청 · Daily 매출 런웨이</b></div>
-      </div>
+      <div class="when">상시 · 사후</div>
+      <h3>반복매출로 키운다 (Retain)</h3>
+      <div class="body"><p>A/S, 카트리지 구독, 추천 리워드, 2차 캠페인·재주문.</p>
+        <div class="tags"><span class="tag">담당 <b>운영·마케팅</b></span><span class="tag">기간 <b>상시</b></span></div>
+        <div class="out">산출물 ▸ <b>카트리지 구독 매출 · 추천 리워드 · 2차 선판매</b></div></div>
     </div>
   </div>
 </section>
 
-<!-- 05 자금 흐름 -->
+<!-- 06 자금 흐름 -->
 <section id="money">
-  <div class="sec-head"><span class="sec-no">05</span><span class="eyebrow">자금 흐름 · 안전장치</span></div>
-  <h2 class="sec-title">돈은 이렇게 흐르고, 이렇게 보호한다</h2>
-  <p class="sec-intro">의사 입장에서 가장 큰 질문은 "내 돈이 어떻게 쓰이고 보호되나". 흐름과 장치를 명확히 보여주는 것이 모집의 핵심입니다.</p>
+  <div class="sec-head"><span class="sec-no">06</span><span class="eyebrow">자금 흐름 · 소비자보호</span></div>
+  <h2 class="sec-title">선수금은 안전하게, 약속은 확실하게</h2>
+  <p class="sec-intro">선지급(선결제) 거래는 <b class="accent">구매안전(결제대금예치)</b>이 핵심입니다. 신뢰가 곧 모집의 성패입니다.</p>
   <div class="flow">
-    <div class="fnode"><div class="ic">🩺</div><h4>의사(투자자)</h4><p>좌 단위 청약·납입</p></div>
-    <div class="fnode"><div class="ic">🔒</div><h4>에스크로/분리계좌</h4><p>회사 통장과 분리 보관</p></div>
-    <div class="fnode"><div class="ic">🎯</div><h4>마일스톤 트랜치</h4><p>단계 달성 시 분할 집행</p></div>
-    <div class="fnode"><div class="ic">🏭</div><h4>사업 집행</h4><p>소재·제조·인허가·운영</p></div>
+    <div class="fnode"><div class="ic">🩺</div><h4>의사(구매)</h4><p>티어 선택·결제</p></div>
+    <div class="fnode"><div class="ic">🔒</div><h4>구매안전(에스크로/PG)</h4><p>결제대금 예치</p></div>
+    <div class="fnode"><div class="ic">🏭</div><h4>제작·납품</h4><p>생산→스캔→제작→배송</p></div>
+    <div class="fnode"><div class="ic">✅</div><h4>배송완료→정산</h4><p>예치금 회사 지급</p></div>
   </div>
-  <div class="tranche">
-    <div class="tr"><div class="pct">30%</div><h4>트랜치 1 — 계약 직후</h4><p>그래피 소재계약·법인·초기 운영. 즉시 집행.</p></div>
-    <div class="tr"><div class="pct">30%</div><h4>트랜치 2 — 시제품/인허가 착수</h4><p>시제품·RA/시험 비용 마일스톤 달성 시.</p></div>
-    <div class="tr"><div class="pct">40%</div><h4>트랜치 3 — 초도생산/매출</h4><p>초도 생산·Daily 매출 개시 마일스톤 달성 시.</p></div>
-  </div>
-  <div class="callout danger"><span class="ic">⚠</span><div><b>환불·중단 조항 필수:</b> 마일스톤 미달·인허가 실패·사업 중단 시 <b>잔여 트랜치 미집행 + 잔여금 반환</b> 조건을 계약에 명시.
-    의료모드 예약금은 받지 않으며(허가 전), 공산품 선주문은 미인도 시 환불.</div></div>
-</section>
-
-<!-- 06 서류 -->
-<section id="docs">
-  <div class="sec-head"><span class="sec-no">06</span><span class="eyebrow">필수 서류</span></div>
-  <h2 class="sec-title">준비해야 할 문서 체크리스트</h2>
-  <p class="sec-intro">계약 전에 갖춰져 있어야 신뢰가 생깁니다. 변호사·회계사와 함께 표준화하세요.</p>
-  <div class="checks">
-    <div class="ck"><span class="b"></span><div><b>텀시트(Term Sheet)</b> — 밸류·좌단가·권리 요약</div></div>
-    <div class="ck"><span class="b"></span><div><b>IR 자료 + 티저</b> — 1:1 제안용</div></div>
-    <div class="ck"><span class="b"></span><div><b>사업계획서</b> — 빌더 산출물 활용</div></div>
-    <div class="ck"><span class="b"></span><div><b>NDA(비밀유지)</b> — 자료 공유 전</div></div>
-    <div class="ck"><span class="b"></span><div><b>SAFE(조건부지분인수계약)</b> 또는 <b>신주인수계약(SSA)</b></div></div>
-    <div class="ck"><span class="b"></span><div><b>주주간계약(SHA)</b> — 지분·의결·태그/드래그</div></div>
-    <div class="ck"><span class="b"></span><div><b>청약서/투자확약서</b> — 좌수·금액 확정</div></div>
-    <div class="ck"><span class="b"></span><div><b>이사회·주총 의사록</b> — 신주발행 절차</div></div>
-    <div class="ck"><span class="b"></span><div><b>에스크로 계약 · 분리계좌</b> 개설서류</div></div>
-    <div class="ck"><span class="b"></span><div><b>벤처기업 확인서 · 투자확인서</b> — 소득공제용</div></div>
-    <div class="ck"><span class="b"></span><div><b>공산품 선주문 약관</b> — 환불·인도 조건</div></div>
-    <div class="ck"><span class="b"></span><div><b>의료모드 우선공급 예약 약정서</b> — 결제 없음</div></div>
-    <div class="ck"><span class="b"></span><div><b>투자위험 고지서</b> — 원금비보장 명시</div></div>
-    <div class="ck"><span class="b"></span><div><b>개인정보 수집·이용 동의서</b></div></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card hl"><h3>지켜야 할 소비자보호</h3><ul>
+      <li><b>구매안전 의무</b> — 선지급식 통신판매는 에스크로/소비자피해보상보험 제공</li>
+      <li><b>청약철회 7일</b> — 단, 환자 맞춤제작 착수 후엔 제한(사전 고지·동의 필요)</li>
+      <li><b>미인도·지연 환불</b> — 약관에 명시</li>
+    </ul></div>
+    <div class="card"><h3>신뢰 장치</h3><ul>
+      <li><b>분리계좌·투명 보고</b> — 선수금 사용·진행 공유</li>
+      <li><b>진행 추적</b> — ERP/환자포털로 제작·배송 가시화</li>
+      <li><b>교환·재고 정책</b> — 의사 재고 부담 완화</li>
+    </ul></div>
   </div>
 </section>
 
-<!-- 07 법률 세무 규제 -->
+<!-- 07 법률 서류 -->
 <section id="legal">
-  <div class="sec-head"><span class="sec-no">07</span><span class="eyebrow">법률 · 세무 · 규제</span></div>
-  <h2 class="sec-title">반드시 지킬 레드라인</h2>
+  <div class="sec-head"><span class="sec-no">07</span><span class="eyebrow">법률 · 서류</span></div>
+  <h2 class="sec-title">선판매 컴플라이언스 & 서류</h2>
   <div class="tablewrap">
     <table>
       <thead><tr><th>항목</th><th>기준</th><th>실행</th></tr></thead>
       <tbody>
-        <tr><td><b>사모/공모 경계</b></td><td>청약 권유 <b>50인 미만</b>·발행가액 <b>10억 미만</b>이면 증권신고서 면제(사모)</td><td>의사 권유 49인 이하 유지, 전문투자자는 인원 산정 제외. 초과 필요 시 <b>증권형 크라우드펀딩</b> 활용.</td></tr>
-        <tr><td><b>전매제한</b></td><td>발행 후 1년 내 50인 이상 양도 가능성 시 모집 간주</td><td>주식 양도제한(보호예수)·주주간계약으로 전매 차단.</td></tr>
-        <tr><td><b>엔젤 소득공제</b></td><td>3천 이하 100% / 3천~5천 70% / 5천 초과 30%</td><td><b>신주 직접투자·개인투자조합</b>만 공제(구주 양수 불가). <b>3년 보유</b>. 벤처기업 요건(투자 후 2년 내 인정 가능).</td></tr>
-        <tr><td><b>의료기기 규제</b></td><td>허가 전 판매·광고·예약결제 위법</td><td>의료모드 <b>결제 없는 예약</b>만. 광고는 공산품/회사 비전으로.</td></tr>
-        <tr><td><b>리베이트 오인</b></td><td>의사 보상이 진료 유인이면 위법</td><td>투자·자문은 진료와 <b>분리</b>, 정당 계약으로 문서화.</td></tr>
-        <tr><td><b>자금 출처</b></td><td>차명·강요 투자 금지</td><td>의사 <b>본인 자금</b> 확인, 투자 위험 충분 고지.</td></tr>
+        <tr><td><b>통신판매업 신고</b></td><td>온라인 선판매 사업자 신고 의무</td><td>관할 구청 신고 + 사업자등록.</td></tr>
+        <tr><td><b>선지급 구매안전</b></td><td>대금 선지급 시 에스크로/보증보험 제공</td><td>PG 에스크로 또는 소비자피해보상보험 가입.</td></tr>
+        <tr><td><b>청약철회</b></td><td>7일 / 맞춤제작은 일부 제한</td><td>제작 착수 전 철회 가능, 착수 후 제한을 <b>사전 고지·동의</b>.</td></tr>
+        <tr><td><b>표시·광고</b></td><td>의료기기 오인·과대광고 금지</td><td>Daily = <b>공산품</b>으로만 표현, 치료 효능 표방 금지.</td></tr>
+        <tr><td><b>세금</b></td><td>선수금 회계·부가세</td><td>의사 거래는 <b>세금계산서</b>(B2B), 선수금 인식.</td></tr>
+        <tr><td><b>의료(Medical) 모드</b></td><td>허가 전 판매·결제·광고 불가</td><td>예약(결제 없음)만, 허가 후 전환.</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="callout danger"><span class="ic">⚠</span><div><b>본 문서는 의사결정 보조용이며 법률·세무 자문이 아닙니다.</b> 모집·계약·세제 적용 전 반드시 <b>변호사·세무사·중기부/금감원 확인</b>을 거치세요. 수치·요건은 시점에 따라 변동될 수 있습니다.</div></div>
+  <div class="checks" style="margin-top:16px">
+    <div class="ck"><span class="b"></span><div><b>통신판매업 신고증 · 사업자등록</b></div></div>
+    <div class="ck"><span class="b"></span><div><b>구매안전(에스크로/보증보험) 계약</b></div></div>
+    <div class="ck"><span class="b"></span><div><b>선판매 이용약관 · 청약철회/환불 정책</b></div></div>
+    <div class="ck"><span class="b"></span><div><b>병원 공급계약</b>(B2B) · 티어·납품가</div></div>
+    <div class="ck"><span class="b"></span><div><b>표시광고 검수 자료</b>(공산품 표현)</div></div>
+    <div class="ck"><span class="b"></span><div><b>카트리지 구독 약관</b></div></div>
+    <div class="ck"><span class="b"></span><div><b>세금계산서 · 영수증</b> 발행 체계</div></div>
+    <div class="ck"><span class="b"></span><div><b>개인정보 수집·이용 동의</b></div></div>
+  </div>
+  <div class="callout danger"><span class="ic">⚠</span><div><b>본 문서는 의사결정 보조용이며 법률·세무 자문이 아닙니다.</b> 선판매 개시 전 <b>변호사·세무사·공정위/관할 구청 확인</b>을 거치세요. 특히 표시광고(의료기기 오인)와 구매안전 의무는 반드시 검토.</div></div>
 </section>
 
 <!-- 08 모집 스크립트 -->
 <section id="script">
-  <div class="sec-head"><span class="sec-no">08</span><span class="eyebrow">모집 스크립트 · 예상 Q&amp;A</span></div>
-  <h2 class="sec-title">1:1 미팅에서 이렇게 말한다</h2>
-  <p class="sec-intro">광고가 아니라 대화입니다. 흐름: <b class="accent">문제 공감 → 제품·검증 → 기회(왜 지금) → 참여 방식 → 안전장치</b>.</p>
+  <div class="sec-head"><span class="sec-no">08</span><span class="eyebrow">모집 스크립트 · Q&amp;A</span></div>
+  <h2 class="sec-title">의사에게 이렇게 제안한다</h2>
   <div class="card hl" style="margin-bottom:18px">
     <h3>오프닝 한 문단</h3>
-    <p style="color:var(--muted)">"원장님이 매일 보시는 잇몸 케어의 한계 — 손으로 균일하게 못 한다는 점, 제가 환자 맞춤 트레이로 풀었습니다.
-    소재는 그래피, 임상은 현장에서 검증 중이고요. 지금은 사업을 키울 자본 단계인데, <b style="color:var(--ink)">가장 먼저 쓰실 원장님들을 창립 멤버로 모십니다.</b>
-    투자로 함께하시면 지분·세제 혜택을, 제품으로 함께하시면 창립가·우선권을 드립니다."</p>
+    <p style="color:var(--muted)">"원장님, 환자에게 <b style="color:var(--ink)">40만원</b>에 처방하시면 대당 <b style="color:var(--ink)">약 21만원</b>이 남습니다.
+    지금 <b style="color:var(--ink)">창립 선판매</b>로 미리 잡으시면 더 낮은 납품가에 확보하시고, <b>많이 잡으실수록 납품가가 내려갑니다.</b>
+    5대부터 시작 가능하고, 안 나간 재고는 교환·환불로 부담을 덜어드립니다. 창립 멤버 혜택과 카트리지 구독 할인도 함께요."</p>
   </div>
-  <div class="qa"><div class="q">Q. 원금 보장되나요?</div><div class="a">A. <b>투자는 원금 보장이 아닙니다(위험 고지).</b> 대신 에스크로·마일스톤으로 다운사이드를 관리하고, 제품 선주문은 제품으로 회수됩니다.</div></div>
-  <div class="qa"><div class="q">Q. 세금 혜택은요?</div><div class="a">A. 신주 직접투자/개인투자조합이면 <b>엔젤투자 소득공제</b>(3천 이하 100% 등)를 받으실 수 있습니다. 3년 보유·벤처기업 요건이 있고, 세무사 확인을 함께 드립니다.</div></div>
-  <div class="qa"><div class="q">Q. 언제 회수하나요?</div><div class="a">A. <b>후속 투자·M&amp;A·배당</b>이 회수 경로입니다. 제품으로 참여 시 창립가·우선공급으로 즉시 가치가 있습니다.</div></div>
-  <div class="qa"><div class="q">Q. 아직 의료기기 허가 전인데 사도 되나요?</div><div class="a">A. 의료모드는 지금 <b>결제 없이 우선공급 예약</b>만 받습니다. 지분 투자는 제품 허가와 무관한 <b>회사 투자</b>이고, 공산품(Daily) 모드는 허가 없이 정상 판매됩니다.</div></div>
-  <div class="qa"><div class="q">Q. 얼마부터 가능한가요?</div><div class="a">A. 1좌 1,000만원, 보통 <b>2~5좌</b>를 권합니다. 소득공제 구간(3천·5천)에 맞춰 안내드립니다.</div></div>
+  <div class="qa"><div class="q">Q. 재고가 안 나가면요?</div><div class="a">A. <b>교환·환불 정책</b>으로 부담을 낮춥니다. 또 환자 추천·리플릿 등 판매 지원을 드리고, 카트리지 구독으로 반복 수익이 생깁니다.</div></div>
+  <div class="qa"><div class="q">Q. 허가는 받았나요?</div><div class="a">A. 지금 파는 <b>Daily 모드는 공산품</b>이라 의료기기 허가가 필요 없습니다. 의료(Medical) 모드는 허가 후 별도로, 파트너·플래그십에 우선 공급합니다.</div></div>
+  <div class="qa"><div class="q">Q. 마진이 얼마죠?</div><div class="a">A. 환자가 40만 − 납품가 = <b>대당 21만~24.5만원</b>(티어에 따라). 20대면 환자 20명에 약 470만원+ 마진입니다.</div></div>
+  <div class="qa"><div class="q">Q. 결제는 안전한가요?</div><div class="a">A. <b>구매안전(에스크로)</b>로 결제대금을 예치하고 납품 완료 후 정산합니다. 분리계좌·진행 알림으로 투명하게 운영합니다.</div></div>
+  <div class="qa"><div class="q">Q. 환자가 부담스러워하지 않을까요?</div><div class="a">A. 맞춤 제작·표적 케어라 일반 워터픽과 가치가 다릅니다. 데모 키트와 환자 안내 리플릿으로 설명을 도와드립니다.</div></div>
 </section>
 
 <!-- 09 타임라인 -->
 <section id="timeline">
   <div class="sec-head"><span class="sec-no">09</span><span class="eyebrow">타임라인</span></div>
-  <h2 class="sec-title">준비 2주 + 모집 6주 = 1차 클로징</h2>
+  <h2 class="sec-title">준비 2주 + 오픈 3주 = 1차 마감</h2>
   <div class="tl">
-    <div class="t"><div class="q">D-14 ~ D0</div><h4>준비</h4><p>벤처인증·밸류·계약서·에스크로·IR. (Step 0)</p></div>
-    <div class="t"><div class="q">W1 ~ W2</div><h4>타겟 확정 + 1:1 제안</h4><p>49인 이하 리스트, NDA, 데모·IR. (Step 1~2)</p></div>
-    <div class="t"><div class="q">W2 ~ W4</div><h4>소프트서클</h4><p>구두 약정 누적 → 목표 도달 게이트. (Step 3)</p></div>
-    <div class="t"><div class="q">W4 ~ W6</div><h4>계약·납입·1차 클로징</h4><p>서명·에스크로 입금·트랜치 1 집행. (Step 4~5)</p></div>
-    <div class="t"><div class="q">W6 ~ W12</div><h4>사후·후속·정책자금</h4><p>주주 온보딩·분기보고·2차 라운드·TIPS/기보. (Step 5~6)</p></div>
+    <div class="t"><div class="q">D-14 ~ D0</div><h4>준비</h4><p>통신판매 신고·구매안전·가격/티어·약관·표시광고 검수. (Step 0)</p></div>
+    <div class="t"><div class="q">W1</div><h4>사전등록</h4><p>관심 의사 수요 확인·티어 안내. (Step 1)</p></div>
+    <div class="t"><div class="q">W1 ~ W3</div><h4>선판매 오픈</h4><p>1:1 제안·결제(에스크로)·누적 모집. (Step 2)</p></div>
+    <div class="t"><div class="q">W3 ~ W4</div><h4>마감·정산·생산발주</h4><p>목표 게이트·주문 확정. (Step 3)</p></div>
+    <div class="t"><div class="q">W4 ~ W10</div><h4>제작·납품</h4><p>생산→스캔→제작→배송, 정산. (Step 4)</p></div>
+    <div class="t"><div class="q">상시</div><h4>구독·추천·2차</h4><p>카트리지 구독·추천 리워드·재주문. (Step 5)</p></div>
   </div>
+</section>
+
+<!-- 10 지분(선택) -->
+<section id="equity">
+  <div class="sec-head"><span class="sec-no">10</span><span class="eyebrow">선택 보조 트랙</span></div>
+  <h2 class="sec-title">"지분으로 더 깊게" 함께할 의사를 위한 옵션</h2>
+  <p class="sec-intro">선판매가 메인입니다. 다만 더 크게 베팅하려는 소수 의사를 위해 <b class="accent">지분 투자</b>를 보조로 엽니다(소수·선택).</p>
+  <div class="grid g3">
+    <div class="card"><h3>신주발행 / 개인투자조합</h3><p>엔젤투자 <b style="color:var(--ink)">소득공제</b> 가능(신주·조합, 구주 제외). 본격 투자 의사 대상.</p></div>
+    <div class="card"><h3>49인 이하 사모 유지</h3><p>청약 권유 50인 미만·10억 미만이면 증권신고서 면제. 초과 시 절차 급증.</p></div>
+    <div class="card"><h3>에스크로·마일스톤</h3><p>지분 자금도 분리계좌·단계 집행·환불 조항으로 보호.</p></div>
+  </div>
+  <p class="note">→ 지분 트랙 상세 절차·세제·서류는 필요 시 별도 확장. 1차는 <b>선판매로 빠르게 런웨이</b>를 만드는 데 집중하세요.</p>
 
   <div class="cta">
-    <h2>숫자는 빌더에서, 진행은 보드에서.</h2>
-    <p>좌수·단가·목표액 시뮬레이션은 의사결정 빌더, 실제 모집 진척·담당은 실행 보드에서 실시간으로 관리하세요.</p>
+    <h2>티어·수량은 빌더에서, 진행은 보드에서.</h2>
+    <p>참여 의사 수·평균 대수·납품가를 빌더에서 시뮬레이션하고, 실제 모집 진척은 실행 보드에서 실시간 추적하세요.</p>
     <div class="btns">
       <a class="btn" href="builder.html">금액 시뮬레이션 (빌더) →</a>
       <a class="btn ghost" href="action.html">실행 보드</a>
-      <a class="btn ghost" href="strategy.html">전략 메모</a>
+      <a class="btn ghost" href="index.html">종합 허브</a>
     </div>
   </div>
 </section>
@@ -410,11 +464,11 @@
 </main>
 
 <footer class="wrap">
-  <div><b>GraphyStyle</b> · 펀딩 실행 플레이북 · 2026.06.12 · 핵심 관계자 한정 · 외부 유출 금지</div>
-  <div class="src">참고(규제·세제) —
-    <a href="https://dart.fss.or.kr/info/main.do?menu=230" target="_blank" rel="noopener">금감원 발행공시(사모/모집)</a> ·
-    <a href="https://www.mss.go.kr" target="_blank" rel="noopener">중기부 엔젤투자 소득공제</a> ·
-    <a href="https://www.doctorsnews.co.kr/news/articleView.html?idxno=111677" target="_blank" rel="noopener">의료기기 허가 전 광고 규제</a>
+  <div><b>GraphyStyle</b> · 펀딩 플레이북(선판매 중심) · 2026.06.12 · 핵심 관계자 한정 · 외부 유출 금지</div>
+  <div class="src">참고(규제) —
+    <a href="https://www.law.go.kr/lsInfoP.do?lsId=009318" target="_blank" rel="noopener">전자상거래법(청약철회·구매안전)</a> ·
+    <a href="https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=25&ccfNo=3&cciNo=3&cnpClsNo=2" target="_blank" rel="noopener">선지급식 통신판매 구매안전</a> ·
+    <a href="https://www.doctorsnews.co.kr/news/articleView.html?idxno=111677" target="_blank" rel="noopener">의료기기 표시·광고 규제</a>
     · 본 문서는 법률·세무 자문이 아니며 실행 전 전문가 확인 필요.
   </div>
 </footer>
