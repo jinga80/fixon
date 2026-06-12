@@ -355,6 +355,25 @@ const RISKS = [
   "증권(SAFE/주식) 모집은 자본시장법상 모집 한도·절차를 준수하고 변호사 검토를 거친다."
 ];
 
+const GLOSSARY = [
+  ["SAFE","미래 지분을 약속하고 먼저 투자받는 간이 투자계약(Simple Agreement for Future Equity)"],
+  ["KOL","영향력 있는 핵심 자문 의사(Key Opinion Leader)"],
+  ["TIPS","민간투자 주도형 기술창업 지원 — 정부 R&D 사업(팁스)"],
+  ["KHIDI","한국보건산업진흥원 — 의료기기 사업화·인허가 지원 기관"],
+  ["기보","기술보증기금 — 기술력 담보 보증으로 대출을 돕는 정책금융기관"],
+  ["VC","벤처캐피탈(Venture Capital) — 전문 투자사"],
+  ["SI","전략적 투자자(Strategic Investor) — 제약사 등 시너지 투자자"],
+  ["D2C","소비자 직접 판매(Direct to Consumer)"],
+  ["B2B","기업·병원 간 거래(Business to Business)"],
+  ["OEM","주문자 상표 위탁생산(Original Equipment Manufacturer)"],
+  ["MOQ","최소 주문 수량(Minimum Order Quantity)"],
+  ["UDI","의료기기 고유식별 코드(Unique Device Identification)"],
+  ["QC","품질관리(Quality Control)"],
+  ["RA","인허가·규제 대응 업무(Regulatory Affairs)"],
+  ["LTV","고객 생애가치(Lifetime Value)"],
+  ["CAGR","연평균 성장률(Compound Annual Growth Rate)"]
+];
+
 /* ============================================================
    상태 & 렌더링
    ============================================================ */
@@ -495,6 +514,9 @@ function renderDoc(){
     <p>${get("timeline").plan}</p>
 
     ${note?`<h2><span class="n">7.</span> 회의 메모 / 추가 결정사항</h2><p>${note.replace(/\n/g,"<br/>")}</p>`:""}
+
+    <h2><span class="n">＊</span> 용어 풀이 (영어 약어·기관명)</h2>
+    <table>${GLOSSARY.map(g=>`<tr><td style="white-space:nowrap;font-weight:700">${g[0]}</td><td>${g[1]}</td></tr>`).join("")}</table>
 
     <div class="foot">© ${new Date().getFullYear()} ${company} · 본 문서는 ${today()} 핵심 관계자 회의에서 의사결정 빌더로 생성되었습니다. 외부 유출 금지.</div>
   `;
