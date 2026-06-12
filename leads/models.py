@@ -32,3 +32,38 @@ class Lead(models.Model):
     @property
     def interests_display(self):
         return ", ".join(PRODUCT_LABELS.get(i, i) for i in (self.interests or []))
+
+
+class BoardCell(models.Model):
+    """실시간 공유 작업 보드 — 필드 단위 셀(충돌 없는 협업)."""
+
+    board = models.CharField("보드", max_length=60, default="action")
+    key = models.CharField("키", max_length=120)
+    value = models.TextField("값", blank=True)
+    updated_by = models.CharField("수정자", max_length=60, blank=True)
+    updated_at = models.DateTimeField("수정시각", auto_now=True)
+
+    class Meta:
+        verbose_name = "보드 셀"
+        verbose_name_plural = "보드 셀"
+        unique_together = ("board", "key")
+        ordering = ["board", "key"]
+
+    def __str__(self):
+        return f"{self.board}:{self.key}={self.value[:30]}"
+
+
+class BoardPresence(models.Model):
+    """보드 접속 현황 — 누가 지금 보고 있는지(프레즌스)."""
+
+    board = models.CharField("보드", max_length=60, default="action")
+    name = models.CharField("이름", max_length=60)
+    last_seen = models.DateTimeField("최근접속", auto_now=True)
+
+    class Meta:
+        verbose_name = "보드 접속현황"
+        verbose_name_plural = "보드 접속현황"
+        unique_together = ("board", "name")
+
+    def __str__(self):
+        return f"{self.board}:{self.name}"

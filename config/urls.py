@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import path
 
-from leads.views import signup
+from leads.views import board, board_reset, signup
 
 
 def healthz(_request):
@@ -19,5 +19,7 @@ def healthz(_request):
 urlpatterns = [
     path("healthz", healthz, name="healthz"),
     path("api/signup", signup, name="signup"),
+    path("api/board", board, name="board"),
+    path("api/board/reset", board_reset, name="board_reset"),
     path("admin/", admin.site.urls),
 ]

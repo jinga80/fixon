@@ -3,7 +3,7 @@ import csv
 from django.contrib import admin
 from django.http import HttpResponse
 
-from .models import Lead
+from .models import BoardCell, BoardPresence, Lead
 
 
 @admin.action(description="선택 항목 CSV 내보내기")
@@ -35,3 +35,16 @@ class LeadAdmin(admin.ModelAdmin):
     @admin.display(description="관심 제품")
     def interests_col(self, obj):
         return obj.interests_display
+
+
+@admin.register(BoardCell)
+class BoardCellAdmin(admin.ModelAdmin):
+    list_display = ("board", "key", "value", "updated_by", "updated_at")
+    list_filter = ("board",)
+    search_fields = ("key", "value", "updated_by")
+
+
+@admin.register(BoardPresence)
+class BoardPresenceAdmin(admin.ModelAdmin):
+    list_display = ("board", "name", "last_seen")
+    list_filter = ("board",)

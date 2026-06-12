@@ -38,7 +38,32 @@
   .progwrap{margin-top:22px;max-width:520px}
   .progbar{height:10px;border-radius:99px;background:var(--card);border:1px solid var(--line);overflow:hidden}
   .progbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff7a35,#ffb061);transition:width .3s}
-  .progtxt{font-size:13px;color:var(--muted);margin-top:7px}
+  .progtxt{font-size:13px;color:var(--muted);margin-top:7px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .syncdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(95,191,143,.18);margin-left:4px;transition:background .3s}
+  .syncdot.off{background:var(--red);box-shadow:0 0 0 3px rgba(255,122,107,.18)}
+  .syncdot.busy{background:var(--gold);box-shadow:0 0 0 3px rgba(224,164,88,.18)}
+  .synctxt{font-size:12px;color:var(--dim)}
+
+  /* presence */
+  .presence{display:flex;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+  .presence .plabel{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .pavatars{display:flex;gap:6px;flex-wrap:wrap}
+  .pav{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);
+    background:var(--card);border:1px solid var(--line2);border-radius:999px;padding:4px 11px 4px 5px}
+  .pav .ini{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:800;color:#1a140f;background:var(--av,#ff8a4c)}
+  .pav.me{border-color:var(--brand);box-shadow:0 0 0 2px rgba(255,107,43,.14)}
+
+  /* name modal */
+  .namemodal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;
+    background:rgba(12,10,9,.72);backdrop-filter:blur(8px)}
+  .namecard{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line2);border-radius:18px;padding:26px;text-align:center}
+  .nmh{font-size:22px;font-weight:800}
+  .nms{font-size:13.5px;color:var(--muted);margin:8px 0 18px}
+  #nameForm{display:flex;gap:8px}
+  #nameInput{flex:1;min-width:0;padding:13px 15px;font-size:15px;border-radius:11px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:#fff;outline:none}
+  #nameInput:focus{border-color:var(--brand)}
+  #nameForm button{padding:0 20px;font-weight:700;border:0;border-radius:11px;cursor:pointer;color:#fff;background:linear-gradient(135deg,#ff7a35,#ff5e1a)}
 
   section{padding:40px 0;border-top:1px solid var(--line)}
   .sec-head{display:flex;align-items:center;gap:11px;margin-bottom:6px}
@@ -58,6 +83,7 @@
   .task .meta{display:flex;align-items:center;gap:8px;flex:none}
   .task .own{width:96px;font-size:12.5px;padding:6px 9px;border-radius:8px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--ink);font-family:inherit;text-align:center}
   .task .own:focus{outline:none;border-color:var(--brand)}
+  .task .byline{font-size:11px;font-weight:700;color:var(--green);white-space:nowrap}
   .task .due{font-size:11px;font-weight:800;color:var(--brand2);background:rgba(255,107,43,.12);border:1px solid rgba(255,107,43,.25);border-radius:999px;padding:4px 9px;white-space:nowrap}
   @media(max-width:640px){
     .task{grid-template-columns:auto 1fr;grid-template-areas:"cb name" ". meta"}
@@ -85,7 +111,12 @@
   .glane{padding:11px 12px;font-weight:700;font-size:12.5px;color:var(--ink);position:sticky;left:0;background:var(--bg2);z-index:1;border-right:1px solid var(--line)}
   .gtrack{grid-column:2 / span 13;position:relative;height:30px;margin:6px 0}
   .gtrack::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent calc(100%/13 - 1px),var(--line) calc(100%/13 - 1px),var(--line) calc(100%/13))}
-  .bar{position:absolute;top:4px;height:22px;border-radius:7px;display:flex;align-items:center;padding:0 9px;font-size:11px;font-weight:700;color:#1a140f;white-space:nowrap;overflow:hidden}
+  .bar{position:absolute;top:4px;height:22px;border-radius:7px;display:flex;align-items:center;gap:5px;padding:0 9px;font-size:11px;font-weight:700;color:#1a140f;white-space:nowrap;overflow:hidden;cursor:pointer;transition:filter .15s}
+  .bar:hover{filter:brightness(1.12)}
+  .bar.st0{background:transparent!important;border:1.5px dashed var(--bc,#888);color:var(--bc,#aaa)}
+  .bar.st1{box-shadow:inset 0 0 0 2px rgba(0,0,0,.18)}
+  .bar.st2{background:var(--green)!important;color:#0d2417}
+  .bar .stmark{font-size:10px;opacity:.85}
   .phasebar{display:grid;grid-template-columns:140px repeat(13,1fr);border-bottom:1px solid var(--line)}
   .ph{grid-row:1;text-align:center;font-size:11px;font-weight:800;padding:7px 2px;color:#1a140f;border-radius:6px;margin:4px 2px}
 
@@ -122,6 +153,7 @@
 <div class="top">
   <div class="l"><span class="dot"></span><span class="ttl">실행 워크플로우 & 90일 타임테이블</span></div>
   <div class="acts">
+    <button class="tbtn" id="meBtn" title="내 이름 설정">🙋 나: <b id="meName">미설정</b></button>
     <a class="tbtn" href="index.html">← 허브</a>
     <button class="tbtn" id="resetBtn">초기화</button>
     <button class="tbtn primary" id="printBtn">인쇄 / PDF</button>
@@ -132,14 +164,30 @@
   <div class="shell">
     <div class="eyebrow">Action Plan · 2026.06.12 회의 직후 가동</div>
     <h1>회의가 끝나는 순간,<br/>이 표대로 움직인다.</h1>
-    <p class="lede">"무엇을 / 누가 / 언제까지" 를 한 화면에. 담당자 칸은 회의 중 바로 입력하고, 완료한 일은 체크하세요 —
-      <b style="color:var(--ink)">입력·체크는 자동 저장</b>됩니다.</p>
+    <p class="lede">"무엇을 / 누가 / 언제까지" 를 한 화면에. 담당자 지정·체크·진행상태가
+      <b style="color:var(--ink)">모든 참여자에게 실시간 공유</b>됩니다. (3초마다 자동 동기화)</p>
+    <div class="presence" id="presence" hidden>
+      <span class="plabel">지금 접속</span>
+      <span class="pavatars" id="pavatars"></span>
+    </div>
     <div class="progwrap">
       <div class="progbar"><i id="progFill"></i></div>
-      <div class="progtxt" id="progTxt">즉시 실행 0/0 완료</div>
+      <div class="progtxt"><span id="progTxt">즉시 실행 0/0 완료</span> <span class="syncdot" id="syncDot"></span><span class="synctxt" id="syncTxt">동기화 중…</span></div>
     </div>
   </div>
 </header>
+
+<!-- 이름 입력 모달 -->
+<div class="namemodal" id="nameModal" hidden>
+  <div class="namecard">
+    <div class="nmh">🙋 누구신가요?</div>
+    <p class="nms">실시간 보드에 표시될 이름을 입력하세요. 담당자 지정·진행 체크가 이 이름으로 공유됩니다.</p>
+    <form id="nameForm" autocomplete="off">
+      <input id="nameInput" maxlength="20" placeholder="예: 이중우 / 김OO" />
+      <button type="submit">시작</button>
+    </form>
+  </div>
+</div>
 
 <main class="shell">
 
@@ -255,93 +303,211 @@ var GATES = [
   {n:"G4", w:"W12", h:"초도 생산 + Daily 매출 개시", p:"초도 생산·첫 매출. 의료모드 인허가 트랙 본격 전환 결정."}
 ];
 
-/* ===================== 상태/저장 ===================== */
-var LS="gs_action_v1";
-var state=load();
-function load(){try{var r=localStorage.getItem(LS);if(r)return JSON.parse(r);}catch(e){}return{done:{},owner:{},roleOwner:{}};}
-function save(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
+/* ===================== 실시간 공유 동기화 엔진 ===================== */
+var BOARD="action", API="/api/board", POLL_MS=3000, CACHE="gs_action_cache_v2";
+var ME=localStorage.getItem("gs_board_name")||"";
+var cells={}, pending={}, online=[], sendTimers={};
 
-/* ===================== 렌더 ===================== */
-function renderImmediate(){
-  var root=document.getElementById("immediate");
-  root.innerHTML=IMMEDIATE.map(function(t){
-    var done=!!state.done[t.id];
-    var own=state.owner[t.id]!=null?state.owner[t.id]:t.role;
-    return '<div class="task '+(done?'done':'')+'" data-id="'+t.id+'">'+
-      '<button class="cb" aria-label="완료">'+(done?'✓':'')+'</button>'+
+try{var cc=localStorage.getItem(CACHE); if(cc) cells=JSON.parse(cc);}catch(e){}
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function nowISO(){return new Date().toISOString();}
+function hhmmss(){var d=new Date();return [d.getHours(),d.getMinutes(),d.getSeconds()].map(function(n){return ("0"+n).slice(-2);}).join(":");}
+function val(k){ if(pending.hasOwnProperty(k)) return pending[k]; return cells[k]?cells[k].v:undefined; }
+function whoBy(k){ return cells[k]?cells[k].by:""; }
+
+function setSync(s){
+  var dot=document.getElementById("syncDot"), txt=document.getElementById("syncTxt");
+  dot.className="syncdot"+(s==="off"?" off":s==="busy"?" busy":"");
+  txt.textContent = s==="off" ? "오프라인 — 재연결 시도 중"
+    : s==="busy" ? "저장 중…" : "실시간 동기화됨 · "+hhmmss();
+}
+function cacheCells(){try{localStorage.setItem(CACHE,JSON.stringify(cells));}catch(e){}}
+
+function applySnapshot(d){
+  var nc={};
+  if(d&&d.cells) Object.keys(d.cells).forEach(function(k){ nc[k]=d.cells[k]; });
+  Object.keys(pending).forEach(function(k){ nc[k]={v:pending[k],by:ME,at:nowISO()}; });
+  cells=nc; online=(d&&d.online)||[];
+  cacheCells();
+  setSync(Object.keys(pending).length?"busy":"ok");
+  applyAll(); renderPresence();
+}
+function sendCell(k){
+  setSync("busy");
+  fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({board:BOARD,key:k,value:pending[k],by:ME})})
+   .then(function(r){return r.json();})
+   .then(function(d){ if(d&&d.ok){ delete pending[k]; applySnapshot(d);} })
+   .catch(function(){ setSync("off"); });
+}
+function setCell(k,v){
+  pending[k]=v;
+  cells[k]={v:v,by:ME||(cells[k]&&cells[k].by)||"",at:nowISO()};
+  applyAll();
+  sendCell(k);
+}
+function setCellDebounced(k,v){ // 텍스트 입력용
+  pending[k]=v;
+  cells[k]={v:v,by:ME,at:nowISO()};
+  if(sendTimers[k]) clearTimeout(sendTimers[k]);
+  sendTimers[k]=setTimeout(function(){ sendCell(k); }, 450);
+}
+function resendPending(){ Object.keys(pending).forEach(function(k){ if(!sendTimers[k]) sendCell(k); }); }
+function fetchSnapshot(){
+  fetch(API+"?board="+BOARD+(ME?"&me="+encodeURIComponent(ME):""))
+   .then(function(r){return r.json();})
+   .then(function(d){ if(d&&d.ok) applySnapshot(d); })
+   .catch(function(){ setSync("off"); });
+}
+
+/* ===================== 이름(식별) ===================== */
+function needName(){ // 이름 없으면 모달 열고 false
+  if(ME) return true;
+  openName(); return false;
+}
+function openName(){
+  var m=document.getElementById("nameModal"); m.hidden=false;
+  var i=document.getElementById("nameInput"); i.value=ME; i.focus();
+}
+document.getElementById("meBtn").addEventListener("click",openName);
+document.getElementById("nameForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  var v=document.getElementById("nameInput").value.trim().slice(0,20);
+  if(!v) return;
+  ME=v; localStorage.setItem("gs_board_name",ME);
+  document.getElementById("meName").textContent=ME;
+  document.getElementById("nameModal").hidden=true;
+  fetchSnapshot();
+});
+
+/* ===================== 렌더(1회 생성) + apply(갱신) ===================== */
+function buildImmediate(){
+  document.getElementById("immediate").innerHTML=IMMEDIATE.map(function(t){
+    return '<div class="task" data-id="'+t.id+'">'+
+      '<button class="cb" aria-label="완료"></button>'+
       '<div class="tname">'+t.name+'<small>'+t.sub+'</small></div>'+
-      '<div class="meta"><input class="own" value="'+esc(own)+'" placeholder="담당자"/>'+
-      '<span class="due">'+t.due+'</span></div></div>';
+      '<div class="meta"><input class="own" data-k="task:'+t.id+':owner" placeholder="담당자"/>'+
+      '<span class="byline"></span><span class="due">'+t.due+'</span></div></div>';
   }).join("");
-  root.querySelectorAll(".task").forEach(function(el){
+  document.querySelectorAll("#immediate .task").forEach(function(el){
     var id=el.dataset.id;
-    el.querySelector(".cb").addEventListener("click",function(){state.done[id]=!state.done[id];save();renderImmediate();updateProg();});
+    el.querySelector(".cb").addEventListener("click",function(){
+      if(!needName()) return;
+      setCell("task:"+id+":done", isDone(id)?"":"1");
+    });
     var ow=el.querySelector(".own");
-    ow.addEventListener("input",function(){state.owner[id]=ow.value;save();});
-    ow.addEventListener("click",function(e){e.stopPropagation();});
+    ow.addEventListener("input",function(){ if(!ME){openName();return;} setCellDebounced("task:"+id+":owner", ow.value); });
   });
 }
-function renderRoles(){
-  var root=document.getElementById("roles-root");
-  root.innerHTML=ROLES.map(function(r){
-    var own=state.roleOwner[r.id]!=null?state.roleOwner[r.id]:"";
+function buildRoles(){
+  document.getElementById("roles-root").innerHTML=ROLES.map(function(r){
     return '<div class="role" style="--rc:'+r.c+'"><h3><span>'+r.title+'</span>'+
-      '<input class="ow" data-r="'+r.id+'" value="'+esc(own)+'" placeholder="담당자"/></h3>'+
+      '<input class="ow" data-r="'+r.id+'" placeholder="담당자"/></h3>'+
       '<ul>'+r.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>';
   }).join("");
-  root.querySelectorAll(".ow").forEach(function(inp){
-    inp.addEventListener("input",function(){state.roleOwner[inp.dataset.r]=inp.value;save();});
+  document.querySelectorAll("#roles-root .ow").forEach(function(inp){
+    inp.addEventListener("input",function(){ if(!ME){openName();return;} setCellDebounced("role:"+inp.dataset.r+":owner", inp.value); });
   });
 }
-function renderLegend(){
+function buildLegend(){
   document.getElementById("legend").innerHTML=LANES.map(function(l){
     return '<span><i style="background:'+l.c+'"></i>'+l.name+'</span>';
-  }).join("");
+  }).join("")+'<span style="color:var(--dim)">· 막대 클릭 → 예정▸진행중▸완료</span>';
 }
-function pctCol(s,e){ // 13 칸(0~12) 기준 left/width %
-  var left=(s/13)*100, width=((e-s+1)/13)*100;
-  return 'left:'+left+'%;width:calc('+width+'% - 4px)';
-}
-function renderGantt(){
+function pctCol(s,e){var left=(s/13)*100,width=((e-s+1)/13)*100;return "left:"+left+"%;width:calc("+width+"% - 4px)";}
+function buildGantt(){
   var g=document.getElementById("gantt");
-  // 헤더(주차)
   var head='<div class="grow ghead"><div class="glane">워크스트림</div>';
-  for(var w=0;w<=12;w++){ head+='<div class="gcell wk">'+(w===0?'이번주':'W'+w)+'</div>'; }
+  for(var w=0;w<=12;w++){ head+='<div class="gcell wk">'+(w===0?"이번주":"W"+w)+'</div>'; }
   head+='</div>';
-  // Phase 바
   var ph='<div class="phasebar"><div class="glane" style="background:var(--card2)">단계</div>';
-  PHASES.forEach(function(p){
-    var span=(p.e-p.s+1);
-    ph+='<div class="ph" style="grid-column:'+(p.s+2)+' / span '+span+';background:'+p.c+'">'+p.label+'</div>';
-  });
+  PHASES.forEach(function(p){ ph+='<div class="ph" style="grid-column:'+(p.s+2)+' / span '+(p.e-p.s+1)+';background:'+p.c+'">'+p.label+'</div>'; });
   ph+='</div>';
-  // Lane 행
-  var rows=LANES.map(function(l){
-    var bars=l.tasks.map(function(t){
-      return '<div class="bar" style="'+pctCol(t.s,t.e)+';background:'+l.c+'" title="'+l.name+' · '+t.label+'">'+t.label+'</div>';
+  var rows=LANES.map(function(l,li){
+    var bars=l.tasks.map(function(t,ti){
+      return '<div class="bar" data-key="gtask:'+li+':'+ti+':st" style="'+pctCol(t.s,t.e)+';background:'+l.c+';--bc:'+l.c+'" '+
+        'title="'+l.name+' · '+t.label+'"><span class="stmark"></span><span class="blabel">'+t.label+'</span></div>';
     }).join("");
     return '<div class="grow"><div class="glane">'+l.name+'</div><div class="gtrack">'+bars+'</div></div>';
   }).join("");
   g.innerHTML=head+ph+rows;
+  document.querySelectorAll("#gantt .bar").forEach(function(b){
+    b.addEventListener("click",function(){
+      if(!needName()) return;
+      var cur=parseInt(val(b.dataset.key)||"0",10);
+      setCell(b.dataset.key, String((cur+1)%3));
+    });
+  });
 }
-function renderGates(){
+function buildGates(){
   document.getElementById("gates-root").innerHTML=GATES.map(function(x){
     return '<div class="gate"><span class="gno">'+x.n+' · '+x.w+'</span><div><h4>'+x.h+'</h4><p>'+x.p+'</p></div></div>';
   }).join("");
 }
-function updateProg(){
-  var total=IMMEDIATE.length, done=IMMEDIATE.filter(function(t){return state.done[t.id];}).length;
+
+function isDone(id){ return val("task:"+id+":done")==="1"; }
+function applyImmediate(){
+  IMMEDIATE.forEach(function(t){
+    var el=document.querySelector('#immediate .task[data-id="'+t.id+'"]'); if(!el) return;
+    var done=isDone(t.id);
+    el.classList.toggle("done",done);
+    el.querySelector(".cb").textContent=done?"✓":"";
+    var ow=el.querySelector(".own");
+    var ov=val("task:"+t.id+":owner"); ov=(ov==null||ov==="")?t.role:ov;
+    if(document.activeElement!==ow) ow.value=ov;
+    var by=whoBy("task:"+t.id+":done");
+    el.querySelector(".byline").textContent=(done&&by)?("✓ "+by):"";
+  });
+  var total=IMMEDIATE.length, done=IMMEDIATE.filter(function(t){return isDone(t.id);}).length;
   document.getElementById("progFill").style.width=(total?Math.round(done/total*100):0)+"%";
   document.getElementById("progTxt").textContent="즉시 실행 "+done+"/"+total+" 완료";
 }
-function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function applyRoles(){
+  document.querySelectorAll("#roles-root .ow").forEach(function(inp){
+    if(document.activeElement===inp) return;
+    var v=val("role:"+inp.dataset.r+":owner"); inp.value=v==null?"":v;
+  });
+}
+var ST_MARK=["","▶","✓"];
+function applyGantt(){
+  document.querySelectorAll("#gantt .bar").forEach(function(b){
+    var s=parseInt(val(b.dataset.key)||"0",10);
+    b.classList.remove("st0","st1","st2"); b.classList.add("st"+s);
+    b.querySelector(".stmark").textContent=ST_MARK[s];
+  });
+}
+function renderPresence(){
+  var wrap=document.getElementById("presence"), box=document.getElementById("pavatars");
+  if(!online.length){ wrap.hidden=true; return; }
+  wrap.hidden=false;
+  box.innerHTML=online.map(function(n){
+    var ini=(n||"?").trim().slice(0,2);
+    var hue=0; for(var i=0;i<n.length;i++) hue=(hue*31+n.charCodeAt(i))%360;
+    var me=(n===ME);
+    return '<span class="pav'+(me?" me":"")+'"><span class="ini" style="--av:hsl('+hue+',55%,62%)">'+esc(ini)+'</span>'+esc(n)+(me?" (나)":"")+'</span>';
+  }).join("");
+}
+function applyAll(){ applyImmediate(); applyRoles(); applyGantt(); }
 
 document.getElementById("printBtn").addEventListener("click",function(){window.print();});
 document.getElementById("resetBtn").addEventListener("click",function(){
-  if(confirm("담당자 입력과 체크를 모두 초기화할까요?")){state={done:{},owner:{},roleOwner:{}};save();renderImmediate();renderRoles();updateProg();}
+  if(!needName()) return;
+  if(confirm("⚠️ 모든 참여자의 보드(담당자·체크·진행상태)가 초기화됩니다. 계속할까요?")){
+    pending={};
+    fetch(API+"/reset",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({board:BOARD})})
+     .then(function(r){return r.json();}).then(function(d){ if(d&&d.ok) applySnapshot(d); })
+     .catch(function(){ setSync("off"); });
+  }
 });
 
-renderImmediate();renderRoles();renderLegend();renderGantt();renderGates();updateProg();
+/* ===================== 부팅 ===================== */
+buildImmediate(); buildRoles(); buildLegend(); buildGantt(); buildGates();
+applyAll(); renderPresence();
+if(ME){ document.getElementById("meName").textContent=ME; }
+else { openName(); }
+fetchSnapshot();
+setInterval(function(){ resendPending(); fetchSnapshot(); }, POLL_MS);
 </script>
 <script src="gate.js"></script>
 </body>
