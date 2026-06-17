@@ -186,7 +186,7 @@
     <!-- funding stack multi -->
     <div class="dgroup">
       <div class="qh"><span class="qno">S</span><span class="q">병행할 자금 스택 (복수 선택)</span></div>
-      <div class="qd">비희석(매출·보증·정부지원)부터 깔고, 그 위에 펀딩·VC를 얹습니다.</div>
+      <div class="qd">지분을 안 주는 자금(매출·보증·정부지원)부터 깔고, 그 위에 펀딩·VC를 얹습니다.</div>
       <div class="checks" id="stackRoot"></div>
     </div>
 
@@ -352,8 +352,8 @@ const DECISIONS = [
 ];
 
 const STACK = [
-  {v:"sales", label:"Daily 매출(비희석)", rec:true, plan:"공산품 Daily 모드 매출로 자체 런웨이를 만든다(희석 0)."},
-  {v:"kibo", label:"기술보증기금 보증", rec:true, plan:"기보 Tech-바이오/사업화 보증(각 최대 10억, 85% 부분보증)으로 비희석 운전자금을 확보한다."},
+  {v:"sales", label:"Daily 매출(지분 안 줌)", rec:true, plan:"공산품 Daily 모드 매출로 자체 런웨이를 만든다(희석 0)."},
+  {v:"kibo", label:"기술보증기금 보증", rec:true, plan:"기보 Tech-바이오/사업화 보증(각 최대 10억, 85% 부분보증)으로 지분 안 주는 운전자금을 확보한다."},
   {v:"khidi", label:"KHIDI 의료기기 사업화 지원", rec:true, plan:"KHIDI 사업화 촉진사업으로 신뢰성·성능 평가, 인허가, 해외진출 비용을 정부가 분담한다."},
   {v:"tips", label:"TIPS (정부 R&D)", rec:true, plan:"TIPS로 정부 R&D 자금(2026년 일반형 최대 8억)을 확보한다. 운영사 선투자 연결이 관문이다."},
   {v:"crowd", label:"증권형 크라우드펀딩", plan:"와디즈·펀딩포유 등 증권형 크라우드펀딩으로 대중 인지도와 소액 자금을 동시에 확보한다(한도 규정 확인)."},
@@ -489,7 +489,7 @@ function renderDoc(){
     <div class="summary">
       <div class="big">핵심 요약</div>
       <p>그래피는 <b>소재 공급사</b>로, 당사는 <b>사업 주체</b>로 역할을 재편한다.
-      자본금 공백은 <b>파운딩 닥터 펀딩(1차 목표 ${total})</b>과 비희석 정책자금으로 메운다.
+      자본금 공백은 <b>파운딩 닥터 펀딩(1차 목표 ${total})</b>과 지분 안 주는 정책자금으로 메운다.
       ${get("launch").label.replace(/<[^>]+>/g,"")}을 출시 우선순위로 하여 ${get("timeline").label.replace(/<[^>]+>/g,"")}로 추진한다.</p>
     </div>
 
