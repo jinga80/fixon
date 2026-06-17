@@ -258,11 +258,14 @@
     .src a{color:#6a625a!important}
     /* ===== 페이지 고른 분배 ===== */
     h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
-    .shead{break-after:avoid;page-break-after:avoid}
-    .grid,.kpi,.tiers3,.team,.price3,.pcompose{break-inside:auto;page-break-inside:auto}
+    .shead{break-inside:avoid;break-after:avoid;page-break-inside:avoid;page-break-after:avoid}
+    /* 인쇄에서도 데스크톱 다단 유지(모바일 1단 스택 방지 → 페이지 압축·여백 최소화) */
+    .kpi{grid-template-columns:repeat(4,1fr)!important}
+    .g3,.tiers3,.team,.price3{grid-template-columns:repeat(3,1fr)!important}
+    .g2,.pcompose{grid-template-columns:repeat(2,1fr)!important}
     .card,.kp,.itier,.mem,.pc,.prc,.callout,.lead-q,.cta,.tablewrap,table,tr,thead,.tl .t,.uof{break-inside:avoid;page-break-inside:avoid}
     p,li{orphans:2;widows:2}
-    .pgbreak{break-before:page;page-break-before:always}
+    .pgbreak{break-before:auto;page-break-before:auto}
     /* 인쇄 머리글 */
     .printhead{display:block!important}
   }

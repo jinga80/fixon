@@ -185,11 +185,14 @@
     footer{border-top:1px solid #d8cfc4!important;color:#6a625a!important;padding:6mm 0 0!important}
     /* ===== 페이지 고른 분배 ===== */
     h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
-    .shead{break-after:avoid;page-break-after:avoid}
-    .grid,.kpi,.scen{break-inside:auto;page-break-inside:auto}
+    .shead{break-inside:avoid;break-after:avoid;page-break-inside:avoid;page-break-after:avoid}
+    /* 인쇄에서도 데스크톱 다단 유지(모바일 1단 스택 방지) */
+    .kpi{grid-template-columns:repeat(4,1fr)!important}
+    .g3,.scen{grid-template-columns:repeat(3,1fr)!important}
+    .g2{grid-template-columns:repeat(2,1fr)!important}
     .card,.kp,.itier,.sc,.callout,.lead-q,.cta,.tablewrap,table,tr,thead,.tl .t{break-inside:avoid;page-break-inside:avoid}
     p,li{orphans:2;widows:2}
-    .pgbreak{break-before:page;page-break-before:always}
+    .pgbreak{break-before:auto;page-break-before:auto}
     .printhead{display:block!important}
   }
   .printhead{display:none}
@@ -233,11 +236,12 @@
     <div class="eyebrow">Strategic Partner Proposal · 그래피(Graphy) 대표님께 · 2026.06</div>
     <h1>그래피의 소재가,<br/>매출이 반복되는 완제품 사업이 됩니다.</h1>
     <p class="lede">그래피는 형상기억 레진 등 <b style="color:var(--ink)">소재의 강자</b>입니다. GraphyStyle(Fixon)은 그 소재로 만든 환자 맞춤 잇몸 케어 기기입니다.
-      사업 운영의 부담은 우리가 지고, 그래피는 가장 잘하는 일(<b style="color:var(--ink)">소재 공급</b>)에 집중하며 <b class="accent">전략 투자자</b>로 함께하는 구조를 제안드립니다.</p>
+      우리는 지금 <b style="color:var(--ink)">사업 자본을 모으고 있습니다.</b> 그래피께 <b class="accent">전략투자(약 2~5억)</b>를 요청드립니다 —
+      운영 부담은 우리가 지고, 그래피는 소재 공급과 자본 참여로 완제품 사업의 업사이드를 함께 가져가는 구조입니다.</p>
     <div class="chips">
-      <span class="chip">관계 <b>소재 공급 + 전략투자</b></span>
+      <span class="chip">투자 요청 <b>약 2~5억</b></span>
+      <span class="chip">대가 <b>소수지분 + 소재 반복매출</b></span>
       <span class="chip">그래피 운영 리스크 <b>낮음</b></span>
-      <span class="chip">매출 <b>소재·카트리지 반복</b></span>
       <span class="chip">브랜드 <b>GraphyStyle</b></span>
     </div>
     <div class="heroact">
@@ -252,15 +256,15 @@
 <!-- 01 한 장 요약 -->
 <section id="exec">
   <div class="shead"><div class="k">Executive Summary</div><h2>한 장으로 보는 제안</h2>
-    <p>그래피는 소재만 공급하고 투자합니다. 운영·인허가·영업은 우리가 책임집니다. 제품이 팔릴 때마다 그래피의 소재 매출이 함께 늘어납니다.</p></div>
+    <p>핵심은 <b class="accent">그래피의 자본 투자(약 2~5억)</b>입니다. 그 대가로 소수지분 + 독점 소재 공급권을 드리고, 운영·인허가·영업은 우리가 책임집니다. 제품이 팔릴 때마다 그래피의 소재 매출도 함께 늘어납니다.</p></div>
   <div class="kpi">
+    <div class="kp"><div class="v">약 2~5억</div><div class="l">투자 요청액 (전략투자·협의)</div></div>
     <div class="kp"><div class="v">반복 매출</div><div class="l">기기마다 레진 + 카트리지 소재 소비</div></div>
-    <div class="kp"><div class="v">낮은 리스크</div><div class="l">운영·인허가 부담은 우리가</div></div>
     <div class="kp"><div class="v">지분 업사이드</div><div class="l">소수지분으로 완제품 가치 공유</div></div>
-    <div class="kp"><div class="v">브랜드 노출</div><div class="l">GraphyStyle = 그래피 이름 동반</div></div>
+    <div class="kp"><div class="v">낮은 리스크</div><div class="l">운영·인허가 부담은 우리가</div></div>
   </div>
   <div class="grid g3" style="margin-top:16px">
-    <div class="card hl"><h3><span class="k">①</span> 무엇을 제안하나</h3><p><b style="color:var(--ink)">소수지분 전략투자(SI)</b> + <b style="color:var(--ink)">독점/우선 소재 공급계약</b>. 운영·영업은 우리가, 소재와 자본은 그래피가 맡는 명확한 역할 분리.</p></div>
+    <div class="card hl"><h3><span class="k">①</span> 무엇을 요청하나</h3><p>그래피의 <b style="color:var(--ink)">전략투자 약 2~5억</b>(소수지분). 더불어 <b style="color:var(--ink)">독점/우선 소재 공급계약</b>. 운영·영업은 우리가, 소재와 자본은 그래피가 맡는 명확한 역할 분리.</p></div>
     <div class="card hl"><h3><span class="k">②</span> 왜 유리한가</h3><p>완제품이 한 대 팔릴 때마다 <b style="color:var(--ink)">소재가 반복 소비</b>됩니다. 그래피 매출이 사업 성장과 함께 <b style="color:var(--ink)">복리로</b> 커지는 구조.</p></div>
     <div class="card hl"><h3><span class="k">③</span> 왜 지금인가</h3><p>제품·임상·운영 시스템은 이미 준비 완료. <b style="color:var(--ink)">자본만 더하면 매출이 시작</b>됩니다. 초기 참여일수록 좋은 조건.</p></div>
   </div>
@@ -302,20 +306,20 @@
   <div class="shead"><div class="k">Deal Structure</div><h2>제안 구조 — 3개의 축</h2>
     <p>전략 메모의 <b class="accent">모델 C(소수지분 합작)</b>를 기반으로, 공급·자본·거버넌스를 분리해 설계했습니다.</p></div>
   <div class="grid g3">
+    <div class="itier feat">
+      <div class="ih"><div class="bdg">축 ① · 핵심 요청</div><div class="nm">전략투자 (자금)</div></div>
+      <div class="ib"><ul>
+        <li>투자 규모 <b>약 2~5억</b> (협의)</li>
+        <li>예시 지분 <b>약 15~25%</b> (협의)</li>
+        <li>신주 발행 — 사업 자본으로 직접 투입</li>
+      </ul></div>
+    </div>
     <div class="itier">
-      <div class="ih"><div class="bdg">축 ①</div><div class="nm">소재 공급계약</div></div>
+      <div class="ih"><div class="bdg">축 ②</div><div class="nm">독점 소재 공급계약</div></div>
       <div class="ib"><ul>
         <li><b>독점/우선 공급</b> 조항(경쟁 소재 차단)</li>
         <li>안정 <b>단가·MOQ·품질</b> 보장</li>
         <li>카트리지 원료까지 포함한 장기 공급</li>
-      </ul></div>
-    </div>
-    <div class="itier feat">
-      <div class="ih"><div class="bdg">축 ② · 핵심</div><div class="nm">전략투자 (소수지분)</div></div>
-      <div class="ib"><ul>
-        <li>예시 지분 <b>약 15~25%</b> (협의)</li>
-        <li>투자 규모 <b>약 2~5억</b> (협의)</li>
-        <li>신주 발행 — 사업 자본으로 직접 투입</li>
       </ul></div>
     </div>
     <div class="itier">
@@ -348,7 +352,7 @@
 <section id="ask">
   <div class="shead"><div class="k">The Ask</div><h2>제안 요약 & 다음 단계</h2></div>
   <div class="grid g3">
-    <div class="card hl"><h3>그래피에게 드리는 제안</h3><p>독점/우선 <b style="color:var(--ink)">소재 공급</b> + <b style="color:var(--ink)">소수지분 전략투자</b>(약 2~5억, 15~25% 협의). 낮은 리스크로 완제품 업사이드 공유.</p></div>
+    <div class="card hl"><h3>그래피에게 드리는 요청</h3><p><b style="color:var(--ink)">전략투자 약 2~5억</b>(소수지분 15~25% 협의)를 요청드립니다. 그 대가로 <b style="color:var(--ink)">독점/우선 소재 공급권</b> + 지분. 낮은 리스크로 완제품 업사이드 공유.</p></div>
     <div class="card hl"><h3>우리가 책임지는 것</h3><p>제품·인허가·브랜딩·영업·CS 전부. 그래피의 소재가 <b style="color:var(--ink)">반복 매출 사업</b>이 되도록 운영.</p></div>
     <div class="card hl"><h3>다음 단계</h3><p>① 소재 공급 조건 협의 → ② 투자 구조·지분 협의 → ③ 계약(브랜드·IP 귀속 명문화). 공급계약 선(先)체결도 가능.</p></div>
   </div>

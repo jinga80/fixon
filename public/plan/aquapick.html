@@ -183,11 +183,14 @@
     footer{border-top:1px solid #d8cfc4!important;color:#6a625a!important;padding:6mm 0 0!important}
     /* ===== 페이지 고른 분배 ===== */
     h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
-    .shead{break-after:avoid;page-break-after:avoid}
-    .grid,.kpi,.scen{break-inside:auto;page-break-inside:auto}
+    .shead{break-inside:avoid;break-after:avoid;page-break-inside:avoid;page-break-after:avoid}
+    /* 인쇄에서도 데스크톱 다단 유지(모바일 1단 스택 방지) */
+    .kpi{grid-template-columns:repeat(4,1fr)!important}
+    .g3,.scen{grid-template-columns:repeat(3,1fr)!important}
+    .g2{grid-template-columns:repeat(2,1fr)!important}
     .card,.kp,.itier,.sc,.callout,.lead-q,.cta,.tablewrap,table,tr,thead,.tl .t{break-inside:avoid;page-break-inside:avoid}
     p,li{orphans:2;widows:2}
-    .pgbreak{break-before:page;page-break-before:always}
+    .pgbreak{break-before:auto;page-break-before:auto}
     .printhead{display:block!important}
   }
   .printhead{display:none}
@@ -231,12 +234,13 @@
     <div class="eyebrow">Strategic Partner Proposal · 아쿠아픽(Aquapick) 대표님께 · 2026.06</div>
     <h1>아쿠아픽의 분사 기술이,<br/>치과가 처방하는 프리미엄 제품의 심장이 됩니다.</h1>
     <p class="lede">아쿠아픽은 구강 세정·분사(워터픽) 분야의 <b style="color:var(--ink)">전문 기업</b>입니다. GraphyStyle(Fixon)은 환자 맞춤 스플린트에 아쿠아픽의 분사장치를 결합한 잇몸 케어 기기입니다.
-      범용 가전 경쟁을 넘어 <b class="accent">치과가 처방하는 의료-인접 프리미엄 채널</b>로 함께 진입하는 파트너십을 제안드립니다.</p>
+      우리는 지금 <b style="color:var(--ink)">사업 자본을 모으고 있습니다.</b> 아쿠아픽께 <b class="accent">전략투자(약 1~3억)</b>를 요청드립니다 —
+      그 대가로 분사장치 우선/전용 공급권과 <b style="color:var(--ink)">치과 처방이라는 새로운 판로</b>를 함께 가져갑니다.</p>
     <div class="chips">
-      <span class="chip">관계 <b>부품 공급 + 전략 파트너십</b></span>
+      <span class="chip">투자 요청 <b>약 1~3억</b></span>
+      <span class="chip">대가 <b>전용 공급권 + 새 판로</b></span>
       <span class="chip">신규 판로 <b>치과 처방 채널</b></span>
       <span class="chip">매출 <b>대량 납품 + 소모품 반복</b></span>
-      <span class="chip">포지션 <b>프리미엄 전환</b></span>
     </div>
     <div class="heroact">
       <button class="printbtn" id="pdfBtn">🖨 A4 PDF로 저장 / 인쇄</button>
@@ -250,15 +254,15 @@
 <!-- 01 한 장 요약 -->
 <section id="exec">
   <div class="shead"><div class="k">Executive Summary</div><h2>한 장으로 보는 제안</h2>
-    <p>아쿠아픽의 분사장치가 우리 제품의 핵심 부품이 됩니다. 가격 경쟁의 가전 시장 대신, 의사가 처방하는 맞춤 제품의 부품으로 안정적·반복적 수요를 확보합니다.</p></div>
+    <p>핵심은 <b class="accent">아쿠아픽의 자본 투자(약 1~3억)</b>입니다. 그 대가로 분사장치 전용 공급권·소수지분·새 판로를 드립니다. 가격 경쟁의 가전 시장 대신, 의사가 처방하는 맞춤 제품의 부품으로 안정적·반복적 수요를 확보합니다.</p></div>
   <div class="kpi">
+    <div class="kp"><div class="v">약 1~3억</div><div class="l">투자 요청액 (전략투자·협의)</div></div>
     <div class="kp"><div class="v">신규 판로</div><div class="l">치과 B2B·처방 채널 — 가전 유통과 별개</div></div>
     <div class="kp"><div class="v">대량 납품</div><div class="l">도입 병원·환자 증가에 비례한 부품 수요</div></div>
     <div class="kp"><div class="v">소모품 반복</div><div class="l">노즐·교체부품 반복 매출</div></div>
-    <div class="kp"><div class="v">프리미엄 전환</div><div class="l">범용 가전 → 맞춤 케어의 핵심 부품</div></div>
   </div>
   <div class="grid g3" style="margin-top:16px">
-    <div class="card hl"><h3><span class="k">①</span> 무엇을 제안하나</h3><p><b style="color:var(--ink)">분사장치 우선/전용 공급 파트너십</b> + 선택적 <b style="color:var(--ink)">전략투자(소수지분)</b> 또는 공동개발. 단계적으로 확대 가능.</p></div>
+    <div class="card hl"><h3><span class="k">①</span> 무엇을 요청하나</h3><p>아쿠아픽의 <b style="color:var(--ink)">전략투자 약 1~3억</b>(소수지분). 더불어 <b style="color:var(--ink)">분사장치 우선/전용 공급 파트너십</b>. 운영·인허가·영업은 우리가.</p></div>
     <div class="card hl"><h3><span class="k">②</span> 왜 유리한가</h3><p>워터픽 가격 경쟁을 벗어나 <b style="color:var(--ink)">의사가 처방하는 맞춤 제품의 핵심 부품</b>으로 격상 + 안정적 대량·반복 수요.</p></div>
     <div class="card hl"><h3><span class="k">③</span> 왜 지금인가</h3><p>제품·임상·운영 준비 완료. 초기 파트너로 들어오면 <b style="color:var(--ink)">전용 모듈 공동개발·장기 공급권</b>을 선점.</p></div>
   </div>
@@ -299,26 +303,26 @@
 <!-- 04 제안 구조 -->
 <section id="structure" class="pgbreak">
   <div class="shead"><div class="k">Deal Structure</div><h2>제안 구조 — 단계적 파트너십</h2>
-    <p>부담 없이 <b class="accent">공급 파트너</b>로 시작해, 신뢰가 쌓이면 투자·공동개발로 확대하는 구조입니다.</p></div>
+    <p>핵심은 <b class="accent">아쿠아픽의 자본 투자(약 1~3억)</b>입니다. 부품 공급·공동개발을 함께 묶어 패키지로 제안드립니다.</p></div>
   <div class="grid g3">
     <div class="itier feat">
-      <div class="ih"><div class="bdg">1단계 · 시작</div><div class="nm">부품 공급 파트너십</div></div>
+      <div class="ih"><div class="bdg">축 ① · 핵심 요청</div><div class="nm">전략투자 (자금)</div></div>
       <div class="ib"><ul>
-        <li><b>우선/전용 공급</b> 계약</li>
-        <li>안정 <b>단가·물량·품질</b> 합의</li>
-        <li>투자 없이 바로 시작 가능</li>
-      </ul></div>
-    </div>
-    <div class="itier">
-      <div class="ih"><div class="bdg">2단계 · 확대</div><div class="nm">전략투자(선택)</div></div>
-      <div class="ib"><ul>
-        <li>소수지분 전략투자 (규모·지분 협의)</li>
-        <li>또는 <b>공동마케팅·공동개발 MOU</b></li>
+        <li>투자 규모 <b>약 1~3억</b> (협의)</li>
+        <li>소수지분 (지분율 협의)</li>
         <li>완제품 사업 업사이드 공유</li>
       </ul></div>
     </div>
     <div class="itier">
-      <div class="ih"><div class="bdg">3단계 · 심화</div><div class="nm">전용 모듈 공동개발</div></div>
+      <div class="ih"><div class="bdg">축 ②</div><div class="nm">부품 공급 파트너십</div></div>
+      <div class="ib"><ul>
+        <li><b>우선/전용 공급</b> 계약</li>
+        <li>안정 <b>단가·물량·품질</b> 합의</li>
+        <li>노즐·소모품 반복 공급</li>
+      </ul></div>
+    </div>
+    <div class="itier">
+      <div class="ih"><div class="bdg">축 ③</div><div class="nm">전용 모듈 공동개발</div></div>
       <div class="ib"><ul>
         <li>스플린트 결합 최적화 <b>전용 분사 모듈</b></li>
         <li>부품 IP는 <b>아쿠아픽</b>, 완제품 브랜드는 <b>우리</b></li>
@@ -326,7 +330,7 @@
       </ul></div>
     </div>
   </div>
-  <div class="callout good"><span class="ic">✓</span><div><b>리스크 없는 진입:</b> 1단계 <b>공급 계약만으로도</b> 아쿠아픽은 새 판로와 매출을 얻습니다. 투자·공동개발은 서로 확신이 생긴 뒤 선택적으로 진행합니다.</div></div>
+  <div class="callout good"><span class="ic">✓</span><div><b>유연한 진입:</b> 자본 투자 + 부품 공급을 함께 진행하는 것이 핵심입니다. 다만 부담이 크면 <b>공급 파트너십부터 시작</b>해 투자로 확대하는 단계적 접근도 가능합니다.</div></div>
   <p class="note">※ 지분율·투자 규모·공급 단가는 협의 전제이며 실제 조건은 협의·확정합니다.</p>
 </section>
 
@@ -347,7 +351,7 @@
 <section id="ask">
   <div class="shead"><div class="k">The Ask</div><h2>제안 요약 & 다음 단계</h2></div>
   <div class="grid g3">
-    <div class="card hl"><h3>아쿠아픽에게 드리는 제안</h3><p><b style="color:var(--ink)">분사장치 우선/전용 공급</b>으로 시작 → 신뢰 후 <b style="color:var(--ink)">전략투자·공동개발</b>로 확대. 새 판로·대량 수요·브랜드 격상.</p></div>
+    <div class="card hl"><h3>아쿠아픽에게 드리는 요청</h3><p><b style="color:var(--ink)">전략투자 약 1~3억</b>(소수지분 협의)을 요청드립니다. 그 대가로 <b style="color:var(--ink)">분사장치 전용 공급권 + 치과 처방 채널 + 공동개발</b>. 새 판로·대량 수요·브랜드 격상.</p></div>
     <div class="card hl"><h3>우리가 책임지는 것</h3><p>맞춤 스플린트·설계·인허가·브랜딩·영업·CS 전부. 아쿠아픽 부품이 <b style="color:var(--ink)">처방 채널 매출</b>이 되도록 운영.</p></div>
     <div class="card hl"><h3>다음 단계</h3><p>① 공급 단가·물량 협의 → ② (선택) 투자·공동개발 논의 → ③ 계약. 공급 파트너십 <b>선(先)시작</b> 가능.</p></div>
   </div>
