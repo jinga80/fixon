@@ -81,10 +81,13 @@
   .cta{background:linear-gradient(160deg,#fdf3ea,#fbf7f1);border:1px solid #e6c39e;border-radius:14px;padding:18px 22px;text-align:center;margin-top:14px}
   .cta h3{font-size:25px;font-weight:800}
   .cta p{color:var(--muted);margin:8px auto 0;max-width:760px;font-size:15.5px}
+  .cover2{display:grid;grid-template-columns:1.25fr .92fr;gap:38px;align-items:center;height:100%}
+  .covimg{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:1px solid var(--line2);box-shadow:0 14px 36px rgba(0,0,0,.22)}
   @media(max-width:760px){
     .deck{padding:16px 11px 40px}
     .slide{aspect-ratio:auto;min-height:auto;overflow:visible;padding:24px 20px 34px}
     .s-title{font-size:23px}.kpi{grid-template-columns:repeat(2,1fr)}.g3,.g4,.g2{grid-template-columns:1fr}
+    .cover2{grid-template-columns:1fr;gap:18px}.covimg{aspect-ratio:16/10}
     .slide .s-brand{display:none}
   }
   @media print{
@@ -98,6 +101,7 @@
     .g2{grid-template-columns:repeat(2,1fr)!important}
     .g3{grid-template-columns:repeat(3,1fr)!important}
     .g4,.kpi{grid-template-columns:repeat(4,1fr)!important}
+    .cover2{grid-template-columns:1.25fr .92fr!important}
   }
 </style>
 </head>
@@ -117,16 +121,20 @@
 
   <!-- 1 표지 -->
   <section class="slide">
-    <div class="s-head"><div class="s-eyebrow">Strategic Partner Proposal · 아쿠아픽(Aquapick) 대표님께 · 2026.06</div></div>
-    <div class="s-body">
-      <h1 class="s-title" style="font-size:38px;line-height:1.18">아쿠아픽의 분사 기술이,<br/>치과가 처방하는 프리미엄 제품의 심장이 됩니다.</h1>
-      <p class="s-sub" style="font-size:16px;margin-top:16px">아쿠아픽은 구강 세정·분사(워터픽) 분야의 <b>전문 기업</b>입니다. GraphyStyle(Fixon)은 환자 맞춤 스플린트에 아쿠아픽의 분사장치를 결합한 잇몸 케어 기기입니다.
-        우리는 지금 <b>사업 자본을 모으고 있습니다.</b> 아쿠아픽께 <b class="accent">전략투자(약 1~3억)</b>를 요청드립니다 — 대가로 전용 공급권과 <b>치과 처방이라는 새로운 판로</b>를.</p>
-      <div class="chips">
-        <span class="chip">투자 요청 <b>약 1~3억</b></span>
-        <span class="chip">대가 <b>전용 공급권 + 새 판로</b></span>
-        <span class="chip">신규 판로 <b>치과 처방 채널</b></span>
-        <span class="chip">매출 <b>대량 납품 + 소모품 반복</b></span>
+    <div class="s-body" style="gap:0">
+      <div class="cover2">
+        <div>
+          <div class="s-eyebrow">Strategic Partner Proposal · 아쿠아픽(Aquapick) 대표님께 · 2026.06</div>
+          <h1 class="s-title" style="font-size:34px;line-height:1.2;margin-top:14px">아쿠아픽의 분사 기술이,<br/>치과가 처방하는 프리미엄 제품의 심장이 됩니다.</h1>
+          <p class="s-sub" style="margin-top:16px">아쿠아픽은 구강 세정·분사(워터픽) 분야의 <b>전문 기업</b>입니다. GraphyStyle(Fixon)은 맞춤 스플린트에 아쿠아픽 분사장치를 결합한 기기입니다.
+            우리는 지금 <b>사업 자본을 모으고 있습니다.</b> 아쿠아픽께 <b class="accent">전략투자(약 1~3억)</b>를 요청드립니다.</p>
+          <div class="chips">
+            <span class="chip">투자 요청 <b>약 1~3억</b></span>
+            <span class="chip">대가 <b>전용 공급권 + 새 판로</b></span>
+            <span class="chip">신규 판로 <b>치과 처방</b></span>
+          </div>
+        </div>
+        <img class="covimg" src="/point-shower/point-shower-결합사진.jpg" alt="아쿠아픽 분사장치가 결합된 GraphyStyle 제품" />
       </div>
     </div>
     <span class="s-brand">GraphyStyle · Confidential</span><span class="s-no">01</span>

@@ -81,10 +81,13 @@
   .cta{background:linear-gradient(160deg,#fdf3ea,#fbf7f1);border:1px solid #e6c39e;border-radius:14px;padding:18px 22px;text-align:center;margin-top:14px}
   .cta h3{font-size:25px;font-weight:800}
   .cta p{color:var(--muted);margin:8px auto 0;max-width:760px;font-size:15.5px}
+  .cover2{display:grid;grid-template-columns:1.25fr .92fr;gap:38px;align-items:center;height:100%}
+  .covimg{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:1px solid var(--line2);box-shadow:0 14px 36px rgba(0,0,0,.22)}
   @media(max-width:760px){
     .deck{padding:16px 11px 40px}
     .slide{aspect-ratio:auto;min-height:auto;overflow:visible;padding:24px 20px 34px}
     .s-title{font-size:23px}.kpi{grid-template-columns:repeat(2,1fr)}.g3,.g4,.g2{grid-template-columns:1fr}
+    .cover2{grid-template-columns:1fr;gap:18px}.covimg{aspect-ratio:16/10}
     .slide .s-brand{display:none}
   }
   @media print{
@@ -98,6 +101,7 @@
     .g2{grid-template-columns:repeat(2,1fr)!important}
     .g3{grid-template-columns:repeat(3,1fr)!important}
     .g4,.kpi{grid-template-columns:repeat(4,1fr)!important}
+    .cover2{grid-template-columns:1.25fr .92fr!important}
   }
 </style>
 </head>
@@ -117,16 +121,20 @@
 
   <!-- 1 표지 -->
   <section class="slide">
-    <div class="s-head"><div class="s-eyebrow">Strategic Partner Proposal · 그래피(Graphy) 대표님께 · 2026.06</div></div>
-    <div class="s-body">
-      <h1 class="s-title" style="font-size:40px;line-height:1.15">그래피의 소재가,<br/>매출이 반복되는 완제품 사업이 됩니다.</h1>
-      <p class="s-sub" style="font-size:16px;margin-top:16px">그래피는 형상기억 레진 등 <b>소재의 강자</b>입니다. GraphyStyle(Fixon)은 그 소재로 만든 환자 맞춤 잇몸 케어 기기입니다.
-        우리는 지금 <b>사업 자본을 모으고 있습니다.</b> 그래피께 <b class="accent">전략투자(약 2~5억)</b>를 요청드립니다 — 운영은 우리가, 그래피는 소재 공급과 자본 참여.</p>
-      <div class="chips">
-        <span class="chip">투자 요청 <b>약 2~5억</b></span>
-        <span class="chip">대가 <b>소수지분 + 소재 반복매출</b></span>
-        <span class="chip">운영 리스크 <b>낮음</b></span>
-        <span class="chip">브랜드 <b>GraphyStyle</b></span>
+    <div class="s-body" style="gap:0">
+      <div class="cover2">
+        <div>
+          <div class="s-eyebrow">Strategic Partner Proposal · 그래피(Graphy) 대표님께 · 2026.06</div>
+          <h1 class="s-title" style="font-size:37px;line-height:1.16;margin-top:14px">그래피의 소재가,<br/>매출이 반복되는 완제품 사업이 됩니다.</h1>
+          <p class="s-sub" style="margin-top:16px">그래피는 형상기억 레진 등 <b>소재의 강자</b>입니다. GraphyStyle(Fixon)은 그 소재로 만든 환자 맞춤 잇몸 케어 기기입니다.
+            우리는 지금 <b>사업 자본을 모으고 있습니다.</b> 그래피께 <b class="accent">전략투자(약 2~5억)</b>를 요청드립니다.</p>
+          <div class="chips">
+            <span class="chip">투자 요청 <b>약 2~5억</b></span>
+            <span class="chip">대가 <b>소수지분 + 소재 반복매출</b></span>
+            <span class="chip">브랜드 <b>GraphyStyle</b></span>
+          </div>
+        </div>
+        <img class="covimg" src="/brand/point-shower-product.jpg" alt="GraphyStyle 제품 — 그래피 소재로 만든 맞춤 트레이" />
       </div>
     </div>
     <span class="s-brand">GraphyStyle · Confidential</span><span class="s-no">01</span>

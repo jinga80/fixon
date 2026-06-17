@@ -133,13 +133,21 @@
 
   .cta{background:linear-gradient(160deg,#fdf3ea,#fbf7f1);border:1px solid #e6c39e;border-radius:14px;padding:18px 22px;text-align:center;margin-top:14px}
   .cta h3{font-size:25px;font-weight:800}
-  .cta p{color:var(--muted);margin:7px auto 0;max-width:680px;font-size:13px}
+  .cta p{color:var(--muted);margin:8px auto 0;max-width:760px;font-size:15.5px}
+  /* 제품 사진 */
+  .shot{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;border:1px solid var(--line2);display:block;background:var(--card2)}
+  .shotfig{margin:0}
+  .shotfig figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;font-weight:600}
+  .shotfig figcaption b{color:var(--ink)}
+  .cover2{display:grid;grid-template-columns:1.25fr .92fr;gap:38px;align-items:center;height:100%}
+  .covimg{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:1px solid var(--line2);box-shadow:0 14px 36px rgba(0,0,0,.22)}
 
   @media(max-width:760px){
     .deck{padding:16px 11px 40px}
     .slide{aspect-ratio:auto;min-height:auto;overflow:visible;padding:24px 20px 34px}
     .s-title{font-size:23px}.kpi{grid-template-columns:repeat(2,1fr)}
     .g3,.g4{grid-template-columns:1fr}.g2{grid-template-columns:1fr}
+    .cover2{grid-template-columns:1fr;gap:18px}.covimg{aspect-ratio:16/10}
     .htl{grid-template-columns:1fr;gap:18px}.htl::before{display:none}
     .ht{padding-top:0;padding-left:22px}.ht::before{left:0;top:2px}
     .slide .s-brand{display:none}
@@ -162,6 +170,7 @@
     .g3{grid-template-columns:repeat(3,1fr)!important}
     .g4,.kpi{grid-template-columns:repeat(4,1fr)!important}
     .htl{grid-template-columns:repeat(5,1fr)!important}
+    .cover2{grid-template-columns:1.25fr .92fr!important}
   }
 </style>
 </head>
@@ -182,17 +191,21 @@
 
   <!-- 1 표지 -->
   <section class="slide">
-    <div class="s-head"><div class="s-eyebrow">Investment Proposal · 투자제안 사업계획서 · 2026.06</div></div>
-    <div class="s-body">
-      <h1 class="s-title" style="font-size:42px;line-height:1.15">내 입에 꼭 맞는 잇몸 케어,<br/>치과가 처방하는 새 카테고리.</h1>
-      <p class="s-sub" style="font-size:16px;margin-top:16px">GraphyStyle(Fixon)은 현직 치과의사가 개발한 <b>환자 맞춤형 잇몸 케어 기기</b>입니다.
-        제품·설계·브랜드·임상·운영 시스템은 이미 갖췄고, 마지막 한 조각 <b class="accent">자본</b>을 채우면 매출이 시작됩니다.
-        <b>1억 · 3억 · 5억</b> 세 가지 라운드를 제안합니다.</p>
-      <div class="chips">
-        <span class="chip">제품 <b>맞춤 잇몸 케어 기기</b></span>
-        <span class="chip">환자가 <b>40만</b> · 납품 <b>&lt;20만</b></span>
-        <span class="chip">소재 <b>Graphy</b></span>
-        <span class="chip">시장 <b>약 7.5조→15조원</b></span>
+    <div class="s-body" style="gap:0">
+      <div class="cover2">
+        <div>
+          <div class="s-eyebrow">Investment Proposal · 투자제안 사업계획서 · 2026.06</div>
+          <h1 class="s-title" style="font-size:40px;line-height:1.16;margin-top:14px">내 입에 꼭 맞는 잇몸 케어,<br/>치과가 처방하는 새 카테고리.</h1>
+          <p class="s-sub" style="margin-top:16px">GraphyStyle(Fixon)은 현직 치과의사가 개발한 <b>환자 맞춤형 잇몸 케어 기기</b>입니다.
+            제품·설계·브랜드·임상·운영 시스템은 이미 갖췄고, 마지막 한 조각 <b class="accent">자본</b>을 채우면 매출이 시작됩니다.
+            <b>1억 · 3억 · 5억</b> 세 가지 라운드를 제안합니다.</p>
+          <div class="chips">
+            <span class="chip">환자가 <b>40만</b> · 납품 <b>&lt;20만</b></span>
+            <span class="chip">소재 <b>Graphy</b></span>
+            <span class="chip">시장 <b>약 7.5조→15조원</b></span>
+          </div>
+        </div>
+        <img class="covimg" src="/brand/point-shower-product.jpg" alt="GraphyStyle 제품 — 맞춤 트레이와 분사장치" />
       </div>
     </div>
     <span class="s-brand">GraphyStyle · Confidential</span><span class="s-no">01</span>
@@ -239,8 +252,10 @@
     <div class="s-body">
       <div class="grid g2" style="align-items:start">
         <div>
-          <div class="grid g2"><div class="pc"><div class="t">구성 ①</div><h4>맞춤 스플린트</h4><p>환자 구강 본 기반, 의사가 노즐 위치 설계. 소재는 그래피.</p></div>
-            <div class="pc"><div class="t">구성 ②</div><h4>분사 장치</h4><p>아쿠아픽 기성품 활용(원가 ~10만원), 약액 공급.</p></div></div>
+          <div class="grid g2">
+            <figure class="shotfig"><img class="shot" src="/point-shower/point-shower-결합사진.jpg" alt="결합 상태 — 맞춤 트레이에 분사장치 결합"/><figcaption><b>① 맞춤 스플린트</b> + <b>② 분사장치</b> 결합</figcaption></figure>
+            <figure class="shotfig"><img class="shot" src="/point-shower/point-shower-분리사진.jpg" alt="구성 분리 — 트레이·노즐·본체"/><figcaption>구성 분리 — 트레이·노즐·본체(아쿠아픽)</figcaption></figure>
+          </div>
           <div class="journey"><span class="jn">진료<span class="ar">→</span></span><span class="jn">의사 추천<span class="ar">→</span></span><span class="jn">스캔·인상<span class="ar">→</span></span><span class="jn">노즐 설계<span class="ar">→</span></span><span class="jn">제작<span class="ar">→</span></span><span class="jn">환자 사용</span></div>
         </div>
         <div class="card"><h3>차별점 (Moat)</h3><ul>
