@@ -124,8 +124,8 @@
 
   /* 가로 로드맵 */
   .htl{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative;margin-top:8px}
-  .htl::before{content:"";position:absolute;left:2%;right:2%;top:9px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--brand),var(--gold))}
-  .ht{position:relative;padding-top:26px}
+  .htline{position:absolute;left:2%;right:2%;top:9px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--brand),var(--gold));z-index:0}
+  .ht{position:relative;padding-top:26px;z-index:1}
   .ht::before{content:"";position:absolute;left:0;top:3px;width:15px;height:15px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 0 0 2px var(--brand)}
   .ht .q{font-size:13px;font-weight:800;color:var(--brand)}
   .ht h4{font-size:15.5px;margin:3px 0 4px}
@@ -148,7 +148,7 @@
     .s-title{font-size:23px}.kpi{grid-template-columns:repeat(2,1fr)}
     .g3,.g4{grid-template-columns:1fr}.g2{grid-template-columns:1fr}
     .cover2{grid-template-columns:1fr;gap:18px}.covimg{aspect-ratio:16/10}
-    .htl{grid-template-columns:1fr;gap:18px}.htl::before{display:none}
+    .htl{grid-template-columns:1fr;gap:18px}.htline{display:none}
     .ht{padding-top:0;padding-left:22px}.ht::before{left:0;top:2px}
     .slide .s-brand{display:none}
   }
@@ -156,6 +156,7 @@
   /* ===== 인쇄: A4 가로, 1슬라이드 = 1페이지 ===== */
   @media print{
     @page{ size:A4 landscape; margin:0 }
+    *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
     html,body{background:#fff!important}
     .bar{display:none!important}
     .deck{max-width:none!important;margin:0!important;padding:0!important}
@@ -389,6 +390,7 @@
       <div class="s-sub">자금 집행은 단계별 마일스톤과 연동합니다 — 달성할 때마다 다음 단계로.</div></div>
     <div class="s-body">
       <div class="htl">
+        <div class="htline"></div>
         <div class="ht"><div class="q">M0 · 클로징</div><h4>투자 집행 + 소재계약</h4><p>라운드 클로징, 그래피 소재 안정공급·독점 조항 확정, CEO 후보 검토.</p></div>
         <div class="ht"><div class="q">M1~2</div><h4>Daily 출시 · 파운딩 닥터</h4><p>공산품 모드 출시, 통신판매·구매안전 셋업, 초기 의사 모집·첫 매출.</p></div>
         <div class="ht"><div class="q">M3~6</div><h4>매출 확장 · 구독</h4><p>카트리지 구독 시작, 채널 확대, 의료기기 인허가 사전상담·RA.</p></div>
