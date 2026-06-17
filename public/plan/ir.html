@@ -256,8 +256,13 @@
     .cta p{color:#3a342e!important}.btns{display:none!important}
     footer{border-top:1px solid #d8cfc4!important;color:#6a625a!important;padding:6mm 0 0!important}
     .src a{color:#6a625a!important}
-    .shead{page-break-after:avoid}
-    .pgbreak{page-break-before:always}
+    /* ===== 페이지 고른 분배 ===== */
+    h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
+    .shead{break-after:avoid;page-break-after:avoid}
+    .grid,.kpi,.tiers3,.team,.price3,.pcompose{break-inside:auto;page-break-inside:auto}
+    .card,.kp,.itier,.mem,.pc,.prc,.callout,.lead-q,.cta,.tablewrap,table,tr,thead,.tl .t,.uof{break-inside:avoid;page-break-inside:avoid}
+    p,li{orphans:2;widows:2}
+    .pgbreak{break-before:page;page-break-before:always}
     /* 인쇄 머리글 */
     .printhead{display:block!important}
   }
@@ -272,7 +277,7 @@
   <nav>
     <a href="index.html">홈</a>
     <a href="strategy.html">전략</a>
-    <a href="ir.html" aria-current="page">사업계획서</a>
+    <a href="proposals.html" aria-current="page">제안서</a>
     <a href="funding.html">펀딩</a>
     <a href="builder.html">빌더</a>
     <a href="action.html">실행</a>
@@ -675,6 +680,7 @@
   var b1=document.getElementById('pdfBtn'), b2=document.getElementById('pdfBtn2');
   if(b1) b1.addEventListener('click',doPrint);
   if(b2) b2.addEventListener('click',doPrint);
+  if(/[?&]print=1/.test(location.search)){ window.addEventListener('load',function(){ setTimeout(doPrint,700); }); }
 })();
 </script>
 <script src="gate.js"></script>

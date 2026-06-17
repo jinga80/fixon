@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>GraphyStyle · 제안서 모음</title>
+<meta name="theme-color" content="#14110f" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#14110f;--bg2:#1b1714;--card:#211b17;--card2:#272019;
+    --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+    --ink:#f4ece3;--muted:#b6a899;--dim:#8a7d70;
+    --brand:#ff6b2b;--brand2:#ff8a4c;--gold:#e0a458;--teal:#56b9c4;--green:#5fbf8f;--violet:#b08ad6;--blue:#6f9be0;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,system-ui,-apple-system,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  h1,h2,h3,h4{line-height:1.25;letter-spacing:-.015em;margin:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .muted{color:var(--muted)}.dim{color:var(--dim)}.accent{color:var(--brand2)}
+
+  .gnav{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;padding:9px 16px;
+    background:rgba(20,17,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .gnav .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;flex:none}
+  .gnav .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,107,43,.15)}
+  .gnav .brand small{font-weight:600;color:var(--dim);letter-spacing:.08em;font-size:10px}
+  .gnav nav{display:flex;gap:3px;margin-left:auto;flex:none}
+  .gnav a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:9px;white-space:nowrap}
+  .gnav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .gnav a[aria-current]{color:#fff;background:rgba(255,107,43,.16);box-shadow:inset 0 0 0 1px rgba(255,107,43,.3)}
+
+  .hero{padding:54px 0 30px;background:radial-gradient(90% 70% at 85% -10%,rgba(255,107,43,.15),transparent 60%),radial-gradient(70% 60% at 0% 0%,rgba(224,164,88,.09),transparent 55%)}
+  .hero h1{font-size:clamp(29px,5.4vw,48px);font-weight:800;margin:13px 0 0}
+  .hero .lede{font-size:clamp(15px,2.2vw,18px);color:var(--muted);margin-top:16px;max-width:660px}
+
+  section{padding:40px 0;border-top:1px solid var(--line)}
+  .shead{margin-bottom:22px}
+  .shead .k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand)}
+  .shead h2{font-size:clamp(21px,3.4vw,29px);font-weight:800;margin:6px 0 8px}
+  .shead p{font-size:15px;color:var(--muted);max-width:700px;margin:0}
+
+  /* proposal deck */
+  .deck{display:grid;grid-template-columns:1fr;gap:16px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
+  @media(max-width:760px){.pcard{grid-template-columns:1fr;gap:16px;align-items:stretch}}
+  .pcard.feat{background:linear-gradient(160deg,#2a201a,#211b17);border-color:rgba(255,107,43,.3)}
+  .pcard .ic{width:56px;height:56px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:27px;background:var(--card2);border:1px solid var(--line2);flex:none}
+  .pcard .bdg{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:rgba(224,164,88,.12);border:1px solid rgba(224,164,88,.28);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+  .pcard.feat .bdg{color:var(--brand2);background:rgba(255,107,43,.12);border-color:rgba(255,107,43,.3)}
+  .pcard h3{font-size:20px;font-weight:800}
+  .pcard .who{font-size:12.5px;color:var(--teal);font-weight:600;margin-top:2px}
+  .pcard .msg{font-size:14px;color:var(--muted);margin-top:8px}
+  .pcard .pts{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .pcard .pts span{font-size:11.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+  .acts{display:flex;flex-direction:column;gap:8px;min-width:158px}
+  @media(max-width:760px){.acts{flex-direction:row;flex-wrap:wrap;min-width:0}}
+  .abtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;border-radius:11px;font-size:13.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .abtn.open{color:#fff;background:linear-gradient(135deg,#ff7a35,#ff5e1a);box-shadow:0 8px 22px rgba(255,94,26,.24)}
+  .abtn.pdf{color:var(--ink);background:transparent;border:1px solid var(--line2)}
+  .abtn:active{transform:translateY(1px)}
+  @media(max-width:760px){.abtn{flex:1}}
+
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--card2);font-weight:700;font-size:13px}
+  tbody tr:last-child td{border-bottom:0}
+  td b{color:var(--ink)}
+  td a{color:var(--brand2);font-weight:700;text-decoration:none}
+
+  .callout{border-radius:13px;padding:15px 17px;border:1px solid;display:flex;gap:12px;align-items:flex-start;font-size:14px;margin-top:18px}
+  .callout .ic{flex:none}
+  .callout.info{background:rgba(224,164,88,.07);border-color:rgba(224,164,88,.28);color:#f0dcc0}.callout.info b{color:var(--gold)}
+
+  footer{padding:34px 0 64px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+  .note{font-size:12.5px;color:var(--dim);margin-top:10px}
+</style>
+</head>
+<body>
+
+<div class="gnav">
+  <span class="brand"><span class="dot"></span>GraphyStyle <small>CONFIDENTIAL</small></span>
+  <nav>
+    <a href="index.html">홈</a>
+    <a href="strategy.html">전략</a>
+    <a href="proposals.html" aria-current="page">제안서</a>
+    <a href="funding.html">펀딩</a>
+    <a href="builder.html">빌더</a>
+    <a href="action.html">실행</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Proposals · 제안서 모음 · 2026.06</div>
+    <h1>상황에 맞는 제안서를<br/>골라 열고, PDF로 건넨다.</h1>
+    <p class="lede">대상별로 메시지를 달리한 제안서를 한곳에 모았습니다. 필요한 자리에서 해당 링크로 들어가 설명하고,
+      <b style="color:var(--ink)">PDF 버튼 하나로 인쇄·다운로드</b>해 전달하세요.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="shead"><div class="k">All Proposals</div><h2>제안서 목록</h2>
+    <p>각 카드의 <b class="accent">제안서 열기</b>로 화면에 띄워 설명하고, <b class="accent">PDF 저장</b>으로 인쇄 대화상자를 띄워 PDF로 내보냅니다.</p></div>
+
+  <div class="deck">
+    <!-- IR -->
+    <div class="pcard feat">
+      <div class="ic">📈</div>
+      <div>
+        <span class="bdg">대상 · 일반 투자자 / 엔젤</span>
+        <h3>투자제안 사업계획서 (IR)</h3>
+        <div class="who">엔젤·VC·전략적 투자자 등 외부 투자 유치용</div>
+        <div class="msg">제품·시장·팀·자금 사용처를 통합한 메인 사업계획서. <b style="color:var(--ink)">1·3·5억 단계별 라운드</b>와 예시 지분율 제시.</div>
+        <div class="pts"><span>1·3·5억 라운드</span><span>팀(CEO 영입)</span><span>자금 사용처</span><span>로드맵</span></div>
+      </div>
+      <div class="acts">
+        <a class="abtn open" href="ir.html">제안서 열기 →</a>
+        <a class="abtn pdf" href="ir.html?print=1">📄 PDF 저장</a>
+      </div>
+    </div>
+
+    <!-- 그래피 -->
+    <div class="pcard">
+      <div class="ic">🧪</div>
+      <div>
+        <span class="bdg">대상 · 그래피 대표</span>
+        <h3>그래피 전략투자·소재 파트너십 제안</h3>
+        <div class="who">소재 공급사 → 전략 투자자 전환 제안</div>
+        <div class="msg">"소재를 파는 회사에서, 사업과 함께 크는 회사로." <b style="color:var(--ink)">독점/우선 소재 공급 + 소수지분 전략투자</b>로 반복 매출·낮은 리스크.</div>
+        <div class="pts"><span>독점 소재 공급</span><span>소수지분 15~25%</span><span>반복 매출</span><span>낮은 리스크</span></div>
+      </div>
+      <div class="acts">
+        <a class="abtn open" href="graphy.html">제안서 열기 →</a>
+        <a class="abtn pdf" href="graphy.html?print=1">📄 PDF 저장</a>
+      </div>
+    </div>
+
+    <!-- 아쿠아픽 -->
+    <div class="pcard">
+      <div class="ic">💧</div>
+      <div>
+        <span class="bdg">대상 · 아쿠아픽 대표</span>
+        <h3>아쿠아픽 부품 파트너십·전략투자 제안</h3>
+        <div class="who">분사장치 공급사 → 전략 파트너 전환 제안</div>
+        <div class="msg">"가격 경쟁의 가전에서, 가치 경쟁의 처방 시장으로." <b style="color:var(--ink)">분사장치 우선/전용 공급 + 전략투자·공동개발</b>로 새 판로 확보.</div>
+        <div class="pts"><span>치과 처방 채널</span><span>대량 납품</span><span>소모품 반복</span><span>단계적 투자</span></div>
+      </div>
+      <div class="acts">
+        <a class="abtn open" href="aquapick.html">제안서 열기 →</a>
+        <a class="abtn pdf" href="aquapick.html?print=1">📄 PDF 저장</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info"><span class="ic">◆</span><div><b>PDF 저장 방법:</b> "📄 PDF 저장"을 누르면 해당 제안서가 열리며 <b>인쇄 대화상자</b>가 자동으로 뜹니다. 대상(프린터)에서 <b>"PDF로 저장"</b>을 선택하면 A4 PDF 파일로 내려받습니다. (자동으로 안 뜨면 페이지 상단의 🖨 버튼을 누르세요.)</div></div>
+</section>
+
+<section>
+  <div class="shead"><div class="k">Which one?</div><h2>상황별 — 어떤 제안서를 쓸까</h2>
+    <p>만나는 상대에 따라 들어가는 링크가 달라집니다.</p></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>이런 자리라면</th><th>이 제안서</th><th>핵심 메시지</th></tr></thead>
+      <tbody>
+        <tr><td>엔젤·VC·외부 투자자 미팅</td><td><b><a href="ir.html">투자제안 IR</a></b></td><td>1·3·5억 중 택1, 준비된 사업에 자본만 더하면 매출</td></tr>
+        <tr><td>그래피 대표와 관계 재정의</td><td><b><a href="graphy.html">그래피 제안</a></b></td><td>소재 공급 + 소수지분 — 운영 부담 없이 반복 매출</td></tr>
+        <tr><td>아쿠아픽 대표와 부품 협력</td><td><b><a href="aquapick.html">아쿠아픽 제안</a></b></td><td>공급으로 시작 → 투자·공동개발로 확대, 새 판로</td></tr>
+        <tr><td>사업 전체 배경 설명이 필요할 때</td><td><b><a href="strategy.html">전략 메모</a></b> · <b><a href="index.html">종합 허브</a></b></td><td>그래피 재편·시장·규제·로드맵 전반</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div><b>GraphyStyle</b> · 제안서 모음 · 2026.06 · 핵심 관계자 한정 · 외부 유출 금지</div>
+  <div class="note">각 제안서의 수치·조건은 협의 전제의 계획값이며 법률·세무·투자 자문이 아닙니다.</div>
+</footer>
+
+<script src="gate.js"></script>
+</body>
+</html>
