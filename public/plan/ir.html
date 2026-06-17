@@ -202,6 +202,13 @@
      ============================================================ */
   @media print{
     @page{ size:A4; margin:14mm 13mm }
+    /* 인쇄용 팔레트로 CSS 변수 전체 재정의 — 인라인 color:var(--ink) 등도 한 번에 가독성 확보 */
+    :root{
+      --bg:#fff;--bg2:#fff;--card:#fff;--card2:#f7f2ec;
+      --line:#d8cfc4;--line2:#cfc6ba;
+      --ink:#0f0c0a;--muted:#3a342e;--dim:#6a625a;
+      --brand:#c2410c;--brand2:#c2410c;--gold:#9a5a1e;--teal:#1f6f78;--green:#1f7a4d;
+    }
     html,body{background:#fff!important;color:#16120f!important;overflow:visible!important}
     body{padding:0!important;font-size:10.5pt;line-height:1.5}
     .gnav,.metro,.mtoggle,.mbackdrop,.noprint,.heroact{display:none!important}
