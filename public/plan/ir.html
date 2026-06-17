@@ -252,13 +252,16 @@
     .pill.no{background:#fdeeeb!important;color:#7a1f12!important;border:1px solid #f0bdb4!important}
 
     .tl::before{background:#d8cfc4!important}.tl .t::before{background:#c2410c!important;box-shadow:none!important}
-    .cta{background:#fbf6f0!important;border:1px solid #e0b48a!important;color:#16120f!important;page-break-inside:avoid}
+    .cta{background:#fbf6f0!important;border:1px solid #e0b48a!important;color:#16120f!important;page-break-inside:avoid;padding:18px!important;margin-top:14px!important}
     .cta p{color:#3a342e!important}.btns{display:none!important}
-    footer{border-top:1px solid #d8cfc4!important;color:#6a625a!important;padding:6mm 0 0!important}
+    footer{border-top:1px solid #d8cfc4!important;color:#6a625a!important;padding:5mm 0 0!important;break-inside:avoid;page-break-inside:avoid}
     .src a{color:#6a625a!important}
     /* ===== 페이지 고른 분배 ===== */
     h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
     .shead{break-inside:avoid;break-after:avoid;page-break-inside:avoid;page-break-after:avoid}
+    /* 섹션을 통째로 유지 → 페이지가 '내용(섹션) 단위'로 끊기게 (콜아웃 고립·제목 분리 방지) */
+    section{break-inside:avoid;page-break-inside:avoid}
+    section{padding:4.5mm 0!important}
     /* 인쇄에서도 데스크톱 다단 유지(모바일 1단 스택 방지 → 페이지 압축·여백 최소화) */
     .kpi{grid-template-columns:repeat(4,1fr)!important}
     .g3,.tiers3,.team,.price3{grid-template-columns:repeat(3,1fr)!important}
