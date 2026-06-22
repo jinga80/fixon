@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>덴티홈 솔루션 · 사업계획서 (1장 + 별첨)</title>
+<meta name="theme-color" content="#0c1417" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    /* 클리니컬 라이트 팔레트 (메디컬 틸 + 골드) */
+    --ink:#13201f;--muted:#4f635f;--dim:#85948f;--line:#e3ebe8;--line2:#cfdcd7;
+    --brand:#0e7c86;--brand2:#13a0ac;--deep:#0a4a52;--gold:#9a6a22;--green:#1f7a4d;--red:#c0392b;--amber:#b06a14;
+    --card:#f6faf9;--card2:#eef5f3;--tint:#e6f3f2;--page:#ffffff;
+    --deckbg:#0c1417;
+    --PW:820px; /* 페이지 기준 폭 (A4 세로 비율) */
+  }
+  *{box-sizing:border-box}[hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--deckbg);color:var(--ink);font-family:Pretendard,system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  h1,h2,h3,h4{line-height:1.18;letter-spacing:-.015em;margin:0}
+  b{font-weight:700}
+  .accent{color:var(--brand)}.muted{color:var(--muted)}.dim{color:var(--dim)}
+
+  /* ===== 상단 바 (화면 전용) ===== */
+  .bar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;padding:10px 18px;
+    background:rgba(12,20,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);color:#eaf3f1}
+  .bar .brand{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;white-space:nowrap}
+  .bar .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--brand2);box-shadow:0 0 0 4px rgba(19,160,172,.18)}
+  .bar .brand small{font-weight:600;color:#7e918c;letter-spacing:.08em;font-size:10px}
+  .bar nav{display:flex;gap:3px;margin-left:auto}
+  .bar nav a,.bar .pbtn{font-size:13px;font-weight:600;color:#9fb2ad;text-decoration:none;padding:7px 13px;border-radius:9px;white-space:nowrap;border:0;background:transparent;cursor:pointer}
+  .bar nav a:hover,.bar .pbtn:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .bar .pbtn{color:#fff;background:linear-gradient(135deg,#13a0ac,#0e7c86)}
+  .bar .count{font-size:12px;color:#7e918c;font-weight:600;margin-left:6px}
+
+  /* ===== 덱 / 페이지(A4 세로) ===== */
+  .deck{max-width:var(--PW);margin:0 auto;padding:24px 16px 60px}
+  .page{position:relative;width:100%;aspect-ratio:210/297;background:var(--page);
+    border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.42);
+    margin:0 0 24px;padding:34px 38px 40px;overflow:hidden;display:flex;flex-direction:column}
+  .page .p-no{position:absolute;right:18px;bottom:12px;font-size:10.5px;font-weight:700;color:var(--dim)}
+  .page .p-brand{position:absolute;left:38px;bottom:12px;font-size:9.5px;font-weight:800;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+
+  /* 머리글 */
+  .ph{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+    padding-bottom:13px;margin-bottom:15px;border-bottom:2px solid var(--ink)}
+  .ph .lab{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:800}
+  .ph h1{font-size:33px;font-weight:800;margin:5px 0 0;letter-spacing:-.02em}
+  .ph h1 .en{font-size:17px;font-weight:700;color:var(--dim);letter-spacing:.02em;margin-left:7px}
+  .ph .tag{font-size:13.5px;color:var(--muted);margin-top:6px;font-weight:500}
+  .ph .meta{flex:none;text-align:right;font-size:10.5px;color:var(--dim);line-height:1.7}
+  .ph .meta b{color:var(--brand);font-weight:800}
+  .ph .meta .conf{display:inline-block;margin-top:4px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line2);border-radius:999px;padding:2px 8px}
+
+  .pbody{flex:1;display:flex;flex-direction:column;gap:13px;min-height:0}
+
+  /* 섹션 라벨 */
+  .seclab{display:flex;align-items:center;gap:9px;margin:0 0 2px}
+  .seclab .n{flex:none;width:21px;height:21px;border-radius:6px;background:var(--brand);color:#fff;
+    font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .seclab h2{font-size:15.5px;font-weight:800;letter-spacing:-.01em}
+  .seclab .sub{font-size:11.5px;color:var(--dim);font-weight:600;margin-left:2px}
+
+  /* 개발자 */
+  .dev{background:linear-gradient(150deg,#eef6f5,#f6faf9);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .dev .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .dev .nm{font-size:19px;font-weight:800}
+  .dev .org{font-size:13px;color:var(--brand);font-weight:700}
+  .dev .edu{font-size:12px;color:var(--dim);font-weight:600}
+  .pat{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .pat .pt{font-size:11.5px;background:#fff;border:1px solid var(--line2);border-radius:999px;padding:4px 11px;color:var(--muted)}
+  .pat .pt b{color:var(--ink)}
+  .pat .pt .y{color:var(--brand);font-weight:800}
+  .pat .more{font-size:11.5px;color:var(--dim);align-self:center;font-weight:700}
+
+  /* 제품 3카드 */
+  .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;display:flex;flex-direction:column}
+  .prod.lead{border-color:#9fd0d0;box-shadow:0 0 0 1px #bfe0e0}
+  .prod .pimg{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--card2);border-bottom:1px solid var(--line);display:block}
+  .prod .pico{width:100%;aspect-ratio:4/3;background:linear-gradient(160deg,#0e7c86,#0a4a52);display:flex;align-items:center;justify-content:center;font-size:34px;color:#cdeeee;border-bottom:1px solid var(--line)}
+  .prod .pin{padding:11px 13px 13px;display:flex;flex-direction:column;flex:1}
+  .prod .nm{font-size:15.5px;font-weight:800}
+  .prod .stt{display:inline-flex;align-self:flex-start;margin-top:5px;font-size:10px;font-weight:800;letter-spacing:.04em;
+    padding:2.5px 8px;border-radius:999px;text-transform:uppercase}
+  .prod .stt.done{color:#0a5a3a;background:#dff3e8;border:1px solid #b9e3cd}
+  .prod .stt.dev{color:#8a5510;background:#fbeed6;border:1px solid #ecd29a}
+  .prod .desc{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+  /* 협력업체 */
+  .partners{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  .pn{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;display:flex;gap:11px;align-items:flex-start}
+  .pn .av{flex:none;width:34px;height:34px;border-radius:9px;background:var(--tint);border:1px solid var(--line2);
+    display:flex;align-items:center;justify-content:center;font-size:15px}
+  .pn .nm{font-size:13.5px;font-weight:800}
+  .pn .nm .bdg{font-size:9.5px;font-weight:800;color:var(--gold);margin-left:6px;letter-spacing:.02em}
+  .pn .ro{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .pn.wide{grid-column:1 / -1}
+
+  /* 가치 스트립 (본문 하단) */
+  .vstrip{margin-top:auto;background:var(--ink);color:#eaf3f1;border-radius:12px;padding:13px 17px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .vstrip .vt{font-size:13.5px;font-weight:700;flex:1;min-width:220px;line-height:1.45}
+  .vstrip .vt b{color:#7fe0dd}
+  .vstrip .flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+  .vstrip .fn{font-size:11px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .vstrip .ar{color:#5fb6b3;font-weight:800}
+
+  /* ===== 별첨 공용 ===== */
+  .grid{display:grid;gap:11px}
+  .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+  .card h3{font-size:14px;font-weight:800;margin-bottom:5px}
+  .card p{margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+  .card ul{margin:7px 0 0;padding-left:15px;color:var(--muted);font-size:11.5px}
+  .card ul li{margin:4px 0}.card ul li b{color:var(--ink)}
+
+  /* TAM/SAM/SOM */
+  .funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  .fc{border-radius:12px;padding:14px 15px;border:1px solid var(--line2)}
+  .fc .k{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .fc .v{font-size:27px;font-weight:800;margin:5px 0 1px;letter-spacing:-.02em}
+  .fc .n{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .fc .d{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.45}
+  .fc.tam{background:#eef5f3}.fc.tam .k{color:var(--dim)}.fc.tam .v{color:var(--ink)}
+  .fc.sam{background:#e6f3f2}.fc.sam .k{color:var(--deep)}.fc.sam .v{color:var(--deep)}
+  .fc.som{background:linear-gradient(160deg,#0e7c86,#0a4a52);border-color:#0a4a52}
+  .fc.som .k{color:#bfe6e6}.fc.som .v{color:#fff}.fc.som .n{color:#eafafa}.fc.som .d{color:#cfeae9}
+
+  /* 표 */
+  table{border-collapse:collapse;width:100%;font-size:12px}
+  th,td{text-align:right;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:middle}
+  th:first-child,td:first-child{text-align:left}
+  thead th{background:var(--card2);font-weight:800;font-size:11.5px;color:var(--ink)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr.total td{background:#e6f3f2;font-weight:800;color:var(--deep);border-top:2px solid var(--line2)}
+  td b{color:var(--ink)}
+  .tablewrap{border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .barcell{position:relative}
+  .barcell .bg{position:absolute;left:0;top:50%;transform:translateY(-50%);height:60%;border-radius:4px;background:rgba(14,124,134,.14);z-index:0}
+  .barcell span{position:relative;z-index:1}
+
+  /* 콜아웃 */
+  .callout{border-radius:11px;padding:11px 14px;border:1px solid;display:flex;gap:10px;align-items:flex-start;font-size:11.5px;line-height:1.5}
+  .callout .ic{flex:none;font-weight:800}
+  .callout.info{background:#eef5f3;border-color:#cfdcd7;color:#3a4f4b}.callout.info b{color:var(--deep)}
+  .callout.warn{background:#fbf3e4;border-color:#ecd29a;color:#6b4a13}.callout.warn b{color:var(--amber)}
+
+  /* 경쟁 매트릭스 */
+  .matrix th,.matrix td{text-align:center;font-size:11px;padding:7px 8px}
+  .matrix th:first-child,.matrix td:first-child{text-align:left;font-weight:700}
+  .matrix tbody tr.us td{background:#e6f3f2}
+  .matrix tbody tr.us td:first-child{color:var(--deep)}
+  .yes{color:var(--green);font-weight:800}.no{color:#c2c9c6;font-weight:700}.part{color:var(--amber);font-weight:800}
+
+  /* 리스크 */
+  .risk{display:grid;grid-template-columns:1.1fr 1fr;gap:10px 14px;align-items:start}
+  .risk .rk{font-size:12px}
+  .risk .rk .t{font-weight:800;display:flex;gap:7px;align-items:baseline}
+  .risk .rk .sev{flex:none;font-size:9px;font-weight:800;letter-spacing:.04em;padding:2px 7px;border-radius:999px;text-transform:uppercase}
+  .sev.h{color:#8a1c0e;background:#fae3df}.sev.m{color:#8a5510;background:#fbeed6}.sev.l{color:#0a5a3a;background:#dff3e8}
+  .risk .rk p{margin:4px 0 0;font-size:11px;color:var(--muted);line-height:1.45}
+  .risk .mit{font-size:11px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;line-height:1.45}
+  .risk .mit b{color:var(--brand)}
+
+  .lead{font-size:13px;color:var(--muted);margin:0 0 4px;max-width:660px;line-height:1.55}
+
+  /* 반응형 (화면) */
+  @media(max-width:680px){
+    .deck{padding:14px 10px 40px}
+    .page{aspect-ratio:auto;min-height:auto;padding:22px 18px 30px}
+    .ph{flex-direction:column;align-items:flex-start;gap:8px}
+    .ph .meta{text-align:left}
+    .prods{grid-template-columns:1fr}
+    .partners,.funnel,.g2,.g3,.risk{grid-template-columns:1fr}
+    .ph h1{font-size:27px}
+    table{font-size:11px}th,td{padding:7px 8px}
+  }
+
+  /* ===== 인쇄: A4 세로, 1페이지 = 1장 ===== */
+  @media print{
+    @page{ size:A4 portrait; margin:0 }
+    *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    html,body{background:#fff!important}
+    .bar{display:none!important}
+    .deck{max-width:none!important;margin:0!important;padding:0!important}
+    .page{width:auto!important;aspect-ratio:auto!important;height:296mm!important;min-height:0!important;max-height:296mm!important;
+      margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+      padding:13mm 14mm!important;page-break-after:always;break-after:page;overflow:hidden}
+    .page:last-child{page-break-after:auto;break-after:auto}
+    .page .p-brand{left:14mm}
+    .prods{grid-template-columns:repeat(3,1fr)!important}
+    .partners,.g2,.risk{grid-template-columns:repeat(2,1fr)!important}
+    .funnel,.g3{grid-template-columns:repeat(3,1fr)!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- 상단 바 (화면 전용) -->
+<div class="bar">
+  <span class="brand"><span class="dot"></span>덴티홈 솔루션 <small>DENTIHOME · CONFIDENTIAL</small></span>
+  <nav>
+    <a href="proposals.html">제안서 목록</a>
+    <a href="ir.html">GraphyStyle IR</a>
+    <button class="pbtn" id="pdfBtn">📄 PDF 저장</button>
+    <span class="count" id="count"></span>
+  </nav>
+</div>
+
+<div class="deck">
+
+  <!-- ============ PAGE 1 · 본문 1장 ============ -->
+  <section class="page">
+    <header class="ph">
+      <div>
+        <div class="lab">사업계획서 · One-Page Overview</div>
+        <h1>덴티홈 솔루션<span class="en">DentiHome Solution</span></h1>
+        <div class="tag">치과의사가 <b>직접 설계</b>하는 개인맞춤 홈케어 — <b>진단 · 세정 · 약제 전달</b>을 하나의 생태계로</div>
+      </div>
+      <div class="meta">
+        2026.06<br/>대표 개발 · <b>올리브서울치과</b><br/>
+        <span class="conf">Confidential</span>
+      </div>
+    </header>
+
+    <div class="pbody">
+
+      <!-- 개발자 -->
+      <div>
+        <div class="seclab"><span class="n">1</span><h2>개발자</h2><span class="sub">기술·특허 기반</span></div>
+        <div class="dev">
+          <div class="row">
+            <span class="nm">이중우 원장</span>
+            <span class="org">올리브서울치과</span>
+            <span class="edu">서울대학교 치과대학 졸업</span>
+          </div>
+          <div class="pat">
+            <span class="pt"><b>구강세척기 및 그 제조방법</b> <span class="y">2013</span></span>
+            <span class="pt"><b>의료용 화상제공 시스템</b> <span class="y">2020</span></span>
+            <span class="pt"><b>치과용 석션기구 거치장치</b> <span class="y">2024</span></span>
+            <span class="pt"><b>치과용 써지컬 석션튜브 그립</b> <span class="y">2024</span></span>
+            <span class="more">외 다수 특허 보유</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 제품 -->
+      <div>
+        <div class="seclab"><span class="n">2</span><h2>제품</h2><span class="sub">개인맞춤 홈케어 라인업</span></div>
+        <div class="prods">
+          <div class="prod lead">
+            <img class="pimg" src="/brand/point-shower-product.jpg" alt="Point Shower" />
+            <div class="pin">
+              <div class="nm">Point Shower</div>
+              <span class="stt done">개발완료 · 특허출원</span>
+              <div class="desc">치과의사가 설계해주는 <b>개인맞춤 구강세정기</b>. 환자 구강 구조에 맞춰 분사 각도·세기를 설계.</div>
+            </div>
+          </div>
+          <div class="prod">
+            <img class="pimg" src="/brand/point-infuser-product.jpg" alt="Point Infuser" />
+            <div class="pin">
+              <div class="nm">Point Infuser</div>
+              <span class="stt dev">개발중 · 특허출원</span>
+              <div class="desc">치과의사가 설계해주는 <b>개인맞춤 약제주입기</b>. 병변 부위에 약제를 정밀 전달.</div>
+            </div>
+          </div>
+          <div class="prod">
+            <div class="pico">🦷</div>
+            <div class="pin">
+              <div class="nm">Dentopik</div>
+              <span class="stt dev">개발중</span>
+              <div class="desc"><b>개인맞춤 치과진단기</b>. AI 기반 마우스피스형 스캐너로 가정에서 구강 상태를 점검.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 협력업체 -->
+      <div>
+        <div class="seclab"><span class="n">3</span><h2>협력업체</h2><span class="sub">소재 · 제조 · 유통 · 채널</span></div>
+        <div class="partners">
+          <div class="pn">
+            <div class="av">🧪</div>
+            <div><div class="nm">㈜그래피 <span class="bdg">2025 상장</span></div>
+              <div class="ro">3D printing용 의료용 형상기억복합소재 공급</div></div>
+          </div>
+          <div class="pn">
+            <div class="av">💧</div>
+            <div><div class="nm">아쿠아픽 <span class="bdg">협회 공식인증</span></div>
+              <div class="ro">대한치과의사협회 공식인증 치아세정기 제조</div></div>
+          </div>
+          <div class="pn">
+            <div class="av">🖨️</div>
+            <div><div class="nm">3DMD</div>
+              <div class="ro">3D printing 모델링 · 제작</div></div>
+          </div>
+          <div class="pn">
+            <div class="av">📈</div>
+            <div><div class="nm">코리아세일즈</div>
+              <div class="ro">디자인 · 마케팅 · ERP · CRM</div></div>
+          </div>
+          <div class="pn wide">
+            <div class="av">🏥</div>
+            <div><div class="nm">예치과 네트워크 <span class="bdg">국내 최초</span></div>
+              <div class="ro">국내 최초 네트워크 치과 그룹 — 전국 처방·임상 채널 확보</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 가치 스트립 -->
+      <div class="vstrip">
+        <div class="vt">디바이스 1회 판매가 아니라, <b>치과 처방 → 맞춤 제작 → 소모품 반복</b>으로 이어지는 락인(Lock-in) 생태계.</div>
+        <div class="flow">
+          <span class="fn">치과 진단·설계</span><span class="ar">→</span>
+          <span class="fn">3D 맞춤 제작</span><span class="ar">→</span>
+          <span class="fn">홈케어 사용</span><span class="ar">→</span>
+          <span class="fn">소모품·약제 반복</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="p-brand">DentiHome Solution</div>
+    <div class="p-no">1 / 3</div>
+  </section>
+
+  <!-- ============ PAGE 2 · 별첨 1 — 시장규모 및 예상 매출 ============ -->
+  <section class="page">
+    <header class="ph">
+      <div>
+        <div class="lab">별첨 1 · Appendix</div>
+        <h1>시장규모 및 예상 매출</h1>
+        <div class="tag">국내 구강 홈케어 시장에서 <b>치과 처방형 개인맞춤</b>이라는 신규 카테고리를 정의</div>
+      </div>
+      <div class="meta">단위 · 원(₩)<br/><b>계획값 · 추정</b><br/>
+        <span class="conf">Internal Estimate</span></div>
+    </header>
+
+    <div class="pbody">
+
+      <!-- TAM/SAM/SOM -->
+      <div>
+        <div class="seclab"><span class="n">A</span><h2>시장규모 — TAM · SAM · SOM</h2></div>
+        <div class="funnel">
+          <div class="fc tam">
+            <div class="k">TAM · 전체 시장</div>
+            <div class="v">₩1.2조</div>
+            <div class="n">국내 구강관리·홈케어 시장</div>
+            <div class="d">치약·칫솔·전동칫솔·구강세정기·홈케어 기기 합산(추정). 글로벌 오럴케어 약 $47B(’26), 전동칫솔 $6.3B(’24).</div>
+          </div>
+          <div class="fc sam">
+            <div class="k">SAM · 유효 시장</div>
+            <div class="v">₩2,500억</div>
+            <div class="n">치과 처방형 맞춤 홈케어</div>
+            <div class="d">전국 치과의원 약 1.9만 곳을 통한 처방·맞춤 디바이스 + 소모품·약제 반복 도달 시장(추정).</div>
+          </div>
+          <div class="fc som">
+            <div class="k">SOM · 5년 목표</div>
+            <div class="v">₩410억</div>
+            <div class="n">5년차(2030) 연매출 목표</div>
+            <div class="d">처방 치과 약 3,800곳(전체의 ~20% · SAM의 ~16%) 침투. 협회 인증·네트워크 채널 기반.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 매출 추정표 -->
+      <div>
+        <div class="seclab"><span class="n">B</span><h2>5개년 예상 매출</h2><span class="sub">디바이스 · 소모품(반복) · 진단</span></div>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>Y1 ’26</th><th>Y2 ’27</th><th>Y3 ’28</th><th>Y4 ’29</th><th>Y5 ’30</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>처방 치과 수(누적)</td><td>120</td><td>450</td><td>1,100</td><td>2,200</td><td>3,800</td></tr>
+              <tr><td>디바이스 매출<br/><span class="dim" style="font-size:10px">Point Shower·Infuser</span></td><td>4억</td><td>19억</td><td>54억</td><td>123억</td><td>239억</td></tr>
+              <tr><td>소모품·약제(반복)<br/><span class="dim" style="font-size:10px">팁·카트리지·약제</span></td><td>1억</td><td>6억</td><td>22억</td><td>56억</td><td>123억</td></tr>
+              <tr><td>진단(Dentopik)<br/><span class="dim" style="font-size:10px">구독·회차</span></td><td>—</td><td>—</td><td>5억</td><td>18억</td><td>45억</td></tr>
+              <tr class="total"><td>합계 매출</td><td>5억</td><td>25억</td><td>81억</td><td>197억</td><td class="barcell"><span>407억</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 핵심 가정 -->
+      <div>
+        <div class="seclab"><span class="n">C</span><h2>핵심 가정</h2></div>
+        <div class="grid g3">
+          <div class="card"><h3>디바이스</h3><p>치과당 연 처방 환자 <b>25→45명</b>(연차 램프업) · 평균 단가(ASP) <b>14만원</b>. Point Shower(완료) 선출시 → Infuser 추가.</p></div>
+          <div class="card"><h3>소모품 반복</h3><p>환자당 연 <b>6만원</b>(월 5천) · 누적 활성 환자 <b>65%</b> 유지. 5년차 매출의 약 30%를 차지하는 반복 수익.</p></div>
+          <div class="card"><h3>진단(Dentopik)</h3><p><b>Y3 베타</b> 출시 후 점진 확대. 치과 진단 보조(SaMD) 포지션으로 구독·회차 과금.</p></div>
+        </div>
+      </div>
+
+      <div class="callout info"><span class="ic">◆</span><div><b>반복 매출 구조가 핵심.</b> 5년차 기준 소모품·진단 등 반복 매출이 전체의 <b>약 41%</b>(₩168억)를 차지 — 디바이스 1회 판매를 넘어 환자 단위 LTV가 누적됩니다. <span class="dim">근거 · 전국 치과의원 약 1.9만 곳(’22년 1.87만, 심평원)· 글로벌 구강세정기 시장 $1.0~1.4B(’24→’30)· 글로벌 오럴케어 약 $47B(’26).</span> 위 수치는 협의 전제의 계획값(추정)입니다.</div></div>
+
+    </div>
+    <div class="p-brand">DentiHome Solution · 별첨 1</div>
+    <div class="p-no">2 / 3</div>
+  </section>
+
+  <!-- ============ PAGE 3 · 별첨 2 — 경쟁사·진입장벽·리스크 ============ -->
+  <section class="page">
+    <header class="ph">
+      <div>
+        <div class="lab">별첨 2 · Appendix</div>
+        <h1>경쟁사 · 진입장벽 · 리스크</h1>
+        <div class="tag">대기업 양산품과 다른 <b>치과 처방·맞춤·네트워크</b> 기반의 방어선</div>
+      </div>
+      <div class="meta">경쟁 분석 · 2026.06<br/><b>계획값 · 추정</b><br/>
+        <span class="conf">Internal</span></div>
+    </header>
+
+    <div class="pbody">
+
+      <!-- 경쟁 매트릭스 -->
+      <div>
+        <div class="seclab"><span class="n">A</span><h2>경쟁 구도</h2><span class="sub">개인맞춤·처방·약제 전달에서 차별화</span></div>
+        <div class="tablewrap">
+          <table class="matrix">
+            <thead>
+              <tr><th>구분</th><th>구강세정기<br/>(물치실)</th><th>전동칫솔<br/>·구강관리</th><th>디지털 스캔<br/>·원격진단</th><th>덴티홈<br/>솔루션</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>대표 주자</td><td>Waterpik·Philips<br/>Panasonic·H2Ofloss</td><td>Philips Sonicare<br/>Oral-B(P&amp;G)</td><td>메디트·3Shape·iTero<br/>Dental Monitoring</td><td><b>덴티홈</b></td></tr>
+              <tr><td>치과의사 개인맞춤 설계</td><td class="no">✕</td><td class="no">✕</td><td class="part">△</td><td class="yes">✓</td></tr>
+              <tr><td>치과 처방 채널(B2B2C)</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+              <tr><td>약제 정밀 전달(홈)</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td></tr>
+              <tr><td>가정 내 AI 진단·모니터링</td><td class="no">✕</td><td class="part">△</td><td class="part">△</td><td class="yes">✓</td></tr>
+              <tr class="us"><td>소모품 반복 매출</td><td class="part">△</td><td class="part">△</td><td class="no">✕</td><td class="yes">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 진입장벽 -->
+      <div>
+        <div class="seclab"><span class="n">B</span><h2>진입장벽 (해자)</h2></div>
+        <div class="grid g3">
+          <div class="card"><h3>① 특허 + 소재 독점</h3><ul>
+            <li>2013~2024 <b>특허 포트폴리오</b></li>
+            <li>그래피 <b>형상기억복합소재</b> 협력</li>
+            <li>맞춤 3D 제작 노하우(3DMD)</li></ul></div>
+          <div class="card"><h3>② 공신력 채널</h3><ul>
+            <li>아쿠아픽 <b>치협 공식인증</b> 제조</li>
+            <li>치과의사 <b>처방</b> 기반 신뢰</li>
+            <li>의료기기 인허가 경험</li></ul></div>
+          <div class="card"><h3>③ 네트워크 락인</h3><ul>
+            <li><b>예치과 네트워크</b> 즉시 처방</li>
+            <li>환자 맞춤 데이터 축적</li>
+            <li>소모품·약제 <b>반복 구매</b> 묶임</li></ul></div>
+        </div>
+      </div>
+
+      <!-- 리스크 & 대응 -->
+      <div>
+        <div class="seclab"><span class="n">C</span><h2>리스크 &amp; 대응</h2></div>
+        <div class="risk">
+          <div class="rk"><div class="t"><span class="sev h">High</span>의료기기 인허가 지연</div>
+            <p>Infuser·Dentopik의 식약처 등급 분류·인증 일정 리스크.</p></div>
+          <div class="mit"><b>대응 ·</b> 비의료(구강세정) 제품 선출시로 매출 확보, 인허가 사전 컨설팅·단계 인증.</div>
+
+          <div class="rk"><div class="t"><span class="sev m">Mid</span>개발 일정 지연</div>
+            <p>Point Infuser·Dentopik 개발중 — 출시 시점 불확실.</p></div>
+          <div class="mit"><b>대응 ·</b> 완료된 <b>Point Shower를 캐시카우</b>로 단계적 출시, 마일스톤 관리.</div>
+
+          <div class="rk"><div class="t"><span class="sev m">Mid</span>소재·부품 단일 의존</div>
+            <p>그래피(소재)·아쿠아픽(분사) 공급 집중 리스크.</p></div>
+          <div class="mit"><b>대응 ·</b> 전략 투자·독점계약으로 결속하되 <b>2차 벤더</b> 병행 확보.</div>
+
+          <div class="rk"><div class="t"><span class="sev m">Mid</span>대기업 진입</div>
+            <p>Philips·P&amp;G 등 자본력 기반 유사 제품 진입 가능성.</p></div>
+          <div class="mit"><b>대응 ·</b> 양산 경쟁 대신 <b>처방·맞춤·네트워크 락인</b>으로 차별 방어.</div>
+
+          <div class="rk"><div class="t"><span class="sev l">Low</span>채널 집중</div>
+            <p>초기 매출이 예치과 네트워크에 편중될 우려.</p></div>
+          <div class="mit"><b>대응 ·</b> 치협 인증을 발판으로 <b>일반 치과·DTC</b>로 채널 확장.</div>
+
+          <div class="rk"><div class="t"><span class="sev l">Low</span>AI 진단 정확도·규제</div>
+            <p>Dentopik 진단 신뢰성·규제 부담.</p></div>
+          <div class="mit"><b>대응 ·</b> <b>진단 보조(SaMD)</b>로 포지셔닝, 임상 검증·치과 연계 확정.</div>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:auto"><span class="ic">⚠</span><div>본 별첨의 시장·매출·경쟁 수치는 <b>협의 전제의 계획값(추정)</b>이며, 투자·법률·세무 자문이 아닙니다. 외부 유출을 금합니다.</div></div>
+
+    </div>
+    <div class="p-brand">DentiHome Solution · 별첨 2</div>
+    <div class="p-no">3 / 3</div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var pages=Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var count=document.getElementById('count');
+  if(count) count.textContent='1 / '+pages.length;
+  var cur=0;
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ cur=pages.indexOf(e.target); if(count) count.textContent=(cur+1)+' / '+pages.length; } });
+  },{threshold:.55});
+  pages.forEach(function(s){ obs.observe(s); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){ e.preventDefault(); if(cur<pages.length-1) pages[cur+1].scrollIntoView({behavior:'smooth',block:'center'}); }
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); if(cur>0) pages[cur-1].scrollIntoView({behavior:'smooth',block:'center'}); }
+  });
+  function doPrint(){ window.print(); }
+  var b=document.getElementById('pdfBtn'); if(b) b.addEventListener('click',doPrint);
+  if(/[?&]print=1/.test(location.search)){ window.addEventListener('load',function(){ setTimeout(doPrint,700); }); }
+})();
+</script>
+<script src="gate.js"></script>
+</body>
+</html>
